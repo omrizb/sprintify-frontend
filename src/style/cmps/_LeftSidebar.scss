@@ -1,0 +1,16 @@
+.left-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: $panelGap;
+    width: 280px;
+    height: 100%;
+
+    .sidebar-nav {
+        @include section;
+    }
+
+    .my-library {
+        @include section;
+        flex-grow: 1;
+    }
+}

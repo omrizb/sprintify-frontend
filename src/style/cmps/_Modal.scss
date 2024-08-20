@@ -1,0 +1,31 @@
+.modal {
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $modalBackdropBgClr;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        z-index: 1000;
+    }
+    
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        max-width: 50%;
+        max-height: 50%;
+        background-color: $modalBgClr;
+        box-shadow: rgba(0, 0, 0, 0.7) 0 25px 50px -15px;
+        overflow: auto;
+    }
+
+    transition: 0.3s;
+}

@@ -1,0 +1,23 @@
+.btn-tinted {
+    @include btn($type: regular);
+    @include tinted
+}
+
+.btn-dark {
+    @include btn($type: regular);
+    @include dark
+}
+
+.btn-light {
+    @include btn($type: regular);
+    @include light
+}
+
+.text-normal {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.disabled {
+    opacity: 0.6;
+}

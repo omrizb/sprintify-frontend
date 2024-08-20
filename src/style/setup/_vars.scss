@@ -1,0 +1,33 @@
+// Fonts
+$fonts: SpotifyMixUI, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva;
+$titleFonts: SpotifyMixUITitle, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva;
+$fallbackFonts: Helvetica, sans-serif;
+
+// Color palette
+$primaryTxtClr: #ffffff;
+$primaryBgClr: #000000;
+$sectionBgClr: #121212;
+$uiBorderClr: #c3c6d4;
+$positiveClr: #00854d;
+$positiveHoverClr: #007038;
+$negativeClr: #d83a52;
+$negativeHoverClr: #b63546;
+$modalBackdropBgClr: rgba(41, 47, 76, 0.7);
+$modalBgClr: #ffffff;
+$tintedBgClr: hsla(0,0%,100%,.1);
+$tintedBgClrHighlight: hsla(0,0%,100%,.14);
+$darkBgClr: rgba(0,0,0,.7);
+$lightTxtClr: #000000;
+$lightBgClr: #ffffff;
+
+// Spaces
+$panelGap: 8px;
+$sectionPaddingBlock: 12px;
+$sectionPaddingInline: 8px;
+$sectionBorderRadius: 8px;
+$playerHeight: 72px;
+
+// Layout breakpoints
+$breakNarrow: 720px;
+$breakNormal: 1360px;
+$breakWide: 1920px;

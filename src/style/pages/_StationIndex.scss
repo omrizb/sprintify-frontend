@@ -1,0 +1,25 @@
+.station-index {
+    padding: $panelGap;
+    background-color: $primaryBgClr;
+
+    .left-sidebar-container {
+        grid-area: left-sidebar;
+        overflow: scroll;
+    }
+
+    .main-view-container {
+        @include section;
+        grid-area: main-view;
+        overflow: scroll;
+    }
+
+    .right-sidebar-container {
+        @include section;
+        grid-area: right-sidebar;
+        overflow: scroll;
+    }
+
+    .now-playing-bar-container {
+        grid-area: now-playing-bar;
+    }
+}

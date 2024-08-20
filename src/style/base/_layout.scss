@@ -1,0 +1,15 @@
+.main-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+    "left-sidebar       main-view       right-sidebar"
+    "now-playing-bar    now-playing-bar now-playing-bar";
+    gap: $panelGap;
+    width: 100%;
+    height: 100vh;
+}
+
+.main-text {
+    margin-bottom: 5rem;
+}
