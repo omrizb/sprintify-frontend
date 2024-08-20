@@ -63,10 +63,6 @@
 @mixin tinted {
     color: $primaryTxtClr;
     background-color: $tintedBgClr;
-
-    &:hover {
-        background-color: $tintedBgClrHighlight;
-    }
 }
 
 @mixin dark {
@@ -78,30 +74,45 @@
     color: $lightTxtClr;
     background-color: $lightBgClr;
 }
+
+@mixin green {
+    color: $lightTxtClr;
+    background-color: $buttonBgGreen;
+}
   
 // Buttons
   
-@mixin btn($type: regular) {
+@mixin btn($type: regular, $size: regular) {
 
     display: inline-flex;
     align-items: center;
 
-    height: 32px;
-    padding: $smallPadding;
     border-radius: 100vh;
     border: none;
-
+    
     line-height: 1.5;
     text-decoration: none;
     font-family: inherit;
-    font-size: em(14px);
-    font-weight: 300;
-
+    
     cursor: pointer;
     
     transition: background-color 0.2s, color 0.2s;
+    
+    height: 32px;
+    padding: $smallPadding;
+    font-size: em(14px);
+    font-weight: 300;
+
+    @if $size == big {
+        height: 48px;
+        padding: $bigPadding;
+        font-size: em(16px);
+        font-weight: 700;
+    }
 
     @if $type == animated {
+        transition: none;
+
         &:hover {
             transform: scale(1.05)
         }

@@ -1,16 +1,29 @@
 .btn-tinted {
+    @include tinted;
     @include btn($type: regular);
-    @include tinted
+
+    &:hover {
+        background-color: $tintedBgClrHighlight;
+    }
 }
 
 .btn-dark {
+    @include dark;
     @include btn($type: regular);
-    @include dark
 }
 
 .btn-light {
+    @include light;
     @include btn($type: regular);
-    @include light
+}
+
+.btn-green {
+    @include green;
+    @include btn($type: animated, $size: big);
+
+    &:active {
+        background-color: $buttonBgGreenPress;
+    }
 }
 
 .text-normal {

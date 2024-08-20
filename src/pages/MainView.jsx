@@ -16,6 +16,7 @@ export function MainView() {
             <button className="btn-tinted">Music</button>
             <button className="btn-tinted">Podcasts</button>
             <h1>My Songs</h1>
+            <button className="btn-green">Continue</button>
             <ul>
                 {createSongs()}
             </ul>

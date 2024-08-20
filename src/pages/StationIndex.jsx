@@ -6,8 +6,7 @@ import { utilService } from '../services/util.service.js'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { NowPlayingDetails } from '../cmps/NowPlayingDetails.jsx'
 import { Player } from '../cmps/Player.jsx'
-import { MainViewHeader } from '../cmps/MainView/MainViewHeader.jsx'
-import { MainView } from './MainView.jsx'
+import { MainViewHeader } from '../cmps/MainViewHeader.jsx'
 
 import { youtubeService } from '../services/youtube.service.js'
 
