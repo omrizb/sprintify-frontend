@@ -1,0 +1,33 @@
+.sidebar-nav {
+    color: $secondaryTxtClr;
+
+    li {
+        display: flex;
+        padding: $smallPadding;
+
+        svg {
+            font-size: 24px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            height: 40px;
+            transition: color 0.2s;
+
+            &:hover {
+                color: $primaryTxtClr;
+            }
+        }
+
+        .logo-link {
+            gap: 5px;
+            color: $primaryTxtClr;
+        }
+
+        .active {
+            color: $primaryTxtClr;
+        }
+    }
+}

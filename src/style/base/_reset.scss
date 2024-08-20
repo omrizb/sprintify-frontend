@@ -13,7 +13,6 @@ html {
 
 body {
     margin: 0;
-
     font-family: $fonts, $fallbackFonts;
     color: $primaryTxtClr;
     line-height: 1.5;
@@ -43,6 +42,7 @@ ul,
 ol {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 /* Don't stretch my Media */

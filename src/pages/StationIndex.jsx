@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import { useEffectOnUpdate } from '../hooks/useEffectOnUpdate.js'
 
 import { utilService } from '../services/util.service.js'
@@ -5,6 +6,7 @@ import { utilService } from '../services/util.service.js'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { NowPlayingDetails } from '../cmps/NowPlayingDetails.jsx'
 import { Player } from '../cmps/Player.jsx'
+import { MainViewHeader } from '../cmps/MainView/MainViewHeader.jsx'
 import { MainView } from './MainView.jsx'
 
 import { youtubeService } from '../services/youtube.service.js'
@@ -137,7 +139,8 @@ export function StationIndex() {
                 <LeftSidebar />
             </div>
             <div className="main-view-container">
-                <MainView />
+                <MainViewHeader />
+                <Outlet />
             </div>
             <div className="right-sidebar-container">
                 <NowPlayingDetails />

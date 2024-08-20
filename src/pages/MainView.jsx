@@ -1,5 +1,3 @@
-import { MainViewHeader } from '../cmps/MainView/MainViewHeader.jsx'
-
 export function MainView() {
 
     const count = 50
@@ -14,7 +12,6 @@ export function MainView() {
 
     return (
         <div className="main-view">
-            <MainViewHeader />
             <button className="btn-light">All</button>
             <button className="btn-tinted">Music</button>
             <button className="btn-tinted">Podcasts</button>
