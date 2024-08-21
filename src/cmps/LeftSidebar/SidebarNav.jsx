@@ -8,7 +8,7 @@ import { BiSolidSearch } from 'react-icons/bi'
 export function SidebarNav() {
     return (
         <div className="sidebar-nav">
-            <ul>
+            <ul className="text-medium">
                 <li>
                     <NavLink to="/" target="_blank" className="logo-link"><FaSpotify />Sprintify</NavLink>
                 </li>
