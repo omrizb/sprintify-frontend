@@ -1,3 +1,12 @@
+/* Layout */
+
+@mixin main-grid {
+    display: grid;
+    gap: $panelGap;
+    width: 100%;
+    height: 100vh;
+}
+
 /* Media queries Breakpoint mixins */
 
 @mixin mobile-layout {

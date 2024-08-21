@@ -2,21 +2,25 @@
     padding: $panelGap;
     background-color: $primaryBgClr;
 
+    .global-nav-container {
+        grid-area: global-nav;
+    }
+
     .left-sidebar-container {
         grid-area: left-sidebar;
-        overflow: scroll;
+        overflow: auto;
     }
 
     .main-view-container {
         @include section;
         grid-area: main-view;
-        overflow: scroll;
+        overflow-y: auto;
     }
 
     .right-sidebar-container {
         @include section;
         grid-area: right-sidebar;
-        overflow: scroll;
+        overflow: auto;
     }
 
     .now-playing-bar-container {

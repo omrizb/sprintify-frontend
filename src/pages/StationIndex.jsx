@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { useEffectOnUpdate } from '../hooks/useEffectOnUpdate.js'
 
 import { utilService } from '../services/util.service.js'
 
+import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { NowPlayingDetails } from '../cmps/NowPlayingDetails.jsx'
 import { Player } from '../cmps/Player.jsx'
@@ -11,6 +13,8 @@ import { MainViewHeader } from '../cmps/MainViewHeader.jsx'
 import { youtubeService } from '../services/youtube.service.js'
 
 export function StationIndex() {
+
+    const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
     const songs2 = [
         'Lady Gaga Poker Face',
@@ -62,9 +66,12 @@ export function StationIndex() {
     }
 
 
-
+    const mainLayout = loggedinUser ? 'main-layout-loggedin' : 'main-layout'
     return (
-        <div className="station-index main-layout">
+        <div className={`station-index ${mainLayout}`}>
+            {loggedinUser && <div className="global-nav-container">
+                <GlobalNav />
+            </div>}
             <div className="left-sidebar-container">
                 <LeftSidebar />
             </div>

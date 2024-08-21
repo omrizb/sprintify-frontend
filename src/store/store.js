@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
-import { stationReducer } from './station.reducer'
-import { userReducer } from './user.reducer'
-import { systemReducer } from './system.reducer'
+import { stationReducer } from './reducers/station.reducer'
+import { userReducer } from './reducers/user.reducer'
+import { systemReducer } from './reducers/system.reducer'
 
 const rootReducer = combineReducers({
     stationModule: stationReducer,
