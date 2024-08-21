@@ -1,502 +1,761 @@
 [
     {
-        "title": "Queen - Bohemian Rhapsody (Official Video Remastered)",
+        "videoId": "fJ9rUzIMcZQ",
+        "title": "Queen – Bohemian Rhapsody (Official Video Remastered)",
         "url": "https://www.youtube.com/embed/fJ9rUzIMcZQ",
-        "imgUrl": "https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 0
+        }
     },
     {
+        "videoId": "JGwWNGJdvx8",
         "title": "Ed Sheeran - Shape of You (Official Music Video)",
         "url": "https://www.youtube.com/embed/JGwWNGJdvx8",
-        "imgUrl": "https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 24
+        }
     },
     {
+        "videoId": "Zi_XLOBDo_Y",
         "title": "Michael Jackson - Billie Jean (Official Video)",
         "url": "https://www.youtube.com/embed/Zi_XLOBDo_Y",
-        "imgUrl": "https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 56
+        }
     },
     {
+        "videoId": "4NRXx6U8ABQ",
         "title": "The Weeknd - Blinding Lights (Official Video)",
         "url": "https://www.youtube.com/embed/4NRXx6U8ABQ",
-        "imgUrl": "https://i.ytimg.com/vi/4NRXx6U8ABQ/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/4NRXx6U8ABQ/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 23
+        }
     },
     {
+        "videoId": "BciS5krYL80",
         "title": "Hotel California (2013 Remaster)",
         "url": "https://www.youtube.com/embed/BciS5krYL80",
-        "imgUrl": "https://i.ytimg.com/vi/BciS5krYL80/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/BciS5krYL80/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 32
+        }
     },
     {
+        "videoId": "rYEDA3JcQqw",
         "title": "Adele - Rolling in the Deep (Official Music Video)",
         "url": "https://www.youtube.com/embed/rYEDA3JcQqw",
-        "imgUrl": "https://i.ytimg.com/vi/rYEDA3JcQqw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/rYEDA3JcQqw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 54
+        }
     },
     {
+        "videoId": "OPf0YbXqDm0",
         "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
         "url": "https://www.youtube.com/embed/OPf0YbXqDm0",
-        "imgUrl": "https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 31
+        }
     },
     {
+        "videoId": "hTWKbfoikeg",
         "title": "Nirvana - Smells Like Teen Spirit (Official Music Video)",
         "url": "https://www.youtube.com/embed/hTWKbfoikeg",
-        "imgUrl": "https://i.ytimg.com/vi/hTWKbfoikeg/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/hTWKbfoikeg/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 39
+        }
     },
     {
+        "videoId": "QkF3oxziUI4",
         "title": "Led Zeppelin - Stairway To Heaven (Official Audio)",
         "url": "https://www.youtube.com/embed/QkF3oxziUI4",
-        "imgUrl": "https://i.ytimg.com/vi/QkF3oxziUI4/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/QkF3oxziUI4/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 8,
+            "seconds": 3
+        }
     },
     {
+        "videoId": "lp-EO5I60KA",
         "title": "Ed Sheeran - Thinking Out Loud (Official Music Video)",
         "url": "https://www.youtube.com/embed/lp-EO5I60KA",
-        "imgUrl": "https://i.ytimg.com/vi/lp-EO5I60KA/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/lp-EO5I60KA/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 57
+        }
     },
     {
+        "videoId": "A_MjCqQoLLA",
         "title": "The Beatles - Hey Jude",
         "url": "https://www.youtube.com/embed/A_MjCqQoLLA",
-        "imgUrl": "https://i.ytimg.com/vi/A_MjCqQoLLA/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/A_MjCqQoLLA/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 8,
+            "seconds": 10
+        }
     },
     {
+        "videoId": "bo_efYhYU2A",
         "title": "Lady Gaga, Bradley Cooper - Shallow (from A Star Is Born) (Official Music Video)",
         "url": "https://www.youtube.com/embed/bo_efYhYU2A",
-        "imgUrl": "https://i.ytimg.com/vi/bo_efYhYU2A/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/bo_efYhYU2A/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 37
+        }
     },
     {
+        "videoId": "kJQP7kiw5Fk",
         "title": "Luis Fonsi - Despacito ft. Daddy Yankee",
         "url": "https://www.youtube.com/embed/kJQP7kiw5Fk",
-        "imgUrl": "https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 42
+        }
     },
     {
+        "videoId": "1w7OgIMMRc4",
         "title": "Guns N&#39; Roses - Sweet Child O&#39; Mine (Official Music Video)",
         "url": "https://www.youtube.com/embed/1w7OgIMMRc4",
-        "imgUrl": "https://i.ytimg.com/vi/1w7OgIMMRc4/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/1w7OgIMMRc4/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 3
+        }
     },
     {
+        "videoId": "DyDfgMOUjCI",
         "title": "Billie Eilish - bad guy",
         "url": "https://www.youtube.com/embed/DyDfgMOUjCI",
-        "imgUrl": "https://i.ytimg.com/vi/DyDfgMOUjCI/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/DyDfgMOUjCI/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 26
+        }
     },
     {
+        "videoId": "fNFzfwLM72c",
         "title": "Bee Gees - Stayin&#39; Alive (Official Music Video)",
         "url": "https://www.youtube.com/embed/fNFzfwLM72c",
-        "imgUrl": "https://i.ytimg.com/vi/fNFzfwLM72c/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/fNFzfwLM72c/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 10
+        }
     },
     {
+        "videoId": "3JWTaaS7LdU",
         "title": "Whitney Houston - I Will Always Love You (Official 4K Video)",
         "url": "https://www.youtube.com/embed/3JWTaaS7LdU",
-        "imgUrl": "https://i.ytimg.com/vi/3JWTaaS7LdU/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/3JWTaaS7LdU/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 34
+        }
     },
     {
+        "videoId": "450p7goxZqg",
         "title": "John Legend - All of Me (Official Video)",
         "url": "https://www.youtube.com/embed/450p7goxZqg",
-        "imgUrl": "https://i.ytimg.com/vi/450p7goxZqg/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/450p7goxZqg/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 8
+        }
     },
     {
+        "videoId": "1k8craCGpgs",
         "title": "Journey - Don&#39;t Stop Believin&#39; (Official Audio)",
         "url": "https://www.youtube.com/embed/1k8craCGpgs",
-        "imgUrl": "https://i.ytimg.com/vi/1k8craCGpgs/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/1k8craCGpgs/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 11
+        }
     },
     {
+        "videoId": "ZbZSe6N_BXs",
         "title": "Pharrell Williams - Happy (Video)",
         "url": "https://www.youtube.com/embed/ZbZSe6N_BXs",
-        "imgUrl": "https://i.ytimg.com/vi/ZbZSe6N_BXs/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/ZbZSe6N_BXs/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 1
+        }
     },
     {
+        "videoId": "djV11Xbc914",
         "title": "a-ha - Take On Me (Official Video) [Remastered in 4K]",
         "url": "https://www.youtube.com/embed/djV11Xbc914",
-        "imgUrl": "https://i.ytimg.com/vi/djV11Xbc914/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/djV11Xbc914/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 4
+        }
     },
     {
+        "videoId": "0zGcUoRlhmw",
         "title": "The Chainsmokers - Closer (Official Video) ft. Halsey",
         "url": "https://www.youtube.com/embed/0zGcUoRlhmw",
-        "imgUrl": "https://i.ytimg.com/vi/0zGcUoRlhmw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/0zGcUoRlhmw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 7
+        }
     },
     {
+        "videoId": "FTQbiNvZqaY",
         "title": "Toto - Africa (Official HD Video)",
         "url": "https://www.youtube.com/embed/FTQbiNvZqaY",
-        "imgUrl": "https://i.ytimg.com/vi/FTQbiNvZqaY/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/FTQbiNvZqaY/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 32
+        }
     },
     {
+        "videoId": "hLQl3WQQoQ0",
         "title": "Adele - Someone Like You (Official Music Video)",
         "url": "https://www.youtube.com/embed/hLQl3WQQoQ0",
-        "imgUrl": "https://i.ytimg.com/vi/hLQl3WQQoQ0/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/hLQl3WQQoQ0/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 45
+        }
     },
     {
+        "videoId": "bx1Bh8ZvH84",
         "title": "Oasis - Wonderwall (Official Video)",
         "url": "https://www.youtube.com/embed/bx1Bh8ZvH84",
-        "imgUrl": "https://i.ytimg.com/vi/bx1Bh8ZvH84/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/bx1Bh8ZvH84/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 38
+        }
     },
     {
+        "videoId": "r7qovpFAGrQ",
         "title": "Lil Nas X - Old Town Road (Official Video) ft. Billy Ray Cyrus",
         "url": "https://www.youtube.com/embed/r7qovpFAGrQ",
-        "imgUrl": "https://i.ytimg.com/vi/r7qovpFAGrQ/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/r7qovpFAGrQ/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 2,
+            "seconds": 38
+        }
     },
     {
+        "videoId": "oRdxUFDoQe0",
         "title": "Michael Jackson - Beat It (Official 4K Video)",
         "url": "https://www.youtube.com/embed/oRdxUFDoQe0",
-        "imgUrl": "https://i.ytimg.com/vi/oRdxUFDoQe0/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/oRdxUFDoQe0/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 59
+        }
     },
     {
+        "videoId": "BQ0mxQXmLsk",
         "title": "Camila Cabello - Havana ft. Young Thug",
         "url": "https://www.youtube.com/embed/BQ0mxQXmLsk",
-        "imgUrl": "https://i.ytimg.com/vi/BQ0mxQXmLsk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/BQ0mxQXmLsk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 43
+        }
     },
     {
+        "videoId": "ugrAo8wEPiI",
         "title": "John Lennon Imagine Official video (HD)",
         "url": "https://www.youtube.com/embed/ugrAo8wEPiI",
-        "imgUrl": "https://i.ytimg.com/vi/ugrAo8wEPiI/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/ugrAo8wEPiI/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 55
+        }
     },
     {
+        "videoId": "fRh_vgS2dFE",
         "title": "Justin Bieber - Sorry (PURPOSE : The Movement)",
         "url": "https://www.youtube.com/embed/fRh_vgS2dFE",
-        "imgUrl": "https://i.ytimg.com/vi/fRh_vgS2dFE/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/fRh_vgS2dFE/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 26
+        }
     },
     {
+        "videoId": "lDK9QqIzhwk",
         "title": "Bon Jovi - Livin&#39; On A Prayer",
         "url": "https://www.youtube.com/embed/lDK9QqIzhwk",
-        "imgUrl": "https://i.ytimg.com/vi/lDK9QqIzhwk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/lDK9QqIzhwk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 9
+        }
     },
     {
+        "videoId": "Pkh8UtuejGw",
         "title": "Shawn Mendes, Camila Cabello - Señorita",
         "url": "https://www.youtube.com/embed/Pkh8UtuejGw",
-        "imgUrl": "https://i.ytimg.com/vi/Pkh8UtuejGw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/Pkh8UtuejGw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 26
+        }
     },
     {
+        "videoId": "gGdGFtwCNBE",
         "title": "The Killers - Mr. Brightside (Official Music Video)",
         "url": "https://www.youtube.com/embed/gGdGFtwCNBE",
-        "imgUrl": "https://i.ytimg.com/vi/gGdGFtwCNBE/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/gGdGFtwCNBE/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 48
+        }
     },
     {
+        "videoId": "ru0K8uYEZWw",
         "title": "CAN&#39;T STOP THE FEELING! (from DreamWorks Animation&#39;s &quot;TROLLS&quot;) (Official Video)",
         "url": "https://www.youtube.com/embed/ru0K8uYEZWw",
-        "imgUrl": "https://i.ytimg.com/vi/ru0K8uYEZWw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/ru0K8uYEZWw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 46
+        }
     },
     {
+        "videoId": "IwOfCgkyEj0",
         "title": "Bob Dylan - Like a Rolling Stone (Official Audio)",
         "url": "https://www.youtube.com/embed/IwOfCgkyEj0",
-        "imgUrl": "https://i.ytimg.com/vi/IwOfCgkyEj0/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/IwOfCgkyEj0/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 0
+        }
     },
     {
+        "videoId": "UceaB4D0jpo",
         "title": "Post Malone ft. 21 Savage - rockstar (Official Music Video)",
         "url": "https://www.youtube.com/embed/UceaB4D0jpo",
-        "imgUrl": "https://i.ytimg.com/vi/UceaB4D0jpo/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/UceaB4D0jpo/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 2
+        }
     },
     {
+        "videoId": "xFYQQPAOz7Y",
         "title": "Eminem - Lose Yourself",
         "url": "https://www.youtube.com/embed/xFYQQPAOz7Y",
-        "imgUrl": "https://i.ytimg.com/vi/xFYQQPAOz7Y/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/xFYQQPAOz7Y/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 28
+        }
     },
     {
+        "videoId": "nfWlot6h_JM",
         "title": "Taylor Swift - Shake It Off",
         "url": "https://www.youtube.com/embed/nfWlot6h_JM",
-        "imgUrl": "https://i.ytimg.com/vi/nfWlot6h_JM/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/nfWlot6h_JM/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 2
+        }
     },
     {
+        "videoId": "xFrGuyw1V8s",
         "title": "Abba - Dancing Queen (Official Music Video Remastered)",
         "url": "https://www.youtube.com/embed/xFrGuyw1V8s",
-        "imgUrl": "https://i.ytimg.com/vi/xFrGuyw1V8s/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/xFrGuyw1V8s/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 53
+        }
     },
     {
+        "videoId": "TUVcZfQe-Kw",
         "title": "Dua Lipa - Levitating Featuring DaBaby (Official Music Video)",
         "url": "https://www.youtube.com/embed/TUVcZfQe-Kw",
-        "imgUrl": "https://i.ytimg.com/vi/TUVcZfQe-Kw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/TUVcZfQe-Kw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 51
+        }
     },
     {
+        "videoId": "sOnqjkJTMaA",
         "title": "Michael Jackson - Thriller (Official 4K Video)",
         "url": "https://www.youtube.com/embed/sOnqjkJTMaA",
-        "imgUrl": "https://i.ytimg.com/vi/sOnqjkJTMaA/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/sOnqjkJTMaA/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 13,
+            "seconds": 42
+        }
     },
     {
+        "videoId": "ktvTqknDobU",
         "title": "Imagine Dragons - Radioactive",
         "url": "https://www.youtube.com/embed/ktvTqknDobU",
-        "imgUrl": "https://i.ytimg.com/vi/ktvTqknDobU/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/ktvTqknDobU/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 22
+        }
     },
     {
+        "videoId": "btPJPFnesV4",
         "title": "Survivor - Eye Of The Tiger (Official HD Video)",
         "url": "https://www.youtube.com/embed/btPJPFnesV4",
-        "imgUrl": "https://i.ytimg.com/vi/btPJPFnesV4/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/btPJPFnesV4/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 5
+        }
     },
     {
+        "videoId": "Pkh8UtuejGw",
         "title": "Shawn Mendes, Camila Cabello - Señorita",
         "url": "https://www.youtube.com/embed/Pkh8UtuejGw",
-        "imgUrl": "https://i.ytimg.com/vi/Pkh8UtuejGw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/Pkh8UtuejGw/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 26
+        }
     },
     {
+        "videoId": "H-kA3UtBj4M",
         "title": "Marvin Gaye - What&#39;s Going On",
         "url": "https://www.youtube.com/embed/H-kA3UtBj4M",
-        "imgUrl": "https://i.ytimg.com/vi/H-kA3UtBj4M/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/H-kA3UtBj4M/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 52
+        }
     },
     {
+        "videoId": "aJOTlE1K90k",
         "title": "Maroon 5 - Girls Like You ft. Cardi B (Official Music Video)",
         "url": "https://www.youtube.com/embed/aJOTlE1K90k",
-        "imgUrl": "https://i.ytimg.com/vi/aJOTlE1K90k/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/aJOTlE1K90k/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 31
+        }
     },
     {
+        "videoId": "CU3mc0yvRNk",
         "title": "The Dandy Warhols - Bohemian Like You",
         "url": "https://www.youtube.com/embed/CU3mc0yvRNk",
-        "imgUrl": "https://i.ytimg.com/vi/CU3mc0yvRNk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/CU3mc0yvRNk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 33
+        }
     },
     {
+        "videoId": "2Vv-BfVoq4g",
         "title": "Ed Sheeran - Perfect (Official Music Video)",
         "url": "https://www.youtube.com/embed/2Vv-BfVoq4g",
-        "imgUrl": "https://i.ytimg.com/vi/2Vv-BfVoq4g/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/2Vv-BfVoq4g/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 40
+        }
     },
     {
+        "videoId": "v1HDt1tknTc",
         "title": "I Want To Hold Your Hand (Remastered 2015)",
         "url": "https://www.youtube.com/embed/v1HDt1tknTc",
-        "imgUrl": "https://i.ytimg.com/vi/v1HDt1tknTc/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/v1HDt1tknTc/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 2,
+            "seconds": 26
+        }
     },
     {
+        "videoId": "qrO4YZeyl0I",
         "title": "Lady Gaga - Bad Romance (Official Music Video)",
         "url": "https://www.youtube.com/embed/qrO4YZeyl0I",
-        "imgUrl": "https://i.ytimg.com/vi/qrO4YZeyl0I/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/qrO4YZeyl0I/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 9
+        }
     },
     {
+        "videoId": "8UVNT4wvIGY",
         "title": "Gotye - Somebody That I Used To Know (feat. Kimbra) [Official Music Video]",
         "url": "https://www.youtube.com/embed/8UVNT4wvIGY",
-        "imgUrl": "https://i.ytimg.com/vi/8UVNT4wvIGY/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/8UVNT4wvIGY/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 4
+        }
     },
     {
+        "videoId": "5IpYOF4Hi6Q",
         "title": "pink floyd - another brick in the wall",
         "url": "https://www.youtube.com/embed/5IpYOF4Hi6Q",
-        "imgUrl": "https://i.ytimg.com/vi/5IpYOF4Hi6Q/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/5IpYOF4Hi6Q/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 50
+        }
     },
     {
+        "videoId": "3T1c7GkzRQQ",
         "title": "The Police - Roxanne (Official Music Video)",
         "url": "https://www.youtube.com/embed/3T1c7GkzRQQ",
-        "imgUrl": "https://i.ytimg.com/vi/3T1c7GkzRQQ/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/3T1c7GkzRQQ/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 10
+        }
     },
     {
+        "videoId": "uSD4vsh1zDA",
         "title": "The Black Eyed Peas - I Gotta Feeling (Official Music Video)",
         "url": "https://www.youtube.com/embed/uSD4vsh1zDA",
-        "imgUrl": "https://i.ytimg.com/vi/uSD4vsh1zDA/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/uSD4vsh1zDA/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 52
+        }
     },
     {
+        "videoId": "MMFj8uDubsE",
         "title": "Bob Dylan - Blowin&#39; in the Wind (Official Audio)",
         "url": "https://www.youtube.com/embed/MMFj8uDubsE",
-        "imgUrl": "https://i.ytimg.com/vi/MMFj8uDubsE/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/MMFj8uDubsE/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 2,
+            "seconds": 51
+        }
     },
     {
+        "videoId": "60ItHLz5WEA",
         "title": "Alan Walker - Faded",
         "url": "https://www.youtube.com/embed/60ItHLz5WEA",
-        "imgUrl": "https://i.ytimg.com/vi/60ItHLz5WEA/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/60ItHLz5WEA/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 33
+        }
     },
     {
+        "videoId": "4m1EFMoRFvY",
         "title": "Beyoncé - Single Ladies (Put a Ring on It) (Video Version)",
         "url": "https://www.youtube.com/embed/4m1EFMoRFvY",
-        "imgUrl": "https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 21
+        }
     },
     {
+        "videoId": "IcrbM1l_BoI",
         "title": "Avicii - Wake Me Up (Official Video)",
         "url": "https://www.youtube.com/embed/IcrbM1l_BoI",
-        "imgUrl": "https://i.ytimg.com/vi/IcrbM1l_BoI/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/IcrbM1l_BoI/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 33
+        }
     },
     {
+        "videoId": "mZ6VezKMoRY",
         "title": "Bob Marley &amp; The Wailers - No Woman, No Cry (Live At The Rainbow 4th June 1977)",
         "url": "https://www.youtube.com/embed/mZ6VezKMoRY",
-        "imgUrl": "https://i.ytimg.com/vi/mZ6VezKMoRY/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/mZ6VezKMoRY/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 54
+        }
     },
     {
+        "videoId": "-tJYN-eG1zk",
         "title": "Queen - We Will Rock You (Official Video)",
         "url": "https://www.youtube.com/embed/-tJYN-eG1zk",
-        "imgUrl": "https://i.ytimg.com/vi/-tJYN-eG1zk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/-tJYN-eG1zk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 2,
+            "seconds": 15
+        }
     },
     {
+        "videoId": "eVTXPUF4Oz4",
         "title": "In The End [Official HD Music Video] - Linkin Park",
         "url": "https://www.youtube.com/embed/eVTXPUF4Oz4",
-        "imgUrl": "https://i.ytimg.com/vi/eVTXPUF4Oz4/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/eVTXPUF4Oz4/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 39
+        }
     },
     {
+        "videoId": "0CFuCYNx-1g",
         "title": "Stevie Wonder Superstition",
         "url": "https://www.youtube.com/embed/0CFuCYNx-1g",
-        "imgUrl": "https://i.ytimg.com/vi/0CFuCYNx-1g/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/0CFuCYNx-1g/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 28
+        }
     },
     {
+        "videoId": "YQHsXMglC9A",
         "title": "Adele - Hello (Official Music Video)",
         "url": "https://www.youtube.com/embed/YQHsXMglC9A",
-        "imgUrl": "https://i.ytimg.com/vi/YQHsXMglC9A/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/YQHsXMglC9A/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 6,
+            "seconds": 7
+        }
     },
     {
+        "videoId": "CvBfHwUxHIk",
         "title": "Rihanna - Umbrella (Orange Version) (Official Music Video) ft. JAY-Z",
         "url": "https://www.youtube.com/embed/CvBfHwUxHIk",
-        "imgUrl": "https://i.ytimg.com/vi/CvBfHwUxHIk/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/CvBfHwUxHIk/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 15
+        }
     },
     {
+        "videoId": "O4irXQhgMqg",
         "title": "The Rolling Stones - Paint It, Black (Official Lyric Video)",
         "url": "https://www.youtube.com/embed/O4irXQhgMqg",
-        "imgUrl": "https://i.ytimg.com/vi/O4irXQhgMqg/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/O4irXQhgMqg/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 47
+        }
     },
     {
+        "videoId": "bnVUHWCynig",
         "title": "Beyoncé - Halo",
         "url": "https://www.youtube.com/embed/bnVUHWCynig",
-        "imgUrl": "https://i.ytimg.com/vi/bnVUHWCynig/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/bnVUHWCynig/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 45
+        }
     },
     {
+        "videoId": "QDYfEBY9NM4",
         "title": "Let It Be (Remastered 2009)",
         "url": "https://www.youtube.com/embed/QDYfEBY9NM4",
-        "imgUrl": "https://i.ytimg.com/vi/QDYfEBY9NM4/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/QDYfEBY9NM4/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 4
+        }
     },
     {
+        "videoId": "tg00YEETFzg",
         "title": "Rihanna - We Found Love ft. Calvin Harris",
         "url": "https://www.youtube.com/embed/tg00YEETFzg",
-        "imgUrl": "https://i.ytimg.com/vi/tg00YEETFzg/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/tg00YEETFzg/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 4,
+            "seconds": 36
+        }
     },
     {
+        "videoId": "lXgkuM2NhYI",
         "title": "David Bowie - Heroes (Official Video)",
         "url": "https://www.youtube.com/embed/lXgkuM2NhYI",
-        "imgUrl": "https://i.ytimg.com/vi/lXgkuM2NhYI/hqdefault.jpg"
-    },
-    {
-        "title": "Lady Gaga - Poker Face (Official Music Video)",
-        "url": "https://www.youtube.com/embed/bESGLojNYSo",
-        "imgUrl": "https://i.ytimg.com/vi/bESGLojNYSo/hqdefault.jpg"
-    },
-    {
-        "title": "AC/DC - Highway to Hell (Official Video)",
-        "url": "https://www.youtube.com/embed/l482T0yNkeo",
-        "imgUrl": "https://i.ytimg.com/vi/l482T0yNkeo/hqdefault.jpg"
-    },
-    {
-        "title": "Happy Together (2016 Remaster)",
-        "url": "https://www.youtube.com/embed/pSw8an1u3rc",
-        "imgUrl": "https://i.ytimg.com/vi/pSw8an1u3rc/hqdefault.jpg"
-    },
-    {
-        "title": "Queen - Somebody To Love (Official Video)",
-        "url": "https://www.youtube.com/embed/kijpcUv-b8M",
-        "imgUrl": "https://i.ytimg.com/vi/kijpcUv-b8M/hqdefault.jpg"
-    },
-    {
-        "title": "Drake - Hotline Bling",
-        "url": "https://www.youtube.com/embed/uxpDa-c-4Mc",
-        "imgUrl": "https://i.ytimg.com/vi/uxpDa-c-4Mc/hqdefault.jpg"
-    },
-    {
-        "title": "Roberta Flack - Killing Me Softly With His Song (Official Audio)",
-        "url": "https://www.youtube.com/embed/DEbi_YjpA-Y",
-        "imgUrl": "https://i.ytimg.com/vi/DEbi_YjpA-Y/hqdefault.jpg"
-    },
-    {
-        "title": "Ed Sheeran - Castle On The Hill [Official Music Video]",
-        "url": "https://www.youtube.com/embed/K0ibBPhiaG0",
-        "imgUrl": "https://i.ytimg.com/vi/K0ibBPhiaG0/hqdefault.jpg"
-    },
-    {
-        "title": "Van Halen - Jump (Official Music Video)",
-        "url": "https://www.youtube.com/embed/SwYN7mTi6HM",
-        "imgUrl": "https://i.ytimg.com/vi/SwYN7mTi6HM/hqdefault.jpg"
-    },
-    {
-        "title": "Drake - One Dance (Lyrics) ft. Wizkid &amp; Kyla",
-        "url": "https://www.youtube.com/embed/ki0Ocze98U8",
-        "imgUrl": "https://i.ytimg.com/vi/ki0Ocze98U8/hqdefault.jpg"
-    },
-    {
-        "title": "Passenger | Let Her Go (Official Video)",
-        "url": "https://www.youtube.com/embed/RBumgq5yVrA",
-        "imgUrl": "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg"
-    },
-    {
-        "title": "Bruce Springsteen - Born to Run (Official Video)",
-        "url": "https://www.youtube.com/embed/IxuThNgl3YA",
-        "imgUrl": "https://i.ytimg.com/vi/IxuThNgl3YA/hqdefault.jpg"
-    },
-    {
-        "title": "OneRepublic - Counting Stars",
-        "url": "https://www.youtube.com/embed/hT_nvWreIhg",
-        "imgUrl": "https://i.ytimg.com/vi/hT_nvWreIhg/hqdefault.jpg"
-    },
-    {
-        "title": "Guns N&#39; Roses - November Rain",
-        "url": "https://www.youtube.com/embed/8SbUC-UaAxE",
-        "imgUrl": "https://i.ytimg.com/vi/8SbUC-UaAxE/hqdefault.jpg"
-    },
-    {
-        "title": "Miley Cyrus - Wrecking Ball (Official Video)",
-        "url": "https://www.youtube.com/embed/My2FRPA3Gf8",
-        "imgUrl": "https://i.ytimg.com/vi/My2FRPA3Gf8/hqdefault.jpg"
-    },
-    {
-        "title": "Daft Punk - Lose Yourself to Dance (Official Version)",
-        "url": "https://www.youtube.com/embed/NF-kLy44Hls",
-        "imgUrl": "https://i.ytimg.com/vi/NF-kLy44Hls/hqdefault.jpg"
-    },
-    {
-        "title": "No Doubt - Don&#39;t Speak (Official 4K Music Video)",
-        "url": "https://www.youtube.com/embed/TR3Vdo5etCQ",
-        "imgUrl": "https://i.ytimg.com/vi/TR3Vdo5etCQ/hqdefault.jpg"
-    },
-    {
-        "title": "David Guetta - Titanium ft. Sia (Official Video)",
-        "url": "https://www.youtube.com/embed/JRfuAukYTKg",
-        "imgUrl": "https://i.ytimg.com/vi/JRfuAukYTKg/hqdefault.jpg"
-    },
-    {
-        "title": "Earth, Wind &amp; Fire - Boogie Wonderland (Official Video)",
-        "url": "https://www.youtube.com/embed/god7hAPv8f0",
-        "imgUrl": "https://i.ytimg.com/vi/god7hAPv8f0/hqdefault.jpg"
-    },
-    {
-        "title": "Lorde - Royals (US Version)",
-        "url": "https://www.youtube.com/embed/nlcIKh6sBtc",
-        "imgUrl": "https://i.ytimg.com/vi/nlcIKh6sBtc/hqdefault.jpg"
-    },
-    {
-        "title": "Madonna - Like A Prayer (Official Video)",
-        "url": "https://www.youtube.com/embed/79fzeNUqQbQ",
-        "imgUrl": "https://i.ytimg.com/vi/79fzeNUqQbQ/hqdefault.jpg"
-    },
-    {
-        "title": "Kings Of Leon - Use Somebody (Official Video)",
-        "url": "https://www.youtube.com/embed/gnhXHvRoUd0",
-        "imgUrl": "https://i.ytimg.com/vi/gnhXHvRoUd0/hqdefault.jpg"
-    },
-    {
-        "title": "Akon - Smack That (Official Music Video) ft. Eminem",
-        "url": "https://www.youtube.com/embed/bKDdT_nyP54",
-        "imgUrl": "https://i.ytimg.com/vi/bKDdT_nyP54/hqdefault.jpg"
-    },
-    {
-        "title": "Keane - Somewhere Only We Know (Official Music Video)",
-        "url": "https://www.youtube.com/embed/Oextk-If8HQ",
-        "imgUrl": "https://i.ytimg.com/vi/Oextk-If8HQ/hqdefault.jpg"
-    },
-    {
-        "title": "Eminem - The Real Slim Shady (Official Video - Clean Version)",
-        "url": "https://www.youtube.com/embed/eJO5HU_7_1w",
-        "imgUrl": "https://i.ytimg.com/vi/eJO5HU_7_1w/hqdefault.jpg"
-    },
-    {
-        "title": "The Killers - Human (Official Music Video)",
-        "url": "https://www.youtube.com/embed/RIZdjT1472Y",
-        "imgUrl": "https://i.ytimg.com/vi/RIZdjT1472Y/hqdefault.jpg"
-    },
-    {
-        "title": "Aerosmith - I Don&#39;t Want to Miss a Thing (Official HD Video)",
-        "url": "https://www.youtube.com/embed/JkK8g6FMEXE",
-        "imgUrl": "https://i.ytimg.com/vi/JkK8g6FMEXE/hqdefault.jpg"
-    },
-    {
-        "title": "Demi Lovato - Sorry Not Sorry (Official Video)",
-        "url": "https://www.youtube.com/embed/-MsvER1dpjM",
-        "imgUrl": "https://i.ytimg.com/vi/-MsvER1dpjM/hqdefault.jpg"
-    },
-    {
-        "title": "Green Day - Boulevard Of Broken Dreams [Official Music Video]",
-        "url": "https://www.youtube.com/embed/Soa3gO7tL-c",
-        "imgUrl": "https://i.ytimg.com/vi/Soa3gO7tL-c/hqdefault.jpg"
-    },
-    {
-        "title": "Celine Dion - My Heart Will Go On (Lyrics)",
-        "url": "https://www.youtube.com/embed/p79GmLNLMrY",
-        "imgUrl": "https://i.ytimg.com/vi/p79GmLNLMrY/hqdefault.jpg"
-    },
-    {
-        "title": "The Cranberries - Zombie (Official Music Video)",
-        "url": "https://www.youtube.com/embed/6Ejga4kJUts",
-        "imgUrl": "https://i.ytimg.com/vi/6Ejga4kJUts/hqdefault.jpg"
-    },
-    {
-        "title": "Adele - Rolling in the Deep (Official Music Video)",
-        "url": "https://www.youtube.com/embed/rYEDA3JcQqw",
-        "imgUrl": "https://i.ytimg.com/vi/rYEDA3JcQqw/hqdefault.jpg"
+        "imgUrl": "https://i.ytimg.com/vi/lXgkuM2NhYI/hqdefault.jpg",
+        "duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 29
+        }
     }
 ]

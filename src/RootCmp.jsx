@@ -6,7 +6,7 @@ import { StationIndex } from './pages/StationIndex.jsx'
 import { MainView } from './pages/MainView.jsx'
 import { Search } from './pages/Search.jsx'
 
-import './style/main.scss'
+import './assets/style/main.scss'
 
 export function App() {
     return (

@@ -1,3 +1,5 @@
+import { array } from "prop-types"
+
 export function MainView() {
 
     const count = 50
