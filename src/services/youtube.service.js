@@ -29,10 +29,10 @@ async function getVideos(value, maxResults = 5) {
         })
 
         return videos.data.items.map(video => ({
+            videoId: video.id.videoId,
             title: video.snippet.title,
             url: `https://www.youtube.com/embed/${video.id.videoId}`,
             imgUrl: video.snippet.thumbnails.high.url,
-            duration: parseISODuration(video.contentDetails.duration)
         }))
     } catch (err) {
         console.log('Error:', err)
@@ -41,8 +41,22 @@ async function getVideos(value, maxResults = 5) {
 
 async function getTopVideo(value) {
     try {
-        const videos = await getVideos(value, 1)
-        return videos[0]
+        const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        const search = await getVideos(value, 1)
+        const video = search[0]
+
+        const videoDetails = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+                part: 'contentDetails',
+                id: video.videoId,
+                key: apiKey,
+            }
+        })
+
+        return {
+            ...video,
+            duration: parseISODuration(videoDetails.data.items[0].contentDetails.duration)
+        }
     } catch (err) {
         console.log('Error:', err)
     }
