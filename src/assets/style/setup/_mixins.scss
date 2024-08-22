@@ -164,3 +164,9 @@
         font-variation-settings: "wght" 200;
     }
 }
+
+// icons
+@mixin icon {
+    display: grid;
+    place-content: center;
+}
