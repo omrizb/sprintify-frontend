@@ -1,5 +1,5 @@
 import { imgService } from "../services/imgService.js"
-import SvgIcon from './SvgIcon'
+import { SvgIcon } from './SvgIcon'
 
 
 export function GlobalNav() {
@@ -7,14 +7,14 @@ export function GlobalNav() {
         <div className="global-nav">
             {/* <img src={imgService.getImg('liked')} alt="" /> */}
             <div className="spotify"><SvgIcon iconName={"spotify"} /></div>
-            <div className="home"><SvgIcon iconName={"home"}    /> </div>
-            <form><span><SvgIcon iconName={"search"}    /> </span>What do you want to play? </form>
+            <div className="home"><SvgIcon iconName={"home"} /> </div>
+            <form><span><SvgIcon iconName={"search"} /> </span>What do you want to play? </form>
             <div><SvgIcon iconName={"bell"} /></div>
             <div>Profile icon</div>
-            
-            
-            
-            
+
+
+
+
         </div>
     )
 }
