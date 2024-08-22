@@ -17,8 +17,6 @@ export function App() {
         // <UserMsg />
 
         <Provider store={store}>
-            {/* <img src={imgService.getImg('liked')} alt="" />
-            <SvgIcon iconName={"bell"} /> */}
             <Router>
                 <Routes>
                     <Route path="/" element={<StationIndex />}>
