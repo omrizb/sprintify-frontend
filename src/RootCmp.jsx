@@ -6,6 +6,7 @@ import { StationIndex } from './pages/StationIndex.jsx'
 import { MainView } from './pages/MainView.jsx'
 import { Search } from './pages/Search.jsx'
 import { imgService } from './services/imgService.js'
+import SvgIcon from './cmps/SvgIcon.jsx'
 
 import './assets/style/main.scss'
 
@@ -17,6 +18,7 @@ export function App() {
         
         <Provider store={store}>
             <img src={imgService.getImg('liked')} alt="" />
+            <SvgIcon iconName={"bell"} />
             <Router>
                 <Routes>
                     <Route path="/" element={<StationIndex />}>
