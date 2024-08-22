@@ -1,5 +1,29 @@
 .global-nav {
-    display: flex;
-    justify-content: center;
+    height: 50px;
+    padding: 0px 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
     align-items: center;
+
+    
+    .home{
+            height: 50px;
+            width: 50px;
+            display: grid;
+            place-content: center;
+            border-radius: 50%;
+            background-color: rgb(31, 31, 31);
+        }
+
+    form {
+        color: rgb(179, 179, 179); 
+        background-color: rgb(42, 42, 42);
+        height: 50px;
+        display: grid;
+        grid-auto-flow: column;
+        align-content: center;
+        border-radius: 500px;
+    }
+
+    
 }
