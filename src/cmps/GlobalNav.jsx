@@ -9,12 +9,12 @@ export function GlobalNav() {
             <div className="spotify"><SvgIcon iconName={"spotify"} /></div>
             <div className="home"><SvgIcon iconName={"home"}    /> </div>
             <form>
-                <span><SvgIcon iconName={"search"}    /> </span>
-                What do you want to play?
-                <span><SvgIcon iconName={"browse"}    /> </span> 
+                <div className="search"><SvgIcon iconName={"search"}    /> </div>
+                <input type="text" placeholder="What do you want to play?" /> 
+                <div className="browse"><SvgIcon iconName={"browse"}    /> </div> 
             </form>
-            <div><SvgIcon iconName={"bell"} /></div>
-            <div>Profile icon</div>
+            <div className="bell"><SvgIcon iconName={"bell"} /></div>
+            <button className="profile-btn">D</button>
 
 
 
