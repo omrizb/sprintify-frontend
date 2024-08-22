@@ -29,10 +29,16 @@
         border-radius: 500px;
         // padding: 12px 64px 12px 48px;
 
+        &:focus {
+            border-color: white;
+        }
+
         input{
             border: none;
             background-color: inherit;
             font-size: inherit;
+
+           
         }
 
         .search {
