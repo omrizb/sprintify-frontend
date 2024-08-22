@@ -1,9 +1,9 @@
-
 import { storageService } from '../async-storage.service'
 import { utilService } from '../util.service.js'
 import { userService } from '../user'
+import { stations } from '../../../data-sample/station.js'
 
-const STORAGE_KEY = 'station'
+const STORAGE_KEY = 'stationDB'
 
 export const stationService = {
     query,
@@ -16,7 +16,7 @@ export const stationService = {
 // DEBUG:
 // window.cs = stationService
 
-_createStations(20)
+_createStations()
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var stations = await storageService.query(STORAGE_KEY)
@@ -93,26 +93,9 @@ async function addStationMsg(stationId, txt) {
     return msg
 }
 
-function _createStations(size) {
-    let stations = utilService.loadFromStorage(STORAGE_KEY)
-    if (!stations || !stations.length) {
-        stations = []
-        for (let i = 0; i < size; i++) {
-            const txt = utilService.makeLorem(3)
-            stations.push(_createStation(txt))
-        }
-        utilService.saveToStorage(ITEM_KEY, stations)
+function _createStations() {
+    let currStations = utilService.loadFromStorage(STORAGE_KEY)
+    if (!currStations || !currStations.length) {
+        utilService.saveToStorage(STORAGE_KEY, stations)
     }
-}
-
-function _createStation(txt) {
-    const station = {
-        vendor: txt,
-        description: utilService.makeLorem(10),
-        price: getRandomIntInclusive(1000, 9000),
-        speed: getRandomIntInclusive(80, 240),
-        msgs: [],
-    }
-    station.createdAt = station.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
-    return station
 }

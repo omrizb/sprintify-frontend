@@ -1,27 +1,19 @@
 const { DEV, VITE_LOCAL } = import.meta.env
-import { getRandomIntInclusive, makeId } from '../util.service'
 
-import { carService as local } from './car.service.local'
-import { carService as remote } from './car.service.remote'
+import { stationService as local } from './station.service.local'
+import { stationService as remote } from './station.service.remote'
 
-function getEmptyCar() {
+function getEmptyStation() {
     return {
-        vendor: makeId(),
-        description: '',
-        price: getRandomIntInclusive(1000, 9000),
-        speed: getRandomIntInclusive(80, 240),
-        msgs: [],
+        name: ''
     }
 }
 
 function getDefaultFilter() {
     return {
         txt: '',
-        maxPrice: '',
-        minSpeed: '',
         sortField: '',
         sortDir: '',
-        // pageIdx: 0
     }
 }
 
@@ -49,7 +41,7 @@ function getFilterBy(searchParams) {
 }
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const carService = { getEmptyCar, getDefaultFilter, getFilterBy, ...service }
+export const stationService = { getEmptyStation, getDefaultFilter, getFilterBy, ...service }
 
 
 
@@ -83,4 +75,4 @@ export const carService = { getEmptyCar, getDefaultFilter, getFilterBy, ...servi
 //* Easy access to this service from the dev tools console
 //* when using script - dev / dev:local
 
-if (DEV) window.carService = carService
+if (DEV) window.stationService = stationService

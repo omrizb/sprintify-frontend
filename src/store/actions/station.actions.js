@@ -1,6 +1,6 @@
-import { stationService } from '../services/station'
-import { store } from '../store/store'
-import { ADD_STATION, REMOVE_STATION, SET_STATIONS, SET_STATION, UPDATE_STATION, ADD_STATION_MSG } from './station.reducer'
+import { stationService } from '../../services/station'
+import { store } from '../store.js'
+import { ADD_STATION, REMOVE_STATION, SET_STATIONS, SET_STATION, UPDATE_STATION, ADD_STATION_MSG } from '../reducers/station.reducer.js'
 
 export async function loadStations(filterBy) {
     try {
