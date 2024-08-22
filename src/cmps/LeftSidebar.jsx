@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
-import { MyLibrary } from './LeftSidebar/MyLibrary.jsx'
+import { LeftSideBarHeader} from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
+import { LeftSideBarFilter } from './LeftSidebar/LeftSideBarFilter.jsx'
+import { StationList } from './StationList.jsx'
 
 export function LeftSidebar() {
 
@@ -9,7 +11,9 @@ export function LeftSidebar() {
     return (
         <div className="left-sidebar">
             {!loggedinUser && <SidebarNav />}
-            <MyLibrary />
+            <LeftSideBarHeader />
+            <LeftSideBarFilter />
+            <StationList />
         </div>
     )
 }

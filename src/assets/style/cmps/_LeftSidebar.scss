@@ -4,13 +4,17 @@
     gap: $panelGap;
     width: 280px;
     height: 100%;
+    @include section;
 
     .sidebar-nav {
         @include section;
     }
 
-    .my-library {
-        @include section;
+    .sidebar-header {
+        flex-grow: 1;
+    }
+
+    .sidebar-filter {
         flex-grow: 1;
     }
 }
