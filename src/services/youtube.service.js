@@ -1,3 +1,5 @@
+const YOUTUBE_DATA_API_KEYS = JSON.parse(import.meta.env.VITE_YOUTUBE_DATA_API_KEYS)
+
 import axios from 'axios'
 import { utilService } from './util.service.js'
 
@@ -5,14 +7,6 @@ export const youtubeService = {
     getVideos,
     getTopVideo
 }
-
-const YOUTUBE_DATA_API_KEYS = [
-    'AIzaSyBbON95W3T1XxVHmol0z6f49h-CCMoLDRU',
-    'AIzaSyBGb9TvPCbfIzpdf4SJMMlTR0xoxuvuSGY',
-    'AIzaSyAyMgW0F74Qul3b0HytgVZOy4Dvq7zE_Os',
-    'AIzaSyCewoUt9zepeRA5dW05a7mf-uyWBFKePfA',
-    'AIzaSyDtVGyJvy1rS2lk1hs1Xid1ofviFhm7S_A'
-]
 
 async function getVideos(value, maxResults = 5) {
     try {

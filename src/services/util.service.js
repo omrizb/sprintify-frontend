@@ -45,7 +45,7 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
 }
 
-function getRandomItems(items, size = 1, duplicationAllowed = false) {
+function getRandomItems(items, size, singleItem = false, duplicationAllowed = false) {
     if (size > items.length && !duplicationAllowed) return
 
     const res = []
@@ -56,7 +56,7 @@ function getRandomItems(items, size = 1, duplicationAllowed = false) {
         res.push(srcArray[randIdx])
         if (!duplicationAllowed) srcArray.splice(randIdx, 1)
     }
-    return (size === 1) ? res[0] : res
+    return (singleItem) ? res[0] : res
 }
 
 function getRandomColor() {
