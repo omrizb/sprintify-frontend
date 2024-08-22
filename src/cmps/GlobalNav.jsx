@@ -1,5 +1,5 @@
 import { imgService } from "../services/imgService.js"
-import SvgIcon from './SvgIcon'
+import { SvgIcon } from './SvgIcon'
 
 
 export function GlobalNav() {
@@ -15,10 +15,10 @@ export function GlobalNav() {
             </form>
             <div><SvgIcon iconName={"bell"} /></div>
             <div>Profile icon</div>
-            
-            
-            
-            
+
+
+
+
         </div>
     )
 }
