@@ -8,8 +8,8 @@ const SVGS = {
         </svg>`,
   
     browse: `<svg 
-            width=40
-            height=40  
+            
+            height=20  
             viewBox="0 0 24 24"
             fill = "rgb(179, 179, 179)"  
             <path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path>
