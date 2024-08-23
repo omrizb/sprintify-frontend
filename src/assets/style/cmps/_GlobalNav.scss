@@ -16,7 +16,6 @@
             border-radius: 50%;
             background-color: rgb(31, 31, 31);
             justify-self: end;
-            @include icon
         }
 
     form {
@@ -41,14 +40,12 @@
             .search {
                 justify-self: start;
                 padding-inline-start: 12px;
-                @include icon;
             }
     
             .browse{
                 width: 48px;
                 border-inline-start: 1px solid rgb(179, 179, 179);
                 justify-self: end;
-                @include icon;
             }
 
             input:focus {

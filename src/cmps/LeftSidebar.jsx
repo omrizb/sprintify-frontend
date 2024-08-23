@@ -7,13 +7,17 @@ import { StationList } from './StationList.jsx'
 export function LeftSidebar() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
+    // const loggedinUser = false
 
     return (
         <div className="left-sidebar">
             {!loggedinUser && <SidebarNav />}
-            <LeftSideBarHeader />
-            <LeftSideBarFilter />
-            <StationList />
+            <div className="my-library" >
+                <LeftSideBarHeader />
+                <LeftSideBarFilter />
+                <StationList />
+            </div>
         </div>
+        
     )
 }

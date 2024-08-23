@@ -1,7 +1,15 @@
+import { SvgIcon } from "../SvgIcon"
+
+
 export function LeftSideBarHeader() {
     return (
         <div className="sidebar-header">
-            My Library
+            <div className="library">
+                <div className="icon"> <SvgIcon iconName={"library"}    /> </div>
+                Your Library
+            </div>
+            
+            <div className="plus icon"><SvgIcon iconName={"plus"}    /> </div>
         </div>
     )
 }

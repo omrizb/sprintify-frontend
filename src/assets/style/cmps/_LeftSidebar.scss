@@ -6,15 +6,50 @@
     height: 100%;
     @include section;
 
-    .sidebar-nav {
+   .my-library{
+        color: $secondaryTxtClr;
+        display: grid;
+        row-gap: 1em;
         @include section;
-    }
 
-    .sidebar-header {
-        flex-grow: 1;
-    }
+        .sidebar-nav {
+            @include section;
+        }
 
-    .sidebar-filter {
-        flex-grow: 1;
+        .sidebar-header {
+           display: grid;
+           grid-auto-flow: column; 
+
+           .library {
+            justify-self: start;
+            display: grid;
+            align-content: center;
+            grid-auto-flow: column;
+            column-gap: 0.5em;
+
+            &:hover {
+                color: white;
+                cursor: pointer;
+            }
+           }
+
+           .plus {
+            justify-self: end;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+
+            &:hover {
+                background-color:  rgb(42, 42, 42);
+                cursor: pointer;
+                
+            }
+           }
+        }
+
+        .sidebar-filter {
+         
+        }
     }
+    
 }
