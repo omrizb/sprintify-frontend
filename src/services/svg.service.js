@@ -64,20 +64,30 @@ const SVGS = {
         </svg>`,
 
     recents: `<svg
-            ${stdSize}
-            ${fillLightGrey}
-            viewBox="0 0 16 16">
-            <path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path>
-            </svg>`,
+        ${stdSize}
+        ${fillLightGrey}
+        viewBox="0 0 16 16">
+        <path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path>
+        </svg>`,
 
     dots: `<svg 
         ${stdSize}
         ${fillLightGrey} 
         viewBox="0 0 24 24" >
         <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-        </svg>`
+        </svg>`,
 
+    playerPlay: `<svg
+        ${smallSize}
+        viewBox="0 0 16 16">
+        <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
+        </svg>`,
 
+    playerPause: `<svg
+        ${smallSize}
+        viewBox="0 0 16 16">
+        <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
+        </svg>`,
 }
 
 export const svgService = {
