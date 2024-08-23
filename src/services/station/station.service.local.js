@@ -18,7 +18,8 @@ export const stationService = {
 
 _createStations()
 
-async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
+// async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
+async function query() {
     var stations = await storageService.query(STORAGE_KEY)
     console.log('stations:', stations)
     // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
