@@ -67,7 +67,14 @@ const SVGS = {
             ${fillLightGrey}
             viewBox="0 0 16 16">
             <path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path>
-            </svg>`
+            </svg>`,
+
+    dots: `<svg 
+        ${stdSize}
+        ${fillLightGrey} 
+        viewBox="0 0 24 24" >
+        <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+        </svg>`
 
     
     }
