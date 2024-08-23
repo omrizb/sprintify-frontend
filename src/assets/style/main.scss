@@ -15,9 +15,11 @@
 
 /* Pages */
 @import "pages/StationIndex";
+@import "pages/StationDetails";
 
 /* Components */
 @import "cmps/GlobalNav";
 @import "cmps/LeftSidebar";
 @import "cmps/Player";
-@import "cmps/SidebarNav"
+@import "cmps/SidebarNav";
+@import "cmps/DisplayFooter";
