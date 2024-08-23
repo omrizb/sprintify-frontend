@@ -1,32 +1,9 @@
-import { useSelector } from 'react-redux'
 
-export function StationDetailsHeader({ stationMeta }) {
-    const station = useSelector((storeState) => storeState.stationModule.station)
+export function StationDetailsHeader({ stationMeta, songCountTxt, durationTxt }) {
     const { type, isLikedSongs, isEmptyStation, isOwnedByUser } = stationMeta
 
     const showSongCountTxt = type === 'playlist' && !isEmptyStation
     const showDurationTxt = type === 'playlist' && !isLikedSongs
-
-
-    function songCountTxt() {
-        if (!showSongCountTxt) return ''
-        const songCount = station.songs.length
-        return songCount > 1 ? `${songCount} songs` : `${songCount} song`
-    }
-
-
-    function durationTxt() {
-        if (!showDurationTxt) return ''
-        const totalDuration = station.songs.reduce((acc, song) => {
-            return acc + song.duration.hours * 3600 + song.duration.minutes * 60 + song.duration.seconds
-        }, 0)
-
-        const hours = Math.floor(totalDuration / 3600)
-        const minutes = Math.floor((totalDuration % 3600) / 60)
-        const seconds = totalDuration % 60
-
-        return `${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
-    }
 
     return (
         <div className="station-header">
