@@ -9,7 +9,8 @@ export function LeftSideBarHeader() {
                 Your Library
             </div>
             
-            <div className="plus icon"><SvgIcon iconName={"plus"}    /> </div>
+            {/* <div className="plus icon"><SvgIcon iconName={"plus"}    /> </div> */}
+            <button className="plus icon btn-medium"><SvgIcon iconName={"plus"}    /> </button>
         </div>
     )
 }

@@ -60,7 +60,16 @@ const SVGS = {
             ${fillLightGrey}
             viewBox="0 0 16 16" >
             <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path>
+            </svg>`,
+
+    recents: `<svg
+            ${stdSize}
+            ${fillLightGrey}
+            viewBox="0 0 16 16">
+            <path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path>
             </svg>`
+
+    
     }
   
   export const svgService = {

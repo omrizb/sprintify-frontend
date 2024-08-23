@@ -74,6 +74,11 @@
     background-color: $tintedBgClr;
 }
 
+@mixin medium {
+    color: $secondaryTxtClr;
+    background-color: $sectionBgClr;
+}
+
 @mixin dark {
     color: $primaryTxtClr;
     background-color: $darkBgClr;
@@ -170,3 +175,5 @@
     display: grid;
     place-content: center;
 }
+
+

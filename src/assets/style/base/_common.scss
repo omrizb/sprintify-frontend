@@ -1,3 +1,7 @@
+.btn {
+    @include btn($type: regular);
+}
+
 .btn-tinted {
     @include tinted;
     @include btn($type: regular);
@@ -7,10 +11,21 @@
     }
 }
 
+.btn-medium {
+    @include medium;
+    @include btn($type: regular);
+
+    &:hover {
+        background-color:  $tintedBgClr;
+    }
+}
+
 .btn-dark {
     @include dark;
     @include btn($type: regular);
 }
+
+
 
 .btn-light {
     @include light;
@@ -44,3 +59,5 @@
 .icon {
     @include icon;
 }
+
+
