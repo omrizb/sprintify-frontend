@@ -96,9 +96,10 @@
   
 // Buttons
   
-@mixin btn($type: regular, $size: regular) {
+@mixin btn($type: regular, $size: regular, $circleSize: 0) {
 
     display: inline-flex;
+    justify-content: center;
     align-items: center;
 
     border-radius: 100vh;
@@ -121,6 +122,11 @@
         padding: $bigPadding;
         font-size: em(16px);
         font-weight: 700;
+    }
+
+    @if $circleSize > 0 {
+        width: $circleSize;
+        height: $circleSize;
     }
 
     @if $type == animated {

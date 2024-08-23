@@ -4,7 +4,7 @@
 
 .btn-tinted {
     @include tinted;
-    @include btn($type: regular);
+    @include btn();
 
     &:hover {
         background-color: $tintedBgClrHighlight;
@@ -13,7 +13,7 @@
 
 .btn-medium {
     @include medium;
-    @include btn($type: regular);
+    @include btn();
 
     &:hover {
         background-color:  $tintedBgClr;
@@ -22,14 +22,14 @@
 
 .btn-dark {
     @include dark;
-    @include btn($type: regular);
+    @include btn();
 }
 
 
 
 .btn-light {
     @include light;
-    @include btn($type: regular);
+    @include btn();
 }
 
 .btn-green {
