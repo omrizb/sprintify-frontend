@@ -1,4 +1,9 @@
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+
+import { loadStations } from '../store/actions/station.actions.js'
+import { stationService } from '../services/station/index.js'
+
 import { LeftSideBarHeader} from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
 import { LeftSideBarFilter } from './LeftSidebar/LeftSideBarFilter.jsx'
@@ -8,6 +13,13 @@ export function LeftSidebar() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     // const loggedinUser = false
+    const [ filterBy, setFilterBy ] = useState(stationService.getDefaultFilter())
+    const stations = useSelector(storeState => storeState.stationModule.stations)
+
+
+    useEffect(() => {
+        loadStations(filterBy)
+    }, [])
 
     return (
         <div className="left-sidebar">
@@ -15,7 +27,7 @@ export function LeftSidebar() {
             <div className="my-library" >
                 <LeftSideBarHeader />
                 <LeftSideBarFilter />
-                <StationList />
+                <StationList stations={stations} />
             </div>
         </div>
         
