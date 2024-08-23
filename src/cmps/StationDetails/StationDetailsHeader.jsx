@@ -4,19 +4,19 @@ export function StationDetailsHeader({ stationMeta }) {
     const station = useSelector((storeState) => storeState.stationModule.station)
     const { type, isLikedSongs, isEmptyStation, isOwnedByUser } = stationMeta
 
-    const isDisplaySongCountTxt = type === 'playlist' && !isEmptyStation
-    const isDisplayDurationTxt = type === 'playlist' && !isLikedSongs
+    const showSongCountTxt = type === 'playlist' && !isEmptyStation
+    const showDurationTxt = type === 'playlist' && !isLikedSongs
 
 
     function songCountTxt() {
-        if (!isDisplaySongCountTxt) return ''
+        if (!showSongCountTxt) return ''
         const songCount = station.songs.length
         return songCount > 1 ? `${songCount} songs` : `${songCount} song`
     }
 
 
     function durationTxt() {
-        if (!isDisplayDurationTxt) return ''
+        if (!showDurationTxt) return ''
         const totalDuration = station.songs.reduce((acc, song) => {
             return acc + song.duration.hours * 3600 + song.duration.minutes * 60 + song.duration.seconds
         }, 0)
@@ -36,8 +36,8 @@ export function StationDetailsHeader({ stationMeta }) {
                 <h1>{station.name}</h1>
                 <p>
                     {station.createdBy.fullName}
-                    {isDisplaySongCountTxt && <><span className="dot">{songCountTxt()}</span></>}
-                    {isDisplayDurationTxt && <><span>, </span><span>{durationTxt()}</span></>}
+                    {showSongCountTxt && <><span className="dot">{songCountTxt()}</span></>}
+                    {showDurationTxt && <><span>, </span><span>{durationTxt()}</span></>}
                 </p>
             </div>
         </div>
