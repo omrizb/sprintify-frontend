@@ -3,7 +3,8 @@ export const SET_STATION = 'SET_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
-export const ADD_STATION_MSG = 'ADD_STATION_MSG'
+export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
+export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 const currStation = {
     _id: 'A1b2C3d4E5',
     name: 'Summer Vibes',
@@ -79,8 +80,12 @@ export function stationReducer(state = initialState, action) {
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations }
             break
-        case ADD_STATION_MSG:
-            newState = { ...state, station: { ...state.station, msgs: [...state.station.msgs || [], action.msg] } }
+        case ADD_SONG_TO_STATION:
+            newState = { ...state, station: { ...state.station, songs: [...state.station.songs || [], action.song] } }
+            break
+        case REMOVE_SONG_FROM_STATION:
+            const updatedSongs = state.station.songs.filter(song => song.songId !== action.songId)
+            newState = { ...state, station: { ...state.station, songs: updatedSongs } }
             break
         default:
     }
@@ -106,9 +111,9 @@ function unitTestReducer() {
     state = stationReducer(state, { type: REMOVE_STATION, stationId: station2._id })
     console.log('After REMOVE_STATION:', state)
 
-    const msg = { id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
-    state = stationReducer(state, { type: ADD_STATION_MSG, stationId: station1._id, msg })
-    console.log('After ADD_STATION_MSG:', state)
+    // const msg = { id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
+    // state = stationReducer(state, { type: ADD_STATION_MSG, stationId: station1._id, msg })
+    // console.log('After ADD_STATION_MSG:', state)
 
     state = stationReducer(state, { type: REMOVE_STATION, stationId: station1._id })
     console.log('After REMOVE_STATION:', state)
