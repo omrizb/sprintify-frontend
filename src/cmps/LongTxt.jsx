@@ -12,7 +12,7 @@ export function LongTxt({ txt, length = 100 }) {
     }
 
     function readMoreOrLess() {
-        return (displayShortTxt) ? 'Read more' : 'Read less'
+        return (displayShortTxt) ? 'Show more' : 'Show less'
     }
 
     return <div className="long-text-display">
