@@ -6,55 +6,57 @@
     column-gap: 0.5em;
     align-items: center;
 
-    
+    &:hover{
+        cursor: pointer;
+    }
+ 
     .home{
             height: 50px;
             width: 50px;
-            display: grid;
-            place-content: center;
             border-radius: 50%;
             background-color: rgb(31, 31, 31);
             justify-self: end;
         }
 
     form {
-        color: rgb(179, 179, 179); 
-        font-size: 16px;
-        background-color: rgb(42, 42, 42);
-        height: 50px;
-        width: 465px;
-        display: grid;
-        grid-auto-flow: column;
-        align-content: center;
-        border-radius: 500px;
-        // padding: 12px 64px 12px 48px;
 
-        &:focus {
-            border-color: white;
-        }
-
-        input{
-            border: none;
-            background-color: inherit;
-            font-size: inherit;
-
-           
-        }
-
-        .search {
-            justify-self: start;
-            padding-inline-start: 12px;
-        }
-
-        .browse{
+        .text-container {
+            color: rgb(179, 179, 179); 
+            font-size: 16px;
+            background-color: rgb(42, 42, 42);
+            height: 50px;
+            width: 465px;
+            display: grid;
+            grid-template-columns: 50px 1fr 50px;
+            align-content: center;
+            border-radius: 500px;
             
-            height: 25px;
-            width: 48px;
-            border-inline-start: 1px solid rgb(179, 179, 179);
-            height: 20px;
-            padding: 0px 4px 0px 12px;
-            justify-self: end;
-        }
+            input{
+                border: none;
+                background-color: inherit;
+                font-size: inherit;
+            }
+    
+            .search {
+                justify-self: start;
+                padding-inline-start: 12px;
+            }
+    
+            .browse{
+                width: 48px;
+                border-inline-start: 1px solid rgb(179, 179, 179);
+                justify-self: end;
+            }
+
+            input:focus {
+                outline: none;
+                color: white;
+            }
+
+            &:has(input:focus) {
+                border: 2px solid white; 
+            }
+        }    
     }
 
     .bell {
@@ -71,6 +73,5 @@
         border-radius: 50%;
         border: 9px solid rgb(31, 31, 31);
     }
-
-    
+ 
 }

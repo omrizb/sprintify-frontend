@@ -18,31 +18,32 @@ export const stationService = {
 
 _createStations()
 
-async function query(filterBy = { txt: '', price: 0 }) {
+// async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
+async function query() {
     var stations = await storageService.query(STORAGE_KEY)
     console.log('stations:', stations)
-    const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+    // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
 
-    if (txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        stations = stations.filter(station => regex.test(station.vendor) || regex.test(station.description))
-    }
-    if (minSpeed) {
-        stations = stations.filter(station => station.speed <= minSpeed)
-    }
-    if (maxPrice) {
-        stations = stations.filter(station => station.price <= maxPrice)
-    }
-    if (sortField === 'vendor' || sortField === 'owner') {
-        stations.sort((station1, station2) =>
-            station1[sortField].localeCompare(station2[sortField]) * +sortDir)
-    }
-    if (sortField === 'price' || sortField === 'speed') {
-        stations.sort((station1, station2) =>
-            (station1[sortField] - station2[sortField]) * +sortDir)
-    }
+    // if (txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     stations = stations.filter(station => regex.test(station.vendor) || regex.test(station.description))
+    // }
+    // if (minSpeed) {
+    //     stations = stations.filter(station => station.speed <= minSpeed)
+    // }
+    // if (maxPrice) {
+    //     stations = stations.filter(station => station.price <= maxPrice)
+    // }
+    // if (sortField === 'vendor' || sortField === 'owner') {
+    //     stations.sort((station1, station2) =>
+    //         station1[sortField].localeCompare(station2[sortField]) * +sortDir)
+    // }
+    // if (sortField === 'price' || sortField === 'speed') {
+    //     stations.sort((station1, station2) =>
+    //         (station1[sortField] - station2[sortField]) * +sortDir)
+    // }
 
-    stations = stations.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
+    // stations = stations.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
     return stations
 }
 
