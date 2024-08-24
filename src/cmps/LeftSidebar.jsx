@@ -8,6 +8,7 @@ import { LeftSideBarHeader } from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
 import { LeftSideBarFilter } from './LeftSidebar/LeftSideBarFilter.jsx'
 import { StationList } from './StationList.jsx'
+import { updateFilterBy } from '../store/actions/filterBy.actions.js'
 
 
 export function LeftSidebar() {
@@ -17,11 +18,16 @@ export function LeftSidebar() {
     // const [ filterBy, setFilterBy ] = useState(stationService.getDefaultFilter())
 
     const stations = useSelector(storeState => storeState.stationModule.stations)
+    const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
+
+    
 
     useEffect(() => {
-        loadStations()
-    }, [])
+        loadStations(filterBy)
+        console.log('filterBy from LeftSideBar', filterBy)
+    }, [filterBy])
 
+    
     return (
         <div className="left-sidebar">
             {!loggedinUser && <SidebarNav />}

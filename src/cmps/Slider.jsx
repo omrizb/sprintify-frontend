@@ -74,8 +74,6 @@ export function Slider({ startValue = 50 }) {
         setIsDragging(false)
     }
 
-    console.log(sliderValue)
-
     return (
         <div className="slider" onMouseDown={handleMouseDown}>
             <div ref={nonActiveBarRef} className="non-active-bar"></div>

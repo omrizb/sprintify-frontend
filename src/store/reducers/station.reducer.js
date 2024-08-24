@@ -5,6 +5,7 @@ export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const ADD_STATION_MSG = 'ADD_STATION_MSG'
 
+
 const initialState = {
     stations: [],
     station: null
