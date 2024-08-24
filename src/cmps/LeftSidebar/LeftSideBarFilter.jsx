@@ -8,6 +8,11 @@ export function LeftSideBarFilter() {
 
     const [ showMenu, setShowMenu] = useState(false)
 
+    const display = {
+        sortBy: 'recents',
+        viewAs: 'list'
+    }
+
     return (
         <div className="sidebar-filter">
             <div className="category">
@@ -18,11 +23,11 @@ export function LeftSideBarFilter() {
             <div className="sidebar-search">
                 <button className="search icon btn-medium"><SvgIcon iconName={"search"}    /> </button>
                 <div className="sort-by">
-                    <button onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}  className="btn-medium">
+                    <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
                         Recents
-                        <div className="icon"><SvgIcon iconName={"recents"}    /> </div>
-                    </button>
-                    {showMenu && <DropDownMenu />}
+                        <div className="icon"><SvgIcon iconName={"list"}    /> </div>
+                    </div>
+                    {showMenu && <DropDownMenu display={display} />}
                 </div>
                 
             </div>
