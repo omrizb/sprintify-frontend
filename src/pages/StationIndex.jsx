@@ -5,7 +5,7 @@ import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { NowPlayingDetails } from '../cmps/NowPlayingDetails.jsx'
 import { Player } from '../cmps/Player.jsx'
-import { MainViewHeader } from '../cmps/MainViewHeader.jsx'
+
 
 import { loadStations } from '../store/actions/station.actions.js'
 
@@ -23,7 +23,6 @@ export function StationIndex() {
                 <LeftSidebar />
             </div>
             <div className="main-view-container">
-                <MainViewHeader />
                 <Outlet />
             </div>
             <div className="right-sidebar-container">
