@@ -17,10 +17,13 @@ export function LeftSidebar() {
     // const [ filterBy, setFilterBy ] = useState(stationService.getDefaultFilter())
 
     const stations = useSelector(storeState => storeState.stationModule.stations)
+    const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
+
+    console.log(filterBy)
 
     useEffect(() => {
-        loadStations()
-    }, [])
+        loadStations(filterBy)
+    }, [filterBy])
 
     return (
         <div className="left-sidebar">

@@ -2,6 +2,7 @@ const smallSize = 'width=16 height=16'
 const stdSize = 'width=20 height=20'
 const fillLightGrey = `fill = "rgb(179, 179, 179)"`
 const fillWhite = `fill = "white"`
+const fillGreen = `fill =  "#1ed760"`
 
 
 const SVGS = {
@@ -63,7 +64,7 @@ const SVGS = {
         <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path>
         </svg>`,
 
-    recents: `<svg
+    list: `<svg
         ${stdSize}
         ${fillLightGrey}
         viewBox="0 0 16 16">
@@ -75,6 +76,27 @@ const SVGS = {
         ${fillLightGrey} 
         viewBox="0 0 24 24" >
         <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+        </svg>`,
+
+    compact: `<svg
+        ${stdSize}
+        ${fillLightGrey}  
+        viewBox="0 0 16 16">
+        <path d="M15.5 13.5H.5V12h15v1.5zm0-4.75H.5v-1.5h15v1.5zm0-4.75H.5V2.5h15V4z"></path>
+        </svg>`,
+
+    grid: `<svg
+        ${stdSize}
+        ${fillLightGrey}  
+        viewBox="0 0 16 16" >
+        <path d="M1 1h6v6H1V1zm1.5 1.5v3h3v-3h-3zM1 9h6v6H1V9zm1.5 1.5v3h3v-3h-3zM9 1h6v6H9V1zm1.5 1.5v3h3v-3h-3zM9 9h6v6H9V9zm1.5 1.5v3h3v-3h-3z"></path>
+        </svg>`,
+
+    check: `<svg
+        ${stdSize}
+        ${fillGreen} 
+        viewBox="0 0 16 16" >
+        <path d="M15.53 2.47a.75.75 0 0 1 0 1.06L4.907 14.153.47 9.716a.75.75 0 0 1 1.06-1.06l3.377 3.376L14.47 2.47a.75.75 0 0 1 1.06 0z"></path>
         </svg>`,
 
     playerPlay: `<svg
@@ -130,6 +152,8 @@ const SVGS = {
         viewBox="0 0 16 16">
         <path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h1.018a.75.75 0 0 1 0 1.5H1.25v-3.579a.75.75 0 0 1 1.5 0v1.018l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94-2.94a.75.75 0 0 1 0-1.06l2.72-2.72h-1.018a.75.75 0 1 1 0-1.5h3.578v3.579a.75.75 0 0 1-1.5 0V3.81l-2.72 2.72a.75.75 0 0 1-1.06 0z"></path>
         </svg>`,
+
+    
 }
 
 export const svgService = {
