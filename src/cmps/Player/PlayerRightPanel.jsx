@@ -1,4 +1,5 @@
 import { SvgIcon } from '../SvgIcon'
+import { VolumeController } from './VolumeController'
 
 export function PlayerRightPanel() {
     return (
@@ -15,9 +16,7 @@ export function PlayerRightPanel() {
             <button className="btn-dark2">
                 <SvgIcon iconName="playerConnectDevice" svgClass="svg-small" />
             </button>
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerVolume" svgClass="svg-small" />
-            </button>
+            <VolumeController />
             <button className="btn-dark2">
                 <SvgIcon iconName="playerOpenMiniPlayer" svgClass="svg-small" />
             </button>
