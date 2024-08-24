@@ -1,42 +1,60 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import YouTube from 'react-youtube'
 
-import { SvgIcon } from './SvgIcon'
+import { playerActions, setPlayer } from '../store/actions/player.actions'
+import { PlayerLeftPanel } from './Player/PlayerLeftPanel'
+import { PlayerMiddlePanel } from './Player/PlayerMiddlePanel'
+import { PlayerRightPanel } from './Player/PlayerRightPanel'
 
-export function Player({ videoId }) {
+export function Player({ songId = 'BciS5krYL80' }) {
 
-    const [player, setPlayer] = useState(null)
-    const [isPlaying, setIsPlaying] = useState(false)
+    const player = useSelector(state => state.playerModule.player)
+    const action = useSelector(state => state.playerModule.action)
+    const [ytPlayer, setYtPlayer] = useState(null)
+
+    console.log(player)
+
+    useEffect(() => {
+        switch (action) {
+            case playerActions.PLAY:
+                ytPlayer.playVideo()
+                break
+            case playerActions.PAUSE:
+                ytPlayer.pauseVideo()
+                break
+        }
+    }, [action])
 
     const opts = {
         height: '0',
         width: '0',
         playerVars: {
-            autoplay: 1,
+            autoplay: 0,
         },
     }
 
     function onReady({ target }) {
-        console.log(target)
-        setPlayer(target)
         target.pauseVideo()
+        setYtPlayer(target)
+        setPlayer({
+            songId,
+            isPlaying: false,
+            duration: target.getDuration(),
+            volume: target.getVolume(),
+        })
     }
 
-    function handlePlayPause() {
-        const playerState = player.getPlayerState()
-        if (playerState !== 1) {
-            player.playVideo()
-            setIsPlaying(true)
-        } else {
-            player.pauseVideo()
-            setIsPlaying(false)
-        }
+    function getPlayerState() {
+        return ytPlayer.getPlayerState()
     }
 
     return (
         <div className="player-container">
-            <YouTube videoId="BciS5krYL80" opts={opts} onReady={onReady} />
-            <button onClick={handlePlayPause} className='btn-player-play'>{isPlaying ? <SvgIcon iconName="playerPause" /> : <SvgIcon iconName="playerPlay" />}</button>
+            <YouTube videoId={songId} opts={opts} onReady={onReady} />
+            <PlayerLeftPanel />
+            <PlayerMiddlePanel getPlayerState={getPlayerState} />
+            <PlayerRightPanel />
         </div>
     )
 }

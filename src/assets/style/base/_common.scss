@@ -1,5 +1,5 @@
 .btn {
-    @include btn($type: regular);
+    @include btn();
 }
 
 .btn-tinted {
@@ -21,11 +21,24 @@
 }
 
 .btn-dark {
-    @include dark;
+    @include dark1;
     @include btn();
 }
 
+.btn-dark2 {
+    @include dark2;
+    @include btn($squareSize: $stdBtnSize);
 
+    &:hover {
+        fill:  $primaryTxtClr;
+        color:  $primaryTxtClr;
+    }
+
+    &:active {
+        fill: $pressedTxtClr;
+        color: $pressedTxtClr;
+    }
+}
 
 .btn-light {
     @include light;
@@ -58,6 +71,21 @@
 
 .icon {
     @include icon;
+}
+
+.svg-small {
+    width: $smallSvgSize;
+    height: $smallSvgSize;
+}
+
+.svg-normal {
+    width: $stdSvgSize;
+    height: $stdSvgSize;
+}
+
+.svg-big {
+    width: $largeSvgSize;
+    height: $largeSvgSize;
 }
 
 
