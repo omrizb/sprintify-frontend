@@ -1,6 +1,8 @@
 import { svgService } from '../services/svg.service.js'
 
-export function SvgIcon({ iconName }) {
-    const svg = svgService.getSvg(iconName);
-    return <i dangerouslySetInnerHTML={{ __html: svg }}></i>
+export function SvgIcon({ iconName, svgClass = '' }) {
+
+    const svg = svgService.getSvg(iconName)
+    const svgWithClass = (svgClass) ? svg.replace(/<svg/, `<svg class="${svgClass}"`) : svg
+    return <i dangerouslySetInnerHTML={{ __html: svgWithClass }} ></i>
 }
