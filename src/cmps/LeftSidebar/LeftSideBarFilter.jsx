@@ -51,23 +51,26 @@ export function LeftSideBarFilter() {
                 <button className="btn-tinted">Artists</button>
                 <button className="btn-tinted">Albums</button>
             </div>
-            <div className="sidebar-search">
 
+            <section className="sidebar-search">
 
-                <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)} 
+                <div className="search-container">
+                    <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)} 
                         className="search icon btn-medium">
                         <SvgIcon iconName={"search"}    /> 
-                </button>
+                    </button>
 
-                {showSearch && 
-                    <input 
-                        type="text" 
-                        name="txt"
-                        value={filterToEdit.txt}
-                        placeholder="Search in Playlists"
-                        onChange={handleChange}
-                        required
-                    /> }
+                    {showSearch && 
+                        <input 
+                            type="text" 
+                            name="txt"
+                            value={filterToEdit.txt}
+                            placeholder="Search in Playlists"
+                            onChange={handleChange}
+                            required
+                        /> }
+                </div>
+                
 
                 <div className="sort-by">
                     <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
@@ -77,7 +80,7 @@ export function LeftSideBarFilter() {
                     {showMenu && <DropDownMenu display={display} />}
                 </div>
                 
-            </div>
+            </section>
         </div>
     )
 }

@@ -1,0 +1,61 @@
+.sidebar-filter {
+    display: grid;
+    row-gap: 0.5em;
+
+    .category {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .sidebar-search{
+        position: relative;
+        display: grid;
+        grid-auto-flow: column;
+
+
+        .search-container{
+
+            display: grid;
+            grid-auto-flow: column;
+            .search{
+                justify-self: start;
+                width: 32px;
+            }
+    
+            input{
+                border: none;
+                width: 140px;
+                background-color: rgb(42, 42, 42);
+                font-size: inherit;
+            }
+    
+            input:focus {
+                outline: none;
+                color: white;
+            }
+        }
+        
+
+        .sort-by{
+            justify-self: end;
+            display: flex;
+            column-gap: 0.2em;
+
+            .recents {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                column-gap: 0.5em;
+                font: inherit;
+                font-size: 14px;
+
+                &:hover{
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+ 
+}
