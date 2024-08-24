@@ -18,16 +18,16 @@ export const stationService = {
 
 _createStations()
 
-// async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
-async function query() {
-    var stations = await storageService.query(STORAGE_KEY)
-    console.log('stations:', stations)
-    // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
 
-    // if (txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     stations = stations.filter(station => regex.test(station.vendor) || regex.test(station.description))
-    // }
+    console.log('filterBy from service:', filterBy)
+    var stations = await storageService.query(STORAGE_KEY)
+    const { txt, sortField, sortDir } = filterBy
+
+    if (txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        stations = stations.filter(station => regex.test(station.vendor) || regex.test(station.description))
+    }
     // if (minSpeed) {
     //     stations = stations.filter(station => station.speed <= minSpeed)
     // }

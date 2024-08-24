@@ -5,7 +5,6 @@ import { SvgIcon } from './SvgIcon'
 
 export function DropDownMenu({display}) {
 
-    console.log(display)
     const [ isChosen, setIsChosen] = useState(true)
 
     return (

@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
 import { stationReducer } from './reducers/station.reducer'
+import { filterByReducer } from './reducers/filterBy.reducer'
 import { userReducer } from './reducers/user.reducer'
 import { playerReducer } from './reducers/player.reducer'
 import { systemReducer } from './reducers/system.reducer'
 
 const rootReducer = combineReducers({
     stationModule: stationReducer,
+    filterByModule: filterByReducer,
     userModule: userReducer,
     playerModule: playerReducer,
     systemModule: systemReducer,
