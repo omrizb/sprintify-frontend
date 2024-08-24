@@ -6,6 +6,7 @@ $fallbackFonts: Helvetica, sans-serif;
 // Color palette
 $primaryTxtClr: #ffffff;
 $secondaryTxtClr: #b3b3b3;
+$pressedTxtClr:#656565;
 $mediumTxtClr: #b3b3b3;
 $primaryBgClr: #000000;
 $sectionBgClr: #121212;
@@ -21,6 +22,13 @@ $lightTxtClr: #000000;
 $lightBgClr: #ffffff;
 $lightBgClrHighlight: #f0f0f0;
 $lightBgClrPress: #c7c7c7;
+
+// Sizes
+$stdBtnSize: 32px;
+$bigBtnSize: 48px;
+$smallSvgSize: 16px;
+$stdSvgSize: 20px;
+$largeSvgSize: 32px;
 
 // Spaces
 $panelGap: 8px;

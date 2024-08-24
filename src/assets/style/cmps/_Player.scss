@@ -1,8 +1,29 @@
 .player-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 0 30% 40% 30%;
+    min-width: 720px;
     height: $playerHeight;
+
+    .player-left-panel {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .player-middle-panel {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .player-right-panel {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
 
     .btn-player-play {
         @include light;

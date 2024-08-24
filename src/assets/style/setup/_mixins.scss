@@ -71,32 +71,43 @@
 // Color schemes
 @mixin tinted {
     color: $primaryTxtClr;
+    fill: $primaryTxtClr;
     background-color: $tintedBgClr;
 }
 
 @mixin medium {
     color: $secondaryTxtClr;
+    fill: $secondaryTxtClr;
     background-color: $sectionBgClr;
 }
 
-@mixin dark {
+@mixin dark1 {
     color: $primaryTxtClr;
+    fill: $primaryTxtClr;
     background-color: $darkBgClr;
+}
+
+@mixin dark2 {
+    color: $secondaryTxtClr;
+    fill: $secondaryTxtClr;
+    background-color: transparent;
 }
 
 @mixin light {
     color: $lightTxtClr;
+    fill: $lightTxtClr;
     background-color: $lightBgClr;
 }
 
 @mixin green {
     color: $lightTxtClr;
+    fill: $lightTxtClr;
     background-color: $buttonBgGreen;
 }
   
 // Buttons
   
-@mixin btn($type: regular, $size: regular, $circleSize: 0) {
+@mixin btn($type: regular, $size: regular, $circleSize: 0, $squareSize: 0) {
 
     display: inline-flex;
     justify-content: center;
@@ -112,13 +123,13 @@
     
     transition: background-color 0.2s, color 0.2s;
     
-    height: 32px;
+    height: $stdBtnSize;
     padding: $smallPadding;
     font-size: em(14px);
     font-weight: 300;
 
     @if $size == big {
-        height: 48px;
+        height: $bigBtnSize;
         padding: $bigPadding;
         font-size: em(16px);
         font-weight: 700;
@@ -127,6 +138,13 @@
     @if $circleSize > 0 {
         width: $circleSize;
         height: $circleSize;
+    }
+
+    @if $squareSize > 0 {
+        padding: 8px;
+        border-radius: 0;
+        width: $squareSize;
+        height: $squareSize;
     }
 
     @if $type == animated {
