@@ -26,7 +26,7 @@ async function query(filterBy = {txt: '', sortField: '', sortDir: ''}) {
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        stations = stations.filter(station => regex.test(station.vendor) || regex.test(station.description))
+        stations = stations.filter(station => regex.test(station.name) || regex.test(station.createdBy.fullName))
     }
     // if (minSpeed) {
     //     stations = stations.filter(station => station.speed <= minSpeed)
