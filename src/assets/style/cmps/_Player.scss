@@ -3,4 +3,17 @@
     justify-content: center;
     align-items: center;
     height: $playerHeight;
+
+    .btn-player-play {
+        @include light;
+        @include btn($type: animated, $circleSize: 32px);
+    
+        &:hover {
+            background-color: $lightBgClrHighlight;
+        }
+    
+        &:active {
+            background-color: $lightBgClrPress;
+        }
+    }    
 }
