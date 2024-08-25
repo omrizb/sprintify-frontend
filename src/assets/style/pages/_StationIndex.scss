@@ -12,7 +12,8 @@
     }
 
     .main-view-container {
-        @include section;
+        border-radius: 8px;
+        background-color: #121212;
         grid-area: main-view;
         overflow-y: auto;
     }
