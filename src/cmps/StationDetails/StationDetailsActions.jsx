@@ -1,26 +1,74 @@
-import { useSelector } from 'react-redux'
+
+import { SvgIcon } from "../SvgIcon"
+import { changeViewMode } from '../../services/event-bus.service.js'
 
 export function StationDetailsActions({ stationMeta }) {
-    const { type, isLikedSongs, isEmptyStation, isOwnedByUser } = stationMeta
+    const {
+        showPlay,
+        showAddRemove,
+        showFollowUnfollow,
+        showMore,
+        showViewList,
+        showViewCompact,
+    } = stationMeta
 
-    const showPlay = type === 'playlist' && !isEmptyStation
-    const showAddRemove = type === 'playlist' && !isOwnedByUser
-    const showFollowUnfollow = type === 'podcast'
-    const showMore = type === 'playlist' && !isLikedSongs
-    const showView = type === 'playlist'
+    const handleViewModeClick = (mode) => {
+        changeViewMode(mode)
+    }
 
     return (
         <div className="station-action-bar">
-            {showPlay && <><button className="play-button" onClick={console.log('play')}>play</button></>}
+            <div className="station-action-bar-row">
+                {showPlay && (
+                    <div className="wrap-playPlaylist">
+                        <button className="action-bar-btn playPlaylist icon btn-medium">
+                            <SvgIcon iconName={"playPlaylist"} />
+                        </button>
+                    </div>
+                )}
 
-            {showAddRemove && <><button className="add-or-remove-button" onClick={console.log('add-or-remove')}>add-or-remove</button></>}
-            {showFollowUnfollow && <><button className="following-button" onClick={console.log('following')}>following</button></>}
+                {showAddRemove && (
+                    <>
+                        <button className="action-bar-btn removePlaylist icon btn-medium">
+                            <SvgIcon iconName={"removePlaylist"} />
+                        </button>
+                        <button className="action-bar-btn addPlaylist icon btn-medium">
+                            <SvgIcon iconName={"addPlaylist"} />
+                        </button>
+                    </>
+                )}
 
-            {showMore && <><button className="more-actions-button" onClick={console.log('more')}>• • •</button></>}
-            {showView && <><button className="view-button" onClick={console.log('view')}>3</button></>}
+                {showFollowUnfollow && (
+                    <>
+                        <button className="following-btn">Following</button>
+                        <button className="following-btn">Follow</button>
+                    </>
+                )}
 
+                {showMore && (
+                    <button className="action-bar-btn dots icon btn-medium">
+                        <SvgIcon iconName={"dots"} />
+                    </button>
+                )}
 
+                {showViewList && (
+                    <div className="view-mode-btn">
+                        <button className="action-bar-btn list icon btn-medium" onClick={() => handleViewModeClick('list')}>
+                            <span>List</span>
+                            <SvgIcon iconName={"list"} />
+                        </button>
+                    </div>
+                )}
+                {showViewCompact && (
+                    <div className="view-mode-btn">
+                        <button className="action-bar-btn compact icon btn-medium" onClick={() => handleViewModeClick('compact')}>
+                            <span>Compact</span>
+                            <SvgIcon iconName={"compact"} />
+                        </button>
+                    </div>
+                )}
+            </div>
         </div>
-
     )
 }
+
