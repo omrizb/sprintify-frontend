@@ -8,14 +8,15 @@
 
     .tooltip {
         position: absolute;
+        border-radius: 4px;
+        padding: $smallPadding;
+        text-wrap: nowrap;
+        font-size: $textSizeSmaller-1;
+        font-weight: 300;
         color: var(--tooltip-txt-color);
         background-color: var(--tooltip-bgcolor);
 
         opacity: 0;
-        transition: opacity 2s ease;
-    }
-
-    &:hover .tooltip {
-        opacity: 1;
+        transition: opacity 0.5s ease;
     }
 }
