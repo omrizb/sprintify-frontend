@@ -8,15 +8,17 @@ export function StationFilterButtons() {
 
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
     const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
-    const [ showClearFilter, setShowClearFilter ] = useState(false)
-    const [ showPlaylists, setShowPlaylists ] = useState(true)
-    const [ showArtists, setShowArtists ] = useState(true)
-    const [ showAlbums, setShowAlbums ] = useState(true)
-    const [ showSubFilter, setShowSubFilter ] = useState(false)
-    const [ playBtnActive, setPlayBtnActive ] = useState('')
-    const [ artistBtnActive, setArtistBtnActive ] = useState('')
-    const [ albumBtnActive, setAlbumBtnActive ] = useState('')
-    
+
+    const initBtnsDispObj = {
+        clearFilter: {showBtn: false, isActive: ''},
+        playlists:   {showBtn: true,  isActive: ''},
+        artists:     {showBtn: true,  isActive: ''},
+        albums:      {showBtn: true,  isActive: ''},
+        byYou:      {showBtn: false, isActive: ''},
+        bySprintify: {showBtn: false, isActive: ''},
+    }
+
+    const [ btnsDispObj, setBtnsDispObj ] = useState({...initBtnsDispObj})
 
     useEffect(() => {
         updateFilterBy(filterToEdit)
@@ -25,9 +27,8 @@ export function StationFilterButtons() {
    
     function handleChange(stationType) {
         
-        if(stationType && showClearFilter) {
+        if(stationType && btnsDispObj.clearFilter.showBtn) {
             resetAllBtns()
-            setShowClearFilter(false)
             setFilterToEdit({ ...filterToEdit, 'stationType': '' })
             return
         }
@@ -38,44 +39,47 @@ export function StationFilterButtons() {
                 break;
 
             case 'playlist':
-                setShowArtists(false)
-                setShowAlbums(false)
-                setShowSubFilter(true)
-                setPlayBtnActive('active')
+                setBtnsDispObj({...btnsDispObj, 'artists': {...artists, 'showBtn': false},
+                                                 'albums': {...albums, 'showBtn': false},
+                                                'playlists': {...playlists, 'isActive': 'active'},
+                                                'clearFilter': {...clearFilter, 'showBtn': true},
+                                                'byYou': {...byYou, 'showBtn': true},
+                                                'bySprintify': {...bySprintify, 'showBtn': true}
+                            })
                 break
             case 'artist':
-                setShowPlaylists(false)
-                setShowAlbums(false)
-                setArtistBtnActive('active')
+                setBtnsDispObj({...btnsDispObj, 'playlists': {...playlists, 'showBtn': false},
+                                                'albums': {...albums, 'showBtn': false},
+                                                'artists': {...artists, 'isActive': 'active'},
+                                                'clearFilter': {...clearFilter, 'showBtn': true},
+                                                'byYou': {...byYou, 'showBtn': false},
+                                                'bySprintify': {...bySprintify, 'showBtn': false}
+                                })
+                
                 break
             case 'album':
-                setShowPlaylists(false)
-                setShowArtists(false)
-                setAlbumBtnActive('active')
+                setBtnsDispObj({...btnsDispObj, 'playlists': {...playlists, 'showBtn': false},
+                                                'artists': {...artists, 'showBtn': false},
+                                                'albums': {...albums, 'isActive': 'active'},
+                                                'clearFilter': {...clearFilter, 'showBtn': true},
+                                                'byYou': {...byYou, 'showBtn': false},
+                                                'bySprintify': {...bySprintify, 'showBtn': false}
+                                })
                 break
-             
         }
 
         setFilterToEdit({ ...filterToEdit, 'stationType': stationType })
-        setShowClearFilter(prevShowClearFilter => !prevShowClearFilter)
-        
     }
 
     function resetAllBtns(){
-        setShowPlaylists(true)
-        setShowArtists(true)
-        setShowAlbums(true)
-        setShowSubFilter(false)
-        setPlayBtnActive('')
-        setArtistBtnActive('')
-        setAlbumBtnActive('')
+        setBtnsDispObj(structuredClone(initBtnsDispObj))
     }
     
-    
+    const { clearFilter, playlists, artists, albums, byYou, bySprintify } = btnsDispObj
     return (
             <div className="station-filter-btns">
 
-                {showClearFilter &&
+                {clearFilter.showBtn &&
                     <button 
                         className="btn-tinted clear-filter"
                         onClick={() => handleChange('')}
@@ -84,36 +88,44 @@ export function StationFilterButtons() {
                 }
 
 
-                {showPlaylists &&
+                {playlists.showBtn &&
                     <button 
-                        className={`btn-tinted ${playBtnActive}`}
+                        className={`btn-tinted ${playlists.isActive}`}
                         onClick={() => handleChange('playlist')}
                         >Playlists
                     </button>
                 }
 
-                {showSubFilter && 
-                    <div className="sub-filter">
-                        <button className="btn-tinted">By Sprintify</button>
-                        <button className="btn-tinted">By you</button>
-
-                    </div> }
-
-                {showArtists &&
+                
+                {artists.showBtn &&
                     <button 
-                        className={`btn-tinted ${artistBtnActive}`}
+                        className={`btn-tinted ${artists.isActive}`}
                         onClick={() => handleChange('artist')}
                         >Artists
                     </button>
                 }
 
-                {showAlbums &&
+                {albums.showBtn &&
                     <button 
-                    className={`btn-tinted ${albumBtnActive}`}
+                    className={`btn-tinted ${albums.isActive}`}
                         onClick={() => handleChange('album')}
                         >Albums
                     </button>
                 }
+
+
+                <div className="sub-filter">
+                    {bySprintify.showBtn &&
+                            <button 
+                                className="btn-tinted">
+                                By Sprintify
+                            </button>} 
+                    {byYou.showBtn &&
+                            <button 
+                                className="btn-tinted">
+                                By You
+                            </button>} 
+                </div> 
 
             </div>
 
