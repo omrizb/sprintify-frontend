@@ -1,0 +1,28 @@
+.station-preview {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    align-items: center;
+    justify-content: start;
+    font: inherit;
+    
+
+    img{
+        height: 50px;
+        width: 50px;
+        border-radius: 4px;
+    }
+
+    .text {
+        text-transform: capitalize;
+
+        .station-name{
+            color: white;
+        }
+        div{
+            &:nth-child(2){
+                font-size: 14px;
+            }
+        }
+    }
+}
