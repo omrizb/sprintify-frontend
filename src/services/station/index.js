@@ -12,7 +12,7 @@ function getEmptyStation() {
 function getDefaultFilter() {
     return {
         txt: '',
-        type:'',
+        stationType:'',
         sortField: '',
         sortDir: '',
     }
