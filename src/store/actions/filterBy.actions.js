@@ -2,7 +2,7 @@ import { store } from '../store.js'
 import { SET_FILTER_BY } from '../reducers/filterBy.reducer.js'
 
 
-export async function setFilterBy(filterBy) {
+export async function updateFilterBy(filterBy) {
     try {
         store.dispatch(getCmdSetFilterBy(filterBy))
     } catch (err) {

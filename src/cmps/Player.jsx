@@ -13,9 +13,13 @@ export function Player({ songId = 'BciS5krYL80' }) {
     const action = useSelector(state => state.playerModule.action)
     const [ytPlayer, setYtPlayer] = useState(null)
 
-    console.log(player)
+    useEffect(() => {
+        if (!ytPlayer) return
+        ytPlayer.setVolume(player.volume)
+    }, [player.volume])
 
     useEffect(() => {
+        if (!ytPlayer) return
         switch (action) {
             case playerActions.PLAY:
                 ytPlayer.playVideo()

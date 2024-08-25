@@ -9,6 +9,7 @@
     .left-sidebar-container {
         grid-area: left-sidebar;
         overflow: auto;
+        // overflow-y: scroll;
     }
 
     .main-view-container {

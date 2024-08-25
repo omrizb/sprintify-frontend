@@ -1,5 +1,6 @@
 export const SET_PLAYER = 'SET_PLAYER'
 export const SET_ACTION = 'SET_ACTION'
+export const SET_VOLUME = 'SET_VOLUME'
 export const SET_SONG_HISTORY = 'SET_SONG_HISTORY'
 export const ADD_TO_SONG_HISTORY = 'ADD_TO_SONG_HISTORY'
 export const SET_QUEUE = 'SET_QUEUE'
@@ -29,6 +30,12 @@ export function playerReducer(state = initialState, action = {}) {
             break
         case SET_ACTION:
             newState = { ...state, action: action.action }
+            break
+        case SET_VOLUME:
+            newState = {
+                ...state,
+                player: { ...state.player, volume: action.volume }
+            }
             break
         case SET_SONG_HISTORY:
             newState = { ...state, playedSongsHistory: action.playedSongsHistory }

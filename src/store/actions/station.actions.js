@@ -10,11 +10,10 @@ import {
     REMOVE_SONG_FROM_STATION,
 } from '../reducers/station.reducer.js'
 
-// export async function loadStations(filterBy) {
+
 export async function loadStations(filterBy) {
     try {
         const stations = await stationService.query(filterBy)
-        // const stations = await stationService.query()
         store.dispatch(getCmdSetStations(stations))
     } catch (err) {
         console.log('Cannot load stations', err)
