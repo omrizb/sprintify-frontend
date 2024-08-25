@@ -104,7 +104,14 @@
     fill: $lightTxtClr;
     background-color: $buttonBgGreen;
 }
-  
+
+@mixin inside-out {
+    background-color: white;
+    // fill: $secondaryTxtClr;
+    color: $sectionBgClr;
+}
+
+ 
 // Buttons
   
 @mixin btn($type: regular, $size: regular, $circleSize: 0, $squareSize: 0) {

@@ -1,0 +1,26 @@
+.station-filter-btns {
+    display: grid;
+    
+    grid-auto-flow: column;
+    justify-items: center;
+    
+    column-gap: 0.2em;
+    grid-template-columns: max-content;
+
+    .hidden-radio {
+        display: none;
+    }
+
+    .active {
+        @include inside-out;
+        justify-self: start;
+    }
+
+    button {
+        &:not(.clear-filter){
+
+            width: 78px;
+        }
+    }
+  
+}
