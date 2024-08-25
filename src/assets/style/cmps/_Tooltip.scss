@@ -1,0 +1,21 @@
+:root {
+    --tooltip-txt-color: #ffffff;
+    --tooltip-bgcolor: hsla(0,0%,100%,.1);
+}
+
+.tooltip-container {
+    position: relative;
+
+    .tooltip {
+        position: absolute;
+        color: var(--tooltip-txt-color);
+        background-color: var(--tooltip-bgcolor);
+
+        opacity: 0;
+        transition: opacity 2s ease;
+    }
+
+    &:hover .tooltip {
+        opacity: 1;
+    }
+}

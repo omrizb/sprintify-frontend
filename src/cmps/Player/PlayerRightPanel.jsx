@@ -1,29 +1,47 @@
-import { SvgIcon } from '../SvgIcon'
+import { SvgButton } from '../SvgButton'
 import { VolumeController } from './VolumeController'
 
 export function PlayerRightPanel() {
 
     return (
         <div className="player-right-panel">
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerNowPlaying" svgClass="svg-small" />
-            </button>
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerLyrics" svgClass="svg-small" />
-            </button>
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerQueue" svgClass="svg-small" />
-            </button>
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerConnectDevice" svgClass="svg-small" />
-            </button>
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerNowPlaying"
+                svgClass="svg-small"
+                tooltipTxt="Now playing view"
+            />
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerLyrics"
+                svgClass="svg-small"
+                tooltipTxt="Lyrics"
+            />
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerQueue"
+                svgClass="svg-small"
+                tooltipTxt="Queue"
+            />
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerConnectDevice"
+                svgClass="svg-small"
+                tooltipTxt="Connect a device"
+            />
             <VolumeController />
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerOpenMiniPlayer" svgClass="svg-small" />
-            </button>
-            <button className="btn-dark2">
-                <SvgIcon iconName="playerFullScreen" svgClass="svg-small" />
-            </button>
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerOpenMiniPlayer"
+                svgClass="svg-small"
+                tooltipTxt="Open Miniplayer"
+            />
+            <SvgButton
+                btnClass="btn-dark2"
+                svgIcon="playerFullScreen"
+                svgClass="svg-small"
+                tooltipTxt="Full screen"
+            />
         </div>
     )
 }
