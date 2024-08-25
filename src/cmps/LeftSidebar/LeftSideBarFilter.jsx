@@ -27,11 +27,16 @@ export function LeftSideBarFilter() {
    
     function handleChange(ev) {
         const type = ev.target.type
-        const field = ev.target.name
+        var field = ev.target.name
         let value
 
         switch (type) {
             case 'text':
+            case 'type': 
+                value = field
+                field = type
+                
+                break
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
                 if(!filterToEdit.sortDir) filterToEdit.sortDir = 1
@@ -39,6 +44,7 @@ export function LeftSideBarFilter() {
             case 'number':
                 value = +ev.target.value || ''
                 break
+             
         }
         setFilterToEdit({ ...filterToEdit, [field]: value })
     }
@@ -47,9 +53,24 @@ export function LeftSideBarFilter() {
     return (
         <div className="sidebar-filter">
             <div className="category">
-                <button className="btn-tinted">Playlists</button>
-                <button className="btn-tinted">Artists</button>
-                <button className="btn-tinted">Albums</button>
+                <button 
+                    className="btn-tinted"
+                    onClick={() => handleChange({ target: { type: 'type', name: 'playlist' } })}
+                    >Playlists
+                </button>
+
+                <button 
+                    className="btn-tinted"
+                    onClick={() => handleChange({ target: { type: 'type', name: 'artist' } })}
+                    >Artists
+                </button>
+
+                <button 
+                    className="btn-tinted"
+                    onClick={() => handleChange({ target: { type: 'type', name: 'album' } })}
+                    >Albums
+                </button>
+
             </div>
 
             <section className="sidebar-search">

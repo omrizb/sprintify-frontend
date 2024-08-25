@@ -5,6 +5,10 @@
     .category {
         display: flex;
         justify-content: space-between;
+
+        .hidden-radio {
+            display: none;
+        }
     }
 
     .sidebar-search{
