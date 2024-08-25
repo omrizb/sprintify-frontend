@@ -34,9 +34,9 @@ export function LeftSideBarFilter() {
             case 'text':
                 value=ev.target.value
                 break  
-            case 'type': 
+            case 'button': 
                 value = ev.target.name
-                field = type
+                field = 'stationType'
                 break
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
@@ -56,19 +56,19 @@ export function LeftSideBarFilter() {
             <div className="category">
                 <button 
                     className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'type', name: 'playlist' } })}
+                    onClick={() => handleChange({ target: { type: 'button', name: 'playlist' } })}
                     >Playlists
                 </button>
 
                 <button 
                     className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'type', name: 'artist' } })}
+                    onClick={() => handleChange({ target: { type: 'button', name: 'artist' } })}
                     >Artists
                 </button>
 
                 <button 
                     className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'type', name: 'album' } })}
+                    onClick={() => handleChange({ target: { type: 'button', name: 'album' } })}
                     >Albums
                 </button>
 
