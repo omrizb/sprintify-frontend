@@ -5,6 +5,8 @@ import { updateFilterBy } from '../../store/actions/filterBy.actions'
 
 import { DropDownMenu } from "../DropDownMenu"
 import { SvgIcon } from "../SvgIcon"
+import { StationFilterButtons } from './StationFilterButtons'
+
 
 
 export function LeftSideBarFilter() {
@@ -32,12 +34,6 @@ export function LeftSideBarFilter() {
 
         switch (type) {
             case 'text':
-                value=ev.target.value
-                break  
-            case 'button': 
-                value = ev.target.name
-                field = 'stationType'
-                break
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
                 if(!filterToEdit.sortDir) filterToEdit.sortDir = 1
@@ -53,26 +49,7 @@ export function LeftSideBarFilter() {
     
     return (
         <div className="sidebar-filter">
-            <div className="category">
-                <button 
-                    className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'button', name: 'playlist' } })}
-                    >Playlists
-                </button>
-
-                <button 
-                    className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'button', name: 'artist' } })}
-                    >Artists
-                </button>
-
-                <button 
-                    className="btn-tinted"
-                    onClick={() => handleChange({ target: { type: 'button', name: 'album' } })}
-                    >Albums
-                </button>
-
-            </div>
+            <StationFilterButtons />
 
             <section className="sidebar-search">
 
