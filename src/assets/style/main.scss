@@ -15,6 +15,7 @@
 
 /* Pages */
 @import "pages/StationIndex";
+@import "pages/StationDetails";
 
 /* Components */
 @import "cmps/GlobalNav";
@@ -26,4 +27,5 @@
 @import "cmps/Slider";
 @import "cmps/Tooltip";
 @import "cmps/VolumeController";
-@import "cmps/StationPreview";
+@import "cmps/StationPreview";;
+@import "cmps/DisplayFooter";

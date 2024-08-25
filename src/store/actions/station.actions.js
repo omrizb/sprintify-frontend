@@ -1,6 +1,14 @@
 import { stationService } from '../../services/station/station.service.local.js'
 import { store } from '../store.js'
-import { ADD_STATION, REMOVE_STATION, SET_STATIONS, SET_STATION, UPDATE_STATION, ADD_STATION_MSG } from '../reducers/station.reducer'
+import {
+    ADD_STATION,
+    REMOVE_STATION,
+    SET_STATIONS,
+    SET_STATION,
+    UPDATE_STATION,
+    ADD_SONG_TO_STATION,
+    REMOVE_SONG_FROM_STATION,
+} from '../reducers/station.reducer.js'
 
 
 export async function loadStations(filterBy) {
@@ -56,13 +64,23 @@ export async function updateStation(station) {
     }
 }
 
-export async function addStationMsg(stationId, txt) {
+export async function addSongToStation(stationId, song) {
     try {
-        const msg = await stationService.addStationMsg(stationId, txt)
-        store.dispatch(getCmdAddStationMsg(msg))
-        return msg
+        const savedSong = await stationService.addSongToStation(stationId, song)
+        store.dispatch(getCmdAddSongToStation(savedSong))
+        return savedSong
     } catch (err) {
-        console.log('Cannot add station msg', err)
+        console.log('Cannot add song to station', err)
+        throw err
+    }
+}
+
+export async function removeSongFromStation(stationId, songId) {
+    try {
+        await stationService.removeSongFromStation(stationId, songId)
+        store.dispatch(getCmdRemoveSongFromStation(songId))
+    } catch (err) {
+        console.log('Cannot remove song from station', err)
         throw err
     }
 }
@@ -98,21 +116,17 @@ function getCmdUpdateStation(station) {
         station
     }
 }
-function getCmdAddStationMsg(msg) {
+function getCmdAddSongToStation(song) {
     return {
-        type: ADD_STATION_MSG,
-        msg
+        type: ADD_SONG_TO_STATION,
+        song
+    }
+}
+function getCmdRemoveSongFromStation(songId) {
+    return {
+        type: REMOVE_SONG_FROM_STATION,
+        songId
     }
 }
 
-// unitTestActions()
-async function unitTestActions() {
-    await loadStations()
-    await addStation(stationService.getEmptyStation())
-    await updateStation({
-        _id: 'm1oC7',
-        title: 'Station-Good',
-    })
-    await removeStation('m1oC7')
-    // TODO unit test addStationMsg
-}
+

@@ -1,0 +1,78 @@
+const { DEV, VITE_LOCAL } = import.meta.env
+
+import { songService as local } from './song.service.local'
+import { songService as remote } from './song.service.remote'
+
+function getEmptySong() {
+    return {
+        name: ''
+    }
+}
+
+function getDefaultFilter() {
+    return {
+        txt: '',
+        sortField: '',
+        sortDir: '',
+    }
+}
+
+function getFilterBy(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+
+    for (const field in defaultFilter) {
+        const defaultValue = defaultFilter[field]
+        const searchParamsValue = searchParams.get(field)
+
+        if (typeof (defaultValue) === 'number') {
+            filterBy[field] = searchParamsValue ? Number(searchParamsValue) : defaultValue
+        } else if (typeof (defaultValue) === 'string') {
+            filterBy[field] = searchParamsValue || defaultValue
+        } else if (Array.isArray(defaultValue)) {
+            filterBy[field] = searchParamsValue ? searchParamsValue.split(',') : defaultValue
+        } else {
+            filterBy[field] = defaultValue
+        }
+
+    }
+
+    return filterBy
+}
+
+const service = VITE_LOCAL === 'true' ? local : remote
+export const songService = { getEmptySong, getDefaultFilter, getFilterBy, ...service }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//* Easy access to this service from the dev tools console
+//* when using script - dev / dev:local
+
+if (DEV) window.songService = songService
