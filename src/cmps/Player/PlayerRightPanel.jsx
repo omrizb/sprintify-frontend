@@ -2,6 +2,7 @@ import { SvgIcon } from '../SvgIcon'
 import { VolumeController } from './VolumeController'
 
 export function PlayerRightPanel() {
+
     return (
         <div className="player-right-panel">
             <button className="btn-dark2">

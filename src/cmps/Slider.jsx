@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function Slider({ startValue = 50 }) {
+export function Slider({ value = 50, min = 0, max = 100, onChange }) {
 
     const nonActiveBarRef = useRef(null)
     const pointerRef = useRef(null)
     const [sliderWidth, setSliderWidth] = useState(null)
-    const [sliderValue, setSliderValue] = useState(startValue)
+    const [sliderValue, setSliderValue] = useState(value)
     const [pointerOffset, setPointerOffset] = useState(null)
     const [isDragging, setIsDragging] = useState(false)
 
@@ -21,7 +21,6 @@ export function Slider({ startValue = 50 }) {
         onSetPointerOffset(sliderValue)
     }, [sliderWidth])
 
-
     useEffect(() => {
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove)
@@ -34,14 +33,18 @@ export function Slider({ startValue = 50 }) {
         }
     }, [isDragging])
 
+    useEffect(() => {
+        if (onChange) onChange(sliderValue)
+    }, [sliderValue])
+
     function onSetPointerOffset(value) {
-        const newOffset = sliderWidth * value / 100
+        const newOffset = sliderWidth * (value - min) / (max - min)
         if (newOffset > sliderWidth) {
-            setSliderValue(100)
+            setSliderValue(max)
             setPointerOffset(sliderWidth)
         }
         else if (newOffset < 0) {
-            setSliderValue(0)
+            setSliderValue(min)
             setPointerOffset(0)
         }
         else {
@@ -53,7 +56,7 @@ export function Slider({ startValue = 50 }) {
     function calcNewValue(ev) {
         const sliderRect = nonActiveBarRef.current.getBoundingClientRect()
         const pointerXOffset = ev.clientX - sliderRect.left
-        return pointerXOffset / sliderWidth * 100
+        return min + pointerXOffset / sliderWidth * (max - min)
     }
 
     function handleMouseDown(ev) {
