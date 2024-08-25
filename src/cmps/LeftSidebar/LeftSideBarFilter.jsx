@@ -32,10 +32,11 @@ export function LeftSideBarFilter() {
 
         switch (type) {
             case 'text':
+                value=ev.target.value
+                break  
             case 'type': 
                 value = field
                 field = type
-                
                 break
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
