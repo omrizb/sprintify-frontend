@@ -12,6 +12,7 @@ export function StationFilterButtons() {
     const [ showPlaylists, setShowPlaylists ] = useState(true)
     const [ showArtists, setShowArtists ] = useState(true)
     const [ showAlbums, setShowAlbums ] = useState(true)
+    const [ showSubFilter, setShowSubFilter ] = useState(false)
     const [ playBtnActive, setPlayBtnActive ] = useState('')
     const [ artistBtnActive, setArtistBtnActive ] = useState('')
     const [ albumBtnActive, setAlbumBtnActive ] = useState('')
@@ -25,31 +26,21 @@ export function StationFilterButtons() {
     function handleChange(stationType) {
         
         if(stationType && showClearFilter) {
-            setShowPlaylists(true)
-            setShowArtists(true)
-            setShowAlbums(true)
+            resetAllBtns()
             setShowClearFilter(false)
-            setPlayBtnActive('')
-            setArtistBtnActive('')
-            setAlbumBtnActive('')
             setFilterToEdit({ ...filterToEdit, 'stationType': '' })
             return
         }
 
-        
         switch (stationType) {
             case '':
-                setShowPlaylists(true)
-                setShowArtists(true)
-                setShowAlbums(true)
-                setPlayBtnActive('')
-                setArtistBtnActive('')
-                setAlbumBtnActive('')
+                resetAllBtns()
                 break;
 
             case 'playlist':
                 setShowArtists(false)
                 setShowAlbums(false)
+                setShowSubFilter(true)
                 setPlayBtnActive('active')
                 break
             case 'artist':
@@ -68,6 +59,16 @@ export function StationFilterButtons() {
         setFilterToEdit({ ...filterToEdit, 'stationType': stationType })
         setShowClearFilter(prevShowClearFilter => !prevShowClearFilter)
         
+    }
+
+    function resetAllBtns(){
+        setShowPlaylists(true)
+        setShowArtists(true)
+        setShowAlbums(true)
+        setShowSubFilter(false)
+        setPlayBtnActive('')
+        setArtistBtnActive('')
+        setAlbumBtnActive('')
     }
     
     
@@ -90,6 +91,13 @@ export function StationFilterButtons() {
                         >Playlists
                     </button>
                 }
+
+                {showSubFilter && 
+                    <div className="sub-filter">
+                        <button className="btn-tinted">By Sprintify</button>
+                        <button className="btn-tinted">By you</button>
+
+                    </div> }
 
                 {showArtists &&
                     <button 
