@@ -3,7 +3,7 @@ export const SET_FILTER_BY = 'SET_FILTER_BY'
 const initialState = {
     filterBy: {
         txt: '',
-        type: '',
+        stationType: '',
         sortField: '',
         sortDir: '',
     }
