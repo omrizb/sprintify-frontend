@@ -35,7 +35,7 @@ export function LeftSideBarFilter() {
                 value=ev.target.value
                 break  
             case 'type': 
-                value = field
+                value = ev.target.name
                 field = type
                 break
             case 'radio':
