@@ -14,10 +14,12 @@ export function Player({ songId = 'BciS5krYL80' }) {
     const [ytPlayer, setYtPlayer] = useState(null)
 
     useEffect(() => {
+        if (!ytPlayer) return
         ytPlayer.setVolume(player.volume)
     }, [player.volume])
 
     useEffect(() => {
+        if (!ytPlayer) return
         switch (action) {
             case playerActions.PLAY:
                 ytPlayer.playVideo()
@@ -37,7 +39,6 @@ export function Player({ songId = 'BciS5krYL80' }) {
     }
 
     function onReady({ target }) {
-        console.log(target)
         target.pauseVideo()
         setYtPlayer(target)
         setPlayer({
