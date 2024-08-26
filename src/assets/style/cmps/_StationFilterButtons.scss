@@ -19,7 +19,7 @@
     button {
         &:not(.clear-filter){
 
-            width: 78px;
+            width: 75px;
         }
         
     }
@@ -29,7 +29,8 @@
         grid-auto-flow: column;
         column-gap: 0.2em;
         width: max-content;
-        justify-content: center;
+        justify-items: start;
+
     }
 
     
