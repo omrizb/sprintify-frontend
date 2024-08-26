@@ -15,7 +15,6 @@ export function LeftSidebar() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     // const loggedinUser = false
-    // const [ filterBy, setFilterBy ] = useState(stationService.getDefaultFilter())
 
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
@@ -24,7 +23,6 @@ export function LeftSidebar() {
 
     useEffect(() => {
         loadStations(filterBy)
-        console.log('filterBy from LeftSideBar', filterBy)
     }, [filterBy])
 
     
