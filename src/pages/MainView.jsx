@@ -1,4 +1,6 @@
 import { array } from "prop-types"
+import { MainViewHeader } from "../cmps/MainView/MainViewHeader"
+import { MainViewBody } from "../cmps/MainView/MainViewBody"
 
 export function MainView() {
 
@@ -14,14 +16,9 @@ export function MainView() {
 
     return (
         <div className="main-view">
-            <button className="btn-light">All</button>
-            <button className="btn-tinted">Music</button>
-            <button className="btn-tinted">Podcasts</button>
-            <h1>My Songs</h1>
-            <button className="btn-green">Continue</button>
-            <ul>
-                {createSongs()}
-            </ul>
+            <MainViewHeader />
+            <MainViewBody />
+        
         </div>
     )
 }

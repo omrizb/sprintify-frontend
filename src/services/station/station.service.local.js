@@ -10,7 +10,10 @@ export const stationService = {
     getById,
     save,
     remove,
-    addStationMsg
+    addStationMsg,
+    getRecommended,
+    getTopMixes,
+    getMadeForYou,
 }
 
 // DEBUG:
@@ -109,6 +112,10 @@ async function addStationMsg(stationId, txt) {
 
     return msg
 }
+
+async function getRecommended(){}
+async function getTopMixes(){}
+async function getMadeForYou(){}
 
 
 function _createStations() {
