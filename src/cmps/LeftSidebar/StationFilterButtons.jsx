@@ -29,7 +29,6 @@ export function StationFilterButtons() {
         
         if(stationType && btnsDispObj.clearFilter.showBtn) {
             resetAllBtns()
-            setFilterToEdit({ ...filterToEdit, 'stationType': '' })
             return
         }
 
@@ -74,13 +73,13 @@ export function StationFilterButtons() {
 
     function resetAllBtns(){
         setBtnsDispObj(structuredClone(initBtnsDispObj))
+        setFilterToEdit({ ...filterToEdit, 'stationType': '', 'playListCreator': '' })
     }
 
     function handlePlaylistCreator(playlistCreator){
         console.log(playlistCreator)
         if(btnsDispObj.bySprintify.isActive === 'active' || byYou.isActive === 'active'){
             resetAllBtns()
-            setFilterToEdit({ ...filterToEdit, 'stationType': '', 'playListCreator': '' })
             return
         }
 
