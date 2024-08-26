@@ -1,4 +1,5 @@
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_FILTER_BY_MAIN = 'SET_FILTER_BY_MAIN'
 
 const initialState = {
     filterBy: {
@@ -7,6 +8,12 @@ const initialState = {
         playListCreator:'',
         sortField: '',
         sortDir: '',
+    },
+
+    filterByMain: {
+        txt: '',
+        type:'',
+
     }
 }
 
@@ -16,6 +23,10 @@ export function filterByReducer(state = initialState, action) {
     switch (action.type) {
         case SET_FILTER_BY:
             newState = { ...state, filterBy: action.filterBy }
+            break
+
+        case SET_FILTER_BY_MAIN:
+            newState = { ...state, filterByMain: action.filterByMain }
             break
       
         default:
