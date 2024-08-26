@@ -110,9 +110,11 @@ async function addStationMsg(stationId, txt) {
     return msg
 }
 
+
 function _createStations() {
     let currStations = utilService.loadFromStorage(STORAGE_KEY)
     if (!currStations || !currStations.length) {
         utilService.saveToStorage(STORAGE_KEY, stations)
     }
 }
+
