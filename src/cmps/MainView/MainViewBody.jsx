@@ -15,12 +15,18 @@ export function MainViewBody() {
 
     useEffect(() => {
         loadStationsMain(filterByMain)
-        // setStationsMain(structuredClone(stations))
-
+    
     }, [])
 
-    function loadStationsMain(filterByMain) {
-        stationService.query(filterByMain).then(stations => setStationsMain(stations))
+    async function loadStationsMain(filterByMain) {
+        try {
+            const stations = await stationService.query(filterByMain)
+            setStationsMain(stations)
+            
+        } catch (err) {
+            
+            console.log('MainBody loading stations:', err)
+        } 
     }
     
     
