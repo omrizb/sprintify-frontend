@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: start;
     font: inherit;
+    border-radius: 4px;
     
 
     img{
@@ -24,5 +25,9 @@
                 font-size: 14px;
             }
         }
+    }
+
+    &.minimal{
+        background-color: $tintedBgClr;
     }
 }
