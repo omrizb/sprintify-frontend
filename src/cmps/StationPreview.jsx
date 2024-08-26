@@ -21,7 +21,7 @@ export function StationPreview({ station, style }) {
                         </section>
                 </article>}
 
-            {(style === 'big-square') &&
+            {(style === 'card') &&
                 <article className="station-preview">
                     <img src={station.stationImgUrl} alt="" />
                         <section className="text">

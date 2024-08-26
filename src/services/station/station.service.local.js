@@ -113,9 +113,21 @@ async function addStationMsg(stationId, txt) {
     return msg
 }
 
-async function getRecommended(){}
-async function getTopMixes(){}
-async function getMadeForYou(){}
+async function getRecommended(userId = 'bob', size = 4){
+    //TODO write algorithm for fetching recommended playlists per user 
+    const stations = await query({stationType: 'playlist'})
+    return utilService.getRandomItems(stations, size)
+}
+async function getTopMixes(userId = 'bob', size = 4){
+    //TODO write algorithm for fetching top mixes per user 
+    const stations = await query({stationType: 'playlist'})
+    return utilService.getRandomItems(stations, size)
+}
+async function getMadeForYou(userId = 'bob', size = 4){
+    //TODO write algorithm for fetching top mixes per user 
+    const stations = await query({stationType: 'playlist'})
+    return utilService.getRandomItems(stations, size)
+}
 
 
 function _createStations() {
