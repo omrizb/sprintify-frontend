@@ -14,7 +14,7 @@ export function StationFilterButtons() {
         playlists:   {showBtn: true,  isActive: ''},
         artists:     {showBtn: true,  isActive: ''},
         albums:      {showBtn: true,  isActive: ''},
-        byYou:      {showBtn: false, isActive: ''},
+        byYou:       {showBtn: false, isActive: ''},
         bySprintify: {showBtn: false, isActive: ''},
     }
 

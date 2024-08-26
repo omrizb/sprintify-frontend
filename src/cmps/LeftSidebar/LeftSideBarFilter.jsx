@@ -12,7 +12,6 @@ import { StationFilterButtons } from './StationFilterButtons'
 export function LeftSideBarFilter() {
 
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
-    const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
 
     const [ showMenu, setShowMenu] = useState(false)
     const [ showSearch, setShowSearch] = useState(false)
@@ -32,10 +31,6 @@ export function LeftSideBarFilter() {
         }
     }
 
-    useEffect(() => {
-        updateFilterBy(filterToEdit)
-    }, [filterToEdit])
-
    
     function handleChange(ev) {
         const type = ev.target.type
@@ -46,14 +41,14 @@ export function LeftSideBarFilter() {
             case 'text':
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
-                if(!filterToEdit.sortDir) filterToEdit.sortDir = 1
+                if(!filterBy.sortDir) filterBy.sortDir = 1
                 break
             case 'number':
                 value = +ev.target.value || ''
                 break
              
         }
-        setFilterToEdit({ ...filterToEdit, [field]: value })
+        updateFilterBy({...filterBy, [field]: value})
     }
     
     
@@ -73,7 +68,7 @@ export function LeftSideBarFilter() {
                         <input 
                             type="text" 
                             name="txt"
-                            value={filterToEdit.txt}
+                            value={filterBy.txt}
                             placeholder="Search in Playlists"
                             onChange={handleChange}
                             required
