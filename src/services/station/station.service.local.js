@@ -18,11 +18,11 @@ export const stationService = {
 
 _createStations()
 
-async function query(filterBy = {txt: '', stationType:'', sortField: '', sortDir: ''}) {
+async function query(filterBy = {txt: '', stationType:'', playListCreator:'', sortField: '', sortDir: ''}) {
 
     console.log('filterBy from service:', filterBy)
     var stations = await storageService.query(STORAGE_KEY)
-    const { txt, stationType, sortField, sortDir } = filterBy
+    const { txt, stationType, playListCreator, sortField, sortDir } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -31,6 +31,12 @@ async function query(filterBy = {txt: '', stationType:'', sortField: '', sortDir
 
     if(stationType === 'playlist'){
         stations = stations.filter(station => station.type === 'playlist' )
+        if(playListCreator === 'byYou'){
+            stations = stations.filter(station => station.createdBy.fullName === 'Darr' )
+        }
+        if(playListCreator === 'bySprintify'){
+            stations = stations.filter(station => station.createdBy.fullName === 'sprintify' )
+        }
     }
     if(stationType === 'artist'){
         stations = stations.filter(station => station.type === 'artist' )

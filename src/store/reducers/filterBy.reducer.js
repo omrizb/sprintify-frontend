@@ -4,6 +4,7 @@ const initialState = {
     filterBy: {
         txt: '',
         stationType: '',
+        playListCreator:'',
         sortField: '',
         sortDir: '',
     }
