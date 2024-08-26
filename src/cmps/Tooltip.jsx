@@ -54,7 +54,7 @@ export function Tooltip({ txt, children, screenMargin = 10 }) {
     }
 
     function handleMouseEnter() {
-        timeOutId.current = setTimeout(() => setIsVisible(true), 500)
+        timeOutId.current = setTimeout(() => setIsVisible(true), 800)
     }
 
     function handleMouseLeave() {

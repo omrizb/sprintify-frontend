@@ -10,7 +10,6 @@ import { PlayerRightPanel } from './Player/PlayerRightPanel'
 export function Player({ songId = 'BciS5krYL80' }) {
 
     const player = useSelector(state => state.playerModule.player)
-    const action = useSelector(state => state.playerModule.action)
     const [ytPlayer, setYtPlayer] = useState(null)
 
     useEffect(() => {
@@ -20,7 +19,7 @@ export function Player({ songId = 'BciS5krYL80' }) {
 
     useEffect(() => {
         if (!ytPlayer) return
-        switch (action) {
+        switch (player.action) {
             case playerActions.PLAY:
                 ytPlayer.playVideo()
                 break
@@ -28,7 +27,7 @@ export function Player({ songId = 'BciS5krYL80' }) {
                 ytPlayer.pauseVideo()
                 break
         }
-    }, [action])
+    }, [player.action])
 
     const opts = {
         height: '0',
@@ -44,7 +43,7 @@ export function Player({ songId = 'BciS5krYL80' }) {
         setPlayer({
             songId,
             isPlaying: false,
-            duration: target.getDuration(),
+            totalDuration: target.getDuration(),
             volume: target.getVolume(),
         })
     }

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 
 import { setPlayer, play, pause } from '../../store/actions/player.actions'
 
-import { SvgIcon } from '../SvgIcon'
+import { SvgButton } from '../SvgButton'
 
 export function PlayerMiddlePanel({ getPlayerState }) {
 
@@ -21,9 +21,13 @@ export function PlayerMiddlePanel({ getPlayerState }) {
 
     return (
         <div className="player-middle-panel">
-            <button onClick={handlePlayPause} className='btn-player-play'>
-                {player.isPlaying ? <SvgIcon iconName="playerPause" /> : <SvgIcon iconName="playerPlay" />}
-            </button>
+            <SvgButton
+                btnClass="btn-player-play"
+                svgIcon={player.isPlaying ? 'playerPause' : 'playerPlay'}
+                svgClass="svg-small"
+                tooltipTxt={player.isPlaying ? 'Pause' : 'Play'}
+                onClick={handlePlayPause}
+            />
         </div>
     )
 }
