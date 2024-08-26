@@ -13,6 +13,7 @@ function getDefaultFilter() {
     return {
         txt: '',
         stationType:'',
+        playListCreator:'',
         sortField: '',
         sortDir: '',
     }

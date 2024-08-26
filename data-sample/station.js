@@ -6,8 +6,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg', // image of one of the songs
         tags: ['Happy', 'Chill', 'Upbeat'],
         createdBy: {
-            id: 'A1b2C3d4E5',
-            fullName: 'Olivia Smith',
+            id: 'AAAA',
+            fullName: 'Darr',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['F6g7H8i9J0', 'K1L2M3N4O5'],
@@ -48,8 +48,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/4NRXx6U8ABQ/hqdefault.jpg', // image of one of the songs
         tags: ['Chill', 'Relaxing'],
         createdBy: {
-            id: 'F6g7H8i9J0',
-            fullName: 'Liam Johnson',
+            id: 'BBBB',
+            fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
@@ -123,8 +123,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg', // image of one of the songs
         tags: ['Upbeat', 'Rock', 'Pop'],
         createdBy: {
-            id: 'P6Q7R8S9T0',
-            fullName: 'Noah Davis',
+            id: 'AAAA',
+            fullName: 'Darr',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'F6g7H8i9J0', 'K1L2M3N4O5'],
@@ -189,8 +189,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg', // image of one of the songs
         tags: ['Chill', 'Relaxing', 'Acoustic'],
         createdBy: {
-            id: 'F6g7H8i9J0',
-            fullName: 'Liam Johnson',
+            id: 'AAAA',
+            fullName: 'Darr',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
@@ -276,8 +276,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg', // image of one of the songs
         tags: ['Dance', 'Upbeat', 'Funky'],
         createdBy: {
-            id: 'K1L2M3N4O5',
-            fullName: 'Sophia Brown',
+            id: 'BBBB',
+            fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['F6g7H8i9J0', 'P6Q7R8S9T0'],
@@ -381,8 +381,8 @@ export const stations = [
         stationImgUrl: 'https://i.ytimg.com/vi/6Ejga4kJUts/hqdefault.jpg', // image of one of the songs
         tags: ['Melancholic', 'Chill'],
         createdBy: {
-            id: 'K1L2M3N4O5',
-            fullName: 'Sophia Brown',
+            id: 'BBBB',
+            fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'F6g7H8i9J0'],
