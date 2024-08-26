@@ -18,8 +18,18 @@ export function LeftSideBarFilter() {
     const [ showSearch, setShowSearch] = useState(false)
 
     const display = {
-        sortBy: 'recents',
-        viewAs: 'list'
+        sortBy: {
+            'showRecents': true,
+            'showRecentlyAdded': true,
+            'showAlpha': true,
+            'showCreator': true,
+            'showCustom': true
+        },
+        viewAs: {
+            'showCompact': true,
+            'showList': true,
+            'showGrid': true,
+        }
     }
 
     useEffect(() => {
