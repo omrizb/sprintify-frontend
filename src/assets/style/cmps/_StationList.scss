@@ -1,4 +1,15 @@
 .station-list{
+
+    ul {
+        li{
+            &:hover{
+                background-color: rgba(179, 179, 179, 0.2);
+                cursor: pointer;
+                
+            }
+        }
+    }
+
     .main-view-stations{
 
         header{
