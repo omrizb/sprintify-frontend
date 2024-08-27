@@ -17,6 +17,7 @@
 @import "pages/StationIndex";
 @import "pages/StationDetails";
 @import "pages/MainView";
+@import "pages/Search";
 
 /* Components */
 @import "cmps/GlobalNav";
@@ -40,3 +41,4 @@
 @import "cmps/SongPreview";
 @import "cmps/StationDetailsHeader";
 @import "cmps/StationDetailsActions";
+@import "cmps/SearchTopic";
