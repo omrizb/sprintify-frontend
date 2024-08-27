@@ -5,10 +5,12 @@ export function SongPreview({ song, index, viewMode }) {
     return (
         <div className="song-preview list-style">
             <div>{index}</div>
-            <div>
-                <img src="imgUrl" alt="" />
-                <div>{songName}</div>
-                <div>{artist}</div>
+            <div className="title-column">
+                <img src={imgUrl} alt="" />
+                <div className="text">
+                    <div>{songName}</div>
+                    <div>{artist}</div>
+                </div>
             </div>
             <div>{album}</div>
             <div>{`${duration.hours}: ${duration.minutes}: ${duration.seconds}`}</div>
