@@ -13,13 +13,13 @@ export function GlobalNav() {
                 <SvgButton btnClass={'btn-tinted home'} svgIcon={'home'} />  
             </Link>
             
-            <form>
+            <Link to={`/search`}>
                 <div className="text-container">
                     <div className="search icon"><SvgIcon iconName={"search"}    /> </div>
                     <input type="text" placeholder="What do you want to play?" /> 
                     <div className="browse icon"><SvgIcon iconName={"browse"}    /> </div> 
                 </div>
-            </form>
+            </Link>
             <div className="bell icon"><SvgIcon iconName={"bell"} /></div>
             <button className="profile-btn">D</button>
 

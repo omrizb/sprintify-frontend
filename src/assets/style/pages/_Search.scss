@@ -1,0 +1,23 @@
+.search-page {
+    font: inherit;
+    margin-block-start: 16px;
+    @include section;
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        height: 60px;
+        margin:0;
+        display:grid;
+        align-items: end;
+        
+    }
+
+    .browse-topics {
+        columns: 2;
+    }
+
+   
+
+    
+}

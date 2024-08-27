@@ -21,6 +21,11 @@
         }
     
     }
+
+    .btn-station-preview-light {
+        @include transparent;
+        @include btn($circleSize: 32px);   
+    }
     
     .btn-song-preview {
         @include transparent;
