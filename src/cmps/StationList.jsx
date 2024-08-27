@@ -66,7 +66,7 @@ export function StationList({stations, viewArea}) {
                         <h2>Recently Played</h2>
                         <p>Show all</p>
                     </header>
-                    <ul className="stations-recently-played">
+                    <ul className="card-stations recently-played">
                         {recentlyPlayed.map(station =>
                             <li key={station._id} >
                                 <StationPreview station={station} style={'card'}/>
@@ -78,7 +78,7 @@ export function StationList({stations, viewArea}) {
                         <h2>Your Top Mixes</h2> 
                         <p>Show all</p>
                     </header>
-                    <ul className="stations-top-mixed">
+                    <ul className="card-stations top-mixed">
                         {topMixes.map(station =>
                             <li key={station._id} >
                                 <StationPreview station={station} style={'card'}/>
@@ -90,7 +90,7 @@ export function StationList({stations, viewArea}) {
                         <h2>Made For You</h2> 
                         <p>Show all</p>
                     </header>
-                    <ul className="stations-for-you">
+                    <ul className="card-stations made-for-you">
                         {madeForYou.map(station =>
                             <li key={station._id} >
                                 <StationPreview station={station} style={'card'}/>

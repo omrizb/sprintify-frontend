@@ -44,10 +44,16 @@
 
             
         }
-        .stations-top{
+        .stations-top {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0.5em;
+        }
+
+        .card-stations {
+           columns: 150px auto; 
+            
+
         }
     }
 }
