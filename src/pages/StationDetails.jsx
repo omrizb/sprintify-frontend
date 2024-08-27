@@ -14,7 +14,8 @@ import { loadStation } from '../store/actions/station.actions.js'
 
 export function StationDetails() {
 
-    const { stationId } = useParams()
+    const { id } = useParams()
+    console.log(id)
 
     const station = useSelector(storeState => storeState.stationModule.station)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
@@ -32,8 +33,8 @@ export function StationDetails() {
     const durationTxt = formatDurationTxt()
 
     useEffect(() => {
-        loadStation(stationId)
-    }, [stationId])
+        loadStation(id)
+    }, [id])
 
     
     const stationMeta = {
