@@ -17,6 +17,7 @@ const initialState = {
         isPlaying: false,
         volume: 100,
         action: '',
+        actionParam: ''
     },
     stationId: '',
     stationSongs: [],
@@ -37,7 +38,11 @@ export function playerReducer(state = initialState, action = {}) {
         case SET_ACTION:
             newState = {
                 ...state,
-                player: { ...state.player, action: action.action }
+                player: {
+                    ...state.player,
+                    action: action.action,
+                    actionParam: action.actionParam
+                }
             }
             break
         case SET_VOLUME:

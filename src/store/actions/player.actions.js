@@ -6,6 +6,7 @@ import { SET_PLAYER, SET_ACTION, SET_VOLUME, SET_STATION_ID, SET_STATION_SONGS, 
 export const playerActions = {
     PLAY: 'play',
     PAUSE: 'pause',
+    GOTO: 'goto'
 }
 
 export function setPlayer(playerProps) {
@@ -28,11 +29,15 @@ export async function loadStationToPlayer(stationId, firstSongId) {
 }
 
 export function play() {
-    store.dispatch({ type: SET_ACTION, action: playerActions.PLAY })
+    store.dispatch({ type: SET_ACTION, action: playerActions.PLAY, actionParam: '' })
 }
 
 export function pause() {
-    store.dispatch({ type: SET_ACTION, action: playerActions.PAUSE })
+    store.dispatch({ type: SET_ACTION, action: playerActions.PAUSE, actionParam: '' })
+}
+
+export function goto(seconds) {
+    store.dispatch({ type: SET_ACTION, action: playerActions.GOTO, actionParam: seconds })
 }
 
 export function setVolume(volume) {
