@@ -1,6 +1,66 @@
 .song-list{
-    header{
+    .list-style{
         display: grid;
-        grid-auto-flow: column;
+        grid-template-columns: 20px repeat(3, 100px);
+        color: $secondaryTxtClr;
+        font: inherit;
+        
     }
 }
+
+
+
+
+
+
+// .song-list {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+
+//     .song-list-header{
+//         font-weight: 400;
+//         color:  $secondaryTxtClr;
+//         height: 36px;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+
+//         border-bottom: 1px solid hsla(0, 0%, 100%, .1);
+        
+//         display: grid;
+//         padding: 0 16px;
+//         grid-gap: 16px;
+//         grid-template-columns: 16px minmax(120px,4fr) minmax(120px,2fr) minmax(120px,1fr);
+    
+//         .index-header{
+//             display: flex;
+//             align-items: center;
+//             justify-self: end;
+//         }
+
+//         .col-header-flex{
+//             display: flex;
+//             align-items: center;
+//         }
+        
+//         .col-header-txt-flex {
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             background-color: transparent;
+//             border: none;
+//         }
+    
+//         .duration-header{
+//             grid-column: last;
+//             justify-content: flex - end;
+//             display: flex;
+//             align-items: center;
+//         }
+
+//         .duration{
+//             background-color: transparent;
+//         }
+
+//     }
+// }

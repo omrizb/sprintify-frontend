@@ -5,7 +5,7 @@ export function SongList({ songs }) {
     
     return (
         <div className="song-list">
-            <header>
+            <header className="list-style">
                 <div>#</div>
                 <div>Title</div>
                 <div>Album</div>

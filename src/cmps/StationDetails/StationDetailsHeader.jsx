@@ -4,7 +4,7 @@ import { SvgIcon } from "../SvgIcon"
 export function StationDetailsHeader({ station, showSongCountTxt, songCountTxt, showDurationTxt, durationTxt }) {
 
     return (
-        <div className="station-header">
+        <div className="station-details-header">
             <div className="station-cover-container">
                 <img className="station-cover" src={station.imgUrl} alt="Station Cover" />
                 <div className="overlay">
