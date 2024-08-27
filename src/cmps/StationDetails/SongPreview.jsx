@@ -1,7 +1,7 @@
 export function SongPreview({ song, index, viewMode }) {
 
     const {songName, artist, album, url, imgUrl, duration} = song
-    
+    //switch case to various displays: main-view, now-playing, song-list
     return (
         <div className="song-preview list-style">
             <div>{index}</div>
