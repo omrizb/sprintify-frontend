@@ -1,0 +1,52 @@
+.search-topic{
+    height: 125px;
+    width: 204px;
+    padding: 12px;
+
+    .img-box{
+        position: relative;
+        width: 180px;
+        height: 100px;
+        border-radius: 8px;
+        overflow: hidden;
+    
+       h2 {
+            display: grid;
+            place-self: center;
+            width: max-content;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px 54px 16px 16px;
+        }
+    
+    
+        img {
+            position: absolute;
+            right: -10px;
+            bottom: -15px;
+            height: 80px;
+            transform: rotate(30deg);
+            border-radius: 4px;
+        }
+    
+        &.pink {
+            background-color: rgb(220, 20, 140);
+        }
+        &.green {
+            background-color: rgb(0, 100, 80);
+        }
+        &.purple {
+            background-color: rgb(132, 0, 231);
+        }
+        &.blue {
+            background-color: rgb(30, 50, 100);
+        }
+        &.bright-green {
+            background-color: rgb(96, 129, 8);
+        }
+        &.turquoise {
+            background-color: rgb(71, 125, 149);
+        }
+    }
+}
