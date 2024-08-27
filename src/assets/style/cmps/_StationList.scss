@@ -1,5 +1,38 @@
 .station-list{
     .main-view-stations{
+
+        header{
+            display: grid;
+            grid-auto-flow: column;
+            align-items: center;
+            font-weight: 700;
+            height: 60px;
+            
+            h2 {
+                font-size: 20px;
+                display: grid;
+                justify-self: start;
+                font-weight: inherit;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            p {
+                justify-self: end;
+                font-size: 13px;
+                color: $mediumTxtClr;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            
+        }
         .stations-top{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
