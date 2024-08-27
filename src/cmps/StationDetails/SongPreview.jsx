@@ -1,14 +1,18 @@
+import { Link } from 'react-router-dom'
+
 export function SongPreview({ song, index, viewMode }) {
 
     const {songName, artist, album, url, imgUrl, duration} = song
-    
+    //switch case to various displays: main-view, now-playing, song-list
     return (
         <div className="song-preview list-style">
             <div>{index}</div>
             <div className="title-column">
                 <img src={imgUrl} alt="" />
                 <div className="text">
-                    <div>{songName}</div>
+                    <Link to={`/track/${song.songId}`}>
+                        <div>{songName}</div>
+                    </Link>
                     <div>{artist}</div>
                 </div>
             </div>
