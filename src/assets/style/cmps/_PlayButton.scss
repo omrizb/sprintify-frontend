@@ -12,10 +12,10 @@
     }
 
     .btn-station-preview {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 8px 0px;
         @include green;
         @include btn($type: animated, $circleSize: 32px);
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 8px 0px;
-
+       
         &:active {
             background-color: $buttonBgGreenPress;
         }
