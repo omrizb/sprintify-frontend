@@ -15,14 +15,12 @@ import { loadStation } from '../store/actions/station.actions.js'
 export function StationDetails() {
 
     const { id } = useParams()
-    console.log(id)
-
+    
     const station = useSelector(storeState => storeState.stationModule.station)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
     const [viewMode, setViewMode] = useState('list') // Default view mode
     
-
     //stationMeta
     const isEmptyStation = station.songs.length === 0
     const isOwnedByUser = station.createdBy.id === loggedinUser._id
