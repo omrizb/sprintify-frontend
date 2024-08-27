@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { StationList } from "../StationList"
 import { stationService } from '../../services/station/station.service.local'
-import { loadStations } from '../../store/actions/station.actions'
+
 
 export function MainViewBody() {
 
@@ -14,13 +14,13 @@ export function MainViewBody() {
     const [ stationsMain, setStationsMain ] = useState([])
 
     useEffect(() => {
-        loadStationsMain(filterByMain)
+        loadStationsMain({stationType: 'playlist'})
     
     }, [])
 
-    async function loadStationsMain(filterByMain) {
+    async function loadStationsMain(filterBy) {
         try {
-            const stations = await stationService.query(filterByMain)
+            const stations = await stationService.query(filterBy)
             setStationsMain(stations)
             
         } catch (err) {

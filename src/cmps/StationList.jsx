@@ -1,4 +1,4 @@
-import {  useEffect } from 'react'
+import {  useState, useEffect } from 'react'
 
 import { MainStationPreview } from "./MainView/MainStationPreview.jsx"
 import { StationPreview } from "./StationPreview.jsx"
@@ -12,8 +12,11 @@ export function StationList({stations, viewArea}) {
     
 
     const player = useSelector(storeState => storeState.playerModule.player)
+    const [recentlyPlayed, setRecentlyPlayed] = useState([])
+    const [topMixes, setTopMixes] = useState([])
+    const [madeForYou, setMadeForYou] = useState([])
     // console.log(player)
-    const playlists = stations.filter(station => station.type === 'playlist')
+    
     
     useEffect(() => {
         loadMainViewColletions()
@@ -22,9 +25,13 @@ export function StationList({stations, viewArea}) {
 
     async function loadMainViewColletions() {
         try {
-            const recommended = await stationService.getRecommended('bob', 4)
-            console.log(recommended)
+            const recentlyPlayedList = await stationService.getRecentlyPlayed('bob', 4)
+            const topMixesList = await stationService.getTopMixes('bob', 4)
+            const madeForYouList = await stationService.getMadeForYou('bob', 4)
             
+            setRecentlyPlayed(recentlyPlayedList)
+            setTopMixes(topMixesList)
+            setMadeForYou(madeForYouList)
         } catch (err) {
             
             console.log('MainBody loading stations:', err)
@@ -46,23 +53,39 @@ export function StationList({stations, viewArea}) {
             }
 
             { viewArea==='mainView' &&  
-                <div className="main-view-stations">
-
-                    <div className="stations-top">
-                        {playlists.slice(0,8).map(station =>
-                            <article key={station._id} >
+                <div className="main-view-stations"> 
+                    <ul className="stations-top">
+                        {stations.slice(0,8).map(station =>
+                            <li key={station._id} >
                                 <StationPreview station={station} style={'minimal'}/>
-                            </article>)
+                            </li>)
                         }
-                    </div>
+                    </ul>
 
-                    <div className="stations-recommended">
-                        {stations.filter(station => station.type === 'playlist').slice(0,8).map(station =>
-                            <article key={station._id} >
-                                <StationPreview station={station} style={'square'}/>
-                            </article>)
+                    <ul className="stations-recently-played">
+                        Recently Played
+                        {recentlyPlayed.map(station =>
+                            <li key={station._id} >
+                                <StationPreview station={station} style={'card'}/>
+                            </li>)
                         }
-                    </div>
+                    </ul>
+                    <ul className="stations-top-mixed">
+                        Your Top Mixes
+                        {topMixes.map(station =>
+                            <li key={station._id} >
+                                <StationPreview station={station} style={'card'}/>
+                            </li>)
+                        }
+                    </ul>
+                    <ul className="stations-recently-played">
+                        Made For You
+                        {madeForYou.map(station =>
+                            <li key={station._id} >
+                                <StationPreview station={station} style={'card'}/>
+                            </li>)
+                        }
+                    </ul>
 
 
 

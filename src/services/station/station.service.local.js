@@ -11,7 +11,7 @@ export const stationService = {
     save,
     remove,
     addStationMsg,
-    getRecommended,
+    getRecentlyPlayed,
     getTopMixes,
     getMadeForYou,
 }
@@ -113,8 +113,8 @@ async function addStationMsg(stationId, txt) {
     return msg
 }
 
-async function getRecommended(userId = 'bob', size = 4){
-    //TODO write algorithm for fetching recommended playlists per user 
+async function getRecentlyPlayed(userId = 'bob', size = 4){
+    //TODO write algorithm for fetching recentlyplayed playlists per user 
     const stations = await query({stationType: 'playlist'})
     return utilService.getRandomItems(stations, size)
 }
