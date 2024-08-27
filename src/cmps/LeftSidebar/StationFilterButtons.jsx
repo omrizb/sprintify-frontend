@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { updateFilterBy } from '../../store/actions/filterBy.actions' 
@@ -7,8 +7,7 @@ import { updateFilterBy } from '../../store/actions/filterBy.actions'
 export function StationFilterButtons() {
 
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
-    const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
-
+    
     const initBtnsDispObj = {
         clearFilter: {showBtn: false, isActive: ''},
         playlists:   {showBtn: true,  isActive: ''},
@@ -20,16 +19,11 @@ export function StationFilterButtons() {
 
     const [ btnsDispObj, setBtnsDispObj ] = useState({...initBtnsDispObj})
 
-    useEffect(() => {
-        updateFilterBy(filterToEdit)
-    }, [filterToEdit])
-
-   
     function handleChange(stationType) {
         
         if(stationType && btnsDispObj.clearFilter.showBtn) {
             resetAllBtns()
-            setFilterToEdit({ ...filterToEdit, 'stationType': '', 'playListCreator': '' })
+            updateFilterBy({ ...filterBy, 'stationType': '', 'playListCreator': '' })
             return
         }
 
@@ -69,7 +63,7 @@ export function StationFilterButtons() {
 
         }
 
-        setFilterToEdit({ ...filterToEdit, 'stationType': stationType })
+        updateFilterBy({...filterBy, 'stationType': stationType })
     }
 
     function resetAllBtns(){
@@ -84,7 +78,8 @@ export function StationFilterButtons() {
                 'byYou': {...byYou, 'showBtn': true, 'isActive': ''},
                 'bySprintify': {...bySprintify, 'showBtn': true, 'isActive': ''}
                 })
-            setFilterToEdit({ ...filterToEdit, 'stationType': 'playlist', 'playListCreator': '' })
+            
+            updateFilterBy({ ...filterBy, 'stationType': 'playlist', 'playListCreator': '' })
             return
         }
 
@@ -105,7 +100,7 @@ export function StationFilterButtons() {
                 break
         }
 
-        setFilterToEdit({ ...filterToEdit, 'playListCreator': playlistCreator })
+        updateFilterBy({ ...filterBy, 'playListCreator': playlistCreator })
     }
 
     
