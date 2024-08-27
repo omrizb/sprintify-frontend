@@ -1,6 +1,6 @@
 import {  useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-import { MainStationPreview } from "./MainView/MainStationPreview.jsx"
 import { StationPreview } from "./StationPreview.jsx"
 import { useSelector } from 'react-redux'
 import { stationService } from "../services/station/station.service.local.js"
@@ -46,7 +46,9 @@ export function StationList({stations, viewArea}) {
                 <ul className="left-side-stations">
                     {stations.map(station =>
                         <li key={station._id} >
-                            <StationPreview station={station} style={'leftSide'}/>
+                            <Link to={`/station/${station._id}`}>
+                                <StationPreview station={station} style={'leftSide'}/>
+                            </Link>
                         </li>)
                     }
                 </ul>
