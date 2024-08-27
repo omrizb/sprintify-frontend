@@ -1,24 +1,32 @@
 export function SongPreview({ song, index, viewMode }) {
+
+    const {songName, artist, album, url, imgUrl, duration} = song
+    
     return (
-        <li className="song-preview">
-            <span className="song-index">{index + 1}</span>
-            <div className="song-info">
-                {viewMode === 'list' && (
-                    <img src={song.imgUrl} alt={song.songName} className="song-cover" />
-                )}
-                <div className="song-details">
-                    <span className="song-name">{song.songName}</span>
-                    {viewMode === 'list' && <span className="song-artist">{song.artist}</span>}
+        <div className="song-preview list-style">
+            <div>{index}</div>
+            <div className="title-column">
+                <img src={imgUrl} alt="" />
+                <div className="text">
+                    <div>{songName}</div>
+                    <div>{artist}</div>
                 </div>
             </div>
-            {viewMode === 'compact' && <span className="song-artist">{song.artist}</span>}
-            <span className="song-album">{song.album}</span>
-            {viewMode === 'list' && <span className="song-date">{/* dateAdded */}</span>}
-            <span className="song-duration">{`${song.duration.hours}:${String(song.duration.minutes).padStart(2, '0')}:${String(song.duration.seconds).padStart(2, '0')}`}</span>
-        </li>
+            <div>{album}</div>
+            <div>{`${duration.hours}: ${duration.minutes}: ${duration.seconds}`}</div>
+        </div>
     )
 }
 
 
 
 
+// {
+//     songId: 'fJ9rUzIMcZQ',
+//     songName: 'Bohemian Rhapsody',
+//     artist: 'Queen',
+//     album: 'A Night at the Opera',
+//     url: 'https://www.youtube.com/embed/fJ9rUzIMcZQ',
+//     imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
+//     duration: { hours: 0, minutes: 6, seconds: 0 }
+// },

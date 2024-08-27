@@ -1,8 +1,26 @@
-
+import { useState } from 'react'
 import { SvgIcon } from "../SvgIcon"
 import { changeViewMode } from '../../services/event-bus.service.js'
+import { DropDownMenu } from '../DropDownMenu.jsx'
 
 export function StationDetailsActions({ stationMeta }) {
+
+    const [showMenu, setShowMenu] = useState(false)
+
+    const display = {
+        sortBy: {
+            'showRecents': false,
+            'showRecentlyAdded': false,
+            'showAlpha': false,
+            'showCreator': false,
+            'showCustom': false
+        },
+        viewAs: {
+            'showCompact': true,
+            'showList': true,
+            'showGrid': false,
+        }
+    }
     const {
         showPlay,
         showAddRemove,
@@ -67,6 +85,14 @@ export function StationDetailsActions({ stationMeta }) {
                         </button>
                     </div>
                 )}
+
+                {/* <div className="view-as">
+                    <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
+                        List
+                        <div className="icon"><SvgIcon iconName={"list"}    /> </div>
+                    </div>
+                    {showMenu && <DropDownMenu display={display} />}
+                </div> */}
             </div>
         </div>
     )

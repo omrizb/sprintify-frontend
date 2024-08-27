@@ -1,28 +1,57 @@
 .station-preview {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 1em;
-    align-items: center;
-    justify-content: start;
-    font: inherit;
     
-
-    img{
-        height: 50px;
-        width: 50px;
+    .list {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 1em;
+        align-items: center;
+        justify-content: start;
+        font: inherit;
         border-radius: 4px;
-    }
-
-    .text {
-        text-transform: capitalize;
-
-        .station-name{
-            color: white;
+    
+        img{
+            height: 50px;
+            width: 50px;
+            border-radius: 4px;
         }
-        div{
-            &:nth-child(2){
-                font-size: 14px;
+    
+        .text {
+            text-transform: capitalize;
+    
+            .station-name{
+                color: white;
+            }
+            div{
+                &:nth-child(2){
+                    font-size: 14px;
+                }
             }
         }
+    
+        &.minimal{
+            background-color: $tintedBgClr;
+        }
+
     }
+
+    .card {
+        display: grid;
+        justify-items: center;
+        
+        img{
+            height: 150px;
+            width: 150px;
+            border-radius: 4px;
+        }
+
+        .text{
+            color: $mediumTxtClr;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    }
+
 }
+
+
+

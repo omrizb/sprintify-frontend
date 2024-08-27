@@ -1,0 +1,49 @@
+.song-preview {
+    padding: 0;
+    font-weight: 400;
+    row-gap: 1em;
+    
+
+    div {
+        font-size: 14px;
+        display: grid;
+        align-items: center;
+
+
+        
+    }
+
+    div:first-child {
+        place-items: center;
+    }
+    
+
+    .title-column {
+        display: grid;
+        grid-template-columns: 60px 200px;
+        column-gap: 0.2em;
+
+        img {
+            height: 50px;
+        }
+
+        .text {
+            display: grid;
+            align-items: center;
+            justify-items: start;
+            justify-self:start;
+            div:first-child {
+                font-size: 14px;
+                color: white;
+            }
+
+            div:nth-child(2) {
+                font-size: 12px;
+
+            }
+            
+        }
+    }
+}
+
+

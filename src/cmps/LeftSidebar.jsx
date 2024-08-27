@@ -32,7 +32,7 @@ export function LeftSidebar() {
             <div className="my-library" >
                 <LeftSideBarHeader />
                 <LeftSideBarFilter />
-                <StationList stations={stations} />
+                <StationList stations = {stations} viewArea = {'leftSide'} />
             </div>
         </div>
 

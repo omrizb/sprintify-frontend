@@ -1,0 +1,7 @@
+.main-view-header{
+    @include section;
+    display: grid;
+    grid-auto-flow: column;
+    width: 250px;
+    place-items: center;
+}
