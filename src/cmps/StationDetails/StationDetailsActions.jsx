@@ -26,9 +26,8 @@ export function StationDetailsActions({ stationMeta }) {
         showAddRemove,
         showFollowUnfollow,
         showMore,
-        showViewList,
-        showViewCompact,
-    } = stationMeta
+        showView,
+    } = stationMeta.stationActionsBar
 
     const handleViewModeClick = (mode) => {
         changeViewMode(mode)
@@ -69,30 +68,17 @@ export function StationDetailsActions({ stationMeta }) {
                             <SvgIcon iconName={"dots"} />
                         </button>
                     )}
-
-                    {showViewList && (
-                        <div className="view-mode-btn">
-                            <button className="action-bar-btn list icon btn-medium" onClick={() => handleViewModeClick('list')}>
-                                <span>List</span>
-                                <SvgIcon iconName={"list"} />
-                            </button>
-                        </div>
-                    )}
-                    {showViewCompact && (
-                        <div className="view-mode-btn">
-                            <button className="action-bar-btn compact icon btn-medium" onClick={() => handleViewModeClick('compact')}>
-                                <span>Compact</span>
-                                <SvgIcon iconName={"compact"} />
-                            </button>
-                        </div>
-                    )}
                 </div>
                 <div className="view-as">
-                    <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
-                        List
-                        <div className="icon"><SvgIcon iconName={"list"} /> </div>
-                    </div>
-                    {showMenu && <DropDownMenu display={display} />}
+                    {showView && (
+                        <>
+                            <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
+                                List
+                                <div className="icon"><SvgIcon iconName={"list"} /> </div>
+                            </div>
+                            {showMenu && <DropDownMenu display={display} />}
+                        </>
+                    )}
                 </div>
             </div>
         </div>

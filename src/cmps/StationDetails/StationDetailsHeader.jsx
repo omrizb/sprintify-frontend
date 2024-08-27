@@ -1,7 +1,7 @@
 
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station, showSongCountTxt, songCountTxt, showDurationTxt, durationTxt }) {
+export function StationDetailsHeader({ station, songCountTxt, durationTxt }) {
 
     return (
         <div className="station-details-header">
@@ -22,8 +22,8 @@ export function StationDetailsHeader({ station, showSongCountTxt, songCountTxt, 
                 <div className="station-name">{station.name}</div>
                 <div>
                     <span className="station-createdBy">{station.createdBy.fullName}</span>
-                    {showSongCountTxt && <><span className="dot">{songCountTxt}</span></>}
-                    {showDurationTxt && <><span>, </span><span>{durationTxt}</span></>}
+                    <span>{songCountTxt}</span>
+                    <span>{durationTxt}</span>
                 </div>
             </div>
         </div >
