@@ -1,0 +1,30 @@
+.play-button {
+
+    display: inline-flex;
+
+    .btn-station-details {
+        @include green;
+        @include btn($type: animated, $circleSize: 48px);
+
+        &:active {
+            background-color: $buttonBgGreenPress;
+        }
+    }
+
+    .btn-station-preview {
+        @include green;
+        @include btn($type: animated, $circleSize: 32px);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 8px 0px;
+
+        &:active {
+            background-color: $buttonBgGreenPress;
+        }
+    
+    }
+    
+    .btn-song-preview {
+        @include transparent;
+        @include btn($size: sm);
+    }
+
+}

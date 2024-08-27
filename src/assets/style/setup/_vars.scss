@@ -34,11 +34,12 @@ $lightBgClrHighlight: #f0f0f0;
 $lightBgClrPress: #c7c7c7;
 
 // Sizes
+$smallBtnSize: 16px;
 $stdBtnSize: 32px;
 $bigBtnSize: 48px;
 $smallSvgSize: 16px;
 $stdSvgSize: 20px;
-$largeSvgSize: 32px;
+$largeSvgSize: 24px;
 
 // Spaces
 $panelGap: 8px;
@@ -47,6 +48,7 @@ $bigPadding: 8px 32px;
 $sectionPaddingBlock: 12px;
 $sectionPaddingInline: 8px;
 $sectionBorderRadius: 8px;
+$sectionHeaderPadding: 8px 16px 0 16px;
 $playerHeight: 72px;
 
 // Layout breakpoints

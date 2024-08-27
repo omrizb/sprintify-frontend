@@ -13,7 +13,7 @@ const initialState = {
     player: {
         songId: '',
         totalDuration: '',
-        elapsedDuration: '',
+        elapsedDuration: 0,
         isPlaying: false,
         volume: 100,
         action: '',
@@ -71,7 +71,7 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case SET_QUEUE:
-            newState = { ...state, queue: action.queue }
+            newState = { ...state, queue: [...action.queue] }
             break
         case ADD_TO_QUEUE:
             newState = {

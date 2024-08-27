@@ -105,6 +105,12 @@
     background-color: $buttonBgGreen;
 }
 
+@mixin transparent {
+    color: $primaryTxtClr;
+    fill: $primaryTxtClr;
+    background-color: transparent;
+}
+
 @mixin inside-out {
     background-color: white;
     // fill: $secondaryTxtClr;
@@ -134,6 +140,12 @@
     padding: $smallPadding;
     font-size: em(14px);
     font-weight: 300;
+
+    @if $size == sm {
+        width: $smallBtnSize;
+        height: $smallBtnSize;
+        border-radius: 0;;
+    }
 
     @if $size == big {
         height: $bigBtnSize;

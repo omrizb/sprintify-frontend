@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import { setPlayer, play, pause } from '../../store/actions/player.actions'
-
+import { play, pause } from '../../store/actions/player.actions'
 import { SvgButton } from '../SvgButton'
 
 export function PlayerMiddlePanel({ getPlayerState }) {
@@ -12,10 +11,8 @@ export function PlayerMiddlePanel({ getPlayerState }) {
         const playerState = getPlayerState()
         if (playerState !== 1) {
             play()
-            setPlayer({ isPlaying: true })
         } else {
             pause()
-            setPlayer({ isPlaying: false })
         }
     }
 
