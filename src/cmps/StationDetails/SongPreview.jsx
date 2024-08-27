@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function SongPreview({ song, index, viewMode }) {
 
     const {songName, artist, album, url, imgUrl, duration} = song
@@ -8,7 +10,9 @@ export function SongPreview({ song, index, viewMode }) {
             <div className="title-column">
                 <img src={imgUrl} alt="" />
                 <div className="text">
-                    <div>{songName}</div>
+                    <Link to={`/track/${song.songId}`}>
+                        <div>{songName}</div>
+                    </Link>
                     <div>{artist}</div>
                 </div>
             </div>
