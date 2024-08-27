@@ -1,9 +1,8 @@
 .station-preview {
     
     .list {
-        display: grid;
-        grid-auto-flow: column;
-        gap: 1em;
+        position: relative;
+        display: flex;
         align-items: center;
         justify-content: start;
         font: inherit;
@@ -16,19 +15,35 @@
         }
     
         .text {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 8px;
+
             text-transform: capitalize;
     
             .station-name{
-                color: white;
+                color: $primaryTxtClr;
             }
+
+            .play-button {
+                opacity: 0;
+            }
+
             div{
                 &:nth-child(2){
                     font-size: 14px;
                 }
             }
+
+            &:hover {
+                .play-button {
+                    opacity: 1;
+                }
+            }
         }
     
-        &.minimal{
+        &.minimal {
             background-color: $tintedBgClr;
         }
 

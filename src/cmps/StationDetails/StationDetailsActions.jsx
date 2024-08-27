@@ -86,13 +86,13 @@ export function StationDetailsActions({ stationMeta }) {
                     </div>
                 )}
 
-                {/* <div className="view-as">
+                <div className="view-as">
                     <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
                         List
                         <div className="icon"><SvgIcon iconName={"list"}    /> </div>
                     </div>
                     {showMenu && <DropDownMenu display={display} />}
-                </div> */}
+                </div>
             </div>
         </div>
     )

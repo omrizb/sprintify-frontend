@@ -6,6 +6,7 @@ import { StationIndex } from './pages/StationIndex.jsx'
 import { MainView } from './pages/MainView.jsx'
 import { Search } from './pages/Search.jsx'
 import { StationDetails } from './pages/StationDetails.jsx'
+import { SongDetails } from './pages/SongDetails.jsx'
 
 import './assets/style/main.scss'
 
@@ -21,6 +22,7 @@ export function App() {
                     <Route path="/" element={<StationIndex />}>
                         <Route index element={<MainView />} />
                         <Route path="/station/:id" element={<StationDetails />} />
+                        <Route path="/track/:id" element={<SongDetails />} />
                         <Route path="/search" element={<Search />} />
                     </Route>
                 </Routes>
