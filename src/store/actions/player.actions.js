@@ -1,6 +1,7 @@
-import { store } from '../store'
+import { stationService } from '../../services/station'
 
-import { SET_PLAYER, SET_ACTION, SET_VOLUME, SET_SONG_HISTORY, ADD_TO_SONG_HISTORY, SET_QUEUE, ADD_TO_QUEUE } from '../reducers/player.reducer'
+import { store } from '../store'
+import { SET_PLAYER, SET_ACTION, SET_VOLUME, SET_STATION_ID, SET_STATION_SONGS, MARK_STATION_SONG_AS_PLAYED, SET_SONG_HISTORY, ADD_TO_SONG_HISTORY, SET_QUEUE, ADD_TO_QUEUE } from '../reducers/player.reducer'
 
 export const playerActions = {
     PLAY: 'play',
@@ -11,8 +12,19 @@ export function setPlayer(playerProps) {
     store.dispatch({ type: SET_PLAYER, playerProps })
 }
 
-export function loadSong(songId) {
+export function loadSongToPlayer(songId) {
+    store.dispatch(getActionSetSong(songId))
+}
 
+export async function loadStationToPlayer(stationId, firstSongId) {
+    try {
+        const station = await stationService.getById(stationId)
+        store.dispatch(getActionSetSong(firstSongId))
+        store.dispatch({ type: SET_STATION_ID, stationId: station._id })
+        store.dispatch({ type: SET_STATION_SONGS, stationSongs: station.songs })
+    } catch (err) {
+        console.log('PlayerActions: Error in loadStationToPlayer', err)
+    }
 }
 
 export function play() {
@@ -25,4 +37,13 @@ export function pause() {
 
 export function setVolume(volume) {
     store.dispatch({ type: SET_VOLUME, volume })
+}
+
+export function setQueue(queue) {
+    store.dispatch({ type: SET_QUEUE, queue })
+}
+
+// Command Creators
+export function getActionSetSong(songId) {
+    return { type: SET_PLAYER, playerProps: { songId } }
 }
