@@ -12,16 +12,20 @@ export function setPlayer(playerProps) {
     store.dispatch({ type: SET_PLAYER, playerProps })
 }
 
-async function loadStationToPlayer(stationId) {
+export function loadSongToPlayer(songId) {
+    store.dispatch(getActionSetSong(songId))
+}
+
+export async function loadStationToPlayer(stationId, firstSongId) {
     try {
         const station = await stationService.getById(stationId)
-        store.dispatch({ type: SET_STATION_ID, stationId: station.stationId })
+        store.dispatch(getActionSetSong(firstSongId))
+        store.dispatch({ type: SET_STATION_ID, stationId: station._id })
         store.dispatch({ type: SET_STATION_SONGS, stationSongs: station.songs })
     } catch (err) {
         console.log('PlayerActions: Error in loadStationToPlayer', err)
     }
 }
-
 
 export function play() {
     store.dispatch({ type: SET_ACTION, action: playerActions.PLAY })
@@ -35,8 +39,11 @@ export function setVolume(volume) {
     store.dispatch({ type: SET_VOLUME, volume })
 }
 
-export function setQueue(volume) {
-    store.dispatch({ type: SET_VOLUME, volume })
+export function setQueue(queue) {
+    store.dispatch({ type: SET_QUEUE, queue })
 }
 
-store.dispatch({ type: SET_QUEUE, queue: [] })
+// Command Creators
+export function getActionSetSong(songId) {
+    return { type: SET_PLAYER, playerProps: { songId } }
+}
