@@ -3,9 +3,9 @@ export function StationPreview({ station, style }) {
 
     return (
 
-        <div>
+        <div className="station-preview">
             {(style === 'leftSide') &&
-                <article className="station-preview">
+                <article className="list">
                     <img src={station.stationImgUrl} alt="" />
                         <section className="text">
                             <div className="station-name">{station.name}</div>
@@ -14,7 +14,7 @@ export function StationPreview({ station, style }) {
                 </article>}
 
             {(style === 'minimal') &&
-                <article className="station-preview minimal">
+                <article className="list minimal">
                     <img src={station.stationImgUrl} alt="" />
                         <section className="text">
                             <div className="station-name">{station.name}</div>
@@ -22,7 +22,7 @@ export function StationPreview({ station, style }) {
                 </article>}
 
             {(style === 'card') &&
-                <article className="station-preview">
+                <article className="station-preview card">
                     <img src={station.stationImgUrl} alt="" />
                         <section className="text">
                             <div className="station-name">{station.name}</div>
