@@ -9,7 +9,7 @@ export function SongList({ songs }) {
                 <div>#</div>
                 <div>Title</div>
                 <div>Album</div>
-                <div><SvgIcon iconName={"duration"} /></div>
+                <div className="duration"><SvgIcon iconName={"duration"} /></div>
 
             </header>
             <ul>
