@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
+import { utilService } from '../../services/util.service.js'
 
 export function SongPreview({ song, index, viewMode }) {
 
-    const {songName, artist, album, url, imgUrl, duration} = song
+    const { songName, artist, album, url, imgUrl, duration } = song
+    const totalDuration = song.duration.hours * 3600 + song.duration.minutes * 60 + song.duration.seconds
+
     //switch case to various displays: main-view, now-playing, song-list
     return (
         <div className="song-preview list-style">
@@ -17,7 +20,7 @@ export function SongPreview({ song, index, viewMode }) {
                 </div>
             </div>
             <div>{album}</div>
-            <div>{`${duration.hours}: ${duration.minutes}: ${duration.seconds}`}</div>
+            <div>{utilService.getTimeStr(totalDuration)}</div>
         </div>
     )
 }
