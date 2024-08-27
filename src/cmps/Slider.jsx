@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function Slider({ value = 50, min = 0, max = 100, onChange }) {
+export function Slider({ value = 50, min = 0, max = 100, setOnMouseup = false, onChange }) {
 
     const nonActiveBarRef = useRef(null)
     const pointerRef = useRef(null)
@@ -34,16 +34,21 @@ export function Slider({ value = 50, min = 0, max = 100, onChange }) {
     }, [isDragging])
 
     useEffect(() => {
-        if (onChange) onChange(sliderValue)
+        if (!onChange) return
+
+        if (!setOnMouseup) {
+            onChange(sliderValue)
+        }
     }, [sliderValue])
 
     function onSetPointerOffset(value) {
         const newOffset = sliderWidth * (value - min) / (max - min)
+
         if (newOffset > sliderWidth) {
             setSliderValue(max)
             setPointerOffset(sliderWidth)
         }
-        else if (newOffset < 0) {
+        else if (newOffset < 0 || isNaN(newOffset)) {
             setSliderValue(min)
             setPointerOffset(0)
         }
@@ -75,6 +80,12 @@ export function Slider({ value = 50, min = 0, max = 100, onChange }) {
     function handleMouseUp(ev) {
         ev.preventDefault()
         setIsDragging(false)
+        if (setOnMouseup) {
+            const finalValue = calcNewValue(ev)
+            onSetPointerOffset(finalValue)
+            setSliderValue(finalValue)
+            onChange(finalValue)
+        }
     }
 
     return (
