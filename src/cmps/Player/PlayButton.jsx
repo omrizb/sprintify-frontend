@@ -11,9 +11,25 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
     const [isPlaying, setIsPlaying] = useState(false)
 
     useEffect(() => {
-        if (type === 'songPreview' && player.songId === songId) setIsPlaying(player.isPlaying)
-        else if (playerStationId === stationId) setIsPlaying(player.isPlaying)
+        if (type === 'songPreview' && player.songId === songId) {
+            setIsPlaying(player.isPlaying)
+        }
+        else if (playerStationId === stationId) {
+            setIsPlaying(player.isPlaying)
+        }
     }, [player.isPlaying])
+
+    useEffect(() => {
+        if (type === 'songPreview' && player.songId !== songId) {
+            setIsPlaying(false)
+        }
+    }, [player.songId])
+
+    useEffect(() => {
+        if (playerStationId !== stationId) {
+            setIsPlaying(false)
+        }
+    }, [playerStationId])
 
     function handleClick() {
         if (playerStationId !== stationId) {
@@ -47,6 +63,10 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
         btnClass = 'btn-station-preview'
         svgClass = 'svg-normal'
         tooltipTxt = stationName
+    } else if (type === 'stationPreviewLight') {
+        btnClass = 'btn-station-preview-light'
+        svgClass = 'svg-normal'
+        tooltipTxt = stationName
     } else if (type === 'songPreview') {
         btnClass = 'btn-song-preview'
         svgClass = 'svg-small'
@@ -54,7 +74,7 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
     }
 
     return (
-        <div className="play-button">
+        <div key={playerStationId} className="play-button">
             <SvgButton
                 btnClass={btnClass}
                 svgIcon={isPlaying ? 'playerPause' : 'playerPlay'}
