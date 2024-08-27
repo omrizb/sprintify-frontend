@@ -10,8 +10,21 @@
         width: 100%;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
+}
+
+.station-action-bar-container{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
 }
     
 .action-bar-btn{
         background-color: transparent;
+}
+
+.view-as{
+        display: flex;  
+        flex-direction: row;   
 }
