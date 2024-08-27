@@ -9,13 +9,20 @@
     &:hover{
         cursor: pointer;
     }
+
+    a {
+        justify-self: end;
+    }
  
     .home{
             height: 50px;
             width: 50px;
             border-radius: 50%;
             background-color: rgb(31, 31, 31);
-            justify-self: end;
+
+            &:hover{
+                background-color: rgba(179, 179, 179, 0.5);
+            }
         }
 
     form {
