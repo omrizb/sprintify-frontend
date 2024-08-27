@@ -13,7 +13,7 @@ const currStation = {
     isLikedSongs: false,
     // isLikedSongs: true,
     tags: ['Happy', 'Chill', 'Upbeat'],
-    imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
+    stationImgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
     description: 'lorem molestie ut euismod ad quis mi ultricies nisl cursus suspendisse dui tempor sit suscipit metus etiam euismod tortor sagittis habitant lorem molestie ut euismod ad quis mi ultricies nisl cursus suspendisse dui tempor sit suscipit metus etiam euismod tortor sagittis habitant',
     isOwnedByUser: true,
     createdBy: {
