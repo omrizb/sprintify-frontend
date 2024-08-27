@@ -14,6 +14,7 @@ export const stationService = {
     getRecentlyPlayed,
     getTopMixes,
     getMadeForYou,
+    getSong
 }
 
 // DEBUG:
@@ -21,9 +22,9 @@ export const stationService = {
 
 _createStations()
 
-async function query(filterBy) {//Could be either filterBy or filterByMain
+async function query(filterBy = { txt: '', stationType: '', playListCreator: ''}) {//Could be either filterBy or filterByMain
 
-    console.log('filterBy from service:', filterBy)
+    // console.log('filterBy from service:', filterBy)
     var stations = await storageService.query(STORAGE_KEY)
     // const { txt, stationType, playListCreator, sortField, sortDir } = filterBy
 
@@ -127,6 +128,15 @@ async function getMadeForYou(userId = 'bob', size = 4){
     //TODO write algorithm for fetching top mixes per user 
     const stations = await query({stationType: 'playlist'})
     return utilService.getRandomItems(stations, size)
+}
+
+async function getSong(songId){
+    const stations = await query()
+   
+    const station = stations.find(station => station.songs.find(song => song.songId === songId))
+    const song = station.songs.find(song => song.songId === songId)
+    
+    return song
 }
 
 
