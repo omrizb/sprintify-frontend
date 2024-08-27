@@ -6,7 +6,7 @@ export function StationDetailsHeader({ station, showSongCountTxt, songCountTxt, 
     return (
         <div className="station-details-header">
             <div className="station-cover-container">
-                <img className="station-cover" src={station.imgUrl} alt="Station Cover" />
+                <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />
                 <div className="overlay">
                     <div className="overlay-content">
                         <button className="editImage icon btn-medium">
