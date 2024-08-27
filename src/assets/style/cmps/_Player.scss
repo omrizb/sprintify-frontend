@@ -5,23 +5,43 @@
     height: $playerHeight;
 
     .player-left-panel {
-        display: flex;
-        align-items: center;
+        @include flex;
         width: 100%;
     }
 
     .player-middle-panel {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        @include flex($direction: column, $gap: 16px);
         width: 100%;
+
+        .actions {
+            @include flex($gap: 16px);
+        }
+
+        .duration-bar {
+            display: grid;
+            grid-template-columns: 1fr minmax(200px, 5fr) 1fr;
+            gap: 8px;
+            width: 100%;
+
+            font-size: $textSizeSmaller-1;
+            color: $mediumTxtClr;
+
+            .elapsed-time {
+                place-self: center end;
+            }
+
+            .slider {
+                place-self: center center;
+            }
+
+            .total-time {
+                place-self: center start;
+            }
+        }
     }
 
     .player-right-panel {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        @include flex($justify: flex-end);
         width: 100%;
     }
 
