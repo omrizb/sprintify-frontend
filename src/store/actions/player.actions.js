@@ -1,4 +1,4 @@
-import { stationService } from '../../services/station'
+import { stationService } from '../../services/station/station.service.local'
 
 import { store } from '../store'
 import { SET_PLAYER, SET_ACTION, SET_VOLUME, SET_STATION_ID, SET_STATION_SONGS, MARK_STATION_SONG_AS_PLAYED, SET_SONG_HISTORY, ADD_TO_SONG_HISTORY, SET_QUEUE, ADD_TO_QUEUE } from '../reducers/player.reducer'
