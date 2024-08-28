@@ -23,26 +23,10 @@ export function SongDetails() {
 
     async function loadSong(songId) {
         try {
-            const songFromYT = await youtubeService.getVideoById(songId)
-            const { snippet, contentDetails } = songFromYT
-            const duration = youtubeService.parseISODuration(contentDetails.duration)
-            console.log('Parsed Duration:', duration)
-
-            const song = {
-                songId: songId,
-                songName: snippet.title,
-                description: snippet.description,
-                imgUrl: snippet.thumbnails.high.url,
-                duration,
-                artist: snippet.channelTitle,
-                publishedAt: snippet.publishedAt,
-            }
-
+            const song = await youtubeService.getSongById(songId)
             setSongYT(song)
-            console.log('songFromYT:', songFromYT)
-
         } catch (err) {
-            console.error(`Couldn't load song from songdetails`, err)
+            console.error(`Couldn't load song from song details`, err)
         }
     }
 

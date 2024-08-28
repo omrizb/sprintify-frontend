@@ -3,6 +3,7 @@ export const SET_ACTION = 'SET_ACTION'
 export const SET_VOLUME = 'SET_VOLUME'
 export const SET_STATION_SONGS = 'SET_STATION_SONGS'
 export const SET_STATION_ID = 'SET_STATION_ID'
+export const SET_STATION_NAME = 'SET_STATION_NAME'
 export const MARK_STATION_SONG_AS_PLAYED = 'MARK_STATION_SONG_AS_PLAYED'
 export const SET_SONG_HISTORY = 'SET_SONG_HISTORY'
 export const ADD_TO_SONG_HISTORY = 'ADD_TO_SONG_HISTORY'
@@ -20,6 +21,7 @@ const initialState = {
         actionParam: ''
     },
     stationId: '',
+    stationName: '',
     stationSongs: [],
     playedSongsHistory: [],
     queue: [],
@@ -53,6 +55,9 @@ export function playerReducer(state = initialState, action = {}) {
             break
         case SET_STATION_ID:
             newState = { ...state, stationId: action.stationId }
+            break
+        case SET_STATION_NAME:
+            newState = { ...state, stationName: action.stationName }
             break
         case SET_STATION_SONGS:
             newState = {

@@ -5,11 +5,12 @@ const VITE_YOUTUBE_EINAT_API_KEY = import.meta.env.VITE_YOUTUBE_EINAT_API_KEY
 
 import axios from 'axios'
 import { utilService } from './util.service.js'
+import getArtistTitle from 'get-artist-title'
 
 export const youtubeService = {
     getVideos,
     getTopVideo,
-    getVideoById,
+    getSongById,
     parseISODuration
 }
 
@@ -33,12 +34,7 @@ async function getVideos(value, maxResults = 5) {
             }
         })
 
-        return videos.data.items.map(video => ({
-            videoId: video.id.videoId,
-            title: video.snippet.title,
-            url: `https://www.youtube.com/embed/${video.id.videoId}`,
-            imgUrl: video.snippet.thumbnails.high.url,
-        }))
+        return videos.data.items.map(video => extractSongData(video, true))
     } catch (err) {
         console.log('Error:', err)
     }
@@ -67,26 +63,48 @@ async function getTopVideo(value) {
     }
 }
 
-async function getVideoById(videoId) {
+async function getSongById(id) {
     try {
         const apiKey = VITE_YOUTUBE_EINAT_API_KEY
-        const video = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+        const search = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: 'snippet,contentDetails',
-                id: videoId,
+                id,
                 key: apiKey,
             }
         })
 
-        // Check if any video is returned
-        if (video.data.items.length > 0) {
-            return video.data.items[0] // Return the first video information
+        if (search.data.items.length > 0) {
+            const song = search.data.items[0]
+            return {
+                ...extractSongData(song),
+                duration: parseISODuration(song.contentDetails.duration),
+            }
         } else {
-            console.log('No video found with this ID.')
+            console.log('No song found with this ID:', id)
             return null
         }
     } catch (error) {
-        console.error('Error fetching video details:', error)
+        console.log('Error fetching song details:', error)
+    }
+}
+
+function extractSongData(song, isSearchApi = false) {
+    const defaultArtist = (isSearchApi) ? song.snippet.channelTitle : song.snippet.tags[0]
+    const songId = (isSearchApi) ? song.id.videoId : song.id
+
+    let [artist, songName] = getArtistTitle(song.snippet.title, {
+        defaultArtist
+    })
+
+    return {
+        songId,
+        songName,
+        artist,
+        description: song.snippet.description,
+        url: `https://www.youtube.com/embed/${song.id}`,
+        imgUrl: song.snippet.thumbnails.high.url,
+        publishedAt: song.snippet.publishedAt
     }
 }
 
@@ -104,7 +122,6 @@ function parseISODuration(isoDuration) {
     const minutes = matches[2] ? parseInt(matches[2]) : 0
     const seconds = matches[3] ? parseInt(matches[3]) : 0
 
-    console.log('Parsed Duration:', hours, minutes, seconds)
     return { hours, minutes, seconds }
 }
 
