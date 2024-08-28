@@ -9,7 +9,8 @@ import { utilService } from './util.service.js'
 export const youtubeService = {
     getVideos,
     getTopVideo,
-    getVideoById
+    getVideoById,
+    parseISODuration
 }
 
 
@@ -90,12 +91,20 @@ async function getVideoById(videoId) {
 }
 
 
-
-
 function parseISODuration(isoDuration) {
-    const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
-    const hours = (match[1] ? parseInt(match[1]) : 0)
-    const minutes = (match[2] ? parseInt(match[2]) : 0)
-    const seconds = (match[3] ? parseInt(match[3]) : 0)
-    return { hours, minutes, seconds }
+    debugger
+    // Use a regular expression to extract hours, minutes, and seconds
+    const regex = /P(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/
+    const matches = isoDuration.match(regex)
+
+    if (!matches) {
+        return 'Invalid duration'
+    }
+
+    const hours = matches[1] ? parseInt(matches[1]) : 0
+    const minutes = matches[2] ? parseInt(matches[2]) : 0
+    const seconds = matches[3] ? parseInt(matches[3]) : 0
+
+    console.log(hours, minutes, seconds)
 }
+
