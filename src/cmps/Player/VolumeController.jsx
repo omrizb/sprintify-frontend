@@ -9,7 +9,7 @@ export function VolumeController() {
 
     const player = useSelector(state => state.playerModule.player)
 
-    const [volumeIcon, setVolumeIcon] = useState('playerVolumeMax')
+    const [volumeIcon, setVolumeIcon] = useState('playerVolumeHigh')
     const [isMute, setIsMute] = useState(false)
 
     function handleVolumeChange(volume) {

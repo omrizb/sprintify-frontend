@@ -33,6 +33,14 @@
     }
 }
 
+@mixin flex($justify: center, $align: center, $direction: row, $gap: 0) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    gap: $gap;
+}
+
 //aspect ratio mixin
 @mixin aspect-ratio($width: 1, $height: 1) {
     position: relative;

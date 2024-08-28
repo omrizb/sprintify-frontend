@@ -11,6 +11,21 @@ export function Player() {
 
     const player = useSelector(state => state.playerModule.player)
     const [ytPlayer, setYtPlayer] = useState(null)
+    const [intervalId, setIntervalId] = useState(null)
+
+    useEffect(() => {
+        if (!ytPlayer) return
+        if (intervalId) clearInterval(intervalId)
+        if (!player.isPlaying) return
+
+        const id = setInterval(() => {
+            const elapsedDuration = Math.floor(ytPlayer.getCurrentTime())
+            setPlayer({ elapsedDuration })
+        }, 113)
+        setIntervalId(id)
+
+        return () => clearInterval(id)
+    }, [ytPlayer, player.isPlaying])
 
     useEffect(() => {
         if (!ytPlayer) return
@@ -28,8 +43,11 @@ export function Player() {
                 ytPlayer.pauseVideo()
                 setPlayer({ isPlaying: false })
                 break
+            case playerActions.GOTO:
+                ytPlayer.seekTo(player.actionParam, true)
+                break
         }
-    }, [player.action])
+    }, [player.action, player.actionParam])
 
     const opts = {
         height: '0',
