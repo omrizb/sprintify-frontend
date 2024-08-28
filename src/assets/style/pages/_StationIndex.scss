@@ -24,6 +24,7 @@
     .right-sidebar-container {
         @include section;
         grid-area: right-sidebar;
+        width: 280px;
         overflow: auto;
     }
 

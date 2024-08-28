@@ -73,7 +73,7 @@ function getTimeStr(timeInSeconds) {
     const minutes = Math.floor((timeInSeconds % 3600) / 60)
     const seconds = timeInSeconds % 60
 
-    const timeInMinutes = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    const timeInMinutes = `${minutes.toString().padStart(1, '0')}:${seconds.toString().padStart(2, '0')}`
     return (timeInSeconds < 3600) ? timeInMinutes : `${hours.toString().padStart(2, '0')}:${timeInMinutes}`
 }
 
