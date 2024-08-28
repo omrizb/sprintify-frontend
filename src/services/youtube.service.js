@@ -90,21 +90,22 @@ async function getVideoById(videoId) {
     }
 }
 
-
 function parseISODuration(isoDuration) {
-    debugger
-    // Use a regular expression to extract hours, minutes, and seconds
+
     const regex = /P(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/
     const matches = isoDuration.match(regex)
 
     if (!matches) {
-        return 'Invalid duration'
+        console.error('Invalid duration:', isoDuration)
+        return { hours: 0, minutes: 0, seconds: 0 }
     }
 
     const hours = matches[1] ? parseInt(matches[1]) : 0
     const minutes = matches[2] ? parseInt(matches[2]) : 0
     const seconds = matches[3] ? parseInt(matches[3]) : 0
 
-    console.log(hours, minutes, seconds)
+    console.log('Parsed Duration:', hours, minutes, seconds)
+    return { hours, minutes, seconds }
 }
+
 

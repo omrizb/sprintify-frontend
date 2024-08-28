@@ -9,15 +9,16 @@ import { SongDetailsActions } from '../cmps/SongDetails/SongDetailsActions.jsx'
 import { LongTxt } from '../cmps/LongTxt.jsx'
 
 
-
 export function SongDetails() {
 
     const { id } = useParams()
     const [songYT, setSongYT] = useState({})
+    const [bgColor, setBgColor] = useState(utilService.getRandomColor())
+
 
     useEffect(() => {
+        setBgColor(utilService.getRandomColor())
         loadSong(id)
-        return console.log(songYT)
     }, [])
 
     async function loadSong(songId) {
@@ -25,14 +26,14 @@ export function SongDetails() {
             const songFromYT = await youtubeService.getVideoById(songId)
             const { snippet, contentDetails } = songFromYT
             const duration = youtubeService.parseISODuration(contentDetails.duration)
-            console.log('duration:', duration)
+            console.log('Parsed Duration:', duration)
 
             const song = {
                 songId: songId,
                 songName: snippet.title,
                 description: snippet.description,
                 imgUrl: snippet.thumbnails.high.url,
-                // duration,
+                duration,
                 artist: snippet.channelTitle,
                 publishedAt: snippet.publishedAt,
             }
@@ -44,8 +45,13 @@ export function SongDetails() {
             console.error(`Couldn't load song from songdetails`, err)
         }
     }
-    const songDuration = (songYT.duration.hours * 3600) + (songYT.duration.minutes * 60) + songYT.duration.seconds
-    const songDurationTxt = utilService.getTimeStr(songDuration)
+
+    const songDuration =
+        songYT.duration
+            ? (songYT.duration.hours * 3600) + (songYT.duration.minutes * 60) + songYT.duration.seconds
+            : 0;
+
+    const songDurationTxt = utilService.getTimeStr(songDuration);
 
     const lyrics =
         `I used to rule the world
@@ -53,52 +59,11 @@ Seas would rise when I gave the word
 Now in the morning, I sleep alone
 Sweep the streets I used to own
 I used to roll the dice
-Feel the fear in my enemy's eyes
-Listen as the crowd would sing
-Now the old king is dead, long live the king
-One minute, I held the key
-Next the walls were closed on me
-And I discovered that my castles stand
-Upon pillars of salt and pillars of sand
-I hear Jerusalem bells a-ringin'
-Roman Cavalry choirs are singin'
-Be my mirror, my sword and shield
-My missionaries in a foreign field
-For some reason, I can't explain
-Once you'd gone, there was never, never an honest word
-And that was when I ruled the world
-It was a wicked and wild wind
-Blew down the doors to let me in
-Shattered windows and the sound of drums
-People couldn't believe what I'd become
-Revolutionaries wait
-For my head on a silver plate
-Just a puppet on a lonely string
-Aw, who would ever wanna be king?
-I hear Jerusalem bells a-ringin'
-Roman Cavalry choirs are singing
-Be my mirror, my sword and shield
-My missionaries in a foreign field
-For some reason, I can't explain
-I know Saint Peter won't call my name
-Never an honest word
-But that was when I ruled the world
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-I hear Jerusalem bells a-ringin'
-Roman Cavalry choirs are singin'
-Be my mirror, my sword and shield
-My missionaries in a foreign field
-For some reason I can't explain
-I know Saint Peter won't call my name
-Never an honest word
-But that was when I ruled the world`
+Feel the fear in my enemy's eyes`
 
     return (
-        <div className="song-details">
+        <div className="song-details"
+            style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}        >
             <SongDetailsHeader
                 song={songYT}
                 songDurationTxt={songDurationTxt}

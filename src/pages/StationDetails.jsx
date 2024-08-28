@@ -7,9 +7,9 @@ import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActi
 import { StationMoreDetails } from '../cmps/StationDetails/StationMoreDetails.jsx'
 import { SongList } from '../cmps/StationDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
+import { utilService } from '../services/util.service.js'
 
 import { loadStation } from '../store/actions/station.actions.js'
-
 
 
 export function StationDetails() {
@@ -29,8 +29,10 @@ export function StationDetails() {
     const showDurationTxt = station.type === 'playlist' && !isEmptyStation && !station.isLikedSongs
     const songCountTxt = formatSongCountTxt()
     const durationTxt = formatDurationTxt()
+    const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
     useEffect(() => {
+        setBgColor(utilService.getRandomColor())
         loadStation(id)
     }, [id])
 
@@ -70,7 +72,9 @@ export function StationDetails() {
 
 
     return (
-        <div className="station-details">
+        <div className="station-details"
+            style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
+        >
             <StationDetailsHeader
                 station={station}
                 songCountTxt={songCountTxt}
