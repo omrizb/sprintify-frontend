@@ -42,6 +42,7 @@ export function StationDetails() {
             'showPlay': station.type === 'playlist' && !isEmptyStation,
             'showAddRemove': station.type === 'playlist' && !isOwnedByUser,
             'showFollowUnfollow': station.type === 'podcast',
+            'showMore': !station.isLikedSongs,
             'showView': station.type === 'playlist'
         }
     }
@@ -75,7 +76,10 @@ export function StationDetails() {
                 songCountTxt={songCountTxt}
                 durationTxt={durationTxt}
             />
-            <StationDetailsActions stationMeta={stationMeta} />
+            <StationDetailsActions
+                station={station}
+                stationMeta={stationMeta}
+            />
 
             <SongList songs={station.songs} />
 

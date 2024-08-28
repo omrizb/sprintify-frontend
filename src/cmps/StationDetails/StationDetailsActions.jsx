@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { SvgIcon } from "../SvgIcon"
+import { SvgButton } from "../SvgButton.jsx"
 import { changeViewMode } from '../../services/event-bus.service.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 
-export function StationDetailsActions({ stationMeta }) {
+export function StationDetailsActions({ station, stationMeta }) {
 
     const [showMenu, setShowMenu] = useState(false)
 
@@ -28,6 +29,7 @@ export function StationDetailsActions({ stationMeta }) {
         showMore,
         showView,
     } = stationMeta.stationActionsBar
+    console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
 
     const handleViewModeClick = (mode) => {
         changeViewMode(mode)
@@ -47,12 +49,18 @@ export function StationDetailsActions({ stationMeta }) {
 
                     {showAddRemove && (
                         <>
-                            <button className="action-bar-btn removePlaylist icon btn-medium">
-                                <SvgIcon iconName={"removePlaylist"} />
-                            </button>
-                            <button className="action-bar-btn addPlaylist icon btn-medium">
-                                <SvgIcon iconName={"addPlaylist"} />
-                            </button>
+                            <SvgButton
+                                btnClass={"action-bar-btn icon"}
+                                svgIcon={"removePlaylist"}
+                                svgClass={"svg-big"}
+                                tooltipTxt={`Remove from Your Library`}
+                            />
+                            <SvgButton
+                                btnClass={"action-bar-btn icon"}
+                                svgIcon={"addPlaylist"}
+                                svgClass={"svg-big"}
+                                tooltipTxt={`Save to Your Library`}
+                            />
                         </>
                     )}
 
@@ -64,9 +72,12 @@ export function StationDetailsActions({ stationMeta }) {
                     )}
 
                     {showMore && (
-                        <button className="action-bar-btn dots icon btn-medium">
-                            <SvgIcon iconName={"dots"} />
-                        </button>
+                        <SvgButton
+                            btnClass={"action-bar-btn icon"}
+                            svgIcon={"dots"}
+                            svgClass={"svg-big"}
+                            tooltipTxt={`More options for ${station.name}`}
+                        />
                     )}
                 </div>
                 <div className="view-as">
