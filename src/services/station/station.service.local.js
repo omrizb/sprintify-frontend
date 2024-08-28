@@ -13,8 +13,7 @@ export const stationService = {
     addStationMsg,
     getRecentlyPlayed,
     getTopMixes,
-    getMadeForYou,
-    getSong
+    getMadeForYou
 }
 
 // DEBUG:
@@ -129,16 +128,6 @@ async function getMadeForYou(userId = 'bob', size = 4){
     const stations = await query({stationType: 'playlist'})
     return utilService.getRandomItems(stations, size)
 }
-
-async function getSong(songId){
-    const stations = await query()
-   
-    const station = stations.find(station => station.songs.find(song => song.songId === songId))
-    const song = station.songs.find(song => song.songId === songId)
-    
-    return song
-}
-
 
 function _createStations() {
     let currStations = utilService.loadFromStorage(STORAGE_KEY)
