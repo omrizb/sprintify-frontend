@@ -13,19 +13,24 @@ export function LeftSideBarHeader() {
                 Your Library
             </div>
             
-            <button className="plus icon btn-medium"
-                    onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
-                <SvgIcon iconName={"plus"} /> 
-            </button>
+            <div className="add-playlist">
+                <button className="plus icon btn-medium"
+                        onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
+                    <SvgIcon iconName={"plus"} /> 
+                </button>
 
-            {showMenu &&
-                <ul className= "drop-down-menu" >
-                    <li>
-                        <div><SvgIcon iconName={"library"}    /></div>
-                        <div>Create a new playlist</div>
-                    </li>
-                </ul>
-            }
+                {showMenu &&
+                    <ul className= "drop-down-menu" >
+                        <li>
+                            <div><SvgIcon iconName={"library"}    /></div>
+                            <div>Create a new playlist</div>
+                        </li>
+                    </ul>
+                }
+            </div>
+            
+
+            
 
         </div>
     )
