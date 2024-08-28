@@ -5,11 +5,12 @@ const VITE_YOUTUBE_EINAT_API_KEY = import.meta.env.VITE_YOUTUBE_EINAT_API_KEY
 
 import axios from 'axios'
 import { utilService } from './util.service.js'
+import getArtistTitle from 'get-artist-title'
 
 export const youtubeService = {
     getVideos,
     getTopVideo,
-    getVideoById,
+    getSongById,
     parseISODuration
 }
 
@@ -67,26 +68,38 @@ async function getTopVideo(value) {
     }
 }
 
-async function getVideoById(videoId) {
+async function getSongById(id) {
     try {
         const apiKey = VITE_YOUTUBE_EINAT_API_KEY
-        const video = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+        const search = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: 'snippet,contentDetails',
-                id: videoId,
+                id,
                 key: apiKey,
             }
         })
 
-        // Check if any video is returned
-        if (video.data.items.length > 0) {
-            return video.data.items[0] // Return the first video information
+        if (search.data.items.length > 0) {
+            const song = search.data.items[0]
+            let [artist, songName] = getArtistTitle(song.snippet.title, {
+                defaultArtist: song.snippet.channelTitle
+            })
+            return {
+                songId: song.id,
+                songName,
+                artist,
+                description: song.snippet.description,
+                duration: parseISODuration(song.contentDetails.duration),
+                url: `https://www.youtube.com/embed/${song.id}`,
+                imgUrl: song.snippet.thumbnails.high.url,
+                publishedAt: song.snippet.publishedAt
+            }
         } else {
-            console.log('No video found with this ID.')
+            console.log('No song found with this ID:', id)
             return null
         }
     } catch (error) {
-        console.error('Error fetching video details:', error)
+        console.log('Error fetching song details:', error)
     }
 }
 
@@ -104,7 +117,6 @@ function parseISODuration(isoDuration) {
     const minutes = matches[2] ? parseInt(matches[2]) : 0
     const seconds = matches[3] ? parseInt(matches[3]) : 0
 
-    console.log('Parsed Duration:', hours, minutes, seconds)
     return { hours, minutes, seconds }
 }
 
