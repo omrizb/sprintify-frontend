@@ -1,16 +1,25 @@
 const YOUTUBE_DATA_API_KEYS = JSON.parse(import.meta.env.VITE_YOUTUBE_DATA_API_KEYS)
+const VITE_YOUTUBE_DARR_API_KEY = import.meta.env.VITE_YOUTUBE_DARR_API_KEY
+// console.log(import.meta.env.VITE_TEST_VARIABLE)
 
 import axios from 'axios'
 import { utilService } from './util.service.js'
 
 export const youtubeService = {
     getVideos,
-    getTopVideo
+    getTopVideo,
+    getVideoById
 }
+
+
+// for debugging from console
+window.youtubeService = youtubeService
 
 async function getVideos(value, maxResults = 5) {
     try {
-        const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        // const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        const apiKey = VITE_YOUTUBE_DARR_API_KEY
+        
         const videos = await axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
                 part: 'snippet',
@@ -55,6 +64,32 @@ async function getTopVideo(value) {
         console.log('Error:', err)
     }
 }
+
+async function getVideoById(videoId) {
+    try {
+        const apiKey = VITE_YOUTUBE_DARR_API_KEY
+        const video = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+                part: 'snippet,contentDetails',  
+                id: videoId,
+                key: apiKey,
+            }
+        })
+
+        // Check if any video is returned
+        if (video.data.items.length > 0) {
+            return video.data.items[0] // Return the first video information
+        } else {
+            console.log('No video found with this ID.')
+            return null
+        }
+    } catch (error) {
+        console.error('Error fetching video details:', error)
+    }
+}
+
+
+
 
 function parseISODuration(isoDuration) {
     const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
