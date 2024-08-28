@@ -15,7 +15,7 @@ export function SongList({ songs }) {
             <ul>
                 {songs.map((song, index) =>
                     <li key={song.songId} >
-                        <SongPreview song={song} index={index + 1} style={'list'} />
+                        <SongPreview song={song} index={index + 1} style={'list-style'} />
                     </li>)
                 }
             </ul>
