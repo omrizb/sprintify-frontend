@@ -5,6 +5,7 @@
         column-gap: 0.5em;
         color: $secondaryTxtClr;
         font: inherit;
+        padding: 16px;
         
     }
 
@@ -22,7 +23,7 @@
             
         }
 
-        i {
+        .duration {
             justify-self: start;
         }
 
@@ -35,6 +36,7 @@
         &:hover {
             cursor: pointer;
             background-color: rgba(179, 179, 179, 0.2);
+            border-radius: 4px;
         }
     }
 }

@@ -1,0 +1,52 @@
+.song-details {
+    // background: linear-gradient(to bottom, pink 0%, $sectionBgClr 30%, $sectionBgClr 100%);
+    font-family: inherit;
+}
+
+.artist-container {
+
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 16px;
+
+    &.list {
+        position: relative;
+        gap: 16px;
+        height: 80px;
+        padding: 8px;
+        font-weight: 300;
+        text-transform: capitalize;
+
+        .image-container {
+            position: relative;
+            
+            img {
+                height: 80px;
+                border-radius: 4px;
+            }
+        }
+
+        .text {
+            .type {
+                font-size: $textSizeBase;
+                color: $primaryTxtClr;
+            }
+
+            .name {
+                font-size: $textSizeSmaller-1;
+            }
+        }
+
+        &:hover .name {
+            text-decoration: underline; 
+       }
+    }
+
+}
+.artist-container:hover {
+    cursor: pointer; 
+    background-color: $buttonDarkBgClr;
+    border-radius: 4px;
+}

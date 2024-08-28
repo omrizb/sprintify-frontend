@@ -7,45 +7,46 @@ import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActi
 import { StationMoreDetails } from '../cmps/StationDetails/StationMoreDetails.jsx'
 import { SongList } from '../cmps/StationDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
+import { utilService } from '../services/util.service.js'
 
 import { loadStation } from '../store/actions/station.actions.js'
-
 
 
 export function StationDetails() {
 
     const { id } = useParams()
-    
+
     const station = useSelector(storeState => storeState.stationModule.station)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
     const [viewMode, setViewMode] = useState('list') // Default view mode
-    
+
     //stationMeta
     const isEmptyStation = station.songs.length === 0
     const isOwnedByUser = station.createdBy.id === loggedinUser._id
     //station-header
     const showSongCountTxt = station.type === 'playlist' && !isEmptyStation
-    const showDurationTxt = station.type === 'playlist' && !station.isLikedSongs
+    const showDurationTxt = station.type === 'playlist' && !isEmptyStation && !station.isLikedSongs
     const songCountTxt = formatSongCountTxt()
     const durationTxt = formatDurationTxt()
+    const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
     useEffect(() => {
+        setBgColor(utilService.getRandomColor())
         loadStation(id)
     }, [id])
 
-    
+
     const stationMeta = {
         isEmptyStation: isEmptyStation,
         isOwnedByUser: isOwnedByUser,
-
-        //station-action-bar
-        showPlay: station.type === 'playlist' && !isEmptyStation,
-        showAddRemove: station.type === 'playlist' && !isOwnedByUser,
-        showFollowUnfollow: station.type === 'podcast',
-        showMore: station.type === 'playlist' && !station.isLikedSongs,
-        showViewList: station.type === 'playlist' && viewMode === 'List',
-        showViewCompact: station.type === 'playlist' && viewMode === 'Compact',
+        stationActionsBar: {
+            'showPlay': station.type === 'playlist' && !isEmptyStation,
+            'showAddRemove': station.type === 'playlist' && !isOwnedByUser,
+            'showFollowUnfollow': station.type === 'podcast',
+            'showMore': !station.isLikedSongs,
+            'showView': station.type === 'playlist'
+        }
     }
 
 
@@ -53,7 +54,7 @@ export function StationDetails() {
     function formatSongCountTxt() {
         if (!showSongCountTxt) return ''
         const songCount = station.songs.length
-        return songCount > 1 ? `${songCount} songs` : `${songCount} song`
+        return songCount > 1 ? ` • ${songCount} songs` : ` • ${songCount} song`
     }
 
     function formatDurationTxt() {
@@ -66,23 +67,26 @@ export function StationDetails() {
         const minutes = Math.floor((totalDuration % 3600) / 60)
         const seconds = totalDuration % 60
 
-        return `${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
+        return `,${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
     }
 
 
     return (
-        <div className="station-details">
+        <div className="station-details"
+            style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
+        >
             <StationDetailsHeader
                 station={station}
-                showSongCountTxt={showSongCountTxt}
                 songCountTxt={songCountTxt}
-                showDurationTxt={showDurationTxt}
                 durationTxt={durationTxt}
             />
-            <StationDetailsActions stationMeta={stationMeta} />
-            
+            <StationDetailsActions
+                station={station}
+                stationMeta={stationMeta}
+            />
+
             <SongList songs={station.songs} />
-                   
+
             <Footer />
         </div>
     )

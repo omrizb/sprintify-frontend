@@ -1,5 +1,6 @@
 const YOUTUBE_DATA_API_KEYS = JSON.parse(import.meta.env.VITE_YOUTUBE_DATA_API_KEYS)
 const VITE_YOUTUBE_DARR_API_KEY = import.meta.env.VITE_YOUTUBE_DARR_API_KEY
+const VITE_YOUTUBE_EINAT_API_KEY = import.meta.env.VITE_YOUTUBE_EINAT_API_KEY
 // console.log(import.meta.env.VITE_TEST_VARIABLE)
 
 import axios from 'axios'
@@ -8,7 +9,8 @@ import { utilService } from './util.service.js'
 export const youtubeService = {
     getVideos,
     getTopVideo,
-    getVideoById
+    getVideoById,
+    parseISODuration
 }
 
 
@@ -18,8 +20,8 @@ window.youtubeService = youtubeService
 async function getVideos(value, maxResults = 5) {
     try {
         // const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
-        const apiKey = VITE_YOUTUBE_DARR_API_KEY
-        
+        const apiKey = VITE_YOUTUBE_EINAT_API_KEY
+
         const videos = await axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
                 part: 'snippet',
@@ -67,10 +69,10 @@ async function getTopVideo(value) {
 
 async function getVideoById(videoId) {
     try {
-        const apiKey = VITE_YOUTUBE_DARR_API_KEY
+        const apiKey = VITE_YOUTUBE_EINAT_API_KEY
         const video = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
-                part: 'snippet,contentDetails',  
+                part: 'snippet,contentDetails',
                 id: videoId,
                 key: apiKey,
             }
@@ -88,13 +90,22 @@ async function getVideoById(videoId) {
     }
 }
 
-
-
-
 function parseISODuration(isoDuration) {
-    const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
-    const hours = (match[1] ? parseInt(match[1]) : 0)
-    const minutes = (match[2] ? parseInt(match[2]) : 0)
-    const seconds = (match[3] ? parseInt(match[3]) : 0)
+
+    const regex = /P(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/
+    const matches = isoDuration.match(regex)
+
+    if (!matches) {
+        console.error('Invalid duration:', isoDuration)
+        return { hours: 0, minutes: 0, seconds: 0 }
+    }
+
+    const hours = matches[1] ? parseInt(matches[1]) : 0
+    const minutes = matches[2] ? parseInt(matches[2]) : 0
+    const seconds = matches[3] ? parseInt(matches[3]) : 0
+
+    console.log('Parsed Duration:', hours, minutes, seconds)
     return { hours, minutes, seconds }
 }
+
+

@@ -1,4 +1,4 @@
-.station-action-bar{
+.song-action-bar{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -6,7 +6,7 @@
     padding: 16px;
 }
     
-.station-action-bar-row{
+.song-action-bar-row{
         display: flex;
         width: 100%;
         flex-direction: row;
@@ -14,7 +14,7 @@
         justify-content: space-between;
 }
 
-.station-action-bar-container{
+.song-action-bar-container{
         display: flex;
         width: 100%;
         flex-direction: row;

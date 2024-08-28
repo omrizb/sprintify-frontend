@@ -9,13 +9,13 @@ export function SongList({ songs }) {
                 <div>#</div>
                 <div>Title</div>
                 <div>Album</div>
-                <div><SvgIcon iconName={"duration"} /></div>
+                <div className="duration"><SvgIcon iconName={"duration"} /></div>
 
             </header>
             <ul>
                 {songs.map((song, index) =>
                     <li key={song.songId} >
-                        <SongPreview song={song} index={index + 1} style={'list'} />
+                        <SongPreview song={song} index={index + 1} style={'list-style'} />
                     </li>)
                 }
             </ul>
