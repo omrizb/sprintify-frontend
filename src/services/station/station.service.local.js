@@ -6,6 +6,7 @@ import { stations } from '../../../data-sample/station.js'
 const STORAGE_KEY = 'stationDB'
 
 export const stationService = {
+    getEmptyStation,
     query,
     getById,
     save,
@@ -20,6 +21,21 @@ export const stationService = {
 // window.cs = stationService
 
 _createStations()
+
+function getEmptyStation() {
+    return  {
+        name: '',
+        type: 'playlist',
+        isLikedSongs: false,
+        tags: [],
+        stationImgUrl: '',
+        description: '',
+        isOwnedByUser: true,
+        createdBy: {},
+        likedByUsers: [],
+        songs: []
+    }
+}
 
 async function query(filterBy = { txt: '', stationType: '', playListCreator: ''}) {//Could be either filterBy or filterByMain
 
@@ -80,18 +96,31 @@ async function save(station) {
     if (station._id) {
         const stationToSave = {
             _id: station._id,
-            price: station.price,
-            speed: station.speed,
+            name: station.name,
+            type: station.type,
+            isLikedSongs: station.isLikedSongs,
+            tags: station.tags,
+            stationImgUrl: station.stationImgUrl,
+            description: station.description,
+            isOwnedByUser: station.isOwnedByUser,
+            createdBy: station.createdBy,
+            likedByUsers: station.likedByUsers,
+            songs: station.songs
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
         const stationToSave = {
-            vendor: station.vendor,
-            price: station.price,
-            speed: station.speed,
-            // Later, owner is set by the backend
-            owner: userService.getLoggedinUser(),
-            msgs: []
+            // _id: utilService.makeId(),
+            name: station.name,
+            type: station.type,
+            isLikedSongs: station.isLikedSongs,
+            tags: station.tags,
+            stationImgUrl: station.stationImgUrl,
+            description: station.description,
+            isOwnedByUser: station.isOwnedByUser,
+            createdBy: station.createdBy,
+            likedByUsers: station.likedByUsers,
+            songs: station.songs
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }

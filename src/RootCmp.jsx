@@ -10,6 +10,7 @@ import { StationDetails } from './pages/StationDetails.jsx'
 import { SongDetails } from './pages/SongDetails.jsx'
 
 import './assets/style/main.scss'
+import { AddStation } from './pages/AddStation.jsx'
 
 export function App() {
     return (
@@ -26,6 +27,7 @@ export function App() {
                         <Route path="/track/:id" element={<SongDetails />} />
                         <Route path="/search" element={<Search />} />
                         <Route path="/search/:txt" element={<SearchResults /> } />
+                        <Route path="/playlist/:id" element={<AddStation /> } />
                     </Route>
                 </Routes>
             </Router>

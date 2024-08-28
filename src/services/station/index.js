@@ -4,8 +4,17 @@ import { stationService as local } from './station.service.local'
 import { stationService as remote } from './station.service.remote'
 
 function getEmptyStation() {
-    return {
-        name: ''
+    return  {
+        name: '',
+        type: 'playlist',
+        isLikedSongs: false,
+        tags: [],
+        stationImgUrl: '',
+        description: '',
+        isOwnedByUser: true,
+        createdBy: {},
+        likedByUsers: [],
+        songs: []
     }
 }
 
