@@ -1,0 +1,42 @@
+.song-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    padding: 16px;
+
+    .song-cover-container{
+        position: relative;
+        width: auto;
+        overflow: hidden;
+        margin-right: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        
+        .song-cover {
+            width: 120px;
+            height: 120px;
+            border-radius: 4px;
+            box-shadow: 0 4px 60px rgba(0, 0, 0, .5);
+            object-fit: cover;
+        }
+        
+    }
+
+
+    .song-info {
+        display: flex;
+        flex: 1;
+        flex-flow: column;
+        justify-content: flex-end;
+        z-index: 0;
+        
+        .song-name{
+            font-size: $textSizeLarger2;
+            font-weight: 800;
+        }
+
+    }
+}
