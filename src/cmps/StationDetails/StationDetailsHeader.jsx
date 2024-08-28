@@ -1,12 +1,18 @@
 
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station, songCountTxt, durationTxt }) {
+export function StationDetailsHeader({ station, songCountTxt, durationTxt  }) {
 
+
+    
+ 
     return (
         <div className="station-details-header">
             <div className="station-cover-container">
-                <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />
+               { (station.stationImgUrl) && <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />}
+                {(!station.stationImgUrl) && <div className="icon new-playlist">
+                    <SvgIcon iconName={"music"}/>  
+                    </div>  }
                 <div className="overlay">
                     <div className="overlay-content">
                         <button className="editImage icon btn-medium">
@@ -22,8 +28,8 @@ export function StationDetailsHeader({ station, songCountTxt, durationTxt }) {
                 <div className="station-name">{station.name}</div>
                 <div>
                     <span className="station-createdBy">{station.createdBy.fullName}</span>
-                    <span>{songCountTxt}</span>
-                    <span>{durationTxt}</span>
+                   {(songCountTxt) && <span>{songCountTxt}</span>} 
+                   {(durationTxt) && <span>{durationTxt}</span>}
                 </div>
             </div>
         </div >

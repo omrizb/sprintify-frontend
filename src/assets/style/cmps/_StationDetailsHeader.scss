@@ -5,6 +5,13 @@
     flex-wrap: nowrap;
     padding: 16px;
 
+    .new-playlist {
+        height: 100px;
+        width: 100px;
+        border-radius: 8px;
+        background-color: rgb(40, 40, 40);
+    }
+
     .station-cover-container{
         position: relative;
         width: auto;

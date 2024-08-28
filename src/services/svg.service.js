@@ -1,6 +1,7 @@
 const smallSize = 'width=16 height=16'
 const stdSize = 'width=20 height=20'
 const bigSize = 'width=24 height=24'
+const veryBigSize = 'width=50 height=50'
 const fillLightGrey = `fill = "rgb(179, 179, 179)"`
 const fillWhite = `fill = "white"`
 const fillGreen = `fill =  "#1ed760"`
@@ -253,6 +254,13 @@ const SVGS = {
         viewBox="0 0 16 16">
         <path d="M16 8a8 8 0 1 0-9.25 7.903v-5.59H4.719V8H6.75V6.237c0-2.005 1.194-3.112 3.022-3.112.875 0 1.79.156 1.79.156V5.25h-1.008c-.994 0-1.304.617-1.304 1.25V8h2.219l-.355 2.313H9.25v5.59A8.002 8.002 0 0 0 16 8z"></path>
         </svg>`,
+
+    music: `<svg  
+    ${veryBigSize}
+    ${fillLightGrey}
+    viewBox="0 0 24 24" >
+    <path d="M6 3h15v15.167a3.5 3.5 0 1 1-3.5-3.5H19V5H8v13.167a3.5 3.5 0 1 1-3.5-3.5H6V3zm0 13.667H4.5a1.5 1.5 0 1 0 1.5 1.5v-1.5zm13 0h-1.5a1.5 1.5 0 1 0 1.5 1.5v-1.5z"/>
+    </svg>`
 
 }
 

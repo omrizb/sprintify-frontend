@@ -3,6 +3,7 @@ import { utilService } from '../util.service.js'
 import { userService } from '../user'
 import { stations } from '../../../data-sample/station.js'
 
+
 const STORAGE_KEY = 'stationDB'
 
 export const stationService = {
@@ -24,14 +25,17 @@ _createStations()
 
 function getEmptyStation() {
     return  {
-        name: '',
+        name: 'My Playlist',
         type: 'playlist',
         isLikedSongs: false,
         tags: [],
         stationImgUrl: '',
         description: '',
         isOwnedByUser: true,
-        createdBy: {},
+        createdBy: {
+                    id: 'AAAA',
+                    fullName: 'Darr',
+                    imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'},
         likedByUsers: [],
         songs: []
     }
