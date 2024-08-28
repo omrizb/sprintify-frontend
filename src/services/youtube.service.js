@@ -1,4 +1,6 @@
 const YOUTUBE_DATA_API_KEYS = JSON.parse(import.meta.env.VITE_YOUTUBE_DATA_API_KEYS)
+const VITE_YOUTUBE_DARR_API_KEY = import.meta.env.VITE_YOUTUBE_DARR_API_KEY
+// console.log(import.meta.env.VITE_TEST_VARIABLE)
 
 import axios from 'axios'
 import { utilService } from './util.service.js'
@@ -8,9 +10,16 @@ export const youtubeService = {
     getTopVideo
 }
 
+
+// for debugging from console
+window.youtubeService = youtubeService
+
 async function getVideos(value, maxResults = 5) {
     try {
-        const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        // const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        const apiKey = VITE_YOUTUBE_DARR_API_KEY
+        console.log("Using API Key:", apiKey)
+        
         const videos = await axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
                 part: 'snippet',
