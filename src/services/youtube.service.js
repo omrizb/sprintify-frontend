@@ -34,12 +34,7 @@ async function getVideos(value, maxResults = 5) {
             }
         })
 
-        return videos.data.items.map(video => ({
-            videoId: video.id.videoId,
-            title: video.snippet.title,
-            url: `https://www.youtube.com/embed/${video.id.videoId}`,
-            imgUrl: video.snippet.thumbnails.high.url,
-        }))
+        return videos.data.items.map(video => extractSongData(video, true))
     } catch (err) {
         console.log('Error:', err)
     }
@@ -81,18 +76,9 @@ async function getSongById(id) {
 
         if (search.data.items.length > 0) {
             const song = search.data.items[0]
-            let [artist, songName] = getArtistTitle(song.snippet.title, {
-                defaultArtist: song.snippet.channelTitle
-            })
             return {
-                songId: song.id,
-                songName,
-                artist,
-                description: song.snippet.description,
+                ...extractSongData(song),
                 duration: parseISODuration(song.contentDetails.duration),
-                url: `https://www.youtube.com/embed/${song.id}`,
-                imgUrl: song.snippet.thumbnails.high.url,
-                publishedAt: song.snippet.publishedAt
             }
         } else {
             console.log('No song found with this ID:', id)
@@ -100,6 +86,25 @@ async function getSongById(id) {
         }
     } catch (error) {
         console.log('Error fetching song details:', error)
+    }
+}
+
+function extractSongData(song, isSearchApi = false) {
+    const defaultArtist = (isSearchApi) ? song.snippet.channelTitle : song.snippet.tags[0]
+    const songId = (isSearchApi) ? song.id.videoId : song.id
+
+    let [artist, songName] = getArtistTitle(song.snippet.title, {
+        defaultArtist
+    })
+
+    return {
+        songId,
+        songName,
+        artist,
+        description: song.snippet.description,
+        url: `https://www.youtube.com/embed/${song.id}`,
+        imgUrl: song.snippet.thumbnails.high.url,
+        publishedAt: song.snippet.publishedAt
     }
 }
 

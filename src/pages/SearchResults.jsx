@@ -21,17 +21,17 @@ export function SearchResults() {
             console.log(`Couldn't load videos`, err)
         }
     }
-    
+
 
     return (
         <div>
             <h1>Search Results:</h1>
-             <ul >
-                    {songs.map(song =>
-                        <li key={song.videoId} >{song.title}</li>)
-                    }
-                </ul>
+            <ul >
+                {songs.map(song =>
+                    <li key={song.songId} >{song.songName}</li>)
+                }
+            </ul>
         </div>
-        
+
     )
 }
