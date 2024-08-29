@@ -4,7 +4,7 @@ import { SvgButton } from "../SvgButton.jsx"
 import { changeViewMode } from '../../services/event-bus.service.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 
-export function StationDetailsActions({ station, stationMeta }) {
+export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
     const [showMenu, setShowMenu] = useState(false)
 
@@ -78,7 +78,12 @@ export function StationDetailsActions({ station, stationMeta }) {
                             svgClass={"svg-big"}
                             tooltipTxt={`More options for ${station.name}`}
                         />
+
+                        
                     )}
+                    <button onClick={onRemoveStation} className="btn-tinted">Remove</button>
+
+
                 </div>
                 <div className="view-as">
                     {showView && (

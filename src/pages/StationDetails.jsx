@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { removeStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -15,6 +18,7 @@ import { loadStation } from '../store/actions/station.actions.js'
 export function StationDetails() {
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const station = useSelector(storeState => storeState.stationModule.station)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
@@ -46,6 +50,16 @@ export function StationDetails() {
             'showFollowUnfollow': station.type === 'podcast',
             'showMore': !station.isLikedSongs,
             'showView': station.type === 'playlist'
+        }
+    }
+
+    async function onRemoveStation(){
+        try {
+            await removeStation(station._id)            
+        } catch (err) {
+            console.log('err from station details page', err)
+        } finally {
+            navigate(`/`)
         }
     }
 
@@ -83,6 +97,7 @@ export function StationDetails() {
             <StationDetailsActions
                 station={station}
                 stationMeta={stationMeta}
+                onRemoveStation={onRemoveStation}
             />
 
             <SongList songs={station.songs} />
