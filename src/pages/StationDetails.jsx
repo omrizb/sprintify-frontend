@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { removeStation, updateStation } from '../store/actions/station.actions.js'
+import { removeStation, updateStation, loadStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -15,6 +15,8 @@ import { utilService } from '../services/util.service.js'
 import { AddSongs } from '../cmps/AddSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
 import { stationService } from '../services/station/station.service.local.js'
+import { EditStation } from '../cmps/EditStation.jsx'
+import { Modal } from '../cmps/Modal.jsx'
 
 
 export function StationDetails() {
@@ -23,22 +25,21 @@ export function StationDetails() {
     const navigate = useNavigate()
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
+    const station = useSelector(storeState => storeState.stationModule.station)
     const [viewMode, setViewMode] = useState('list') // Default view mode
-
-    const [station, setStation] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
+    const [showEditBox, setShowEditBox] = useState(false)
 
     useEffect(() => {
         setBgColor(utilService.getRandomColor())
-        loadStation(id)
+        onLoad(id)
     }, [id])
 
-    async function loadStation(id) {
+    async function onLoad(id) {
         try {
             setIsLoading(true)
-            const newStation = await stationService.getById(id)
-            setStation(newStation)
+            await loadStation(id)
             setIsLoading(false)
         } catch (err) {
             console.log('Error: StationDetails, loadStation:', err)
@@ -71,6 +72,16 @@ export function StationDetails() {
         }
     }
 
+    function onEdit() {
+        if (!isOwnedByUser) return
+        console.log('onEdit from Station Details')
+        setShowEditBox(true)
+    }
+
+    function handleCloseEdit() {
+        setShowEditBox(false)
+    }
+
     if (isLoading) return <Loader />
     if (!station) return <div className="station-details">No station to display</div>
 
@@ -89,12 +100,13 @@ export function StationDetails() {
         }
     }
 
+
     return (isLoading)
         ? <Loader />
         : <div className="station-details"
             style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
         >
-            <StationDetailsHeader station={station} />
+            <StationDetailsHeader station={station} onEdit={onEdit} />
 
             <StationDetailsActions
                 key={station}
@@ -106,6 +118,9 @@ export function StationDetails() {
             <SongList station={station} songs={station.songs} onRemoveSong={onRemoveSong} />
 
             {isOwnedByUser && <AddSongs station={station} />}
+
+            {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
+            {showEditBox && <Modal children={station} closeModal={handleCloseEdit} />}
 
             <Footer />
         </div>

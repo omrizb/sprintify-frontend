@@ -24,8 +24,12 @@
     .right-sidebar-container {
         @include section;
         grid-area: right-sidebar;
-        width: 280px;
         overflow: auto;
+    }
+
+    .right-sidebar-closed {
+        width: 0;
+        padding: 0;
     }
 
     .now-playing-bar-container {

@@ -41,15 +41,6 @@ export function AddSongs(){
         update(stationToSave) 
     }
 
-    // function onRemoveSong(songId){
-    
-    //     const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
-    //     const stationToSave = {...station, songs: updatedSongsArr }
-    //     update(stationToSave)
-    //     console.log('remove')
-
-    // }
-
     async function update(stationToSave){
         try {
             const updatedStation = await updateStation(stationToSave)
@@ -59,7 +50,6 @@ export function AddSongs(){
         } 
     }
 
-    
     return (
         <div className="add-songs">
 
