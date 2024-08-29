@@ -54,11 +54,11 @@ export function AddStation(){
                         />
                 </div>
 
-                <ul>
+                <ul className="song-preview">
                 {songs.map((song) =>
                     <li key={song.songId} >
                         <div className="title-column">
-                            <img src={song.imgUrl} alt="" style={{ height: '20px' }} />
+                            <img src={song.imgUrl} alt=""  />
                             <div className="text">
                                 <div>{song.songName}</div>
                                 <div>{song.artist}</div>
