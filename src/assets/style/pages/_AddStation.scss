@@ -6,7 +6,42 @@
         font: inherit;
         font-weight: 700;
         font-size: 24px;
-        margin: 0;
-        margin-block-start: 1em;
+        
+        margin-block: 1em;
     }
+
+    .text-container {
+        color: rgb(179, 179, 179); 
+        font-size: 16px;
+        background-color: rgb(42, 42, 42);
+        height: 40px;
+        width: 398px;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        align-content: center;
+        border-radius: 4px;
+        border-bottom-color: (255, 255, 255, 0.7);
+            
+        input{
+                border: none;
+                background-color: inherit;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: inherit;
+            }
+        
+        .search {
+                justify-self: start;
+                padding-inline-start: 12px;
+            }
+        
+        input:focus {
+            outline: none;
+        }
+ 
+         
+    }
+
+    
+
+    
 }

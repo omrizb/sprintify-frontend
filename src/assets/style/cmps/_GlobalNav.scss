@@ -25,46 +25,45 @@
             }
         }
 
-    a {
 
-        .text-container {
-            color: rgb(179, 179, 179); 
-            font-size: 16px;
-            background-color: rgb(42, 42, 42);
-            height: 50px;
-            width: 465px;
-            display: grid;
-            grid-template-columns: 50px 1fr 50px;
-            align-content: center;
-            border-radius: 500px;
+    .text-container {
+        color: rgb(179, 179, 179); 
+        font-size: 16px;
+        background-color: rgb(42, 42, 42);
+        height: 50px;
+        width: 465px;
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+        align-content: center;
+        border-radius: 500px;
             
-            input{
+        input{
                 border: none;
                 background-color: inherit;
                 color: white;
                 font-size: inherit;
             }
-    
-            .search {
+        
+        .search {
                 justify-self: start;
                 padding-inline-start: 12px;
             }
-    
-            .browse{
+        
+        .browse{
                 width: 48px;
                 border-inline-start: 1px solid rgb(179, 179, 179);
                 justify-self: end;
             }
 
-            input:focus {
-                outline: none;
-                color: white;
-            }
+        input:focus {
+            outline: none;
+            color: white;
+        }
 
-            &:has(input:focus) {
-                border: 2px solid white; 
-            }
-        }    
+        &:has(input:focus) {
+            border: 2px solid white; 
+        }
+           
     }
 
     .bell {
