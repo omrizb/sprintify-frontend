@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { removeStation } from '../store/actions/station.actions.js'
+import { removeStation, updateStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -60,6 +60,24 @@ export function StationDetails() {
         }
     }
 
+  
+
+    function onRemoveSong(songId){
+        const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
+        const stationToSave = {...station, songs: updatedSongsArr }
+        update(stationToSave)
+        console.log('remove')
+    }
+
+    async function update(stationToSave){
+        try {
+            const updatedStation = await updateStation(stationToSave)
+            console.log(updatedStation)
+        } catch (err) {
+            console.log('Cannot add a station')
+        } 
+    }
+
 
     return (
         <div className="station-details"
@@ -73,7 +91,7 @@ export function StationDetails() {
                 onRemoveStation={onRemoveStation}
             />
 
-            <SongList songs={station.songs} />
+            <SongList songs={station.songs} onRemoveSong={onRemoveSong} />
 
             {isOwnedByUser && <AddSongs station={station} /> }
 

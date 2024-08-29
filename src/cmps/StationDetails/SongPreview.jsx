@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { utilService } from '../../services/util.service.js'
 
-export function SongPreview({ song, index, style }) {
+export function SongPreview({ song, index, style, onRemoveSong }) {
     let articleClassName
     let songPreviewType
+
+    const isStationOwner = true
 
     switch (style) {
         case 'list-style':
@@ -38,6 +40,8 @@ export function SongPreview({ song, index, style }) {
             </div>
             {articleClassName !== 'list-minimal' && <div>{album}</div>}
             <div>{utilService.getTimeStr(songDuration)}</div>
+            {isStationOwner && <button onClick={()=> onRemoveSong(song.songId)}>Remove</button> }
+            
         </div>
     )
 }

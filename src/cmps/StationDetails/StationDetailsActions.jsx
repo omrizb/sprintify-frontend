@@ -29,7 +29,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         showMore,
         showView,
     } = stationMeta.stationActionsBar
-    console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
+    // console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
 
     const handleViewModeClick = (mode) => {
         changeViewMode(mode)
