@@ -54,19 +54,21 @@ export function AddStation(){
                         />
                 </div>
 
-                <ul className="song-preview">
-                {songs.map((song) =>
-                    <li key={song.songId} >
-                        <div className="title-column">
-                            <img src={song.imgUrl} alt=""  />
-                            <div className="text">
-                                <div>{song.songName}</div>
-                                <div>{song.artist}</div>
-                            </div>
-                        </div>
-                    </li>)
-                }
-                </ul>
+                {(!songs) && <h2>Youtube is blocking us!!</h2> }
+                {(songs)&&
+                    <ul className="song-preview">
+                        {songs.map((song) =>
+                            <li key={song.songId} >
+                                <div className="title-column">
+                                    <img src={song.imgUrl} alt=""  />
+                                    <div className="text">
+                                        <div>{song.songName}</div>
+                                        <div>{song.artist}</div>
+                                    </div>
+                                </div>
+                            </li>)
+                        }
+                    </ul>}
           
         </div> 
     )

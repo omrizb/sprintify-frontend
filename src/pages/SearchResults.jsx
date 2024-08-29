@@ -26,11 +26,14 @@ export function SearchResults() {
     return (
         <div>
             <h1>Search Results:</h1>
-            <ul >
-                {songs.map(song =>
-                    <li key={song.songId} >{song.songName}</li>)
-                }
-            </ul>
+
+            {(!songs) && <h2> Youtube is blocking us!!</h2> }
+            {songs &&
+                <ul >
+                    {songs.map(song =>
+                        <li key={song.songId} >{song.songName}</li>)
+                    }
+                </ul>}
         </div>
 
     )

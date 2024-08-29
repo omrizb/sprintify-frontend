@@ -21,7 +21,8 @@ window.youtubeService = youtubeService
 async function getVideos(value, maxResults = 5) {
     try {
         // const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
-        const apiKey = VITE_YOUTUBE_EINAT_API_KEY
+        // const apiKey = VITE_YOUTUBE_EINAT_API_KEY
+        const apiKey = VITE_YOUTUBE_DARR_API_KEY
 
         const videos = await axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
