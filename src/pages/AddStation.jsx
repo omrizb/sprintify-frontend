@@ -35,16 +35,28 @@ export function AddStation(){
         }
     }
 
-    async function handleAddSong(song){
+    function onAddSong(song){
         song.duration =  { hours: 0, minutes: 6, seconds: 0 }
-        const songToAdd = {...station, songs: [...station.songs, song]}
-        
+        const stationToSave = {...station, songs: [...station.songs, song]}
+        update(stationToSave) 
+    }
+
+    function onRemoveSong(songId){
+    
+        const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
+        const stationToSave = {...station, songs: updatedSongsArr }
+        update(stationToSave)
+        console.log('remove')
+
+    }
+
+    async function update(stationToSave){
         try {
-            const updatedStation = await updateStation(songToAdd)
+            const updatedStation = await updateStation(stationToSave)
             console.log(updatedStation)
         } catch (err) {
             console.log('Cannot add a station')
-        }  
+        } 
     }
 
     
@@ -62,7 +74,7 @@ export function AddStation(){
                                 <div>{song.songName} </div>
                                 <div>{song.artist} </div>
                             </div>
-                            <button className="btn-tinted">Remove</button>
+                            <button onClick={() => onRemoveSong(song.songId)} className="btn-tinted">Remove</button>
                         </div>
                     </li>
                 )}
@@ -91,7 +103,7 @@ export function AddStation(){
                                         <div>{song.songName}</div>
                                         <div>{song.artist}</div>
                                     </div>
-                                <button onClick={() => handleAddSong(song)} className="btn-tinted">Add</button>
+                                <button onClick={() => onAddSong(song)} className="btn-tinted">Add</button>
                                 </div>
                             </li>)
                         }
