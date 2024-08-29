@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { removeStation, updateStation } from '../store/actions/station.actions.js'
+import { removeStation, updateStation, loadStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -30,15 +30,16 @@ export function StationDetails() {
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
+   
     useEffect(() => {
         setBgColor(utilService.getRandomColor())
-        loadStation(id)
+        onLoad(id)
     }, [id])
 
-    async function loadStation(id) {
+    async function onLoad(id) {
         try {
             setIsLoading(true)
-            await stationService.getById(id)
+            await loadStation(id)
             setIsLoading(false)
         } catch (err) {
             console.log('Error: StationDetails, loadStation:', err)
