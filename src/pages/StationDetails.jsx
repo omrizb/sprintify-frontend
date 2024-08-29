@@ -23,9 +23,10 @@ export function StationDetails() {
     const navigate = useNavigate()
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
+    const station = useSelector(storeState => storeState.stationModule.station)
     const [viewMode, setViewMode] = useState('list') // Default view mode
 
-    const [station, setStation] = useState(null)
+    // const [station, setStation] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
@@ -37,8 +38,7 @@ export function StationDetails() {
     async function loadStation(id) {
         try {
             setIsLoading(true)
-            const newStation = await stationService.getById(id)
-            setStation(newStation)
+            await stationService.getById(id)
             setIsLoading(false)
         } catch (err) {
             console.log('Error: StationDetails, loadStation:', err)
