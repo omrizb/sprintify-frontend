@@ -13,7 +13,8 @@ export function LeftSideBarHeader() {
       
         try {
             const station = await addStation()
-            navigate(`/playlist/${station._id}`)
+            // navigate(`/playlist/${station._id}`)
+            navigate(`/station/${station._id}`)
         } catch (err) {
             console.log('Cannot add a station')
         }   
