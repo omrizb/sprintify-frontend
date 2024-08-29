@@ -5,13 +5,13 @@ export function SongList({ station, songs, onRemoveSong }) {
 
     return (
         <div className="song-list">
-            <header className="list-style">
+            {(songs.length > 0) && <header className="list-style">
                 <div>#</div>
                 <div>Title</div>
                 <div>Album</div>
                 <div className="duration"><SvgIcon iconName={"duration"} /></div>
 
-            </header>
+            </header>}
             <ul>
                 {songs.map((song, index) =>
                     <li key={song.songId} >
