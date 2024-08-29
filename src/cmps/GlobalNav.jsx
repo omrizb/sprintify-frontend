@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { SvgButton } from "./SvgButton.jsx"
 import { SvgIcon } from './SvgIcon'
@@ -9,42 +8,93 @@ import { utilService } from '../services/util.service.js'
 export function GlobalNav() {
 
     const navigate = useNavigate()
-    const debouncedNavigate = utilService.debounce(navToResults, 1500) 
+    const debouncedNavigate = utilService.debounce(navToResults, 1500)
+    const location = useLocation()
+    const isHome = location.pathname === '/'
+    const isbrowse = location.pathname === '/search'
 
     function handleChange(ev) {
         var value = ev.target.value
         debouncedNavigate(value)
     }
 
-    function navToResults(value){
+    function navToResults(value) {
         navigate(`/search/${value}`)
     }
 
-
     return (
-        <div className="global-nav">
-            
-            <div className="spotify"><SvgIcon iconName={"spotify"} /></div>
-            <Link to={`/`}>
-                <SvgButton btnClass={'btn-tinted home'} svgIcon={'home'} />  
-            </Link>
-            
-            <Link to={`/search`}>
-                <div className="text-container">
-                    <div className="search icon"><SvgIcon iconName={"search"}    /> </div>
-                    <input 
-                            type="text" 
-                            name="txt"
-                            placeholder="What do you want to play?"
-                            onChange={handleChange}
-                            required
-                        />
-                    <div className="browse icon"><SvgIcon iconName={"browse"}    /> </div> 
-                </div>
-            </Link>
-            <div className="bell icon"><SvgIcon iconName={"bell"} /></div>
-            <button className="profile-btn">D</button>
+        <div className="global-nav flex-center-space-between">
 
+            <div className="global-nav-left flex-center-center">
+                <SvgIcon iconName={"spotify"} />
+            </div>
+            <div className="global-nav-mid">
+                <div className="homeIcon">
+                    <Link to={`/`}>
+                        <SvgButton
+                            btnClass="btn-global-nav"
+                            svgIcon={isHome ? 'homeFull' : 'home'}
+                            svgClass="svg-big"
+                            tooltipTxt="Home"
+                        />
+                    </Link>
+                </div>
+                <div className="search-container">
+                    <Link to={`/search`}>
+                        <div className="text-container">
+                            <div>
+                                <SvgButton
+                                    btnClass="btn-search-nav"
+                                    svgIcon="search"
+                                    svgClass="svg-big"
+                                    tooltipTxt="Search"
+                                />
+                            </div>
+                            <input
+                                type="text"
+                                name="txt"
+                                placeholder="What do you want to play?"
+                                onChange={handleChange}
+                                required
+                            />
+                            <div className="flex-center-center">
+                                <div className="border-element">
+                                </div>
+                            </div>
+                            <div>
+                                <SvgButton
+                                    btnClass="btn-search-nav"
+                                    svgIcon={isbrowse ? 'browseFull' : 'browse'}
+                                    svgClass="svg-big"
+                                    tooltipTxt="Browse"
+                                />
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            <div className="global-nav-right">
+                <div className="installApp">
+                    <SvgButton
+                        btnClass="btn-installApp-nav"
+                        svgIcon='installApp'
+                        svgClass="svg-small"
+                        tooltipTxt={"What's New"}
+                    />
+                    <span>installApp</span>
+                </div>
+
+                <SvgButton
+                    btnClass="btn-search-nav"
+                    svgIcon='bell'
+                    svgClass="svg-small"
+                    tooltipTxt={"What's New"}
+                />
+
+                <div className="btn-global-nav">
+                    <button className="profile-btn">D</button>
+                </div>
+            </div>
         </div>
     )
 }
