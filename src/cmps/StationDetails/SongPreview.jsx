@@ -5,7 +5,9 @@ export function SongPreview({ station, song, index, style, onRemoveSong }) {
     let articleClassName
     let songPreviewType
 
-    const isOwnedByUser = station.createdBy.id === 'AAAA'
+    if (station) {
+        var isOwnedByUser = station.createdBy.id === 'AAAA'
+    }
 
     switch (style) {
         case 'list-style':
@@ -46,15 +48,3 @@ export function SongPreview({ station, song, index, style, onRemoveSong }) {
     )
 }
 
-
-
-
-// {
-//     songId: 'fJ9rUzIMcZQ',
-//     songName: 'Bohemian Rhapsody',
-//     artist: 'Queen',
-//     album: 'A Night at the Opera',
-//     url: 'https://www.youtube.com/embed/fJ9rUzIMcZQ',
-//     imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
-//     duration: { hours: 0, minutes: 6, seconds: 0 }
-// },
