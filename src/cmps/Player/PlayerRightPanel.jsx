@@ -1,45 +1,56 @@
-import { SvgButton } from '../SvgButton'
+import { useState } from 'react'
+import { setRightSidebarContent, rightSidebarContentKeys } from '../../store/actions/system.actions'
+
 import { VolumeController } from './VolumeController'
+import { PanelIcon } from './PanelIcon'
 
 export function PlayerRightPanel() {
 
+    const [activeIcon, setActiveIcon] = useState('')
+
+    function handleIconClick(key) {
+        if (activeIcon === key) {
+            setRightSidebarContent('')
+            setActiveIcon('')
+        } else {
+            setRightSidebarContent(key)
+            setActiveIcon(key)
+        }
+    }
+
     return (
         <div className="player-right-panel">
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerNowPlaying"
-                svgClass="svg-small"
                 tooltipTxt="Now playing view"
+                isActive={activeIcon === rightSidebarContentKeys.NOW_PLAYING}
+                onClick={() => handleIconClick(rightSidebarContentKeys.NOW_PLAYING)}
             />
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerLyrics"
-                svgClass="svg-small"
                 tooltipTxt="Lyrics"
+                isActive={activeIcon === rightSidebarContentKeys.LYRICS}
+                onClick={() => handleIconClick(rightSidebarContentKeys.LYRICS)}
             />
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerQueue"
-                svgClass="svg-small"
                 tooltipTxt="Queue"
+                isActive={activeIcon === rightSidebarContentKeys.QUEUE}
+                onClick={() => handleIconClick(rightSidebarContentKeys.QUEUE)}
             />
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerConnectDevice"
-                svgClass="svg-small"
                 tooltipTxt="Connect a device"
+                isActive={activeIcon === rightSidebarContentKeys.CONNECT_DEVICE}
+                onClick={() => handleIconClick(rightSidebarContentKeys.CONNECT_DEVICE)}
             />
             <VolumeController />
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerOpenMiniPlayer"
-                svgClass="svg-small"
                 tooltipTxt="Open Miniplayer"
             />
-            <SvgButton
-                btnClass="btn-dark2"
+            <PanelIcon
                 svgIcon="playerFullScreen"
-                svgClass="svg-small"
                 tooltipTxt="Full screen"
             />
         </div>

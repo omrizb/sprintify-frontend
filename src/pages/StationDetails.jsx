@@ -14,8 +14,6 @@ import { utilService } from '../services/util.service.js'
 
 import { AddSongs } from '../cmps/AddSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
-import { stationService } from '../services/station/station.service.local.js'
-
 
 export function StationDetails() {
 
@@ -25,12 +23,9 @@ export function StationDetails() {
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const station = useSelector(storeState => storeState.stationModule.station)
     const [viewMode, setViewMode] = useState('list') // Default view mode
-
-    // const [station, setStation] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
-   
     useEffect(() => {
         setBgColor(utilService.getRandomColor())
         onLoad(id)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { youtubeService } from '../services/youtube.service'
+import { youtubeService } from '../../services/youtube.service'
 
 export function NowPlayingDetails() {
 

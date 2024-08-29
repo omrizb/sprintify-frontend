@@ -1,0 +1,18 @@
+import { SvgButton } from '../SvgButton'
+
+export function PanelIcon({ svgIcon, tooltipTxt, isActive, onClick }) {
+
+    const btnClass = (isActive) ? 'btn-dark2 active-icon' : 'btn-dark2'
+
+    return (
+        <div className="panel-icon">
+            <SvgButton
+                btnClass={btnClass}
+                svgIcon={svgIcon}
+                svgClass="svg-small"
+                tooltipTxt={tooltipTxt}
+                onClick={onClick}
+            />
+        </div>
+    )
+}
