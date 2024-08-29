@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 
 import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
@@ -23,7 +23,7 @@ export function StationIndex() {
                 <LeftSidebar />
             </div>
             <div className="main-view-container">
-                <Outlet />
+                <Outlet key={useParams().id} />
             </div>
             <div className="right-sidebar-container">
                 <NowPlayingDetails />

@@ -12,8 +12,9 @@ import { SongList } from '../cmps/StationDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
 import { utilService } from '../services/util.service.js'
 
-import { loadStation } from '../store/actions/station.actions.js'
 import { AddSongs } from '../cmps/AddSongs.jsx'
+import { Loader } from '../cmps/Loader.jsx'
+import { stationService } from '../services/station/station.service.local.js'
 
 
 export function StationDetails() {
@@ -21,15 +22,11 @@ export function StationDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
 
-    const station = useSelector(storeState => storeState.stationModule.station)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
-
     const [viewMode, setViewMode] = useState('list') // Default view mode
 
-    const isEmptyStation = station.songs.length === 0
-    // const isOwnedByUser = station.createdBy.id === loggedinUser._id
-    const isOwnedByUser = station.createdBy.id === 'AAAA'
-    
+    const [station, setStation] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
 
     useEffect(() => {
@@ -37,7 +34,49 @@ export function StationDetails() {
         loadStation(id)
     }, [id])
 
+    async function loadStation(id) {
+        try {
+            setIsLoading(true)
+            const newStation = await stationService.getById(id)
+            setStation(newStation)
+            setIsLoading(false)
+        } catch (err) {
+            console.log('Error: StationDetails, loadStation:', err)
+        }
+    }
 
+    async function onRemoveStation() {
+        try {
+            await removeStation(station._id)
+        } catch (err) {
+            console.log('Error: StationDetails, onRemoveStation:', err)
+        } finally {
+            navigate(`/`)
+        }
+    }
+
+    function onRemoveSong(songId) {
+        const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
+        const stationToSave = { ...station, songs: updatedSongsArr }
+        update(stationToSave)
+        console.log('remove')
+    }
+
+    async function update(stationToSave) {
+        try {
+            const updatedStation = await updateStation(stationToSave)
+            console.log(updatedStation)
+        } catch (err) {
+            console.log('Cannot add a station')
+        }
+    }
+
+    if (isLoading) return <Loader />
+    if (!station) return <div className="station-details">No station to display</div>
+
+    const isEmptyStation = station.songs.length === 0
+    // const isOwnedByUser = station.createdBy.id === loggedinUser._id
+    const isOwnedByUser = station.createdBy.id === 'AAAA'
     const stationMeta = {
         isEmptyStation: isEmptyStation,
         isOwnedByUser: isOwnedByUser,
@@ -50,42 +89,15 @@ export function StationDetails() {
         }
     }
 
-    async function onRemoveStation(){
-        try {
-            await removeStation(station._id)            
-        } catch (err) {
-            console.log('err from station details page', err)
-        } finally {
-            navigate(`/`)
-        }
-    }
-
-  
-
-    function onRemoveSong(songId){
-        const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
-        const stationToSave = {...station, songs: updatedSongsArr }
-        update(stationToSave)
-        console.log('remove')
-    }
-
-    async function update(stationToSave){
-        try {
-            const updatedStation = await updateStation(stationToSave)
-            console.log(updatedStation)
-        } catch (err) {
-            console.log('Cannot add a station')
-        } 
-    }
-
-
-    return (
-        <div className="station-details"
+    return (isLoading)
+        ? <Loader />
+        : <div className="station-details"
             style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
         >
-            <StationDetailsHeader station={station}/>
+            <StationDetailsHeader station={station} />
 
             <StationDetailsActions
+                key={station}
                 station={station}
                 stationMeta={stationMeta}
                 onRemoveStation={onRemoveStation}
@@ -93,9 +105,8 @@ export function StationDetails() {
 
             <SongList station={station} songs={station.songs} onRemoveSong={onRemoveSong} />
 
-            {isOwnedByUser && <AddSongs station={station} /> }
+            {isOwnedByUser && <AddSongs station={station} />}
 
             <Footer />
         </div>
-    )
 }

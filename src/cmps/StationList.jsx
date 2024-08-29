@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { StationPreview } from "./StationPreview.jsx"
-import { useSelector } from 'react-redux'
-import { stationService } from "../services/station/station.service.local.js"
+import { StationPreview } from './StationPreview.jsx'
+import { stationService } from '../services/station/station.service.local.js'
 
 
 
 export function StationList({ stations, viewArea }) {
 
-    const player = useSelector(storeState => storeState.playerModule.player)
     const [recentlyPlayed, setRecentlyPlayed] = useState([])
     const [topMixes, setTopMixes] = useState([])
     const [madeForYou, setMadeForYou] = useState([])

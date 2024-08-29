@@ -14,20 +14,17 @@ import { AddStation } from './pages/AddStation.jsx'
 
 export function App() {
     return (
-
-        
-        // <UserMsg />
-
         <Provider store={store}>
             <Router>
+                {/* <UserMsg /> */}
                 <Routes>
                     <Route path="/" element={<StationIndex />}>
                         <Route index element={<MainView />} />
                         <Route path="/station/:id" element={<StationDetails />} />
                         <Route path="/track/:id" element={<SongDetails />} />
                         <Route path="/search" element={<Search />} />
-                        <Route path="/search/:txt" element={<SearchResults /> } />
-                        <Route path="/playlist/:id" element={<AddStation /> } />
+                        <Route path="/search/:txt" element={<SearchResults />} />
+                        <Route path="/playlist/:id" element={<AddStation />} />
                     </Route>
                 </Routes>
             </Router>
