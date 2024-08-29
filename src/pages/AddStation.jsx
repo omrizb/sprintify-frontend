@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { loadStation } from '../store/actions/station.actions'
+import { loadStation, updateStation } from '../store/actions/station.actions'
 
 import { SvgIcon } from '../cmps/SvgIcon'
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader'
@@ -17,7 +17,7 @@ export function AddStation(){
 
     useEffect(() => {
         loadStation(id)
-    }, [])
+    }, [station])
 
     function handleChange(ev) {
         const value = ev.target.value
@@ -29,18 +29,29 @@ export function AddStation(){
         try {
             const loadedSongs = await youtubeService.getVideos(value, 10)
             setSongs(loadedSongs)
-            console.log(loadedSongs)
-
+        
         } catch (err) {
-            console.log(`Couldn't load videos`, err)
+            console.log(`Couldn't load songs`, err)
         }
     }
 
-   
+    async function handleAddSong(song){
+        song.duration =  { hours: 0, minutes: 6, seconds: 0 }
+        const songToAdd = {...station, songs: [...station.songs, song]}
+        
+        try {
+            const updatedStation = await updateStation(songToAdd)
+            console.log(updatedStation)
+        } catch (err) {
+            console.log('Cannot add a station')
+        }  
+    }
+
+    
     return (
         <div className="add-station">
+
             <StationDetailsHeader station={station}  />
-            {/* <StationDetailsActions station={station} /> */}
             <h1>Let's find something for your playlist</h1>
 
             <div className="global-nav text-container">
@@ -56,15 +67,16 @@ export function AddStation(){
 
                 {(!songs) && <h2>Youtube is blocking us!!</h2> }
                 {(songs)&&
-                    <ul className="song-preview">
+                    <ul className="" >
                         {songs.map((song) =>
-                            <li key={song.songId} >
-                                <div className="title-column">
+                            <li key={song.songId}  >
+                                <div className="list">
                                     <img src={song.imgUrl} alt=""  />
                                     <div className="text">
                                         <div>{song.songName}</div>
                                         <div>{song.artist}</div>
                                     </div>
+                                <button onClick={() => handleAddSong(song)} className="btn-tinted">Add</button>
                                 </div>
                             </li>)
                         }
