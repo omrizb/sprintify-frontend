@@ -52,6 +52,21 @@ export function AddStation(){
         <div className="add-station">
 
             <StationDetailsHeader station={station}  />
+            {(station.songs.length > 0) && 
+            <ul>
+                {station.songs.map(song => 
+                    <li key={song.songId}>
+                        <div className="list">
+                            <img src={song.imgUrl} alt="" />
+                            <div className="text">
+                                <div>{song.songName} </div>
+                                <div>{song.artist} </div>
+                            </div>
+                            <button className="btn-tinted">Remove</button>
+                        </div>
+                    </li>
+                )}
+            </ul> }
             <h1>Let's find something for your playlist</h1>
 
             <div className="global-nav text-container">
