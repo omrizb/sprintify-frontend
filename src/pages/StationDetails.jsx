@@ -14,6 +14,10 @@ import { utilService } from '../services/util.service.js'
 
 import { AddSongs } from '../cmps/AddSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
+import { stationService } from '../services/station/station.service.local.js'
+import { EditStation } from '../cmps/EditStation.jsx'
+import { Modal } from '../cmps/Modal.jsx'
+
 
 export function StationDetails() {
 
@@ -25,6 +29,7 @@ export function StationDetails() {
     const [viewMode, setViewMode] = useState('list') // Default view mode
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
+    const [showEditBox, setShowEditBox] = useState(false)
 
     useEffect(() => {
         setBgColor(utilService.getRandomColor())
@@ -67,6 +72,16 @@ export function StationDetails() {
         }
     }
 
+    function onEdit() {
+        if (!isOwnedByUser) return
+        console.log('onEdit from Station Details')
+        setShowEditBox(true)
+    }
+
+    function handleCloseEdit() {
+        setShowEditBox(false)
+    }
+
     if (isLoading) return <Loader />
     if (!station) return <div className="station-details">No station to display</div>
 
@@ -85,12 +100,13 @@ export function StationDetails() {
         }
     }
 
+
     return (isLoading)
         ? <Loader />
         : <div className="station-details"
             style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
         >
-            <StationDetailsHeader station={station} />
+            <StationDetailsHeader station={station} onEdit={onEdit} />
 
             <StationDetailsActions
                 key={station}
@@ -102,6 +118,9 @@ export function StationDetails() {
             <SongList station={station} songs={station.songs} onRemoveSong={onRemoveSong} />
 
             {isOwnedByUser && <AddSongs station={station} />}
+
+            {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
+            {showEditBox && <Modal children={station} closeModal={handleCloseEdit} />}
 
             <Footer />
         </div>

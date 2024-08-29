@@ -1,6 +1,6 @@
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station  }) {
+export function StationDetailsHeader({ station, onEdit  }) {
 
     const songCountTxt = formatSongCountTxt()
     const durationTxt = formatDurationTxt()
@@ -22,9 +22,13 @@ export function StationDetailsHeader({ station  }) {
         return `,${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
     }
 
+    function onUpdateStation(station){
+        console.log(station._id)
+    }
+
     
     return (
-        <div className="station-details-header">
+        <div className="station-details-header" onClick={onEdit}>
             <div className="station-cover-container">
                { (station.stationImgUrl) && <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />}
                 {(!station.stationImgUrl) && <div className="icon new-playlist">

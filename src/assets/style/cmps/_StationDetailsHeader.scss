@@ -5,6 +5,10 @@
     flex-wrap: nowrap;
     padding: 16px;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     .new-playlist {
         height: 100px;
         width: 100px;
