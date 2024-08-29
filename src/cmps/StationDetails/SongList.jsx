@@ -1,7 +1,7 @@
 import { SongPreview } from '../StationDetails/SongPreview.jsx'
 import { SvgIcon } from '../SvgIcon.jsx'
 
-export function SongList({ songs, onRemoveSong }) {
+export function SongList({ station, songs, onRemoveSong }) {
 
     return (
         <div className="song-list">
@@ -15,7 +15,7 @@ export function SongList({ songs, onRemoveSong }) {
             <ul>
                 {songs.map((song, index) =>
                     <li key={song.songId} >
-                        <SongPreview song={song} index={index + 1} style={'list-style'} onRemoveSong={onRemoveSong} />
+                        <SongPreview station={station} song={song} index={index + 1} style={'list-style'} onRemoveSong={onRemoveSong} />
                     </li>)
                 }
             </ul>

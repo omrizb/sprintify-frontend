@@ -1,7 +1,14 @@
 .song-preview {
+    position: relative;
     padding: 0;
     font-weight: 400;
     row-gap: 1em;
+
+    button {
+        position: absolute;
+        right: 10px;
+        top: 25px;
+    }
     
     div {
         font-size: 14px;

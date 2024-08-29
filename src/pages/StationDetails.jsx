@@ -91,7 +91,7 @@ export function StationDetails() {
                 onRemoveStation={onRemoveStation}
             />
 
-            <SongList songs={station.songs} onRemoveSong={onRemoveSong} />
+            <SongList station={station} songs={station.songs} onRemoveSong={onRemoveSong} />
 
             {isOwnedByUser && <AddSongs station={station} /> }
 

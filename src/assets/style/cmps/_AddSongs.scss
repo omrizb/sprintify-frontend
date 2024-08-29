@@ -1,5 +1,7 @@
 .add-songs {
     
+    @include section;
+    border-radius: 0;
 
     h1 {
         font: inherit;
