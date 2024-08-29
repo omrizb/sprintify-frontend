@@ -11,25 +11,14 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
     const [isPlaying, setIsPlaying] = useState(false)
 
     useEffect(() => {
-        if (type === 'songPreview' && player.songId === songId) {
-            setIsPlaying(player.isPlaying)
-        }
-        else if (playerStationId === stationId) {
-            setIsPlaying(player.isPlaying)
-        }
-    }, [player.isPlaying])
-
-    useEffect(() => {
-        if (type === 'songPreview' && player.songId !== songId) {
-            setIsPlaying(false)
-        }
-    }, [player.songId])
-
-    useEffect(() => {
         if (playerStationId !== stationId) {
             setIsPlaying(false)
+        } else if (type === 'songPreview' && player.songId === songId) {
+            (player.songId === songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
+        } else {
+            setIsPlaying(player.isPlaying)
         }
-    }, [playerStationId])
+    }, [player.isPlaying, player.songId, playerStationId])
 
     function handleClick() {
         if (playerStationId !== stationId) {

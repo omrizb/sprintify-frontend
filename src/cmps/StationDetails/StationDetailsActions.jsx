@@ -3,6 +3,7 @@ import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
 import { changeViewMode } from '../../services/event-bus.service.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
+import { PlayButton } from '../Player/PlayButton.jsx'
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
@@ -39,13 +40,13 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         <div className="station-action-bar">
             <div className="station-action-bar-row">
                 <div className="station-action-bar-container">
-                    {showPlay && (
-                        <div className="wrap-playPlaylist">
-                            <button className="action-bar-btn playPlaylist icon btn-medium">
-                                <SvgIcon iconName={"playPlaylist"} />
-                            </button>
-                        </div>
-                    )}
+                    {showPlay && <PlayButton
+                        type={'stationDetails'}
+                        stationId={station._id}
+                        stationName={station.name}
+                        songId={station.songs[0]?.songId}
+                        songName={station.songs[0]?.songName}
+                    />}
 
                     {showAddRemove && (
                         <>
@@ -79,7 +80,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                             tooltipTxt={`More options for ${station.name}`}
                         />
 
-                        
+
                     )}
                     <button onClick={onRemoveStation} className="btn-tinted">Remove</button>
 

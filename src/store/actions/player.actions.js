@@ -19,6 +19,7 @@ export function loadSongToPlayer(songId) {
 
 export async function loadStationToPlayer(stationId, firstSongId) {
     try {
+        store.dispatch(getActionPausePlayer())
         const station = await stationService.getById(stationId)
         store.dispatch(getActionSetSong(firstSongId))
         store.dispatch({ type: SET_STATION_ID, stationId: station._id })
@@ -30,11 +31,11 @@ export async function loadStationToPlayer(stationId, firstSongId) {
 }
 
 export function play() {
-    store.dispatch({ type: SET_ACTION, action: playerActions.PLAY, actionParam: '' })
+    store.dispatch(getActionPlayPlayer())
 }
 
 export function pause() {
-    store.dispatch({ type: SET_ACTION, action: playerActions.PAUSE, actionParam: '' })
+    store.dispatch(getActionPausePlayer())
 }
 
 export function goto(seconds) {
@@ -52,4 +53,12 @@ export function setQueue(queue) {
 // Command Creators
 export function getActionSetSong(songId) {
     return { type: SET_PLAYER, playerProps: { songId } }
+}
+
+export function getActionPlayPlayer() {
+    return { type: SET_ACTION, action: playerActions.PLAY, actionParam: '' }
+}
+
+export function getActionPausePlayer() {
+    return { type: SET_ACTION, action: playerActions.PAUSE, actionParam: '' }
 }
