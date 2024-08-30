@@ -1,6 +1,6 @@
 // Fonts
-$fonts: SpotifyMixUI, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva;
-$titleFonts: SpotifyMixUITitle, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva;
+$fonts: SprintifyUI;
+$titleFonts: SprintifyUITitle;
 $fallbackFonts: Helvetica, sans-serif;
 
 // Font sizes
@@ -21,6 +21,7 @@ $mediumTxtClr: #b3b3b3;
 $primaryBgClr: #000000;
 $sectionBgClr: #121212;
 $uiBorderClr: #c3c6d4;
+$transparentGray: rgba(255, 255, 255, 0.3);
 $buttonBgGreen: #1ed760;
 $buttonBgGreenPress: #169c46;
 $iconActive: #1db954;

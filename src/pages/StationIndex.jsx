@@ -14,11 +14,9 @@ import { ConnectDevice } from '../cmps/RightSidebar/ConnectDevice.jsx'
 
 export function StationIndex() {
 
-    const loggedinUser = useSelector(storeState => storeState.userModule.user)
-    const rightSidebarContent = useSelector(storeState => storeState.systemModule.rightSidebarContent)
-    const rightSidebarWidth = useSelector(storeState => storeState.systemModule.rightSidebarWidth)
-
-    console.log(rightSidebarContent)
+    const loggedinUser = useSelector(state => state.userModule.user)
+    const rightSidebarContent = useSelector(state => state.systemModule.rightSidebarContent)
+    const rightSidebarWidth = useSelector(state => state.systemModule.rightSidebarWidth)
 
     let rightSidebarContentCmp
     switch (rightSidebarContent) {

@@ -2,7 +2,7 @@ export const SET_RIGHT_SIDEBAR_CONTENT = 'SET_RIGHT_SIDEBAR_CONTENT'
 export const SET_RIGHT_SIDEBAR_WIDTH = 'SET_RIGHT_BAR_WIDTH'
 
 const initialState = {
-    rightSidebarContent: '',
+    rightSidebarContent: 'nowPlaying',
     rightSidebarWidth: 280
 }
 
