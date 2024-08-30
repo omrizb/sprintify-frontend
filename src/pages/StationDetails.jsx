@@ -8,7 +8,7 @@ import { removeStation, updateStation, loadStation } from '../store/actions/stat
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
 import { StationMoreDetails } from '../cmps/StationDetails/StationMoreDetails.jsx'
-import { SongList } from '../cmps/StationDetails/SongList.jsx'
+import { SongList } from '../cmps/SongDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
 import { utilService } from '../services/util.service.js'
 
