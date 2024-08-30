@@ -1,3 +1,5 @@
+import { SvgIcon } from "./SvgIcon";
+
 export function EditStation({station, onCloseEdit}){
 
     // console.log(station)
@@ -15,9 +17,31 @@ export function EditStation({station, onCloseEdit}){
             </div>
 
             <div className = "body">
-                <input accept="image/.jpg, image/.jpeg, image/.png" type="file" />
 
-                <div className="album-image"></div>
+                <div className="album-image">
+
+                    <div className="choose-photo">
+                        <div>
+                            <SvgIcon iconName={'music'} />  
+                        </div>
+                    </div>
+
+                    <div className="edit-image">
+                        <button className="edit-image-btn">
+                            <div>
+                                <SvgIcon iconName={'edit'} svgClass={'dots'} />  
+                            </div>
+                        </button>
+                    </div>
+
+                    <div className="more">
+                        <button>
+                            <SvgIcon iconName={'dots'} /> 
+                            <span className="hidden-visually">Edit photo</span>
+                        </button>
+                    </div>
+
+                </div>
 
                 <div className="title">
                     <label htmlFor="text-input"> </label>
@@ -37,7 +61,12 @@ export function EditStation({station, onCloseEdit}){
                     </textarea>
                 </div>
 
-                <button className="save-btn" >Save</button>
+                <div className="save">
+                    <button className="save-btn" >
+                        <span>Save</span>
+                    </button> 
+                </div>
+
                 <p className="disclaimer">
                     By proceeding, you agree to give Sprintify acces to the image you choose 
                     to upload. Please make sure you have the right to upload the image.
