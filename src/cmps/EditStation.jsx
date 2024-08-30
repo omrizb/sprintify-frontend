@@ -1,19 +1,36 @@
-import { SvgIcon } from "./SvgIcon";
+import { useState } from 'react'
+import { SvgIcon } from "./SvgIcon"
 
-export function EditStation({station, onCloseEdit}){
 
-    // console.log(station)
 
-    // function onClose(){
-    //     onCloseEdit()
-    // }
+
+export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
+    
+    const [station, setStation] = useState(stationToEdit)
+
+    function handleChange(ev) {
+        const value = ev.target.value
+
+        setStation(prevStation => ({...prevStation, name:value }))
+    }
+
+    function onSave(){
+        editStation(station)
+        onCloseEdit()
+        
+
+    }
+
+   
+
+    
 
     return(
         <div className = "edit-station">
 
             <div className = "header">
                 <h1>Edit details</h1>
-                <button>X</button> 
+                <button onClick={onCloseEdit}>X</button> 
             </div>
 
             <div className = "body">
@@ -29,9 +46,11 @@ export function EditStation({station, onCloseEdit}){
                     <div className="edit-image">
                         <button className="edit-image-btn">
                             <div>
-                                <SvgIcon iconName={'edit'} svgClass={'dots'} />  
+                                <SvgIcon iconName={'edit'} svgClass={'dots'} />
+                                <span>Choose photo</span>  
                             </div>
                         </button>
+                        
                     </div>
 
                     <div className="more">
@@ -49,7 +68,10 @@ export function EditStation({station, onCloseEdit}){
                     id="text-input"
                     type="text"
                     placeholder="Add a name"
-                    value={station.name} />
+                    value={station.name}
+                    onChange={handleChange}
+                    required
+                     />
                 </div>
 
                 <div className="description">
@@ -62,7 +84,7 @@ export function EditStation({station, onCloseEdit}){
                 </div>
 
                 <div className="save">
-                    <button className="save-btn" >
+                    <button onClick={onSave} className="save-btn" >
                         <span>Save</span>
                     </button> 
                 </div>

@@ -120,7 +120,7 @@ export function StationDetails() {
             {isOwnedByUser && <AddSongs station={station} />}
 
             {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
-            {showEditBox && <Modal children={station} closeModal={handleCloseEdit} />}
+            {showEditBox && <Modal children={station} closeModal={handleCloseEdit} editStation={update} />}
 
             <Footer />
         </div>
