@@ -83,6 +83,7 @@ export function SongDetails() {
                     <AddSongs
                         value={song.artist}
                         style={"recommended"}
+                        viewArea={'songDetails'}
                     />
                 </div>
             )}

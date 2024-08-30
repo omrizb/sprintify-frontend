@@ -26,7 +26,6 @@ export function StationDetails() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const station = useSelector(storeState => storeState.stationModule.station)
-    const [viewMode, setViewMode] = useState('list') // Default view mode
     const [isLoading, setIsLoading] = useState(true)
     const [bgColor, setBgColor] = useState(utilService.getRandomColor())
     const [showEditBox, setShowEditBox] = useState(false)
@@ -106,7 +105,10 @@ export function StationDetails() {
         : <div className="station-details"
             style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
         >
-            <StationDetailsHeader station={station} onEdit={onEdit} />
+            <StationDetailsHeader
+                station={station}
+                onEdit={onEdit}
+            />
 
             <StationDetailsActions
                 key={station}
@@ -115,9 +117,17 @@ export function StationDetails() {
                 onRemoveStation={onRemoveStation}
             />
 
-            <SongList station={station} songs={station.songs} onRemoveSong={onRemoveSong} />
-
-            {isOwnedByUser && <AddSongs station={station} />}
+            <SongList
+                station={station}
+                songs={station.songs}
+                onRemoveSong={onRemoveSong}
+            />
+            {isOwnedByUser &&
+                <AddSongs
+                    value={isEmptyStation ? "" : station.songs[0].artist}
+                    style={isEmptyStation ? "search" : "recommended"}
+                    viewArea={isEmptyStation ? "search" : 'myPlaylist'}
+                />}
 
             {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
             {showEditBox && <Modal children={station} closeModal={handleCloseEdit} editStation={update} />}

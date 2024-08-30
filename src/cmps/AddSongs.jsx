@@ -8,7 +8,7 @@ import { SvgIcon } from '../cmps/SvgIcon'
 import { utilService } from '../services/util.service'
 import { SongPreview } from '../cmps/SongDetails/SongPreview.jsx'
 
-export function AddSongs({ value, style = "search" }) {
+export function AddSongs({ value, style = "search", viewArea = "search" }) {
     const { id } = useParams()
     const station = useSelector(storeState => storeState.stationModule.station)
     const [songs, setSongs] = useState([])
@@ -58,7 +58,7 @@ export function AddSongs({ value, style = "search" }) {
     return (
         <div className="add-songs">
 
-            {style === 'search' && (
+            {viewArea === 'search' && (
                 <>
                     <h1>Let's find something for your playlist</h1>
 
@@ -75,10 +75,17 @@ export function AddSongs({ value, style = "search" }) {
                 </>
             )}
 
-            {(style === 'recommended') && (
+            {(viewArea === 'myPlaylist') && (
                 <>
                     <h1>Recommended</h1>
                     <h2>Based on what's in this playlist</h2>
+                </>
+            )}
+
+            {(viewArea === 'songDetails') && (
+                <>
+                    <h1>Recommended</h1>
+                    <h2>Based on this song</h2>
                 </>
             )}
 
