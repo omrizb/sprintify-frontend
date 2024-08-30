@@ -10,6 +10,12 @@
 	display: flex;
 }
 
+.flex-regular-gap {
+	display: flex;
+	align-items: center;
+	gap: $regularGap;
+}
+
 .flex.flex-column {
 	flex-direction: column;
 }

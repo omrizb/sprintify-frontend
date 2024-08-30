@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useParams } from 'react-router-dom'
 
@@ -17,6 +17,7 @@ export function StationIndex() {
     const loggedinUser = useSelector(state => state.userModule.user)
     const rightSidebarContent = useSelector(state => state.systemModule.rightSidebarContent)
     const rightSidebarWidth = useSelector(state => state.systemModule.rightSidebarWidth)
+    const mainViewContainerRef = useRef()
 
     let rightSidebarContentCmp
     switch (rightSidebarContent) {
@@ -43,8 +44,8 @@ export function StationIndex() {
             <div className="left-sidebar-container">
                 <LeftSidebar />
             </div>
-            <div className="main-view-container">
-                <Outlet key={useParams().id} />
+            <div className="main-view-container" ref={mainViewContainerRef}>
+                <Outlet key={useParams().id} context={{ containerRef: mainViewContainerRef }} />
             </div>
             <div
                 className={`right-sidebar-container${!rightSidebarContent ? ' right-sidebar-closed' : ''}`}
