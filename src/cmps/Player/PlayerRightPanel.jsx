@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { setRightSidebarContent, rightSidebarContentKeys } from '../../store/actions/system.actions'
 
 import { VolumeController } from './VolumeController'
@@ -6,15 +6,13 @@ import { PanelIcon } from './PanelIcon'
 
 export function PlayerRightPanel() {
 
-    const [activeIcon, setActiveIcon] = useState('')
+    const activeIcon = useSelector(state => state.systemModule.rightSidebarContent)
 
     function handleIconClick(key) {
         if (activeIcon === key) {
             setRightSidebarContent('')
-            setActiveIcon('')
         } else {
             setRightSidebarContent(key)
-            setActiveIcon(key)
         }
     }
 

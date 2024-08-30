@@ -1,8 +1,38 @@
 // Main fonts
 
 @font-face {
-    font-family: Figtree;
-    src: url("../assets/fonts/Figtree-VariableFont_wght.ttf");
+    font-family: SprintifyUI;
+    src: url("../fonts/SpotifyMixUI-Regular.woff2");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: SprintifyUI;
+    src: url("../fonts/SpotifyMixUI-Regular.woff2");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: SprintifyUI;
+    src: url("../fonts/SpotifyMixUI-Bold.woff2");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: SprintifyUI;
+    src: url("../fonts/SpotifyMixUI-Bold.woff2");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: SprintifyUI;
+    src: url("../fonts/SpotifyMixUI-Bold.woff2");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: SprintifyUITitle;
+    src: url("../fonts/SpotifyMixUITitleVariable.woff2");
 }
 
 // Font Awesome
