@@ -1,6 +1,34 @@
-import { SvgIcon } from "../SvgIcon"
+import { useEffect, useRef, useState } from 'react'
+
+import { SvgIcon } from '../SvgIcon'
 
 export function StationDetailsHeader({ station, bgColor, onEditStation }) {
+
+    const [stationNameClass, setStationNameClass] = useState('station-name')
+    const stationNameRef = useRef(null)
+
+    useEffect(() => {
+        adjustStationNameSize()
+        window.addEventListener('resize', adjustStationNameSize)
+        return () => window.removeEventListener('resize', adjustStationNameSize)
+    }, [])
+
+    function adjustStationNameSize() {
+        // const containerWidth = stationNameRef.current.parentElement.offsetWidth
+        // const containerHeight = stationNameRef.current.parentElement.offsetHeight
+
+        // if (stationNameRef.current.scrollHeight > 120) {
+        //     if (stationNameClass === 'station-name') setStationNameClass('station-name medium-title')
+        //     if (stationNameClass === 'station-name medium-title') setStationNameClass('station-name small-title')
+        // } else {
+        //     if (stationNameClass === 'station-name medium-title') setStationNameClass('station-name')
+        //     if (stationNameClass === 'station-name small-title') setStationNameClass('station-name medium-title')
+        // }
+        // console.log('containerWidth', containerWidth)
+        // console.log('containerHeight', containerHeight)
+        // console.log(stationNameRef.current.scrollWidth)
+        // console.log(stationNameRef.current.scrollHeight)
+    }
 
     const songCount = station.songs.length
     const songCountTxt = formatSongCountTxt()
@@ -48,7 +76,7 @@ export function StationDetailsHeader({ station, bgColor, onEditStation }) {
 
             <div className="station-info">
                 <div className="station-type">{station.type}</div>
-                <div onClick ={onEditStation} className="station-name">{station.name}</div>
+                <div ref={stationNameRef} onClick={onEditStation} className={stationNameClass}>{station.name}</div>
                 <div className="bottom-info">
                     <span className="created-by">{station.createdBy.fullName}</span>
                     {songCount &&
