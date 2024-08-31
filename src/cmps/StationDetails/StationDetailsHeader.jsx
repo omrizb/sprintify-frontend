@@ -1,43 +1,45 @@
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station, onEdit  }) {
+export function StationDetailsHeader({ station, onEdit }) {
 
+    const songCount = station.songs.length
     const songCountTxt = formatSongCountTxt()
     const durationTxt = formatDurationTxt()
 
     function formatSongCountTxt() {
-        const songCount = station.songs.length
-        return songCount > 1 ? ` • ${songCount} songs` : ` • ${songCount} song`
+        if (songCount > 1) return `${songCount} songs`
+        else if (songCount === 1) return `${songCount} song`
+        else return ''
     }
 
     function formatDurationTxt() {
         const totalDuration = station.songs.reduce((acc, song) => {
-            return acc + song.duration.hours * 3600 + song.duration.minutes * 60 + song.duration.seconds
+            return acc + song.duration
         }, 0)
 
         const hours = Math.floor(totalDuration / 3600)
         const minutes = Math.floor((totalDuration % 3600) / 60)
         const seconds = totalDuration % 60
 
-        return `,${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
+        return `${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
     }
 
-    function onUpdateStation(station){
+    function onUpdateStation(station) {
         console.log(station._id)
     }
 
-    
     return (
-        <div className="station-details-header" onClick={onEdit}>
+        <div className="station-details-header">
             <div className="station-cover-container">
-               { (station.stationImgUrl) && <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />}
-                {(!station.stationImgUrl) && <div className="icon new-playlist">
-                    <SvgIcon iconName={"music"}/>  
-                    </div>  }
+                {(station.stationImgUrl)
+                    ? <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />
+                    : <div className="icon new-playlist">
+                        <SvgIcon iconName={"music"} />
+                    </div>}
                 <div className="overlay">
                     <div className="overlay-content">
                         <button className="editImage icon btn-medium">
-                            <SvgIcon iconName={"editImage"} />
+                            <SvgIcon iconName="editImage" />
                         </button>
                         <span>Choose photo</span>
                     </div>
@@ -47,10 +49,14 @@ export function StationDetailsHeader({ station, onEdit  }) {
             <div className="station-info">
                 <div className="station-type">{station.type}</div>
                 <div className="station-name">{station.name}</div>
-                <div>
-                    <span className="station-createdBy">{station.createdBy.fullName}</span>
-                   {(songCountTxt) && <span>{songCountTxt}</span>} 
-                   {(durationTxt) && <span>{durationTxt}</span>}
+                <div className="bottom-info">
+                    <span className="created-by">{station.createdBy.fullName}</span>
+                    {songCount &&
+                        <>
+                            <span className="dot"></span>
+                            <span className="song-count">{songCountTxt}, </span>
+                            <span className="total-duration">{durationTxt}</span>
+                        </>}
                 </div>
             </div>
         </div >

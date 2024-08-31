@@ -19,7 +19,7 @@ export const stations = [
                 album: 'A Night at the Opera',
                 url: 'https://www.youtube.com/embed/fJ9rUzIMcZQ',
                 imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 6, seconds: 0 }
+                duration: 60
             },
             {
                 songId: 'JGwWNGJdvx8',
@@ -28,7 +28,7 @@ export const stations = [
                 album: '÷ (Divide)',
                 url: 'https://www.youtube.com/embed/JGwWNGJdvx8',
                 imgUrl: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 24 }
+                duration: 266
             },
             {
                 songId: 'Zi_XLOBDo_Y',
@@ -37,7 +37,7 @@ export const stations = [
                 album: 'Thriller',
                 url: 'https://www.youtube.com/embed/Zi_XLOBDo_Y',
                 imgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 56 }
+                duration: 296
             }
         ]
     },
@@ -61,7 +61,7 @@ export const stations = [
                 album: 'After Hours',
                 url: 'https://www.youtube.com/embed/4NRXx6U8ABQ',
                 imgUrl: 'https://i.ytimg.com/vi/4NRXx6U8ABQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 23 }
+                duration: 263
             },
             {
                 songId: 'hTWKbfoikeg',
@@ -70,7 +70,7 @@ export const stations = [
                 album: 'Nevermind',
                 url: 'https://www.youtube.com/embed/hTWKbfoikeg',
                 imgUrl: 'https://i.ytimg.com/vi/hTWKbfoikeg/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 39 }
+                duration: 279
             },
             {
                 songId: 'QkF3oxziUI4',
@@ -79,7 +79,7 @@ export const stations = [
                 album: 'Led Zeppelin IV',
                 url: 'https://www.youtube.com/embed/QkF3oxziUI4',
                 imgUrl: 'https://i.ytimg.com/vi/QkF3oxziUI4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 8, seconds: 3 }
+                duration: 483
             }
         ]
     },
@@ -103,7 +103,7 @@ export const stations = [
                 album: 'x (Multiply)',
                 url: 'https://www.youtube.com/embed/lp-EO5I60KA',
                 imgUrl: 'https://i.ytimg.com/vi/lp-EO5I60KA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 57 }
+                duration: 297
             },
             {
                 songId: 'A_MjCqQoLLA',
@@ -112,7 +112,7 @@ export const stations = [
                 album: 'The Beatles (The White Album)',
                 url: 'https://www.youtube.com/embed/A_MjCqQoLLA',
                 imgUrl: 'https://i.ytimg.com/vi/A_MjCqQoLLA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 8, seconds: 10 }
+                duration: 490
             }
         ]
     },
@@ -136,7 +136,7 @@ export const stations = [
                 album: 'Vida',
                 url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
                 imgUrl: 'https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 42 }
+                duration: 282
             },
             {
                 songId: '1w7OgIMMRc4',
@@ -145,7 +145,7 @@ export const stations = [
                 album: 'Appetite for Destruction',
                 url: 'https://www.youtube.com/embed/1w7OgIMMRc4',
                 imgUrl: 'https://i.ytimg.com/vi/1w7OgIMMRc4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 3 }
+                duration: 303
             }
         ]
     },
@@ -169,7 +169,7 @@ export const stations = [
                 album: 'When We All Fall Asleep, Where Do We Go?',
                 url: 'https://www.youtube.com/embed/DyDfgMOUjCI',
                 imgUrl: 'https://i.ytimg.com/vi/DyDfgMOUjCI/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 26 }
+                duration: 206
             },
             {
                 songId: 'fNFzfwLM72c',
@@ -178,7 +178,7 @@ export const stations = [
                 album: 'Saturday Night Fever Soundtrack',
                 url: 'https://www.youtube.com/embed/fNFzfwLM72c',
                 imgUrl: 'https://i.ytimg.com/vi/fNFzfwLM72c/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 10 }
+                duration: 250
             }
         ]
     },
@@ -202,7 +202,7 @@ export const stations = [
                 album: 'Thriller',
                 url: 'https://www.youtube.com/embed/Zi_XLOBDo_Y',
                 imgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 56 }
+                duration: 296
             },
             {
                 songId: '4NRXx6U8ABQ',
@@ -211,7 +211,7 @@ export const stations = [
                 album: 'After Hours',
                 url: 'https://www.youtube.com/embed/4NRXx6U8ABQ',
                 imgUrl: 'https://i.ytimg.com/vi/4NRXx6U8ABQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 23 }
+                duration: 263
             },
             {
                 songId: 'JGwWNGJdvx8',
@@ -220,7 +220,7 @@ export const stations = [
                 album: '÷ (Divide)',
                 url: 'https://www.youtube.com/embed/JGwWNGJdvx8',
                 imgUrl: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 24 }
+                duration: 266
             },
             {
                 songId: 'hTWKbfoikeg',
@@ -229,7 +229,7 @@ export const stations = [
                 album: 'Nevermind',
                 url: 'https://www.youtube.com/embed/hTWKbfoikeg',
                 imgUrl: 'https://i.ytimg.com/vi/hTWKbfoikeg/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 39 }
+                duration: 279
             },
             {
                 songId: 'QkF3oxziUI4',
@@ -238,7 +238,7 @@ export const stations = [
                 album: 'Led Zeppelin IV',
                 url: 'https://www.youtube.com/embed/QkF3oxziUI4',
                 imgUrl: 'https://i.ytimg.com/vi/QkF3oxziUI4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 8, seconds: 3 }
+                duration: 483
             },
             {
                 songId: 'hLQl3WQQoQ0',
@@ -247,7 +247,7 @@ export const stations = [
                 album: '21',
                 url: 'https://www.youtube.com/embed/hLQl3WQQoQ0',
                 imgUrl: 'https://i.ytimg.com/vi/hLQl3WQQoQ0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 45 }
+                duration: 285
             },
             {
                 songId: 'bx1Bh8ZvH84',
@@ -256,7 +256,7 @@ export const stations = [
                 album: "(What's the Story) Morning Glory?",
                 url: 'https://www.youtube.com/embed/bx1Bh8ZvH84',
                 imgUrl: 'https://i.ytimg.com/vi/bx1Bh8ZvH84/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 38 }
+                duration: 278
             },
             {
                 songId: 'lp-EO5I60KA',
@@ -265,7 +265,7 @@ export const stations = [
                 album: 'x (Multiply)',
                 url: 'https://www.youtube.com/embed/lp-EO5I60KA',
                 imgUrl: 'https://i.ytimg.com/vi/lp-EO5I60KA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 57 }
+                duration: 297
             }
         ]
     },
@@ -289,7 +289,7 @@ export const stations = [
                 album: 'Uptown Special',
                 url: 'https://www.youtube.com/embed/OPf0YbXqDm0',
                 imgUrl: 'https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 31 }
+                duration: 271
             },
             {
                 songId: 'kJQP7kiw5Fk',
@@ -298,7 +298,7 @@ export const stations = [
                 album: 'Vida',
                 url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
                 imgUrl: 'https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 42 }
+                duration: 282
             },
             {
                 songId: '1w7OgIMMRc4',
@@ -307,7 +307,7 @@ export const stations = [
                 album: 'Appetite for Destruction',
                 url: 'https://www.youtube.com/embed/1w7OgIMMRc4',
                 imgUrl: 'https://i.ytimg.com/vi/1w7OgIMMRc4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 3 }
+                duration: 303
             },
             {
                 songId: 'Zi_XLOBDo_Y',
@@ -316,7 +316,7 @@ export const stations = [
                 album: 'Thriller',
                 url: 'https://www.youtube.com/embed/Zi_XLOBDo_Y',
                 imgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 56 }
+                duration: 296
             },
             {
                 songId: 'JGwWNGJdvx8',
@@ -325,7 +325,7 @@ export const stations = [
                 album: '÷ (Divide)',
                 url: 'https://www.youtube.com/embed/JGwWNGJdvx8',
                 imgUrl: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 24 }
+                duration: 266
             },
             {
                 songId: 'DyDfgMOUjCI',
@@ -334,7 +334,7 @@ export const stations = [
                 album: 'When We All Fall Asleep, Where Do We Go?',
                 url: 'https://www.youtube.com/embed/DyDfgMOUjCI',
                 imgUrl: 'https://i.ytimg.com/vi/DyDfgMOUjCI/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 26 }
+                duration: 206
             },
             {
                 songId: 'FTQbiNvZqaY',
@@ -343,7 +343,7 @@ export const stations = [
                 album: 'Toto IV',
                 url: 'https://www.youtube.com/embed/FTQbiNvZqaY',
                 imgUrl: 'https://i.ytimg.com/vi/FTQbiNvZqaY/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 32 }
+                duration: 272
             },
             {
                 songId: '3JWTaaS7LdU',
@@ -352,7 +352,7 @@ export const stations = [
                 album: 'The Bodyguard Soundtrack',
                 url: 'https://www.youtube.com/embed/3JWTaaS7LdU',
                 imgUrl: 'https://i.ytimg.com/vi/3JWTaaS7LdU/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 34 }
+                duration: 274
             },
             {
                 songId: '450p7goxZqg',
@@ -361,7 +361,7 @@ export const stations = [
                 album: 'Love in the Future',
                 url: 'https://www.youtube.com/embed/450p7goxZqg',
                 imgUrl: 'https://i.ytimg.com/vi/450p7goxZqg/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 8 }
+                duration: 308
             },
             {
                 songId: 'fNFzfwLM72c',
@@ -370,7 +370,7 @@ export const stations = [
                 album: 'Saturday Night Fever Soundtrack',
                 url: 'https://www.youtube.com/embed/fNFzfwLM72c',
                 imgUrl: 'https://i.ytimg.com/vi/fNFzfwLM72c/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 10 }
+                duration: 250
             }
         ]
     },
@@ -394,7 +394,7 @@ export const stations = [
                 album: 'No Need to Argue',
                 url: 'https://www.youtube.com/embed/6Ejga4kJUts',
                 imgUrl: 'https://i.ytimg.com/vi/6Ejga4kJUts/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 8 }
+                duration: 308
             },
             {
                 songId: '5IpYOF4Hi6Q',
@@ -403,7 +403,7 @@ export const stations = [
                 album: 'The Wall',
                 url: 'https://www.youtube.com/embed/5IpYOF4Hi6Q',
                 imgUrl: 'https://i.ytimg.com/vi/5IpYOF4Hi6Q/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 50 }
+                duration: 230
             }
         ]
     },
@@ -427,7 +427,7 @@ export const stations = [
                 album: 'x (Multiply)',
                 url: 'https://www.youtube.com/embed/lp-EO5I60KA',
                 imgUrl: 'https://i.ytimg.com/vi/lp-EO5I60KA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 57 }
+                duration: 297
             },
             {
                 songId: 'IxuThNgl3YA',
@@ -436,7 +436,7 @@ export const stations = [
                 album: 'Born to Run',
                 url: 'https://www.youtube.com/embed/IxuThNgl3YA',
                 imgUrl: 'https://i.ytimg.com/vi/IxuThNgl3YA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 33 }
+                duration: 333
             },
             {
                 songId: '2Vv-BfVoq4g',
@@ -445,7 +445,7 @@ export const stations = [
                 album: '÷ (Divide)',
                 url: 'https://www.youtube.com/embed/2Vv-BfVoq4g',
                 imgUrl: 'https://i.ytimg.com/vi/2Vv-BfVoq4g/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 40 }
+                duration: 280
             }
         ]
     },
@@ -483,7 +483,7 @@ export const stations = [
                 album: 'Thriller',
                 url: 'https://www.youtube.com/embed/sOnqjkJTMaA',
                 imgUrl: 'https://i.ytimg.com/vi/sOnqjkJTMaA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 13, seconds: 42 }
+                duration: 942
             },
             {
                 songId: '4m1EFMoRFvY',
@@ -492,7 +492,7 @@ export const stations = [
                 album: 'I Am... Sasha Fierce',
                 url: 'https://www.youtube.com/embed/4m1EFMoRFvY',
                 imgUrl: 'https://i.ytimg.com/vi/4m1EFMoRFvY/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 21 }
+                duration: 201
             }
         ]
     },
@@ -516,7 +516,7 @@ export const stations = [
                 album: 'The Dark Side of the Moon',
                 url: 'https://www.youtube.com/embed/t6Z57QZ2fsA',
                 imgUrl: 'https://i.ytimg.com/vi/t6Z57QZ2fsA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 1, seconds: 30 }
+                duration: 90
             },
             {
                 songId: 'm8T7xQ7c9FQ',
@@ -525,7 +525,7 @@ export const stations = [
                 album: 'The Dark Side of the Moon',
                 url: 'https://www.youtube.com/embed/m8T7xQ7c9FQ',
                 imgUrl: 'https://i.ytimg.com/vi/m8T7xQ7c9FQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 6, seconds: 53 }
+                duration: 413
             },
             {
                 songId: 'j2YT2d0GRM0',
@@ -534,7 +534,7 @@ export const stations = [
                 album: 'The Dark Side of the Moon',
                 url: 'https://www.youtube.com/embed/j2YT2d0GRM0',
                 imgUrl: 'https://i.ytimg.com/vi/j2YT2d0GRM0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 16 }
+                duration: 156
             },
             {
                 songId: '5_tXXcUeAY4',
@@ -543,7 +543,7 @@ export const stations = [
                 album: 'The Dark Side of the Moon',
                 url: 'https://www.youtube.com/embed/5_tXXcUeAY4',
                 imgUrl: 'https://i.ytimg.com/vi/5_tXXcUeAY4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 6, seconds: 22 }
+                duration: 382
             },
             {
                 songId: '3JQ9KPoTeGU',
@@ -552,7 +552,7 @@ export const stations = [
                 album: 'The Dark Side of the Moon',
                 url: 'https://www.youtube.com/embed/3JQ9KPoTeGU',
                 imgUrl: 'https://i.ytimg.com/vi/3JQ9KPoTeGU/hqdefault.jpg',
-                duration: { hours: 0, minutes: 7, seconds: 49 }
+                duration: 469
             }
         ]
     },
@@ -576,7 +576,7 @@ export const stations = [
                 album: 'Abbey Road',
                 url: 'https://www.youtube.com/embed/sXhTjLsuc60',
                 imgUrl: 'https://i.ytimg.com/vi/sXhTjLsuc60/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 20 }
+                duration: 260
             },
             {
                 songId: 'xVau9EChJJc',
@@ -585,7 +585,7 @@ export const stations = [
                 album: 'Abbey Road',
                 url: 'https://www.youtube.com/embed/xVau9EChJJc',
                 imgUrl: 'https://i.ytimg.com/vi/xVau9EChJJc/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 3 }
+                duration: 183
             },
             {
                 songId: 'cRJB7b23i1c',
@@ -594,7 +594,7 @@ export const stations = [
                 album: 'Abbey Road',
                 url: 'https://www.youtube.com/embed/cRJB7b23i1c',
                 imgUrl: 'https://i.ytimg.com/vi/cRJB7b23i1c/hqdefault.jpg',
-                duration: { hours: 0, minutes: 2, seconds: 50 }
+                duration: 170
             },
             {
                 songId: 'k75cECaAaiw',
@@ -603,7 +603,7 @@ export const stations = [
                 album: 'Abbey Road',
                 url: 'https://www.youtube.com/embed/k75cECaAaiw',
                 imgUrl: 'https://i.ytimg.com/vi/k75cECaAaiw/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 5 }
+                duration: 185
             },
             {
                 songId: '3r5erPinW2g',
@@ -612,7 +612,7 @@ export const stations = [
                 album: 'Abbey Road',
                 url: 'https://www.youtube.com/embed/3r5erPinW2g',
                 imgUrl: 'https://i.ytimg.com/vi/3r5erPinW2g/hqdefault.jpg',
-                duration: { hours: 0, minutes: 1, seconds: 58 }
+                duration: 118
             }
         ]
     },
@@ -636,7 +636,7 @@ export const stations = [
                 album: 'Rumours',
                 url: 'https://www.youtube.com/embed/NsxEtPHs6a0',
                 imgUrl: 'https://i.ytimg.com/vi/NsxEtPHs6a0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 38 }
+                duration: 228
             },
             {
                 songId: 'iEtWI3-DhWs',
@@ -645,7 +645,7 @@ export const stations = [
                 album: 'Rumours',
                 url: 'https://www.youtube.com/embed/iEtWI3-DhWs',
                 imgUrl: 'https://i.ytimg.com/vi/iEtWI3-DhWs/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 17 }
+                duration: 257
             },
             {
                 songId: '3U0E4O1W3mQ',
@@ -654,7 +654,7 @@ export const stations = [
                 album: 'Rumours',
                 url: 'https://www.youtube.com/embed/3U0E4O1W3mQ',
                 imgUrl: 'https://i.ytimg.com/vi/3U0E4O1W3mQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 10 }
+                duration: 190
             },
             {
                 songId: 'FYXKabQxUyQ',
@@ -663,7 +663,7 @@ export const stations = [
                 album: 'Rumours',
                 url: 'https://www.youtube.com/embed/FYXKabQxUyQ',
                 imgUrl: 'https://i.ytimg.com/vi/FYXKabQxUyQ/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 30 }
+                duration: 270
             },
             {
                 songId: 'WXYuC9_pjOs',
@@ -672,7 +672,7 @@ export const stations = [
                 album: 'Rumours',
                 url: 'https://www.youtube.com/embed/WXYuC9_pjOs',
                 imgUrl: 'https://i.ytimg.com/vi/WXYuC9_pjOs/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 30 }
+                duration: 210
             }
         ]
     },
@@ -696,7 +696,7 @@ export const stations = [
                 album: 'Back in Black',
                 url: 'https://www.youtube.com/embed/LJsFm09N-nc',
                 imgUrl: 'https://i.ytimg.com/vi/LJsFm09N-nc/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 12 }
+                duration: 312
             },
             {
                 songId: 't8k50VfeyN0',
@@ -705,7 +705,7 @@ export const stations = [
                 album: 'Back in Black',
                 url: 'https://www.youtube.com/embed/t8k50VfeyN0',
                 imgUrl: 'https://i.ytimg.com/vi/t8k50VfeyN0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 17 }
+                duration: 317
             },
             {
                 songId: 'VZsOaA1cofM',
@@ -714,7 +714,7 @@ export const stations = [
                 album: 'Back in Black',
                 url: 'https://www.youtube.com/embed/VZsOaA1cofM',
                 imgUrl: 'https://i.ytimg.com/vi/VZsOaA1cofM/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 15 }
+                duration: 255
             },
             {
                 songId: '5bciH2WduL4',
@@ -723,7 +723,7 @@ export const stations = [
                 album: 'Back in Black',
                 url: 'https://www.youtube.com/embed/5bciH2WduL4',
                 imgUrl: 'https://i.ytimg.com/vi/5bciH2WduL4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 30 }
+                duration: 210
             },
             {
                 songId: 'H4lMfeKpMc8',
@@ -732,7 +732,7 @@ export const stations = [
                 album: 'Back in Black',
                 url: 'https://www.youtube.com/embed/H4lMfeKpMc8',
                 imgUrl: 'https://i.ytimg.com/vi/H4lMfeKpMc8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 14 }
+                duration: 254
             }
         ]
     },
@@ -756,7 +756,7 @@ export const stations = [
                 album: 'Hotel California',
                 url: 'https://www.youtube.com/embed/tsVxl8QcNyM',
                 imgUrl: 'https://i.ytimg.com/vi/tsVxl8QcNyM/hqdefault.jpg',
-                duration: { hours: 0, minutes: 6, seconds: 30 }
+                duration: 390
             },
             {
                 songId: '2ZnhyZqWSt4',
@@ -765,7 +765,7 @@ export const stations = [
                 album: 'Hotel California',
                 url: 'https://www.youtube.com/embed/2ZnhyZqWSt4',
                 imgUrl: 'https://i.ytimg.com/vi/2ZnhyZqWSt4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 57 }
+                duration: 237
             },
             {
                 songId: '9WrsG8azkMI',
@@ -774,7 +774,7 @@ export const stations = [
                 album: 'Hotel California',
                 url: 'https://www.youtube.com/embed/9WrsG8azkMI',
                 imgUrl: 'https://i.ytimg.com/vi/9WrsG8azkMI/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 15 }
+                duration: 255
             },
             {
                 songId: '_2iq8QStoJ0',
@@ -783,7 +783,7 @@ export const stations = [
                 album: 'Hotel California',
                 url: 'https://www.youtube.com/embed/_2iq8QStoJ0',
                 imgUrl: 'https://i.ytimg.com/vi/_2iq8QStoJ0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 5, seconds: 3 }
+                duration: 303
             },
             {
                 songId: 'Qm2L91tn8rs',
@@ -792,7 +792,7 @@ export const stations = [
                 album: 'Hotel California',
                 url: 'https://www.youtube.com/embed/Qm2L91tn8rs',
                 imgUrl: 'https://i.ytimg.com/vi/Qm2L91tn8rs/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 56 }
+                duration: 236
             }
         ]
     },
@@ -816,7 +816,7 @@ export const stations = [
                 album: 'Fearless',
                 url: 'https://www.youtube.com/embed/09R8_2nJZjA',
                 imgUrl: 'https://i.ytimg.com/vi/09R8_2nJZjA/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 55 }
+                duration: 235
             },
             {
                 songId: 'W56FGX4XJx0',
@@ -825,7 +825,7 @@ export const stations = [
                 album: '1989',
                 url: 'https://www.youtube.com/embed/W56FGX4XJx0',
                 imgUrl: 'https://i.ytimg.com/vi/W56FGX4XJx0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 51 }
+                duration: 231
             },
             {
                 songId: 'GrG-RJpwuq0',
@@ -834,7 +834,7 @@ export const stations = [
                 album: '1989',
                 url: 'https://www.youtube.com/embed/GrG-RJpwuq0',
                 imgUrl: 'https://i.ytimg.com/vi/GrG-RJpwuq0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 39 }
+                duration: 219
             },
             {
                 songId: 'PsI-Hw-ZgEg',
@@ -843,7 +843,7 @@ export const stations = [
                 album: 'Fearless',
                 url: 'https://www.youtube.com/embed/PsI-Hw-ZgEg',
                 imgUrl: 'https://i.ytimg.com/vi/PsI-Hw-ZgEg/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 56 }
+                duration: 236
             },
             {
                 songId: 'LYU06sKf5QY',
@@ -852,7 +852,7 @@ export const stations = [
                 album: 'Folklore',
                 url: 'https://www.youtube.com/embed/LYU06sKf5QY',
                 imgUrl: 'https://i.ytimg.com/vi/LYU06sKf5QY/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 59 }
+                duration: 239
             }
         ]
     },
@@ -876,7 +876,7 @@ export const stations = [
                 album: 'Scorpion',
                 url: 'https://www.youtube.com/embed/YmZrKlAL8rY',
                 imgUrl: 'https://i.ytimg.com/vi/YmZrKlAL8rY/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 18 }
+                duration: 198
             },
             {
                 songId: 'H5cI6nGhc_U',
@@ -885,7 +885,7 @@ export const stations = [
                 album: 'Scorpion',
                 url: 'https://www.youtube.com/embed/H5cI6nGhc_U',
                 imgUrl: 'https://i.ytimg.com/vi/H5cI6nGhc_U/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 38 }
+                duration: 228
             },
             {
                 songId: 'p9-H7HJ9fa4',
@@ -894,7 +894,7 @@ export const stations = [
                 album: 'Views',
                 url: 'https://www.youtube.com/embed/p9-H7HJ9fa4',
                 imgUrl: 'https://i.ytimg.com/vi/p9-H7HJ9fa4/hqdefault.jpg',
-                duration: { hours: 0, minutes: 2, seconds: 54 }
+                duration: 174
             },
             {
                 songId: 'pLxl51xgpHE',
@@ -903,7 +903,7 @@ export const stations = [
                 album: 'Scorpion',
                 url: 'https://www.youtube.com/embed/pLxl51xgpHE',
                 imgUrl: 'https://i.ytimg.com/vi/pLxl51xgpHE/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 38 }
+                duration: 228
             },
             {
                 songId: 'yPa51UsO3wg',
@@ -912,7 +912,7 @@ export const stations = [
                 album: 'Nothing Was the Same',
                 url: 'https://www.youtube.com/embed/yPa51UsO3wg',
                 imgUrl: 'https://i.ytimg.com/vi/yPa51UsO3wg/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 26 }
+                duration: 206
             }
         ]
     },
@@ -936,7 +936,7 @@ export const stations = [
                 album: '21',
                 url: 'https://www.youtube.com/embed/F28sBW3XQxY',
                 imgUrl: 'https://i.ytimg.com/vi/F28sBW3XQxY/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 48 }
+                duration: 228
             },
             {
                 songId: 'sV8Iq0UaSK8',
@@ -945,7 +945,7 @@ export const stations = [
                 album: '21',
                 url: 'https://www.youtube.com/embed/sV8Iq0UaSK8',
                 imgUrl: 'https://i.ytimg.com/vi/sV8Iq0UaSK8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 45 }
+                duration: 285
             },
             {
                 songId: 'cM0z8CckuUk',
@@ -954,7 +954,7 @@ export const stations = [
                 album: '25',
                 url: 'https://www.youtube.com/embed/cM0z8CckuUk',
                 imgUrl: 'https://i.ytimg.com/vi/cM0z8CckuUk/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 55 }
+                duration: 295
             },
             {
                 songId: '0zMZsW0OZGc',
@@ -963,7 +963,7 @@ export const stations = [
                 album: '25',
                 url: 'https://www.youtube.com/embed/0zMZsW0OZGc',
                 imgUrl: 'https://i.ytimg.com/vi/0zMZsW0OZGc/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 50 }
+                duration: 290
             },
             {
                 songId: 'Gq9YJpQo-rE',
@@ -972,7 +972,7 @@ export const stations = [
                 album: '21',
                 url: 'https://www.youtube.com/embed/Gq9YJpQo-rE',
                 imgUrl: 'https://i.ytimg.com/vi/Gq9YJpQo-rE/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 22 }
+                duration: 262
             }
         ]
     },
@@ -996,7 +996,7 @@ export const stations = [
                 album: 'Uptown Special',
                 url: 'https://www.youtube.com/embed/OPf0YbXqDm0',
                 imgUrl: 'https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg',
-                duration: { hours: 0, minutes: 4, seconds: 31 }
+                duration: 271
             },
             {
                 songId: 'KQ6iUzXxW1s',
@@ -1005,7 +1005,7 @@ export const stations = [
                 album: 'Doo-Wops & Hooligans',
                 url: 'https://www.youtube.com/embed/KQ6iUzXxW1s',
                 imgUrl: 'https://i.ytimg.com/vi/KQ6iUzXxW1s/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 40 }
+                duration: 220
             },
             {
                 songId: 'Qn7Im9d6u6k',
@@ -1014,7 +1014,7 @@ export const stations = [
                 album: 'Doo-Wops & Hooligans',
                 url: 'https://www.youtube.com/embed/Qn7Im9d6u6k',
                 imgUrl: 'https://i.ytimg.com/vi/Qn7Im9d6u6k/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 42 }
+                duration: 222
             },
             {
                 songId: 'Y6tM0sQcMg8',
@@ -1023,7 +1023,7 @@ export const stations = [
                 album: '24K Magic',
                 url: 'https://www.youtube.com/embed/Y6tM0sQcMg8',
                 imgUrl: 'https://i.ytimg.com/vi/Y6tM0sQcMg8/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 46 }
+                duration: 226
             },
             {
                 songId: 'YbeR_sEjU8U',
@@ -1032,7 +1032,7 @@ export const stations = [
                 album: '24K Magic',
                 url: 'https://www.youtube.com/embed/YbeR_sEjU8U',
                 imgUrl: 'https://i.ytimg.com/vi/YbeR_sEjU8U/hqdefault.jpg',
-                duration: { hours: 0, minutes: 3, seconds: 26 }
+                duration: 206
             }
         ]
     }
@@ -1041,4 +1041,3 @@ export const stations = [
 
 
 
- 

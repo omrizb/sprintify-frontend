@@ -1,24 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { utilService } from '../services/util.service.js'
 import { removeStation, updateStation, loadStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
-import { StationMoreDetails } from '../cmps/StationDetails/StationMoreDetails.jsx'
 import { SongList } from '../cmps/SongDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
-import { utilService } from '../services/util.service.js'
-
 import { AddSongs } from '../cmps/AddSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
-import { stationService } from '../services/station/station.service.local.js'
-import { EditStation } from '../cmps/EditStation.jsx'
 import { Modal } from '../cmps/Modal.jsx'
 import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
 import { PlayButton } from '../cmps/Player/PlayButton.jsx'
+import { EditStation } from '../cmps/EditStation.jsx'
 
 
 export function StationDetails() {
@@ -29,11 +26,10 @@ export function StationDetails() {
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const station = useSelector(storeState => storeState.stationModule.station)
     const [isLoading, setIsLoading] = useState(true)
-    const [bgColor, setBgColor] = useState(utilService.getRandomColor())
-    const [showEditBox, setShowEditBox] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const bgColor = useRef(utilService.getRandomColor())
 
     useEffect(() => {
-        setBgColor(utilService.getRandomColor())
         onLoad(id)
     }, [id])
 
@@ -61,7 +57,6 @@ export function StationDetails() {
         const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
         const stationToSave = { ...station, songs: updatedSongsArr }
         update(stationToSave)
-        console.log('remove')
     }
 
     async function update(stationToSave) {
@@ -76,11 +71,11 @@ export function StationDetails() {
     function onEdit() {
         if (!isOwnedByUser) return
         console.log('onEdit from Station Details')
-        setShowEditBox(true)
+        setIsModalOpen(true)
     }
 
-    function handleCloseEdit() {
-        setShowEditBox(false)
+    function onCloseModal() {
+        setIsModalOpen(false)
     }
 
     if (isLoading) return <Loader />
@@ -101,35 +96,16 @@ export function StationDetails() {
         }
     }
 
-    function renderHeader() {
-        return (
-            <div className="flex-regular-gap">
-                {station &&
-                    <>
-                        <PlayButton
-                            type={'stationDetails'}
-                            stationId={station._id}
-                            stationName={station.name}
-                            songId={station.songs[0]?.songId}
-                            songName={station.songs[0]?.songName}
-                        />
-                        <div className="title-medium">{station.name}</div>
-                    </>
-                }
-            </div>
-        )
-    }
-
     return (isLoading)
         ? <Loader />
         : <div
             className="station-details"
-            style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
+            style={{ background: `linear-gradient(to bottom, ${bgColor.current} 0%, #121212 30%, #121212 100%)` }}
         >
             <HeaderFixer
-                header={renderHeader()}
+                header={renderHeader(station)}
                 className="padded-top-rounded-box"
-                bgColor={bgColor}
+                bgColor={bgColor.current}
                 showFromY={100}
             >
                 <StationDetailsHeader
@@ -156,10 +132,33 @@ export function StationDetails() {
                         viewArea={isEmptyStation ? "search" : 'myPlaylist'}
                     />}
 
-                {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
-                {showEditBox && <Modal children={station} closeModal={handleCloseEdit} editStation={update} />}
 
                 <Footer />
             </HeaderFixer>
+
+            {isModalOpen &&
+                <Modal closeModal={onCloseModal} >
+                    <EditStation station={station} />
+                </Modal>
+            }
         </div>
+}
+
+function renderHeader(station) {
+    return (
+        <div className="flex-regular-gap">
+            {station &&
+                <>
+                    <PlayButton
+                        type={'stationDetails'}
+                        stationId={station._id}
+                        stationName={station.name}
+                        songId={station.songs[0]?.songId}
+                        songName={station.songs[0]?.songName}
+                    />
+                    <div className="title-medium">{station.name}</div>
+                </>
+            }
+        </div>
+    )
 }
