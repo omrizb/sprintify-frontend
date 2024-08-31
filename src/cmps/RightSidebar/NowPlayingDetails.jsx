@@ -32,38 +32,42 @@ export function NowPlayingDetails() {
     return (
         <div className="now-playing-details">
             {isLoading && <div>Loading...</div>}
-            {song && (
-                <div className='now-playing-details-header'>
-                    <div className='header-container'>
-                        <Link to={`/track/${song.songId}`}>
-                            <div className='link'>{song.songName}</div>
-                        </Link>
-                        <div className='action-bar-row'>
-                            <div>
-                                <SvgButton
-                                    btnClass={"btn-action-bar"}
-                                    svgIcon={"dots"}
-                                    svgClass={"svg-small"}
-                                    tooltipTxt={`More options for ${song.songName}`}
-                                />
-                                <SvgButton
-                                    btnClass={"btn-action-bar"}
-                                    svgIcon={"close"}
-                                    svgClass={"svg-small"}
-                                    tooltipTxt={"close"}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    {/* <pre>{JSON.stringify(song, false, 4)}</pre> */}
-                    <SongPreview song={song} index={0} style={'card'} />
-                    <SongPreview song={song} index={0} style={'card'} />
-                    <SongPreview song={song} index={0} style={'card'} />
-                    <SongPreview song={song} index={0} style={'card'} />
 
-                </div>
+            {song && (
+                <>
+                    <section className="header-container">
+                        <Link to={`/track/${song.songId}`} className="link text-normal">
+                            {song.songName}
+                        </Link>
+                        <div className="action-bar-row">
+                            <SvgButton
+                                btnClass={"btn-action-bar"}
+                                svgIcon={"dots"}
+                                svgClass={"svg-small"}
+                                tooltipTxt={`More options for ${song.songName}`}
+                            />
+                            <SvgButton
+                                btnClass={"btn-action-bar"}
+                                svgIcon={"close"}
+                                svgClass={"svg-small"}
+                                tooltipTxt={"close"}
+                            />
+                        </div>
+                    </section>
+                    <div className="scroll-container">
+                        <section className="content">
+                            <SongPreview song={song} index={0} style={'card'} />
+                            <SongPreview song={song} index={0} style={'card'} />
+                            <SongPreview song={song} index={0} style={'card'} />
+                            <SongPreview song={song} index={0} style={'card'} />
+                        </section>
+                    </div>
+                </>
             )}
         </div>
     )
+
+
+
 
 }
