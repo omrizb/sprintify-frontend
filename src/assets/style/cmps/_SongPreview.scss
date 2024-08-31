@@ -9,7 +9,7 @@
         right: 10px;
         top: 25px;
     }
-    
+
     div {
         font-size: 14px;
         display: grid;
@@ -19,43 +19,84 @@
     div:first-child {
         place-items: center;
     }
-    
 
-    .title-column {
+    &.list-style,
+    &.search,
+    &.recommended {
+        .title-column {
+            display: grid;
+            grid-template-columns: 60px 200px;
+            column-gap: 0.2em;
+
+            img {
+                height: 50px;
+            }
+
+            .text {
+                display: grid;
+                align-items: center;
+                justify-items: start;
+                justify-self: start;
+
+                div:first-child {
+                    font-size: 14px;
+                    color: white;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                div:nth-child(2) {
+                    font-size: 12px;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    &.card {
+        .title-column {
         display: grid;
-        grid-template-columns: 60px 200px;
-        column-gap: 0.2em;
-
+        row-gap: 16px;
+        
         img {
-            height: 50px;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
         }
 
         .text {
             display: grid;
             align-items: center;
             justify-items: start;
-            justify-self:start;
+            justify-self: start;
 
             div:first-child {
-                font-size: 14px;
-                color: white;
-             &:hover   
-                {
+                font-size: $textSizeLarger1;
+                color: $primaryTxtClr;
+
+                &:hover {
                     text-decoration: underline;
                 }
             }
 
             div:nth-child(2) {
-                font-size: 12px;
-                &:hover   
-                {
+                font-size: $textSizeBase;
+                color: $mediumTxtClr;
+
+                &:hover {
                     text-decoration: underline;
                 }
-
             }
-            
+        }
         }
     }
+
+    
 }
-
-

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { SvgIcon } from "./SvgIcon"
 
 
@@ -7,23 +7,40 @@ import { SvgIcon } from "./SvgIcon"
 export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
     
     const [station, setStation] = useState(stationToEdit)
+    const [selectedFile, setSelectedFile] = useState(null)
+    const fileInputRef = useRef(null)
+
+
+    useEffect(() => {
+        return () => {
+            if (selectedFile) {
+                URL.revokeObjectURL(URL.createObjectURL(selectedFile))
+            }
+        }
+    }, [selectedFile])
 
     function handleChange(ev) {
         const value = ev.target.value
+        const field = ev.target.name
+    
+        setStation(prevStation => ({...prevStation, [field]:value }))
+    }
 
-        setStation(prevStation => ({...prevStation, name:value }))
+    const handleFileChange = (ev) => {
+        const file = ev.target.files[0]
+        console.log(file)
+        if (file) {
+            setSelectedFile(file)
+            const imgUrl = URL.createObjectURL(selectedFile)
+            console.log(imgUrl)
+            setStation(prevStation => ({...prevStation, stationImgUrl:imgUrl }))
+        }
     }
 
     function onSave(){
         editStation(station)
         onCloseEdit()
-        
-
     }
-
-   
-
-    
 
     return(
         <div className = "edit-station">
@@ -39,17 +56,30 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
 
                     <div className="choose-photo">
                         <div>
-                            <SvgIcon iconName={'music'} />  
+                            {station.stationImgUrl ? (
+                                    <img src={station.stationImgUrl} alt="" /> 
+                                ) : (
+                                    <SvgIcon iconName={'music'} />
+                                )}
                         </div>
                     </div>
 
+
                     <div className="edit-image">
-                        <button className="edit-image-btn">
+                        <button className="edit-image-btn" onClick={() => {fileInputRef.current.click()}}>
                             <div>
-                                <SvgIcon iconName={'edit'} svgClass={'dots'} />
+                                <SvgIcon iconName={'edit'}  />
                                 <span>Choose photo</span>  
                             </div>
                         </button>
+
+                        <input 
+                            type="file" 
+                            accept=".jpg, .jpeg, .png" 
+                            onChange={handleFileChange} 
+                            style={{ display: 'none' }} 
+                            ref={fileInputRef} 
+                        />
                         
                     </div>
 
@@ -67,6 +97,7 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                     <input 
                     id="text-input"
                     type="text"
+                    name="name"
                     placeholder="Add a name"
                     value={station.name}
                     onChange={handleChange}
@@ -77,7 +108,9 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                 <div className="description">
                     <label htmlFor="text-area"></label>
                     <textarea 
-                    name="" 
+                    name="description"
+                    value={station.description}
+                    onChange={handleChange} 
                     id="text-area"
                     placeholder="Add an optional description">
                     </textarea>
