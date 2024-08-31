@@ -1,28 +1,17 @@
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 
-import { updateStation, loadStation } from '../store/actions/station.actions'
+import { updateStation } from '../store/actions/station.actions'
 import { SvgIcon } from '../cmps/SvgIcon'
 
 import { utilService } from '../services/util.service'
-import { SongPreview } from '../cmps/SongDetails/SongPreview.jsx'
 
-export function AddSongs({ value, style = "search", viewArea = "search" }) {
-    const { id } = useParams()
+
+export function AddSongs() {
+
     const station = useSelector(storeState => storeState.stationModule.station)
     const [songs, setSongs] = useState([])
     const debouncedLoadSongs = utilService.debounce(loadSongs, 1000)
-
-    useEffect(() => {
-        loadStation(id)
-    }, [station])
-
-    useEffect(() => {
-        if (value) {
-            loadSongs(value)
-        }
-    }, [value])
 
     function handleChange(ev) {
         const value = ev.target.value
@@ -36,7 +25,7 @@ export function AddSongs({ value, style = "search", viewArea = "search" }) {
             setSongs(loadedSongs)
 
         } catch (err) {
-            console.error(`Couldn't load songs`, err)
+            console.log(`Couldn't load songs`, err)
         }
     }
 
@@ -51,54 +40,42 @@ export function AddSongs({ value, style = "search", viewArea = "search" }) {
             const updatedStation = await updateStation(stationToSave)
             console.log(updatedStation)
         } catch (err) {
-            console.error('Cannot add a station')
+            console.log('Cannot add a station')
         }
     }
 
     return (
         <div className="add-songs">
 
-            {viewArea === 'search' && (
-                <>
-                    <h1>Let's find something for your playlist</h1>
+            <h1>Let's find something for your playlist</h1>
 
-                    <div className="global-nav text-container">
-                        <div className="search icon"><SvgIcon iconName={"search"} /> </div>
-                        <input
-                            type="text"
-                            name="txt"
-                            placeholder="Search for songs?"
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </>
-            )}
-
-            {(viewArea === 'myPlaylist') && (
-                <>
-                    <h1>Recommended</h1>
-                    <h2>Based on what's in this playlist</h2>
-                </>
-            )}
-
-            {(viewArea === 'songDetails') && (
-                <>
-                    <h1>Recommended</h1>
-                    <h2>Based on this song</h2>
-                </>
-            )}
+            <div className="global-nav text-container">
+                <div className="search icon"><SvgIcon iconName={"search"} /> </div>
+                <input
+                    type="text"
+                    name="txt"
+                    placeholder="Search for songs?"
+                    onChange={handleChange}
+                    required
+                />
+            </div>
 
             {(!songs) && <h2>Youtube is blocking us!!</h2>}
             {(songs) &&
-                <ul>
-                    {songs.map((song, index) =>
-                        <li key={song.songId} >
-                            <SongPreview song={song} index={index + 1} style={style} />
+                <ul className="" >
+                    {songs.map((song) =>
+                        <li key={song.songId}  >
+                            <div className="list">
+                                <img src={song.imgUrl} alt="" />
+                                <div className="text">
+                                    <div>{song.songName}</div>
+                                    <div>{song.artist}</div>
+                                </div>
+                                <button onClick={() => onAddSong(song)} className="btn-tinted">Add</button>
+                            </div>
                         </li>)
                     }
-                </ul>
-            }
+                </ul>}
 
         </div>
     )

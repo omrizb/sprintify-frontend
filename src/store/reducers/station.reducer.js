@@ -9,7 +9,7 @@ export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 
 const initialState = {
     stations: [],
-    station: null
+    station: null,
 }
 
 export function stationReducer(state = initialState, action) {
@@ -23,16 +23,15 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, station: action.station }
             break
         case REMOVE_STATION:
-            const lastRemovedStation = state.stations.find(station => station._id === action.stationId)
             stations = state.stations.filter(station => station._id !== action.stationId)
-            newState = { ...state, stations, lastRemovedStation }
+            newState = { ...state, stations, station: null }
             break
         case ADD_STATION:
             newState = { ...state, stations: [action.station, ...state.stations] }
             break
         case UPDATE_STATION:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
-            newState = { ...state, stations }
+            newState = { ...state, stations, station: action.station }
             break
         case ADD_SONG_TO_STATION:
             newState = { ...state, station: { ...state.station, songs: [...state.station.songs || [], action.song] } }
