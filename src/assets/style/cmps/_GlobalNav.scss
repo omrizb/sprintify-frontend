@@ -69,6 +69,10 @@
                     .btn-installApp-nav{
                         @include transparent;
                         @include btn($type: animated, $size: small);
+                        
+                    }
+
+                    .smaller-margin{
                         margin-right: -9px;
                     }
 

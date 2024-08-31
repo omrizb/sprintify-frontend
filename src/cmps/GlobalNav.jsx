@@ -76,7 +76,7 @@ export function GlobalNav() {
             <div className="global-nav-right">
                 <div className="installApp">
                     <SvgButton
-                        btnClass="btn-installApp-nav"
+                        btnClass="btn-installApp-nav smaller-margin"
                         svgIcon='installApp'
                         svgClass="svg-small"
                         tooltipTxt={"What's New"}
