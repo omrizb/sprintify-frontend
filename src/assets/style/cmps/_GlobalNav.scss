@@ -65,10 +65,11 @@
                     align-items: center;
                     padding:4px 16px 4px 33px ;
 
+
                     .btn-installApp-nav{
                         @include transparent;
                         @include btn($type: animated, $size: small);
-                        padding: 4px
+                        margin-right: -9px;
                     }
 
                     &:hover {
