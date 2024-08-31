@@ -55,14 +55,20 @@
 }
 
 .text-normal {
-    font-size: 1rem;
+    font-size: $textSizeBase;
     font-weight: 400;
 }
 
 .text-medium {
-    font-size: 1rem;
+    font-size: $textSizeBase;
     font-weight: 700;
     color: $mediumTxtClr;
+}
+
+.title-medium {
+    font-family: SprintifyUITitle;
+    font-size: $textSizeLarger1;
+    font-weight: 700;
 }
 
 .disabled {
@@ -71,6 +77,12 @@
 
 .icon {
     @include icon;
+}
+
+.padded-top-rounded-box {
+    padding: $sectionPaddingInline $sectionPaddingBlock;
+    border-top-left-radius: $sectionBorderRadius;
+    border-top-right-radius: $sectionBorderRadius;
 }
 
 .svg-small {

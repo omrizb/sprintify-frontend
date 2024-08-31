@@ -17,6 +17,8 @@ import { Loader } from '../cmps/Loader.jsx'
 import { stationService } from '../services/station/station.service.local.js'
 import { EditStation } from '../cmps/EditStation.jsx'
 import { Modal } from '../cmps/Modal.jsx'
+import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
+import { PlayButton } from '../cmps/Player/PlayButton.jsx'
 
 
 export function StationDetails() {
@@ -99,39 +101,65 @@ export function StationDetails() {
         }
     }
 
+    function renderHeader() {
+        return (
+            <div className="flex-regular-gap">
+                {station &&
+                    <>
+                        <PlayButton
+                            type={'stationDetails'}
+                            stationId={station._id}
+                            stationName={station.name}
+                            songId={station.songs[0]?.songId}
+                            songName={station.songs[0]?.songName}
+                        />
+                        <div className="title-medium">{station.name}</div>
+                    </>
+                }
+            </div>
+        )
+    }
 
     return (isLoading)
         ? <Loader />
-        : <div className="station-details"
+        : <div
+            className="station-details"
             style={{ background: `linear-gradient(to bottom, ${bgColor} 0%, #121212 30%, #121212 100%)` }}
         >
-            <StationDetailsHeader
-                station={station}
-                onEdit={onEdit}
-            />
+            <HeaderFixer
+                header={renderHeader()}
+                className="padded-top-rounded-box"
+                bgColor={bgColor}
+                showFromY={100}
+            >
+                <StationDetailsHeader
+                    station={station}
+                    onEdit={onEdit}
+                />
 
-            <StationDetailsActions
-                key={station}
-                station={station}
-                stationMeta={stationMeta}
-                onRemoveStation={onRemoveStation}
-            />
+                <StationDetailsActions
+                    key={station}
+                    station={station}
+                    stationMeta={stationMeta}
+                    onRemoveStation={onRemoveStation}
+                />
 
-            <SongList
-                station={station}
-                songs={station.songs}
-                onRemoveSong={onRemoveSong}
-            />
-            {isOwnedByUser &&
-                <AddSongs
-                    value={isEmptyStation ? "" : station.songs[0].artist}
-                    style={isEmptyStation ? "search" : "recommended"}
-                    viewArea={isEmptyStation ? "search" : 'myPlaylist'}
-                />}
+                <SongList
+                    station={station}
+                    songs={station.songs}
+                    onRemoveSong={onRemoveSong}
+                />
+                {isOwnedByUser &&
+                    <AddSongs
+                        value={isEmptyStation ? "" : station.songs[0].artist}
+                        style={isEmptyStation ? "search" : "recommended"}
+                        viewArea={isEmptyStation ? "search" : 'myPlaylist'}
+                    />}
 
-            {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
-            {showEditBox && <Modal children={station} closeModal={handleCloseEdit} editStation={update} />}
+                {/* {showEditBox && <EditStation station = {station} onCloseEdit = {handleCloseEdit} />} */}
+                {showEditBox && <Modal children={station} closeModal={handleCloseEdit} editStation={update} />}
 
-            <Footer />
+                <Footer />
+            </HeaderFixer>
         </div>
 }
