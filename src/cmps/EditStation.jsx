@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from 'react'
 import { SvgIcon } from "./SvgIcon"
+import { updateStation } from '../store/actions/station.actions'
 
 
-
-
-export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
+export function EditStation({station, onCloseEdit}){
     
-    const [station, setStation] = useState(stationToEdit)
+    const [stationToEdit, setStationToEdit] = useState(structuredClone(station))
     const [selectedFile, setSelectedFile] = useState(null)
     const fileInputRef = useRef(null)
 
-
+    
     useEffect(() => {
         return () => {
             if (selectedFile) {
@@ -23,22 +22,22 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
         const value = ev.target.value
         const field = ev.target.name
     
-        setStation(prevStation => ({...prevStation, [field]:value }))
+        setStationToEdit(prevStation => ({...prevStation, [field]:value }))
     }
 
     const handleFileChange = (ev) => {
         const file = ev.target.files[0]
-        console.log(file)
+        // console.log(file)
         if (file) {
             setSelectedFile(file)
             const imgUrl = URL.createObjectURL(selectedFile)
             console.log(imgUrl)
-            setStation(prevStation => ({...prevStation, stationImgUrl:imgUrl }))
+            setStationToEdit(prevStation => ({...prevStation, stationImgUrl:imgUrl }))
         }
     }
 
-    function onSave(){
-        editStation(station)
+    function onClickSave(){ 
+        updateStation(stationToEdit)
         onCloseEdit()
     }
 
@@ -56,11 +55,14 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
 
                     <div className="choose-photo">
                         <div>
-                            {station.stationImgUrl ? (
-                                    <img src={station.stationImgUrl} alt="" /> 
+                            {stationToEdit.stationImgUrl ? (
+                                    <img src={stationToEdit.stationImgUrl} alt="" /> 
                                 ) : (
                                     <SvgIcon iconName={'music'} />
                                 )}
+                            
+                            {/* <SvgIcon iconName={'music'} /> */}
+                    
                         </div>
                     </div>
 
@@ -79,6 +81,7 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                             onChange={handleFileChange} 
                             style={{ display: 'none' }} 
                             ref={fileInputRef} 
+                            // value={stationToEdit.stationImgUrl}
                         />
                         
                     </div>
@@ -99,7 +102,7 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                     type="text"
                     name="name"
                     placeholder="Add a name"
-                    value={station.name}
+                    value={stationToEdit.name}
                     onChange={handleChange}
                     required
                      />
@@ -109,7 +112,7 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                     <label htmlFor="text-area"></label>
                     <textarea 
                     name="description"
-                    value={station.description}
+                    value={stationToEdit.description}
                     onChange={handleChange} 
                     id="text-area"
                     placeholder="Add an optional description">
@@ -117,7 +120,7 @@ export function EditStation({station: stationToEdit, onCloseEdit, editStation}){
                 </div>
 
                 <div className="save">
-                    <button onClick={onSave} className="save-btn" >
+                    <button onClick={onClickSave} className="save-btn" >
                         <span>Save</span>
                     </button> 
                 </div>

@@ -1,6 +1,6 @@
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station, bgColor, onEdit }) {
+export function StationDetailsHeader({ station, bgColor, onEditStation }) {
 
     const songCount = station.songs.length
     const songCountTxt = formatSongCountTxt()
@@ -48,7 +48,7 @@ export function StationDetailsHeader({ station, bgColor, onEdit }) {
 
             <div className="station-info">
                 <div className="station-type">{station.type}</div>
-                <div className="station-name">{station.name}</div>
+                <div onClick ={onEditStation} className="station-name">{station.name}</div>
                 <div className="bottom-info">
                     <span className="created-by">{station.createdBy.fullName}</span>
                     {songCount &&
