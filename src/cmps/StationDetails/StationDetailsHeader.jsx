@@ -1,6 +1,6 @@
 import { SvgIcon } from "../SvgIcon"
 
-export function StationDetailsHeader({ station, onEdit }) {
+export function StationDetailsHeader({ station, bgColor, onEdit }) {
 
     const songCount = station.songs.length
     const songCountTxt = formatSongCountTxt()
@@ -29,7 +29,7 @@ export function StationDetailsHeader({ station, onEdit }) {
     }
 
     return (
-        <div className="station-details-header">
+        <div className="station-details-header" style={{ backgroundColor: bgColor }}>
             <div className="station-cover-container">
                 {(station.stationImgUrl)
                     ? <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />

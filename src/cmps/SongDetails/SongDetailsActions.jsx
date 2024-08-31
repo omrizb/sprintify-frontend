@@ -18,19 +18,19 @@ export function SongDetailsActions({ song }) {
                     <SvgButton
                         btnClass={"action-bar-btn icon"}
                         svgIcon={"removePlaylist"}
-                        svgClass={"svg-big"}
+                        svgClass={"svg-big1"}
                         tooltipTxt={`Remove from Your Library`}
                     />
                     <SvgButton
                         btnClass={"action-bar-btn icon"}
                         svgIcon={"addPlaylist"}
-                        svgClass={"svg-big"}
+                        svgClass={"svg-big1"}
                         tooltipTxt={`Save to Your Library`}
                     />
                     <SvgButton
                         btnClass={"action-bar-btn icon"}
                         svgIcon={"dots"}
-                        svgClass={"svg-big"}
+                        svgClass={"svg-big1"}
                         tooltipTxt={`More options for ${song.name}`}
                     />
                 </div>

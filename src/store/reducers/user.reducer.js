@@ -7,7 +7,12 @@ export const SET_SCORE = 'SET_SCORE'
 
 const initialState = {
     // user: userService.getLoggedinUser(),
-    user: 'bob',
+    user: {
+        _id: 'A1b2C3d4E5',
+        fullName: 'Olivia Smith',
+        imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
+        settings: { songsDisplay: 'list' }
+    },
     users: [],
     watchedUser: null
 }

@@ -82,17 +82,16 @@ export function StationDetails() {
     if (!station) return <div className="station-details">No station to display</div>
 
     const isEmptyStation = station.songs.length === 0
-    // const isOwnedByUser = station.createdBy.id === loggedinUser._id
-    const isOwnedByUser = station.createdBy.id === 'AAAA'
+    const isOwnedByUser = station.createdBy.id === loggedinUser._id
+    const isLikedByUser = station.likedByUsers.includes(loggedinUser._id)
     const stationMeta = {
-        isEmptyStation: isEmptyStation,
-        isOwnedByUser: isOwnedByUser,
         stationActionsBar: {
             'showPlay': station.type === 'playlist' && !isEmptyStation,
-            'showAddRemove': station.type === 'playlist' && !isOwnedByUser,
+            'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
+            'showRemoveFromLibrary': !isOwnedByUser && isLikedByUser,
             'showFollowUnfollow': station.type === 'podcast',
             'showMore': !station.isLikedSongs,
-            'showView': station.type === 'playlist'
+            'songsDisplay': loggedinUser.songsDisplay || 'list'
         }
     }
 
@@ -100,18 +99,21 @@ export function StationDetails() {
         ? <Loader />
         : <div
             className="station-details"
-            style={{ background: `linear-gradient(to bottom, ${bgColor.current} 0%, #121212 30%, #121212 100%)` }}
+        // style={{ background: `linear-gradient(to bottom, ${bgColor.current} 0%, #121212 30%, #121212 100%)` }}
         >
             <HeaderFixer
                 header={renderHeader(station)}
                 className="padded-top-rounded-box"
                 bgColor={bgColor.current}
-                showFromY={100}
+                showFromY={150}
             >
                 <StationDetailsHeader
                     station={station}
+                    bgColor={bgColor.current}
                     onEdit={onEdit}
                 />
+
+                <div className="secondary-background" style={{ backgroundColor: bgColor.current }}></div>
 
                 <StationDetailsActions
                     key={station}
@@ -125,6 +127,7 @@ export function StationDetails() {
                     songs={station.songs}
                     onRemoveSong={onRemoveSong}
                 />
+
                 {isOwnedByUser &&
                     <AddSongs
                         value={isEmptyStation ? "" : station.songs[0].artist}

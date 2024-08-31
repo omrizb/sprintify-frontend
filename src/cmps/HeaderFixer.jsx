@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom'
 export function HeaderFixer({ header, className, bgColor, showFromY, children }) {
 
     // OPACITY_SCALE is the scroll distance after showFromY during which opacity grows from 0 to 1
-    const OPACITY_SCALE = 100
+    const OPACITY_SCALE = 80
 
     const { containerRef: scrollableContainerRef } = useOutletContext()
     const [width, setWidth] = useState(0)
@@ -57,7 +57,7 @@ export function HeaderFixer({ header, className, bgColor, showFromY, children })
                     className={`background ${className}`}
                     style={{ ...style, backgroundColor: bgColor }}
                 ></div>
-                <header className={className} style={{ ...style }}>
+                <header className={className} style={{ ...style, opacity: (opacity) ? 1 : 0 }}>
                     {header}
                 </header>
             </div>

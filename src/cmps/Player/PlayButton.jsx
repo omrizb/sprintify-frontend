@@ -46,7 +46,7 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
 
     if (type === 'stationDetails') {
         btnClass = 'btn-station-details'
-        svgClass = 'svg-big'
+        svgClass = 'svg-big1'
         tooltipTxt = stationName
     } else if (type === 'stationPreview') {
         btnClass = 'btn-station-preview'

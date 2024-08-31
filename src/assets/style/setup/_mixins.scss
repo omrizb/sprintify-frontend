@@ -41,6 +41,13 @@
     gap: $gap;
 }
 
+@mixin align-to-end-flex() {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
 //aspect ratio mixin
 @mixin aspect-ratio($width: 1, $height: 1) {
     position: relative;
@@ -107,6 +114,12 @@
     background-color: $lightBgClr;
 }
 
+@mixin green-secondary {
+    color: $secondaryTxtClr;
+    fill: $secondaryTxtClr;
+    background-color: $buttonBgGreen;
+}
+
 @mixin green {
     color: $lightTxtClr;
     fill: $lightTxtClr;
@@ -163,6 +176,7 @@
     }
 
     @if $circleSize > 0 {
+        padding: 0;
         width: $circleSize;
         height: $circleSize;
     }

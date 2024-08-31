@@ -34,7 +34,7 @@ export function GlobalNav() {
                         <SvgButton
                             btnClass="btn-global-nav"
                             svgIcon={isHome ? 'homeFull' : 'home'}
-                            svgClass="svg-big"
+                            svgClass="svg-big1"
                             tooltipTxt="Home"
                         />
                     </Link>
@@ -46,7 +46,7 @@ export function GlobalNav() {
                                 <SvgButton
                                     btnClass="btn-search-nav"
                                     svgIcon="search"
-                                    svgClass="svg-big"
+                                    svgClass="svg-big1"
                                     tooltipTxt="Search"
                                 />
                             </div>
@@ -65,7 +65,7 @@ export function GlobalNav() {
                                 <SvgButton
                                     btnClass="btn-search-nav"
                                     svgIcon={isbrowse ? 'browseFull' : 'browse'}
-                                    svgClass="svg-big"
+                                    svgClass="svg-big1"
                                     tooltipTxt="Browse"
                                 />
                             </div>

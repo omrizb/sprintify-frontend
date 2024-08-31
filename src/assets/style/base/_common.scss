@@ -22,12 +22,12 @@
 
 .btn-dark {
     @include dark1;
-    @include btn();
+    @include btn;
 }
 
 .btn-dark2 {
     @include dark2;
-    @include btn($squareSize: $stdBtnSize);
+    @include btn($circleSize: $stdBtnSize);
 
     &:hover {
         fill:  $primaryTxtClr;
@@ -40,9 +40,20 @@
     }
 }
 
+.btn-dark2-simple {
+    @include dark2;
+    @include btn($circleSize: $stdBtnSize);
+    transition: none;
+
+    &:hover {
+        fill:  $primaryTxtClr;
+        color:  $primaryTxtClr;
+    }
+}
+
 .btn-light {
     @include light;
-    @include btn();
+    @include btn;
 }
 
 .btn-green {
@@ -51,6 +62,26 @@
 
     &:active {
         background-color: $buttonBgGreenPress;
+    }
+}
+
+.btn-v {
+    @include btn($type: animated, $circleSize: 30px);
+    background-color: transparent;
+    fill: $buttonBgGreen;
+
+    &:active {
+        fill: $buttonBgGreenPress;
+    }
+}
+
+.btn-v-small {
+    @include btn($type: animated, $circleSize: 16px);
+    background-color: transparent;
+    fill: $buttonBgGreen;
+
+    &:active {
+        fill: $buttonBgGreenPress;
     }
 }
 
@@ -79,6 +110,11 @@
     @include icon;
 }
 
+.content-spacing {
+    width: 100%;
+    padding: 0 $sectionPaddingInline;
+}
+
 .padded-top-rounded-box {
     padding: $sectionPaddingInline $sectionPaddingBlock;
     border-top-left-radius: $sectionBorderRadius;
@@ -86,16 +122,21 @@
 }
 
 .svg-small {
-    width: $smallSvgSize;
-    height: $smallSvgSize;
+    width: $svgSizeSmall;
+    height: $svgSizeSmall;
 }
 
 .svg-normal {
-    width: $stdSvgSize;
-    height: $stdSvgSize;
+    width: $svgSizeBase;
+    height: $svgSizeBase;
 }
 
-.svg-big {
-    width: $largeSvgSize;
-    height: $largeSvgSize;
+.svg-big1 {
+    width: $svgSizeLarge1;
+    height: $svgSizeLarge1;
+}
+
+.svg-big2 {
+    width: $svgSizeLarge2;
+    height: $svgSizeLarge2;
 }

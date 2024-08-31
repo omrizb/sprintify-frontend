@@ -23,12 +23,15 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
             'showGrid': false,
         }
     }
+
+
     const {
         showPlay,
-        showAddRemove,
+        showAddToLibrary,
+        showRemoveFromLibrary,
         showFollowUnfollow,
         showMore,
-        showView,
+        songsDisplay,
     } = stationMeta.stationActionsBar
     // console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
 
@@ -38,65 +41,51 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
     return (
         <div className="station-action-bar">
-            <div className="station-action-bar-row">
-                <div className="station-action-bar-container">
-                    {showPlay && <PlayButton
-                        type={'stationDetails'}
-                        stationId={station._id}
-                        stationName={station.name}
-                        songId={station.songs[0]?.songId}
-                        songName={station.songs[0]?.songName}
-                    />}
 
-                    {showAddRemove && (
-                        <>
-                            <SvgButton
-                                btnClass={"action-bar-btn icon"}
-                                svgIcon={"removePlaylist"}
-                                svgClass={"svg-big"}
-                                tooltipTxt={`Remove from Your Library`}
-                            />
-                            <SvgButton
-                                btnClass={"action-bar-btn icon"}
-                                svgIcon={"addPlaylist"}
-                                svgClass={"svg-big"}
-                                tooltipTxt={`Save to Your Library`}
-                            />
-                        </>
-                    )}
+            {showPlay && <PlayButton
+                type={'stationDetails'}
+                stationId={station._id}
+                stationName={station.name}
+                songId={station.songs[0]?.songId}
+                songName={station.songs[0]?.songName}
+            />}
 
-                    {showFollowUnfollow && (
-                        <>
-                            <button className="following-btn">Following</button>
-                            <button className="following-btn">Follow</button>
-                        </>
-                    )}
+            {showAddToLibrary && <SvgButton
+                btnClass={"btn-dark2"}
+                svgIcon={"addPlaylist"}
+                svgClass={"svg-big2"}
+                tooltipTxt={`Save to Your Library`}
+            />}
 
-                    {showMore && (
-                        <SvgButton
-                            btnClass={"action-bar-btn icon"}
-                            svgIcon={"dots"}
-                            svgClass={"svg-big"}
-                            tooltipTxt={`More options for ${station.name}`}
-                        />
+            {showRemoveFromLibrary && <SvgButton
+                btnClass={"btn-v"}
+                svgIcon={"removePlaylist"}
+                svgClass={"svg-big2"}
+                tooltipTxt={`Remove from Your Library`}
+            />}
 
+            {showFollowUnfollow && (
+                <>
+                    <button className="following-btn">Following</button>
+                    <button className="following-btn">Follow</button>
+                </>
+            )}
 
-                    )}
-                    <button onClick={onRemoveStation} className="btn-tinted">Remove</button>
+            {showMore && (<SvgButton
+                btnClass={"btn-dark2"}
+                svgIcon={"dots"}
+                svgClass={"svg-big2"}
+                tooltipTxt={`More options for ${station.name}`}
+            />)}
 
-
-                </div>
-                <div className="view-as">
-                    {showView && (
-                        <>
-                            <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
-                                List
-                                <div className="icon"><SvgIcon iconName={"list"} /> </div>
-                            </div>
-                            {showMenu && <DropDownMenu display={display} />}
-                        </>
-                    )}
-                </div>
+            <div className="view-as">
+                <button className="btn-dark2-simple flex-regular-gap" onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
+                    {(songsDisplay === 'list')
+                        ? <><span>List</span><SvgIcon iconName="list" svgClass="svg-small" /></>
+                        : <><span>Compact</span><SvgIcon iconName="compact" svgClass="svg-small" /></>
+                    }
+                </button>
+                {showMenu && <DropDownMenu display={display} />}
             </div>
         </div>
     )

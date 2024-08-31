@@ -1,11 +1,11 @@
 :root {
     --tooltip-txt-color: #ffffff;
-    --tooltip-bgcolor: hsla(0,0%,100%,.1);
+    --tooltip-bgcolor: rgb(12,12,12,0.9);
 }
 
 .tooltip-container {
     position: relative;
-
+    
     .tooltip {
         position: absolute;
         border-radius: 4px;
@@ -15,6 +15,7 @@
         font-weight: 300;
         color: var(--tooltip-txt-color);
         background-color: var(--tooltip-bgcolor);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 4px 0px;
 
         opacity: 0;
         transition: opacity 0.5s ease;
