@@ -62,7 +62,7 @@ export function StationDetails() {
     async function update(stationToSave) {
         try {
             const updatedStation = await updateStation(stationToSave)
-            console.log(updatedStation)
+            // console.log(updatedStation)
         } catch (err) {
             console.log('Cannot add a station')
         }
@@ -108,9 +108,12 @@ export function StationDetails() {
                 showFromY={150}
             >
                 <StationDetailsHeader
+                    key={station}
                     station={station}
                     bgColor={bgColor.current}
                     onEdit={onEdit}
+                    onEditStation = {() => setIsModalOpen(true)}
+
                 />
 
                 <div className="secondary-background" style={{ backgroundColor: bgColor.current }}></div>
@@ -140,7 +143,7 @@ export function StationDetails() {
 
             {isModalOpen &&
                 <Modal closeModal={onCloseModal} >
-                    <EditStation station={station} />
+                    <EditStation station={station} onCloseEdit ={onCloseModal} />
                 </Modal>
             }
         </div>
