@@ -3,7 +3,10 @@ import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
 import { changeViewMode } from '../../services/event-bus.service.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
-import { PlayButton } from '../Player/PlayButton.jsx'
+import { PlayButton } from '../Buttons/PlayButton.jsx'
+import { VButton } from '../Buttons/VButton.jsx'
+import { AddToButton } from '../Buttons/AddToButton.jsx'
+import { DotsButton } from '../Buttons/DotsButton.jsx'
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
@@ -34,7 +37,6 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         showMore,
         songsDisplay,
     } = stationMeta.stationActionsBar
-    // console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
 
     const handleViewModeClick = (mode) => {
         changeViewMode(mode)
@@ -51,19 +53,9 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 songName={station.songs[0]?.songName}
             />}
 
-            {showAddToLibrary && <SvgButton
-                btnClass={"btn-dark2"}
-                svgIcon={"addPlaylist"}
-                svgClass={"svg-big2"}
-                tooltipTxt={`Save to Your Library`}
-            />}
+            {showAddToLibrary && <AddToButton type="addToLibrary" />}
 
-            {showRemoveFromLibrary && <SvgButton
-                btnClass={"btn-v"}
-                svgIcon={"removePlaylist"}
-                svgClass={"svg-big2"}
-                tooltipTxt={`Remove from Your Library`}
-            />}
+            {showRemoveFromLibrary && <VButton type="removeFromLibrary" />}
 
             {isOwnedByUser && <button
                 className={"btn-dark2"}
@@ -77,18 +69,13 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 </>
             )}
 
-            {showMore && (<SvgButton
-                btnClass={"btn-dark2"}
-                svgIcon={"dots"}
-                svgClass={"svg-big2"}
-                tooltipTxt={`More options for ${station.name}`}
-            />)}
+            {showMore && <DotsButton type="stationDetails" elementName={station.name} />}
 
             <div className="view-as">
                 <button className="btn-dark2-simple flex-regular-gap" onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
                     {(songsDisplay === 'list')
-                        ? <><span>List</span><SvgIcon iconName="list" svgClass="svg-small" /></>
-                        : <><span>Compact</span><SvgIcon iconName="compact" svgClass="svg-small" /></>
+                        ? <><span>List</span><SvgIcon iconName="list" svgClass="svg-small1" /></>
+                        : <><span>Compact</span><SvgIcon iconName="compact" svgClass="svg-small1" /></>
                     }
                 </button>
                 {showMenu && <DropDownMenu display={display} />}

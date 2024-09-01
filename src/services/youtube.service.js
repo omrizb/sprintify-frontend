@@ -116,14 +116,14 @@ function parseISODuration(isoDuration) {
 
     if (!matches) {
         console.error('Invalid duration:', isoDuration)
-        return { hours: 0, minutes: 0, seconds: 0 }
+        return 0
     }
 
     const hours = matches[1] ? parseInt(matches[1]) : 0
     const minutes = matches[2] ? parseInt(matches[2]) : 0
     const seconds = matches[3] ? parseInt(matches[3]) : 0
 
-    return { hours, minutes, seconds }
+    return hours * 3600 + minutes * 60 + seconds
 }
 
 

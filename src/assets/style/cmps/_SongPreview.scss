@@ -1,8 +1,58 @@
 .song-preview {
     position: relative;
+    width: 100%;
+    color: $secondaryTxtClr;
+
+    a:hover {
+        text-decoration: underline;
+        color: $primaryTxtClr;
+    }
+
+    &.highlight {
+        color: $primaryTxtClr;
+    }
 
     &.list {
-        
+        .small-preview {
+            display: grid;
+            grid-template-areas:
+            "thumbnail  song-name"
+            "thumbnail  artist";
+            height: 100%;
+
+            .thumbnail {
+                grid-area: thumbnail;
+                place-self: center;
+                width: 40px;
+                height: 40px;
+                margin-inline-end: 12px;
+                border-radius: 4px;
+            }
+
+            .song-name {
+                grid-area: song-name;
+                place-self: end start;
+                color: $primaryTxtClr;
+            }
+
+            .artist {
+                grid-area: artist;
+                place-self: start;
+                font-size: $textSizeSmaller-1;
+            }
+        }
+
+        .album {
+            font-size: $textSizeSmaller-1;
+        }
+
+        .song-duration {
+            display: grid;
+            grid-template-columns: 25% 45% 30%;
+            place-items: center end;
+            width: 100%;
+            font-size: $textSizeSmaller-1;
+        }
     }
 
     &.type-search,

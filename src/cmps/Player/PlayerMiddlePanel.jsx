@@ -30,33 +30,33 @@ export function PlayerMiddlePanel({ getPlayerState }) {
                 <SvgButton
                     btnClass="btn-dark2"
                     svgIcon="playerShuffle"
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt="Shuffle"
                 />
                 <SvgButton
                     btnClass="btn-dark2"
                     svgIcon="playerPreviousSong"
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt="Previous song"
 
                 />
                 <SvgButton
                     btnClass="btn-player-play"
                     svgIcon={player.isPlaying ? 'playerPause' : 'playerPlay'}
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt={player.isPlaying ? 'Pause' : 'Play'}
                     onClick={handlePlayPause}
                 />
                 <SvgButton
                     btnClass="btn-dark2"
                     svgIcon="playerNextSong"
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt="Next song"
                 />
                 <SvgButton
                     btnClass="btn-dark2"
                     svgIcon="playerRepeat"
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt="Repeat"
                 />
             </div>

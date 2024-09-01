@@ -15,6 +15,7 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
             setIsPlaying(false)
         } else if (type === 'songPreview' && player.songId === songId) {
             (player.songId === songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
+            console.log("sdf")
         } else {
             setIsPlaying(player.isPlaying)
         }
@@ -46,7 +47,11 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
 
     if (type === 'stationDetails') {
         btnClass = 'btn-station-details'
-        svgClass = 'svg-big1'
+        svgClass = 'svg-normal'
+        tooltipTxt = stationName
+    } else if (type === 'stationDetailsSmall') {
+        btnClass = 'btn-station-details-small'
+        svgClass = 'svg-normal'
         tooltipTxt = stationName
     } else if (type === 'stationPreview') {
         btnClass = 'btn-station-preview'
@@ -58,7 +63,7 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
         tooltipTxt = stationName
     } else if (type === 'songPreview') {
         btnClass = 'btn-song-preview'
-        svgClass = 'svg-small'
+        svgClass = 'svg-small2'
         tooltipTxt = songName
     }
 

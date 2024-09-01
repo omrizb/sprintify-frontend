@@ -38,6 +38,11 @@
     }
 }
 
+.btn-primary-transparent-small {
+    @include transparent;
+    @include btn($type: animated, $circleSize: $smallBtnSize);
+}
+
 .btn-dark {
     @include dark1;
     @include btn;
@@ -46,6 +51,21 @@
 .btn-dark2 {
     @include dark2;
     @include btn($circleSize: $stdBtnSize);
+
+    &:hover {
+        fill:  $primaryTxtClr;
+        color:  $primaryTxtClr;
+    }
+
+    &:active {
+        fill: $pressedTxtClr;
+        color: $pressedTxtClr;
+    }
+}
+
+.btn-dark2-small {
+    @include dark2;
+    @include btn($circleSize: $smallBtnSize);
 
     &:hover {
         fill:  $primaryTxtClr;
@@ -84,9 +104,9 @@
 }
 
 .btn-v {
-    @include btn($type: animated, $circleSize: 30px);
     background-color: transparent;
     fill: $buttonBgGreen;
+    @include btn($type: animated, $circleSize: 30px);
 
     &:active {
         fill: $buttonBgGreenPress;
@@ -94,9 +114,9 @@
 }
 
 .btn-v-small {
-    @include btn($type: animated, $circleSize: 16px);
     background-color: transparent;
     fill: $buttonBgGreen;
+    @include btn($type: animated, $circleSize: 16px);
 
     &:active {
         fill: $buttonBgGreenPress;
@@ -139,9 +159,14 @@
     border-top-right-radius: $sectionBorderRadius;
 }
 
-.svg-small {
-    width: $svgSizeSmall;
-    height: $svgSizeSmall;
+.svg-small2 {
+    width: $svgSizeSmall2;
+    height: $svgSizeSmall2;
+}
+
+.svg-small1 {
+    width: $svgSizeSmall1;
+    height: $svgSizeSmall1;
 }
 
 .svg-normal {
@@ -157,4 +182,8 @@
 .svg-big2 {
     width: $svgSizeLarge2;
     height: $svgSizeLarge2;
+}
+
+.hide {
+    display: none;
 }

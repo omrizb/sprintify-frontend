@@ -9,7 +9,7 @@ export function PanelIcon({ svgIcon, tooltipTxt, isActive, onClick }) {
             <SvgButton
                 btnClass={btnClass}
                 svgIcon={svgIcon}
-                svgClass="svg-small"
+                svgClass="svg-small1"
                 tooltipTxt={tooltipTxt}
                 onClick={onClick}
             />

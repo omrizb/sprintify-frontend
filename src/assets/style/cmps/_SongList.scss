@@ -5,9 +5,34 @@
     .list-header {
         height: 36px;
         margin-bottom: 8px;
+        padding: 0 16px;
         border-bottom: 1px solid $tintedBgClr;
         font-size: $textSizeSmaller-1;
         color: $secondaryTxtClr;
+
+        .duration {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            place-items: end;
+            width: 100%;
+        }
+    }
+
+    li {
+        @include flex;
+        height: 56px;
+        padding: 0 16px;
+        border-radius: 4px;
+        cursor: default;
+
+        &.selected {
+            background-color: $listSelectedClr;
+        }
+
+        &:not(.selected):hover {
+            background-color: $listHoverClr;
+        }
+        
     }
 }
 

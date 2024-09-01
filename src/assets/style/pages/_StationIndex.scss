@@ -7,11 +7,11 @@
     }
 
     .left-sidebar-container {
+        @include section;
         grid-area: left-sidebar;
         overflow-y: auto;
-        overflow-x:hidden;
+        overflow-x: hidden;
         width: 300px;
-        // overflow-y: scroll;
     }
 
     .main-view-container {

@@ -43,13 +43,13 @@ export function NowPlayingDetails() {
                             <SvgButton
                                 btnClass={"btn-action-bar"}
                                 svgIcon={"dots"}
-                                svgClass={"svg-small"}
+                                svgClass={"svg-small1"}
                                 tooltipTxt={`More options for ${song.songName}`}
                             />
                             <SvgButton
                                 btnClass={"btn-action-bar"}
                                 svgIcon={"close"}
-                                svgClass={"svg-small"}
+                                svgClass={"svg-small1"}
                                 tooltipTxt={"close"}
                             />
                         </div>

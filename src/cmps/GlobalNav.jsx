@@ -78,7 +78,7 @@ export function GlobalNav() {
                     <SvgButton
                         btnClass="btn-installApp-nav smaller-margin"
                         svgIcon='installApp'
-                        svgClass="svg-small"
+                        svgClass="svg-small1"
                         tooltipTxt={"What's New"}
                     />
                     <span>installApp</span>
@@ -87,7 +87,7 @@ export function GlobalNav() {
                 <SvgButton
                     btnClass="btn-search-nav"
                     svgIcon='bell'
-                    svgClass="svg-small"
+                    svgClass="svg-small1"
                     tooltipTxt={"What's New"}
                 />
 

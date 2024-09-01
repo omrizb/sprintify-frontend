@@ -35,7 +35,7 @@ export function VolumeController() {
             <SvgButton
                 btnClass="btn-dark2"
                 svgIcon={volumeIcon}
-                svgClass="svg-small"
+                svgClass="svg-small1"
                 tooltipTxt={isMute ? 'Unmute' : 'Mute'}
             />
             <Slider value={player.volume} onChange={handleVolumeChange} />

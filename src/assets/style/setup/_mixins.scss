@@ -236,18 +236,18 @@
 
 // textarea
 @mixin textarea {
-        @include input;
-        padding: 8px 8px 28px;
-        margin: 0;
-        column-count: auto;
-        text-wrap: wrap;
-        text-align: start;
-        text-indent: 0px;
-        text-rendering: auto;
-        overflow-wrap: break-word;
-        width: 280px;
-        height: 132px;
-        appearance: auto;
+    padding: 8px 8px 28px;
+    margin: 0;
+    column-count: auto;
+    text-wrap: wrap;
+    text-align: start;
+    text-indent: 0px;
+    text-rendering: auto;
+    overflow-wrap: break-word;
+    width: 280px;
+    height: 132px;
+    appearance: auto;
+    @include input;
 }
 
 

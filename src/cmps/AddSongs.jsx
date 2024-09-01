@@ -30,7 +30,6 @@ export function AddSongs() {
     }
 
     function onAddSong(song) {
-        song.duration = { hours: 0, minutes: 6, seconds: 0 }
         const stationToSave = { ...station, songs: [...station.songs, song] }
         update(stationToSave)
     }

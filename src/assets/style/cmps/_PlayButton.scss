@@ -4,6 +4,15 @@
 
     .btn-station-details {
         @include green;
+        @include btn($type: animated, $circleSize: 56px);
+
+        &:active {
+            background-color: $buttonBgGreenPress;
+        }
+    }
+
+    .btn-station-details-small {
+        @include green;
         @include btn($type: animated, $circleSize: 48px);
 
         &:active {
@@ -29,7 +38,7 @@
     
     .btn-song-preview {
         @include transparent;
-        @include btn($size: sm);
+        @include btn($circleSize: 16px);
     }
 
 }

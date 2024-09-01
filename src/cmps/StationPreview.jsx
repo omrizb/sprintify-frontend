@@ -1,4 +1,4 @@
-import { PlayButton } from './Player/PlayButton'
+import { PlayButton } from './Buttons/PlayButton'
 import { SvgIcon } from './SvgIcon'
 
 export function StationPreview({ station, style }) {
@@ -26,8 +26,8 @@ export function StationPreview({ station, style }) {
             <div className="image-container">
                 {(station.stationImgUrl) && <img src={station.stationImgUrl} alt="" />}
                 {(!station.stationImgUrl) && <div className="icon">
-                    <SvgIcon iconName={"music"}/>  
-                    </div>  }
+                    <SvgIcon iconName={"music"} />
+                </div>}
                 <PlayButton
                     type={stationPreviewType}
                     stationId={station._id}

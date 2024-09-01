@@ -10,6 +10,10 @@
 	display: flex;
 }
 
+.flex-center {
+	@include flex;
+}
+
 .flex-regular-gap {
 	display: flex;
 	align-items: center;

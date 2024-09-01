@@ -1,40 +1,65 @@
 import { Link } from 'react-router-dom'
+
 import { utilService } from '../../services/util.service.js'
+import { AddToButton } from '../Buttons/AddToButton.jsx'
+import { VButton } from '../Buttons/VButton.jsx'
+import { DotsButton } from '../Buttons/DotsButton.jsx'
+import { PlayButton } from '../Buttons/PlayButton.jsx'
 
-export function SongPreview({ station, song, index, type, onRemoveSong }) {
+export function SongPreview(props) {
+
+    const { song, stationId, likedSongsIds, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
+
     let articleClassName
-    let songPreviewType
-
-    if (station) {
-        var isOwnedByUser = station.createdBy.id === 'AAAA'
-    }
-
     switch (type) {
         case 'list':
-            articleClassName = 'dynamic-grid'
+            articleClassName = 'list dynamic-grid'
     }
 
-    const { songName, artist, album, url, imgUrl, duration } = song
+    const { songId, songName, artist, album, url, imgUrl, duration } = song
+    const isHovered = song.songId === hoveredSongId
+    const isHighlighted = isHovered || song.songId === selectedSongId
+    const isLikedByUser = likedSongsIds && likedSongsIds.includes(song.songId)
 
     return (
-        <article className={`song-preview ${articleClassName}`}>
-            <div>{index}</div>
-            <div>
+        <article className={`song-preview ${articleClassName} ${isHighlighted ? 'highlight' : ''}`}>
+            <div className="index flex">
+                {isHovered
+                    ? <PlayButton
+                        type="songPreview"
+                        stationId={stationId}
+                        songId={songId}
+                        songName={songName}
+                    />
+                    : index}
+            </div>
+            <div className="small-preview flex">
                 <img className="thumbnail" src={imgUrl} alt={songName} />
-                <span className="song-name"><Link to={`/track/${song.songId}`}>{songName}</Link></span>
+                <span className="song-name"><Link to={`/track/${songId}`}>{songName}</Link></span>
                 <span className="artist">{artist}</span>
             </div>
             <div className="album">{album}</div>
             <div className="song-duration">
-                {isOwnedByUser && <button className="btn-tinted"
+                {/* <button className="btn-tinted"
                     onClick={() => onRemoveSong(song.songId)}>X
-                </button>}
+                </button>
                 <button className="btn-tinted"
                     onClick={() => onAddSong(song)}>Add
-                </button>
-                {utilService.getTimeStr(duration)}
+                </button> */}
+                <div className="add-btn-container">
+                    {isHighlighted && <DynamicButton isLikedByUser={isLikedByUser} />}
+                </div>
+                <span>{utilService.getTimeStr(duration)}</span>
+                <div className="dots-container">{isHighlighted && <DotsButton type="songPreview" elementName={songName} />}</div>
             </div>
         </article>
     )
+}
+
+function DynamicButton({ isLikedByUser }) {
+
+    return (isLikedByUser)
+        ? <VButton type="addToStation" />
+        : <AddToButton type="addToLikedSongs" />
 }
 

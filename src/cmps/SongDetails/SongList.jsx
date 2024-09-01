@@ -1,22 +1,44 @@
+import { useState } from 'react'
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
 import { SvgIcon } from '../SvgIcon.jsx'
 
-export function SongList({ station, onRemoveSong }) {
+export function SongList({ station, likedSongsIds, onRemoveSong }) {
 
+    const [hoveredSongId, setHoveredSongId] = useState(null)
+    const [selectedSongId, setSelectedSongId] = useState(null)
+
+    function onSetSelectedSongId(songId) {
+        setSelectedSongId(songId)
+    }
     return (
         <div className="song-list">
             <div className="list-header dynamic-grid">
-                <div>#</div>
-                <div>Title</div>
-                <div>Album</div>
-                <div className="duration"><SvgIcon iconName={"duration"} /></div>
+                <div className="index">#</div>
+                <div className="title">Title</div>
+                <div className="album">Album</div>
+                <div className="duration"><SvgIcon className="icon" iconName="duration" /></div>
             </div>
             <ul className="list-body">
-                {station.songs.map((song, index) =>
-                    <li key={song.songId} >
-                        <SongPreview type={'list'} onRemoveSong={onRemoveSong} station={station} song={song} index={index + 1} />
-                    </li>)
-                }
+                {station.songs.map((song, index) => {
+                    const selectedSongClass = (song.songId === selectedSongId) ? 'selected' : ''
+                    return <li
+                        key={song.songId}
+                        className={selectedSongClass}
+                        onMouseEnter={() => setHoveredSongId(song.songId)}
+                        onMouseLeave={() => setHoveredSongId('')}
+                        onClick={() => onSetSelectedSongId(song.songId)}
+                    >
+                        <SongPreview
+                            type={'list'}
+                            song={song}
+                            stationId={station._id}
+                            likedSongsIds={likedSongsIds}
+                            onRemoveSong={onRemoveSong}
+                            hoveredSongId={hoveredSongId}
+                            selectedSongId={selectedSongId}
+                            index={index + 1} />
+                    </li>
+                })}
             </ul>
         </div>
     )

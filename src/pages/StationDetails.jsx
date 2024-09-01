@@ -14,7 +14,7 @@ import { AddSongs } from '../cmps/AddSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
 import { Modal } from '../cmps/Modal.jsx'
 import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
-import { PlayButton } from '../cmps/Player/PlayButton.jsx'
+import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
 
 
@@ -92,7 +92,6 @@ export function StationDetails() {
                 showFromY={150}
             >
                 <StationDetailsHeader
-                    key={station}
                     station={station}
                     bgColor={bgColor.current}
                     onEdit={onEdit}
@@ -103,7 +102,6 @@ export function StationDetails() {
                 <div className="secondary-background" style={{ backgroundColor: bgColor.current }}></div>
 
                 <StationDetailsActions
-                    key={station}
                     station={station}
                     stationMeta={stationMeta}
                     onRemoveStation={onRemoveStation}
@@ -111,6 +109,7 @@ export function StationDetails() {
 
                 {(station.songs.length > 0) && <SongList
                     station={station}
+                    likedSongsIds={loggedinUser.likedSongsIds}
                     onRemoveSong={onRemoveSong}
                 />}
 
@@ -133,7 +132,7 @@ function renderHeader(station) {
             {station &&
                 <>
                     <PlayButton
-                        type={'stationDetails'}
+                        type={'stationDetailsSmall'}
                         stationId={station._id}
                         stationName={station.name}
                         songId={station.songs[0]?.songId}
