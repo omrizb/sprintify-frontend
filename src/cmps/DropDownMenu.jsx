@@ -2,8 +2,8 @@ import { DropDownMenuItem } from "./DropDownMenuItem";
 
 export function DropDownMenu({listItems, handleAction}) {
 
-    function onClick(listItem){
-        
+    function onClick(ev,listItem){
+        ev.stopPropagation()
         handleAction(listItem)
     }
 
@@ -14,7 +14,7 @@ export function DropDownMenu({listItems, handleAction}) {
 
             <ul className="list">
                         {listItems.map((listItem, index) =>
-                            <li key={index} onClick = {()=> onClick(listItem) } >
+                            <li key={index} onClick = {(ev)=> onClick(ev,listItem) } >
                                 <DropDownMenuItem listItem = {listItem} />
                             </li>)
                         }
