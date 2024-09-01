@@ -2,9 +2,9 @@ import { DropDownMenuItem } from "./DropDownMenuItem";
 
 export function DropDownMenu({listItems, handleAction}) {
 
-    function onClick(action){
-        if (!action) return
-        handleAction(action)
+    function onClick(listItem){
+        
+        handleAction(listItem)
     }
 
 
@@ -14,7 +14,7 @@ export function DropDownMenu({listItems, handleAction}) {
 
             <ul className="list">
                         {listItems.map((listItem, index) =>
-                            <li key={index} onClick = {()=> onClick(listItem.action) } >
+                            <li key={index} onClick = {()=> onClick(listItem) } >
                                 <DropDownMenuItem listItem = {listItem} />
                             </li>)
                         }

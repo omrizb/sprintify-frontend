@@ -28,17 +28,23 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     // console.log('stationMeta.stationActionsBar:', stationMeta.stationActionsBar)
 
     function getViewList(){
+        const title ={
+            type: 'title',
+            name: 'View as',
+            icon: '',
+            topDivision: '',
+            isChosen: false
+        }
         const compact =  {
             type: 'list-item',
             name: 'Compact',
             icon: 'compact',
-            action: '',
             topDivision: '',
             isChosen: false
         }
         const list = {...compact, name:'List', icon: 'list', isChosen: true}
 
-        return [compact, list]
+        return [title, compact, list]
     }
 
     function getMoreList(){
@@ -46,25 +52,45 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
             type: 'list-item',
             name: 'Add to queque',
             icon: 'addToQueque',
-            action: 'add-to-queque',
             topDivision: '',
             isChosen: false
         }
-        const editDetails = {...addToQueque, name:'Edit details', icon: 'editDetails', action: 'edit-station'}
-        const deleteStation = {...addToQueque, name:'Delete', icon: 'delete', action: 'remove-station'}
+        const editDetails = {...addToQueque, name:'Edit details', icon: 'editDetails'}
+        const deleteStation = {...addToQueque, name:'Delete', icon: 'delete'}
 
         return [addToQueque, editDetails, deleteStation]
     }
 
-
     function findChosenItem(){
-        const chosenViewItem = listItemsView.find(listItem => listItem.isChosen === true)
-        return chosenViewItem.name
+        const chosen = listItemsView.find(listItem => listItem.isChosen === true)
+        return chosen.name
     }
+
     function findChosenItemIcon(){
-        const chosenViewItem = listItemsView.find(listItem => listItem.isChosen === true)
-        return chosenViewItem.icon
+        const chosen = listItemsView.filter(listItem => listItem.icon !== '')
+                        .find(listItem => listItem.isChosen === true)
+        return chosen.icon
     
+    }
+
+    function handleViewAction(listItem){
+        
+        setListItemsView(prevListItemsView => 
+            prevListItemsView.map(item => {
+                if(item.type === 'title')  return item   
+                else {
+                    return {
+                        ...item,
+                        isChosen: (item.name === listItem.name)
+                    }
+                }
+            }
+        ))  
+        
+    }
+
+    function handleMoreAction(listItem){
+        console.log(listItem.name)
     }
 
     const handleViewModeClick = (mode) => {
@@ -116,7 +142,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                     svgClass={"svg-big2"}
                     tooltipTxt={`More options for ${station.name}`}
                 />)}
-                {showMoreMenu && <DropDownMenu listItems={listItemsMore} />}
+                {showMoreMenu && <DropDownMenu listItems={listItemsMore} handleAction = {handleMoreAction} />}
                 
             </div>
 
@@ -129,7 +155,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                     <span>{findChosenItem()}</span>
                     <SvgIcon iconName={findChosenItemIcon()} svgClass="svg=small"/>
                 </button>
-                {showViewMenu && <DropDownMenu listItems={listItemsView} />}
+                {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction ={handleViewAction} />}
             </div>
         </div>
     )

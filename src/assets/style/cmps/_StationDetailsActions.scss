@@ -17,4 +17,10 @@
     .show-more {
         position: relative;
     }
+
+    .show-more {
+        .drop-down-menu{
+            right: -130px;
+        }
+    }
 }

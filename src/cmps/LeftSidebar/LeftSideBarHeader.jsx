@@ -13,16 +13,14 @@ export function LeftSideBarHeader() {
         type: 'list-item',
         name: 'Create a new playlist',
         icon: 'library',
-        action: 'add-station',
         topDivision: '',
         isChosen: false
     }
     
     const listItems = [createPlaylist]
 
-    function handleAction(action){
-        console.log(action)
-        if(action === 'add-station') handleAddStation()
+    function handleAction(listItem){
+        if(listItem.name === 'Create a new playlist') handleAddStation()
     }
 
     async function handleAddStation(){
