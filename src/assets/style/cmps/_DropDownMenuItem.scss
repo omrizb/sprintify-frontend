@@ -1,0 +1,44 @@
+.drop-down-menu-item {
+
+    padding: 12px 8px 12px 12px;
+    min-width: 152px;
+    
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+
+    &.include-top-division {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
+        border-block-start: 1px solid  rgba(0, 0, 0, 0.3);
+    }
+
+    &:hover {
+
+        &:not(.section-title){
+            background-color: $transparentGray;
+            cursor: pointer;
+        }
+    }
+
+    .section-title{
+        font-size: 11px;
+        font-weight: 700; 
+    }
+    
+    .list-item {
+        display: flex;
+        column-gap: 1em;
+        font-size: 13px;
+        font-weight: 400; 
+    }
+    
+    .chosen {
+        color: $buttonBgGreen;
+
+        i {
+            fill: "#1ed760";
+        }
+
+    }
+ 
+}

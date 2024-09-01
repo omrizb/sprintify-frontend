@@ -10,23 +10,14 @@ import { DotsButton } from '../Buttons/DotsButton.jsx'
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
-    const [showMenu, setShowMenu] = useState(false)
+    const [showViewMenu, setShowViewMenu] = useState(false)
+    const [showMoreMenu, setShowMoreMenu] = useState(false)
 
-    const display = {
-        sortBy: {
-            'showRecents': false,
-            'showRecentlyAdded': false,
-            'showAlpha': false,
-            'showCreator': false,
-            'showCustom': false
-        },
-        viewAs: {
-            'showCompact': true,
-            'showList': true,
-            'showGrid': false,
-        }
-    }
+    const viewList = getViewList()
+    const moreList = getMoreList()
 
+    const [listItemsView, setListItemsView] = useState(viewList)
+    const [listItemsMore, setListItemsMore] = useState(moreList)
 
     const { isOwnedByUser } = stationMeta
     const {
@@ -37,6 +28,72 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         showMore,
         songsDisplay,
     } = stationMeta.stationActionsBar
+
+    function getViewList() {
+        const title = {
+            type: 'title',
+            name: 'View as',
+            icon: '',
+            topDivision: '',
+            isChosen: false
+        }
+        const compact = {
+            type: 'list-item',
+            name: 'Compact',
+            icon: 'compact',
+            topDivision: '',
+            isChosen: false
+        }
+        const list = { ...compact, name: 'List', icon: 'list', isChosen: true }
+
+        return [title, compact, list]
+    }
+
+    function getMoreList() {
+        const addToQueque = {
+            type: 'list-item',
+            name: 'Add to queque',
+            icon: 'addToQueque',
+            topDivision: '',
+            isChosen: false
+        }
+        const editDetails = { ...addToQueque, name: 'Edit details', icon: 'editDetails' }
+        const deleteStation = { ...addToQueque, name: 'Delete', icon: 'delete' }
+
+        return [addToQueque, editDetails, deleteStation]
+    }
+
+    function findChosenItem() {
+        const chosen = listItemsView.find(listItem => listItem.isChosen === true)
+        return chosen.name
+    }
+
+    function findChosenItemIcon() {
+        const chosen = listItemsView.filter(listItem => listItem.icon !== '')
+            .find(listItem => listItem.isChosen === true)
+        return chosen.icon
+
+    }
+
+    function handleViewAction(listItem) {
+
+        setListItemsView(prevListItemsView =>
+            prevListItemsView.map(item => {
+                if (item.type === 'title') return item
+                else {
+                    return {
+                        ...item,
+                        isChosen: (item.name === listItem.name)
+                    }
+                }
+            }
+            ))
+
+    }
+
+    function handleMoreAction(listItem) {
+        console.log(listItem.name)
+    }
 
     const handleViewModeClick = (mode) => {
         changeViewMode(mode)
@@ -69,18 +126,33 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 </>
             )}
 
-            {showMore && <DotsButton type="stationDetails" elementName={station.name} />}
+            <div className="show-more"
+                onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
+                {showMore && (<SvgButton
+                    btnClass={"btn-dark2"}
+                    svgIcon={"dots"}
+                    svgClass={"svg-big2"}
+                    tooltipTxt={`More options for ${station.name}`}
+                />)}
+                {showMoreMenu && <DropDownMenu listItems={listItemsMore} handleAction={handleMoreAction} />}
+
+            </div>
+
+
 
             <div className="view-as">
-                <button className="btn-dark2-simple flex-regular-gap" onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
-                    {(songsDisplay === 'list')
-                        ? <><span>List</span><SvgIcon iconName="list" svgClass="svg-small1" /></>
-                        : <><span>Compact</span><SvgIcon iconName="compact" svgClass="svg-small1" /></>
-                    }
+                <button
+                    className="btn-dark2-simple flex-regular-gap"
+                    onClick={() => setShowViewMenu(prevShowViewMenu => !prevShowViewMenu)}>
+                    <span>{findChosenItem()}</span>
+                    <SvgIcon iconName={findChosenItemIcon()} svgClass="svg=small" />
                 </button>
-                {showMenu && <DropDownMenu display={display} />}
+                {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction={handleViewAction} />}
             </div>
         </div>
     )
 }
+
+
+
 

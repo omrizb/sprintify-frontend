@@ -12,4 +12,15 @@
         @include align-to-end-flex;
         padding-inline: $regularGap;
     }
+
+    .view-as,
+    .show-more {
+        position: relative;
+    }
+
+    .show-more {
+        .drop-down-menu{
+            right: -130px;
+        }
+    }
 }

@@ -16,22 +16,67 @@ export function LeftSideBarFilter() {
     const [ showMenu, setShowMenu] = useState(false)
     const [ showSearch, setShowSearch] = useState(false)
 
-    const display = {
-        sortBy: {
-            'showRecents': true,
-            'showRecentlyAdded': true,
-            'showAlpha': true,
-            'showCreator': true,
-            'showCustom': true
-        },
-        viewAs: {
-            'showCompact': true,
-            'showList': true,
-            'showGrid': true,
+    const listMenu = getList()
+
+    const [listItems, setListItems] = useState(listMenu)
+
+    function getList(){
+        const sortTitle ={
+            type: 'title',
+            name: 'Sort by',
+            icon: '',
+            topDivision: '',
+            isChosen: false
         }
+        const viewTitle ={...sortTitle, name: 'View as', topDivision: 'include-top-division'}
+    
+        const recents =  {
+            type: 'list-item',
+            name: 'Recents',
+            section: 'sort-by',
+            icon: '',
+            topDivision: '',
+            isChosen: true,
+        }
+    
+        const recentlyAdded = {...recents, name:'Recently Added', isChosen: false}
+        const alpha = {...recents, name:'Alphabetical', isChosen: false}
+        const creator = {...recents, name:'Creator', isChosen: false}
+    
+        const compact =  {...recents, name:'Compact', section:'view-as', icon: 'compact', isChosen: false}
+        const list = {...compact, name:'List', icon: 'list', isChosen: true}
+        const grid = {...compact, name:'Grid', icon: 'grid'}
+        
+        return [sortTitle, recents, recentlyAdded, alpha, creator, viewTitle, compact, list, grid] 
     }
 
-   
+    function findChosenItem(){
+        const chosen = listItems.find(listItem => listItem.isChosen === true)
+        return chosen.name
+    }
+    function findChosenItemIcon(){
+        const chosen = listItems.filter(listItem => listItem.icon !== '')
+                        .find(listItem => listItem.isChosen === true)
+        return chosen.icon
+    
+    }
+
+    function handleAction(listItem){
+        setListItems(prevListItems => 
+            prevListItems.map(item => {
+                if((item.type === 'title') || 
+                (item.section !== listItem.section)) return item
+                
+                else {
+                    return {
+                        ...item,
+                        isChosen: (item.name === listItem.name)
+                    }
+                }
+            }
+        ))  
+    }
+
     function handleChange(ev) {
         const type = ev.target.type
         var field = ev.target.name
@@ -78,10 +123,12 @@ export function LeftSideBarFilter() {
 
                 <div className="sort-by">
                     <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
-                        Recents
-                        <div className="icon"><SvgIcon iconName={"list"}    /> </div>
+                        {/* Recents
+                        <div className="icon"><SvgIcon iconName={"list"}    /> </div> */}
+                        <span>{findChosenItem()}</span>
+                        <SvgIcon iconName={findChosenItemIcon()} svgClass="svg=small"/>
                     </div>
-                    {showMenu && <DropDownMenu display={display} />}
+                    {showMenu && <DropDownMenu listItems = {listItems} handleAction = {handleAction} />}
                 </div>
                 
             </section>

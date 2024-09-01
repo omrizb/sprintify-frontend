@@ -3,17 +3,30 @@ import { addStation } from '../../store/actions/station.actions'
 import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
+import { DropDownMenu } from '../DropDownMenu'
 
 export function LeftSideBarHeader() {
     const navigate = useNavigate()
     const [ showMenu, setShowMenu] = useState(false)
 
+    const createPlaylist =  {
+        type: 'list-item',
+        name: 'Create a new playlist',
+        icon: 'library',
+        topDivision: '',
+        isChosen: false
+    }
+    
+    const listItems = [createPlaylist]
+
+    function handleAction(listItem){
+        if(listItem.name === 'Create a new playlist') handleAddStation()
+    }
+
     async function handleAddStation(){
         setShowMenu(prevShowMenu => !prevShowMenu)
-      
         try {
             const station = await addStation()
-            // navigate(`/playlist/${station._id}`)
             navigate(`/station/${station._id}`)
         } catch (err) {
             console.log('Cannot add a station')
@@ -34,12 +47,7 @@ export function LeftSideBarHeader() {
                 </button>
 
                 {showMenu &&
-                    <ul className= "drop-down-menu" >
-                        <li onClick={handleAddStation}>
-                            <div><SvgIcon iconName={"library"}    /></div>
-                            <div>Create a new playlist</div>
-                        </li>
-                    </ul>
+                    <DropDownMenu listItems = {listItems} handleAction = {handleAction} />
                 }
             </div>
         </div>
