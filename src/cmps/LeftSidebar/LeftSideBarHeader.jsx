@@ -4,54 +4,45 @@ import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
 import { DropDownMenu } from '../DropDownMenu'
-import { stationService } from '../../services/station/station.service.local'
 
 export function LeftSideBarHeader() {
     const navigate = useNavigate()
-    const [ showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
 
-    const createPlaylist =  {
+    const listItems = [{
         type: 'list-item',
         name: 'Create a new playlist',
         icon: 'library',
         topDivision: '',
-        isChosen: false
-    }
-    
-    const listItems = [createPlaylist]
+        isChosen: false,
+        onClick: handleAddStation
+    }]
 
-    function handleAction(listItem){
-        if(listItem.name === 'Create a new playlist') handleAddStation()
-    }
-
-    async function handleAddStation(){
+    async function handleAddStation() {
         setShowMenu(prevShowMenu => !prevShowMenu)
         try {
-            const newStation = stationService.getEmptyStation()
-            const savedStation = await stationService.save(newStation)
-            const station = await addStation(savedStation)
+            const station = await addStation()
             navigate(`/station/${station._id}`)
         } catch (err) {
             console.log('Cannot add a station')
-        }   
+        }
     }
-
 
     return (
         <div className="sidebar-header">
             <div className="library">
-                <div className="icon"> <SvgIcon iconName={"library"}    /> </div>
+                <div className="icon"> <SvgIcon iconName={"library"} /> </div>
                 Your Library
             </div>
-            
+
             <div className="add-playlist">
                 <button className="plus icon btn-medium"
-                        onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
-                    <SvgIcon iconName={"plus"} /> 
+                    onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
+                    <SvgIcon iconName={"plus"} />
                 </button>
 
                 {showMenu &&
-                    <DropDownMenu listItems = {listItems} handleAction = {handleAction} />
+                    <DropDownMenu listItems={listItems} />
                 }
             </div>
         </div>

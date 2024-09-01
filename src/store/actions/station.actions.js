@@ -42,8 +42,10 @@ export async function removeStation(stationId) {
     }
 }
 
-export async function addStation(savedStation) {
+export async function addStation() {
     try {
+        const newStation = stationService.getEmptyStation()
+        const savedStation = await stationService.save(newStation)
         store.dispatch(getCmdAddStation(savedStation))
         return savedStation
     } catch (err) {
