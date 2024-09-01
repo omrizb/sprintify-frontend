@@ -70,8 +70,8 @@ export function StationDetails() {
         isOwnedByUser,
         stationActionsBar: {
             'showPlay': station.type === 'playlist' && !isEmptyStation,
-            'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
             'showRemoveFromLibrary': !isOwnedByUser && isLikedByUser,
+            'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
             'showFollowUnfollow': station.type === 'podcast',
             'showMore': !station.isLikedSongs,
             'songsDisplay': loggedinUser.songsDisplay || 'list'

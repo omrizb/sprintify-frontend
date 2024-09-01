@@ -10,7 +10,7 @@ export const stations = [
             fullName: 'Darr',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['F6g7H8i9J0', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA','F6g7H8i9J0', 'K1L2M3N4O5'],
         songs: [
             {
                 songId: 'fJ9rUzIMcZQ',
@@ -52,7 +52,7 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
+        likedByUsers: ['AAAA','A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
         songs: [
             {
                 songId: '4NRXx6U8ABQ',
@@ -94,7 +94,7 @@ export const stations = [
             fullName: 'Sophia Brown',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['A1b2C3d4E5'],
+        likedByUsers: ['AAAA','A1b2C3d4E5'],
         songs: [
             {
                 songId: 'lp-EO5I60KA',
@@ -160,7 +160,7 @@ export const stations = [
             fullName: 'Ava Wilson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['A1b2C3d4E5', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA','A1b2C3d4E5', 'K1L2M3N4O5'],
         songs: [
             {
                 songId: 'DyDfgMOUjCI',
@@ -280,7 +280,7 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['F6g7H8i9J0', 'P6Q7R8S9T0'],
+        likedByUsers: ['AAAA','F6g7H8i9J0', 'P6Q7R8S9T0'],
         songs: [
             {
                 songId: 'OPf0YbXqDm0',
@@ -385,7 +385,7 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['A1b2C3d4E5', 'F6g7H8i9J0'],
+        likedByUsers: ['AAAA','A1b2C3d4E5', 'F6g7H8i9J0'],
         songs: [
             {
                 songId: '6Ejga4kJUts',
@@ -474,7 +474,7 @@ export const stations = [
             fullName: 'Liam Johnson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['U1V2W3X4Y5'],
+        likedByUsers: ['AAAA','U1V2W3X4Y5'],
         songs: [
             {
                 songId: 'sOnqjkJTMaA',
