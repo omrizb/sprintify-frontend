@@ -23,8 +23,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         showPlay,
         showAddToLibrary,
         showRemoveFromLibrary,
-        showMore,
-        songsDisplay,
+        showMore
     } = stationMeta.stationActionsBar
 
 
@@ -50,15 +49,6 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
     const moreList = getMoreList()
 
-    // const [listItemsMore, setListItemsMore] = useState(moreList)
-
-
-    // useEffect(() => {
-    //     const updatedMoreList = getMoreList()
-    //     setListItemsMore([...updatedMoreList])
-    // }, [isLikedByUser])
-
-
     function getMoreList() {
         const addToQueue = buildListObj({
             name: 'Add to queue',
@@ -82,12 +72,17 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
         const removeFromLibrary = buildListObj({
             name: 'Remove from Your Library',
-            icon: 'removeFromLibrary'
+            icon: 'removeFromLibrary',
+            onClick: () => {
+                const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
+                updateStation({ ...station, likedByUsers: updatedLikedByArr })
+            }
         })
 
         const addToLibrary = buildListObj({
             name: 'Add to Your Library',
-            icon: 'addToLibrary'
+            icon: 'addToLibrary',
+            onClick: () => updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
         })
 
         if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
@@ -102,10 +97,12 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
             icon: '',
             topDivision: '',
             isChosen: false,
-            onClick: undefined,
+            onClick: noop,
             ...props
         }
     }
+
+    function noop() { }
 
 
     return (
