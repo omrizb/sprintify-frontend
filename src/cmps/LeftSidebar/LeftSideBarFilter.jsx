@@ -16,22 +16,38 @@ export function LeftSideBarFilter() {
     const [ showMenu, setShowMenu] = useState(false)
     const [ showSearch, setShowSearch] = useState(false)
 
-    const display = {
-        sortBy: {
-            'showRecents': true,
-            'showRecentlyAdded': true,
-            'showAlpha': true,
-            'showCreator': true,
-            'showCustom': true
-        },
-        viewAs: {
-            'showCompact': true,
-            'showList': true,
-            'showGrid': true,
-        }
+
+    const sortTitle ={
+        type: 'title',
+        name: 'Sort by',
+        icon: '',
+        action: '',
+        topDivision: '',
+        isChosen: false,
+        closeMenu: false
+    }
+    const viewTitle ={...sortTitle, name: 'View as', topDivision: 'include-top-division'}
+
+    const recents =  {
+        type: 'list-item',
+        name: 'Recents',
+        icon: '',
+        action: 'update-filter',
+        topDivision: '',
+        isChosen: true,
+        closeMenu: false, 
     }
 
-   
+    const recentlyAdded = {...recents, name:'Recently Added', isChosen: false}
+    const alpha = {...recents, name:'Alphabetical', isChosen: false}
+    const creator = {...recents, name:'Creator', isChosen: false}
+
+    const compact =  {...recents, name:'Compact', icon: 'compact', isChosen: false}
+    const list = {...compact, name:'List', icon: 'list', isChosen: true}
+    const grid = {...compact, name:'Grid', icon: 'grid'}
+    
+    const listItems = [sortTitle, recents, recentlyAdded, alpha, creator, viewTitle, compact, list, grid]
+
     function handleChange(ev) {
         const type = ev.target.type
         var field = ev.target.name
@@ -81,7 +97,7 @@ export function LeftSideBarFilter() {
                         Recents
                         <div className="icon"><SvgIcon iconName={"list"}    /> </div>
                     </div>
-                    {showMenu && <DropDownMenu display={display} />}
+                    {showMenu && <DropDownMenu listItems = {listItems} />}
                 </div>
                 
             </section>
