@@ -60,10 +60,6 @@ export function StationDetails() {
         setIsModalOpen(true)
     }
 
-    function onCloseModal() {
-        setIsModalOpen(false)
-    }
-
     if (isLoading) return <Loader />
     if (!station) return <div className="station-details">No station to display</div>
 
@@ -119,8 +115,8 @@ export function StationDetails() {
             </HeaderFixer>
 
             {isModalOpen &&
-                <Modal closeModal={onCloseModal} >
-                    <EditStation station={station} onCloseEdit={onCloseModal} />
+                <Modal closeModal={() => setIsModalOpen(false)} >
+                    <EditStation station={station} onCloseEdit={() => setIsModalOpen(false)} />
                 </Modal>
             }
         </div>

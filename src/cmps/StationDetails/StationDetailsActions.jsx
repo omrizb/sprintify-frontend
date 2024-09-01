@@ -7,11 +7,14 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
+import { Modal } from '../Modal.jsx'
+import { EditStation } from '../EditStation.jsx'
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
     const [showViewMenu, setShowViewMenu] = useState(false)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const { isOwnedByUser } = stationMeta
     const {
@@ -62,7 +65,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         const deleteStation = { ...addToQueque, name: 'Delete', icon: 'delete' }
 
         if (isOwnedByUser) return [addToQueque, editDetails, deleteStation]
-        return [addToQueque, editDetails]
+        return [addToQueque]
     }
 
     function findChosenItem() {
@@ -93,7 +96,12 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     }
 
     function handleMoreAction(listItem) {
+        console.log(listItem.name)
         if(listItem.name === 'Delete') onRemoveStation()
+        if(listItem.name === 'Edit details') {
+            setIsModalOpen(true)
+            setShowMoreMenu(false)
+        }
     }
 
     const handleViewModeClick = (mode) => {
@@ -143,6 +151,14 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 </button>
                 {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction={handleViewAction} />}
             </div>
+
+
+
+            {isModalOpen &&
+                <Modal closeModal={() => setIsModalOpen(false)} >
+                    <EditStation station={station} onCloseEdit={() => setIsModalOpen(false)} />
+                </Modal>
+            }
         </div>
     )
 }
