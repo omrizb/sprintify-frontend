@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { removeStation, updateStation } from '../../store/actions/station.actions.js'
+
+import { EditStation } from '../EditStation.jsx'
+import { Modal } from '../Modal.jsx'
+import { DropDownMenu } from '../DropDownMenu.jsx'
 import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
 import { changeViewMode } from '../../services/event-bus.service.js'
-import { DropDownMenu } from '../DropDownMenu.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
-import { Modal } from '../Modal.jsx'
-import { EditStation } from '../EditStation.jsx'
-import { addStation, removeStation, updateStation } from '../../store/actions/station.actions.js'
 
-export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
+export function StationDetailsActions({ station, stationMeta }) {
 
+    const navigate = useNavigate()
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
@@ -58,7 +62,10 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         const deleteStation = buildListObj({
             name: 'Delete',
             icon: 'delete',
-            onClick: onRemoveStation
+            onClick: () => {
+                removeStation(station._id)
+                navigate(`/`)
+            }
         })
 
         const editDetails = buildListObj({

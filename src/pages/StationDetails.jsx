@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import { utilService } from '../services/util.service.js'
-import { removeStation, updateStation, loadStation } from '../store/actions/station.actions.js'
+import { updateStation, loadStation } from '../store/actions/station.actions.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -21,7 +20,6 @@ import { EditStation } from '../cmps/EditStation.jsx'
 export function StationDetails() {
 
     const { id } = useParams()
-    const navigate = useNavigate()
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const station = useSelector(storeState => storeState.stationModule.station)
@@ -41,11 +39,6 @@ export function StationDetails() {
         } catch (err) {
             console.log('Error: StationDetails, loadStation:', err)
         }
-    }
-
-    function onRemoveStation() {
-        removeStation(station._id)
-        navigate(`/`)
     }
 
     function onRemoveSong(songId) {
@@ -101,7 +94,6 @@ export function StationDetails() {
                 <StationDetailsActions
                     station={station}
                     stationMeta={stationMeta}
-                    onRemoveStation={onRemoveStation}
                 />
 
                 {(station.songs.length > 0) && <SongList
