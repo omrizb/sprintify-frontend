@@ -43,29 +43,15 @@ export function StationDetails() {
         }
     }
 
-    async function onRemoveStation() {
-        try {
-            await removeStation(station._id)
-        } catch (err) {
-            console.log('Error: StationDetails, onRemoveStation:', err)
-        } finally {
-            navigate(`/`)
-        }
+    function onRemoveStation() {
+        removeStation(station._id)
+        navigate(`/`)
     }
 
     function onRemoveSong(songId) {
         const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
         const stationToSave = { ...station, songs: updatedSongsArr }
-        update(stationToSave)
-    }
-
-    async function update(stationToSave) {
-        try {
-            const updatedStation = await updateStation(stationToSave)
-            // console.log(updatedStation)
-        } catch (err) {
-            console.log('Cannot add a station')
-        }
+        updateStation(stationToSave)
     }
 
     function onEdit() {
@@ -85,6 +71,7 @@ export function StationDetails() {
     const isOwnedByUser = station.createdBy.id === loggedinUser._id
     const isLikedByUser = station.likedByUsers.includes(loggedinUser._id)
     const stationMeta = {
+        isOwnedByUser,
         stationActionsBar: {
             'showPlay': station.type === 'playlist' && !isEmptyStation,
             'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
@@ -97,10 +84,7 @@ export function StationDetails() {
 
     return (isLoading)
         ? <Loader />
-        : <div
-            className="station-details"
-        // style={{ background: `linear-gradient(to bottom, ${bgColor.current} 0%, #121212 30%, #121212 100%)` }}
-        >
+        : <div className="station-details">
             <HeaderFixer
                 header={renderHeader(station)}
                 className="padded-top-rounded-box"
@@ -112,7 +96,7 @@ export function StationDetails() {
                     station={station}
                     bgColor={bgColor.current}
                     onEdit={onEdit}
-                    onEditStation = {() => setIsModalOpen(true)}
+                    onEditStation={() => setIsModalOpen(true)}
 
                 />
 
@@ -125,26 +109,19 @@ export function StationDetails() {
                     onRemoveStation={onRemoveStation}
                 />
 
-                <SongList
+                {(station.songs.length > 0) && <SongList
                     station={station}
-                    songs={station.songs}
                     onRemoveSong={onRemoveSong}
-                />
+                />}
 
-                {isOwnedByUser &&
-                    <AddSongs
-                        value={isEmptyStation ? "" : station.songs[0].artist}
-                        style={isEmptyStation ? "search" : "recommended"}
-                        viewArea={isEmptyStation ? "search" : 'myPlaylist'}
-                    />}
-
+                {isOwnedByUser && <AddSongs />}
 
                 <Footer />
             </HeaderFixer>
 
             {isModalOpen &&
                 <Modal closeModal={onCloseModal} >
-                    <EditStation station={station} onCloseEdit ={onCloseModal} />
+                    <EditStation station={station} onCloseEdit={onCloseModal} />
                 </Modal>
             }
         </div>

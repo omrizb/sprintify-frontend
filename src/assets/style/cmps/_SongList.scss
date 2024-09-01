@@ -1,46 +1,15 @@
 .song-list{
-    .list-style{
-        display: grid;
-        grid-template-columns: 16px minmax(120px,4fr) minmax(120px,2fr) minmax(120px,1fr);
-        column-gap: 0.5em;
-        color: $secondaryTxtClr;
-        font: inherit;
-        padding: 16px;
-        
-    }
+    position: relative;
+    padding-inline: 16px;
 
-    header {
-        font-weight: 400;
-        
-        color:  $secondaryTxtClr;
+    .list-header {
         height: 36px;
-        border-bottom: 1px solid hsla(0, 0%, 100%, .1);
-        
-        div{
-            display:grid;
-            font-size: 14px;
-            align-items: center;
-            
-        }
-
-        .duration {
-            justify-self: start;
-        }
-
-        div:first-child{
-            place-items: center;
-        }
-    }
-
-    li{
-        &:hover {
-            cursor: pointer;
-            background-color: rgba(179, 179, 179, 0.2);
-            border-radius: 4px;
-        }
+        margin-bottom: 8px;
+        border-bottom: 1px solid $tintedBgClr;
+        font-size: $textSizeSmaller-1;
+        color: $secondaryTxtClr;
     }
 }
-
 
 
 

@@ -1,27 +1,11 @@
 .song-preview {
     position: relative;
-    padding: 0;
-    font-weight: 400;
-    row-gap: 1em;
 
-    button {
-        position: absolute;
-        right: 10px;
-        top: 25px;
+    &.list {
+        
     }
 
-    div {
-        font-size: 14px;
-        display: grid;
-        align-items: center;
-    }
-
-    div:first-child {
-        place-items: center;
-    }
-
-    &.list-style,
-    &.search,
+    &.type-search,
     &.recommended {
         .title-column {
             display: grid;
@@ -60,43 +44,41 @@
 
     &.card {
         .title-column {
-        display: grid;
-        row-gap: 16px;
-        
-        img {
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .text {
             display: grid;
-            align-items: center;
-            justify-items: start;
-            justify-self: start;
-
-            div:first-child {
-                font-size: $textSizeLarger1;
-                color: $primaryTxtClr;
-
-                &:hover {
-                    text-decoration: underline;
-                }
+            row-gap: 16px;
+            
+            img {
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                border-radius: 8px;
             }
 
-            div:nth-child(2) {
-                font-size: $textSizeBase;
-                color: $mediumTxtClr;
+            .text {
+                display: grid;
+                align-items: center;
+                justify-items: start;
+                justify-self: start;
 
-                &:hover {
-                    text-decoration: underline;
+                div:first-child {
+                    font-size: $textSizeLarger1;
+                    color: $primaryTxtClr;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                div:nth-child(2) {
+                    font-size: $textSizeBase;
+                    color: $mediumTxtClr;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
-        }
         }
     }
-
-    
 }

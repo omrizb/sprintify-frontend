@@ -25,6 +25,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     }
 
 
+    const { isOwnedByUser } = stationMeta
     const {
         showPlay,
         showAddToLibrary,
@@ -63,6 +64,11 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 svgClass={"svg-big2"}
                 tooltipTxt={`Remove from Your Library`}
             />}
+
+            {isOwnedByUser && <button
+                className={"btn-dark2"}
+                onClick={onRemoveStation}
+            >X</button>}
 
             {showFollowUnfollow && (
                 <>
