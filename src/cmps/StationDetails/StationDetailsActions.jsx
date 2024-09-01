@@ -9,22 +9,26 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
     const [showMenu, setShowMenu] = useState(false)
 
-    const display = {
-        sortBy: {
-            'showRecents': false,
-            'showRecentlyAdded': false,
-            'showAlpha': false,
-            'showCreator': false,
-            'showCustom': false
-        },
-        viewAs: {
-            'showCompact': true,
-            'showList': true,
-            'showGrid': false,
-        }
+    const viewTitle ={
+        type: 'title',
+        name: 'View as',
+        icon: '',
+        action: '',
+        topDivision: '',
+        isChosen: false
     }
-
-
+    
+    const compact =  {
+        type: 'list-item',
+        name: 'Compact',
+        icon: 'compact',
+        action: '',
+        topDivision: '',
+        isChosen: false
+    }
+    const list = {...compact, name:'List', icon: 'list', isChosen: true}
+    const listItems = [compact, list]
+    
     const { isOwnedByUser } = stationMeta
     const {
         showPlay,
@@ -91,7 +95,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                         : <><span>Compact</span><SvgIcon iconName="compact" svgClass="svg-small" /></>
                     }
                 </button>
-                {showMenu && <DropDownMenu display={display} />}
+                {showMenu && <DropDownMenu listItems={listItems} />}
             </div>
         </div>
     )
