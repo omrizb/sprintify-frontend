@@ -4,7 +4,7 @@ import { stationService as local } from './station.service.local'
 import { stationService as remote } from './station.service.remote'
 
 function getEmptyStation() {
-    return  {
+    return {
         name: '',
         type: 'playlist',
         isLikedSongs: false,
@@ -21,8 +21,8 @@ function getEmptyStation() {
 function getDefaultFilter() {
     return {
         txt: '',
-        stationType:'',
-        playListCreator:'',
+        stationType: '',
+        createdBy: '',
         sortField: '',
         sortDir: '',
     }
