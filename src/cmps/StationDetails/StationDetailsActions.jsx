@@ -130,7 +130,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
                 {showMore && (<SvgButton
                     btnClass={"btn-dark2"}
-                    svgIcon={"dots"}
+                    svgIcon={"dotsBig"}
                     svgClass={"svg-big2"}
                     tooltipTxt={`More options for ${station.name}`}
                 />)}
@@ -138,14 +138,12 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
             </div>
 
-
-
             <div className="view-as">
                 <button
                     className="btn-dark2-simple flex-regular-gap"
                     onClick={() => setShowViewMenu(prevShowViewMenu => !prevShowViewMenu)}>
                     <span>{findChosenItem()}</span>
-                    <SvgIcon iconName={findChosenItemIcon()} svgClass="svg=small" />
+                    <SvgIcon iconName={findChosenItemIcon()} svgClass="svg-small1" />
                 </button>
                 {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction={handleViewAction} />}
             </div>
