@@ -11,71 +11,84 @@ import { StationFilterButtons } from './StationFilterButtons'
 
 export function LeftSideBarFilter() {
 
+    const [viewType, setViewType] = useState('list')
+    const [sortType, setSortType] = useState('recents')
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
-    const [ showMenu, setShowMenu] = useState(false)
-    const [ showSearch, setShowSearch] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showSearch, setShowSearch] = useState(false)
 
-    const listMenu = getList()
-
-    const [listItems, setListItems] = useState(listMenu)
-
-    function getList(){
-        const sortTitle ={
+    const listMenu = [
+        buildListObj({
             type: 'title',
-            name: 'Sort by',
-            icon: '',
-            topDivision: '',
-            isChosen: false
-        }
-        const viewTitle ={...sortTitle, name: 'View as', topDivision: 'include-top-division'}
-    
-        const recents =  {
-            type: 'list-item',
+            name: 'Sort-by'
+        }),
+
+        buildListObj({
             name: 'Recents',
-            section: 'sort-by',
+            isChosen: (sortType === 'recents'),
+            onClick: () => setSortType('recents')
+        }),
+
+        buildListObj({
+            name: 'Recently Added',
+            isChosen: (sortType === 'recently-added'),
+            onClick: () => setSortType('recently-added')
+        }),
+
+        buildListObj({
+            name: 'Alphabetical',
+            isChosen: (sortType === 'alphabetical'),
+            onClick: () => setSortType('alphabetical')
+        }),
+
+        buildListObj({
+            name: 'Creator',
+            isChosen: (sortType === 'creator'),
+            onClick: () => setSortType('creator')
+        }),
+
+        buildListObj({
+            type: 'title',
+            name: 'View-as'
+        }),
+
+        buildListObj({
+            name: 'List',
+            icon: 'list',
+            isChosen: (viewType === 'list'),
+            onClick: () => setViewType('list')
+        }),
+
+        buildListObj({
+            name: 'Compact',
+            icon: 'compact',
+            isChosen: (viewType === 'compact'),
+            onClick: () => setViewType('compact')
+        }),
+
+        buildListObj({
+            name: 'Grid',
+            icon: 'grid',
+            isChosen: (viewType === 'grid'),
+            onClick: () => setViewType('grid')
+        })
+
+    ]
+
+    function buildListObj(props) {
+        return {
+            type: 'list-item',
+            name: '',
             icon: '',
             topDivision: '',
-            isChosen: true,
+            isChosen: false,
+            onClick: noop,
+            ...props
         }
-    
-        const recentlyAdded = {...recents, name:'Recently Added', isChosen: false}
-        const alpha = {...recents, name:'Alphabetical', isChosen: false}
-        const creator = {...recents, name:'Creator', isChosen: false}
-    
-        const compact =  {...recents, name:'Compact', section:'view-as', icon: 'compact', isChosen: false}
-        const list = {...compact, name:'List', icon: 'list', isChosen: true}
-        const grid = {...compact, name:'Grid', icon: 'grid'}
-        
-        return [sortTitle, recents, recentlyAdded, alpha, creator, viewTitle, compact, list, grid] 
     }
 
-    function findChosenItem(){
-        const chosen = listItems.find(listItem => listItem.isChosen === true)
-        return chosen.name
-    }
-    function findChosenItemIcon(){
-        const chosen = listItems.filter(listItem => listItem.icon !== '')
-                        .find(listItem => listItem.isChosen === true)
-        return chosen.icon
-    
-    }
-
-    function handleAction(listItem){
-        setListItems(prevListItems => 
-            prevListItems.map(item => {
-                if((item.type === 'title') || 
-                (item.section !== listItem.section)) return item
-                
-                else {
-                    return {
-                        ...item,
-                        isChosen: (item.name === listItem.name)
-                    }
-                }
-            }
-        ))  
-    }
+    function noop() { }
 
     function handleChange(ev) {
         const type = ev.target.type
@@ -86,17 +99,17 @@ export function LeftSideBarFilter() {
             case 'text':
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
-                if(!filterBy.sortDir) filterBy.sortDir = 1
+                if (!filterBy.sortDir) filterBy.sortDir = 1
                 break
             case 'number':
                 value = +ev.target.value || ''
                 break
-             
+
         }
-        updateFilterBy({...filterBy, [field]: value})
+        updateFilterBy({ ...filterBy, [field]: value })
     }
-    
-    
+
+
     return (
         <div className="sidebar-filter">
             <StationFilterButtons />
@@ -104,33 +117,31 @@ export function LeftSideBarFilter() {
             <section className="sidebar-search">
 
                 <div className="search-container">
-                    <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)} 
+                    <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)}
                         className="search icon btn-medium">
-                        <SvgIcon iconName={"search"}    /> 
+                        <SvgIcon iconName={"search"} />
                     </button>
 
-                    {showSearch && 
-                        <input 
-                            type="text" 
+                    {showSearch &&
+                        <input
+                            type="text"
                             name="txt"
                             value={filterBy.txt}
                             placeholder="Search in Playlists"
                             onChange={handleChange}
                             required
-                        /> }
+                        />}
                 </div>
-                
+
 
                 <div className="sort-by">
                     <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
-                        {/* Recents
-                        <div className="icon"><SvgIcon iconName={"list"}    /> </div> */}
-                        <span>{findChosenItem()}</span>
-                        <SvgIcon iconName={findChosenItemIcon()} svgClass="svg=small"/>
+                        <span>{sortType}</span>
+                        <SvgIcon iconName={viewType} svgClass="svg=small" />
                     </div>
-                    {showMenu && <DropDownMenu listItems = {listItems} handleAction = {handleAction} />}
+                    {showMenu && <DropDownMenu listItems={listMenu} />}
                 </div>
-                
+
             </section>
         </div>
     )
