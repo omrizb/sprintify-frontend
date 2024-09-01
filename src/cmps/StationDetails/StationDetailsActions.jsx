@@ -13,6 +13,7 @@ import { addStation, removeStation, updateStation } from '../../store/actions/st
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
+    const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -26,48 +27,68 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
         songsDisplay,
     } = stationMeta.stationActionsBar
 
-    const viewList = getViewList()
-    const moreList = getMoreList()
 
-    const [listItemsView, setListItemsView] = useState(viewList)
-    const [listItemsMore, setListItemsMore] = useState(moreList)
-
-
-    useEffect(() => {
-        const updatedViewList = getViewList()
-        const updatedMoreList = getMoreList()
-        setListItemsView([...updatedViewList])
-        setListItemsMore([...updatedMoreList])
-    }, [isLikedByUser])
-
-
-    function getViewList() {
-        const title = {
-            type: 'title',
+    const viewList = [
+        buildListObj({
             name: 'View as',
-            icon: '',
-            topDivision: '',
-            isChosen: false
-        }
-        const compact = {
-            type: 'list-item',
+            type: 'title'
+        }),
+        buildListObj({
             name: 'Compact',
             icon: 'compact',
-            topDivision: '',
-            isChosen: false
-        }
-        const list = { ...compact, name: 'List', icon: 'list', isChosen: true }
+            isChosen: (viewType === 'compact'),
+            onClick: () => setViewType('compact')
+        }),
+        buildListObj({
+            name: 'List',
+            icon: 'list',
+            isChosen: (viewType === 'list'),
+            onClick: () => setViewType('list')
+        })
 
-        return [title, compact, list]
-    }
+    ]
+
+    const moreList = getMoreList()
+
+    // const [listItemsMore, setListItemsMore] = useState(moreList)
+
+
+    // useEffect(() => {
+    //     const updatedMoreList = getMoreList()
+    //     setListItemsMore([...updatedMoreList])
+    // }, [isLikedByUser])
+
 
     function getMoreList() {
-        const addToQueue = buildListObj({ name: 'Add to queue', icon: 'addToQueue' })
+        const addToQueue = buildListObj({
+            name: 'Add to queue',
+            icon: 'addToQueue'
+        })
 
-        const editDetails = { ...addToQueue, name: 'Edit details', icon: 'editDetails' }
-        const deleteStation = { ...addToQueue, name: 'Delete', icon: 'delete' }
-        const removeFromLibrary = { ...addToQueue, name: 'Remove from Your Library', icon: 'removeFromLibrary' }
-        const addToLibrary = { ...addToQueue, name: 'Add to Your Library', icon: 'addToLibrary' }
+        const deleteStation = buildListObj({
+            name: 'Delete',
+            icon: 'delete',
+            onClick: onRemoveStation
+        })
+
+        const editDetails = buildListObj({
+            name: 'Edit details',
+            icon: 'editDetails',
+            onClick: () => {
+                setIsModalOpen(true)
+                setShowMoreMenu(false)
+            }
+        })
+
+        const removeFromLibrary = buildListObj({
+            name: 'Remove from Your Library',
+            icon: 'removeFromLibrary'
+        })
+
+        const addToLibrary = buildListObj({
+            name: 'Add to Your Library',
+            icon: 'addToLibrary'
+        })
 
         if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
         if (!isOwnedByUser && isLikedByUser) return [removeFromLibrary, addToQueue]
@@ -81,58 +102,11 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
             icon: '',
             topDivision: '',
             isChosen: false,
+            onClick: undefined,
             ...props
         }
     }
 
-    function findChosenItem() {
-        const chosen = listItemsView.find(listItem => listItem.isChosen === true)
-        return chosen.name
-    }
-
-    function findChosenItemIcon() {
-        const chosen = listItemsView.filter(listItem => listItem.icon !== '')
-            .find(listItem => listItem.isChosen === true)
-        return chosen.icon
-    }
-
-    function handleViewAction(listItem) {
-
-        setListItemsView(prevListItemsView =>
-            prevListItemsView.map(item => {
-                if (item.type === 'title') return item
-                else {
-                    return {
-                        ...item,
-                        isChosen: (item.name === listItem.name)
-                    }
-                }
-            }
-            ))
-
-    }
-
-    function handleMoreAction(listItem) {
-        console.log(listItem.name)
-        if (listItem.name === 'Delete') onRemoveStation()
-        if (listItem.name === 'Edit details') {
-            setIsModalOpen(true)
-            setShowMoreMenu(false)
-        }
-        if (listItem.name === 'Remove from Your Library') {
-            const likedByArr = station.likedByUsers.filter(user => user !== userId)
-            updateStation({ ...station, likedByUsers: [...likedByArr] })
-            removeStation(station._id)
-        }
-        if (listItem.name === 'Add to Your Library') {
-            updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
-            addStation(station)
-        }
-    }
-
-    const handleViewModeClick = (mode) => {
-        changeViewMode(mode)
-    }
 
     return (
         <div className="station-action-bar" >
@@ -157,7 +131,8 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                     svgClass={"svg-big2"}
                     tooltipTxt={`More options for ${station.name}`}
                 />)}
-                {showMoreMenu && <DropDownMenu listItems={listItemsMore} handleAction={handleMoreAction} />}
+                {/* {showMoreMenu && <DropDownMenu listItems={listItemsMore} />} */}
+                {showMoreMenu && <DropDownMenu listItems={moreList} />}
 
             </div>
 
@@ -165,10 +140,10 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 <button
                     className="btn-dark2-simple flex-regular-gap"
                     onClick={() => setShowViewMenu(prevShowViewMenu => !prevShowViewMenu)}>
-                    <span>{findChosenItem()}</span>
-                    <SvgIcon iconName={findChosenItemIcon()} svgClass="svg-small1" />
+                    <span>{viewType}</span>
+                    <SvgIcon iconName={viewType} svgClass="svg-small1" />
                 </button>
-                {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction={handleViewAction} />}
+                {showViewMenu && <DropDownMenu listItems={viewList} />}
             </div>
 
             {isModalOpen &&

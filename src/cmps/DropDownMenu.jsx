@@ -1,12 +1,12 @@
 import { DropDownMenuItem } from "./DropDownMenuItem";
 
-export function DropDownMenu({ listItems, handleAction }) {
+export function DropDownMenu({ listItems }) {
+
 
     function onClick(ev, listItem) {
         ev.stopPropagation()
-        handleAction(listItem)
+        listItem.onClick()
     }
-
 
     return (
 

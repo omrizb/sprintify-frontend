@@ -5,21 +5,16 @@ const initialState = {
     filterBy: {
         txt: '',
         stationType: '',
-        playListCreator:'',
+        playListCreator: '',
         sortField: '',
         sortDir: '',
-    },
-
-    filterByMain: {
-        txt: '',
-        type:'',
-
     }
+
 }
 
 export function filterByReducer(state = initialState, action) {
     var newState = state
-    
+
     switch (action.type) {
         case SET_FILTER_BY:
             newState = { ...state, filterBy: action.filterBy }
@@ -28,7 +23,7 @@ export function filterByReducer(state = initialState, action) {
         case SET_FILTER_BY_MAIN:
             newState = { ...state, filterByMain: action.filterByMain }
             break
-      
+
         default:
     }
     return newState
@@ -39,8 +34,8 @@ export function filterByReducer(state = initialState, action) {
 function unitTestReducer() {
     var state = initialState
     const filterBy = { txt: 'chill', sortField: 'playlists', sortDir: 1 }
-    
-    
+
+
     state = filterByReducer(state, { type: SET_FILTER_BY, filterBy: filterBy })
     console.log('After SET_FILTER_BY:', state)
 

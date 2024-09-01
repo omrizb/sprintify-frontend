@@ -25,7 +25,7 @@ export const stationService = {
 _createStations()
 
 function getEmptyStation() {
-    return  {
+    return {
         name: 'My Playlist',
         type: 'playlist',
         isLikedSongs: false,
@@ -34,15 +34,16 @@ function getEmptyStation() {
         description: '',
         isOwnedByUser: true,
         createdBy: {
-                    id: 'AAAA',
-                    fullName: 'Darr',
-                    imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'},
+            id: 'AAAA',
+            fullName: 'Darr',
+            imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+        },
         likedByUsers: [],
         songs: []
     }
 }
 
-async function query(filterBy = { txt: '', stationType: '', playListCreator: '', songId: ''}) {//Could be either filterBy or filterByMain
+async function query(filterBy = { txt: '', likedByUser: '', stationType: '', playListCreator: '', songId: '' }) {//Could be either filterBy or filterByMain
 
     // console.log('filterBy from service:', filterBy)
     var stations = await storageService.query(STORAGE_KEY)
@@ -53,24 +54,30 @@ async function query(filterBy = { txt: '', stationType: '', playListCreator: '',
         stations = stations.filter(station => regex.test(station.name) || regex.test(station.createdBy.fullName))
     }
 
-    if(filterBy.stationType === 'playlist'){
-        stations = stations.filter(station => station.type === 'playlist' )
-        if(filterBy.playListCreator === 'byYou'){
-            stations = stations.filter(station => station.createdBy.fullName === 'Darr' )
+    if (filterBy.stationType === 'playlist') {
+        stations = stations.filter(station => station.type === 'playlist')
+        if (filterBy.playListCreator === 'byYou') {
+            stations = stations.filter(station => station.createdBy.fullName === 'Darr')
         }
-        if(filterBy.playListCreator === 'bySprintify'){
-            stations = stations.filter(station => station.createdBy.fullName === 'sprintify' )
+        if (filterBy.playListCreator === 'bySprintify') {
+            stations = stations.filter(station => station.createdBy.fullName === 'sprintify')
         }
     }
-    if(filterBy.stationType === 'artist'){
-        stations = stations.filter(station => station.type === 'artist' )
+    if (filterBy.stationType === 'artist') {
+        stations = stations.filter(station => station.type === 'artist')
     }
-    if(filterBy.stationType === 'album'){
-        stations = stations.filter(station => station.type === 'album' )
+    if (filterBy.stationType === 'album') {
+        stations = stations.filter(station => station.type === 'album')
     }
-    if(filterBy.songId){
+    if (filterBy.songId) {
         stations = stations.find(station => station.songs.find(song => song.songId === filterBy.songId))
     }
+
+    if (filterBy.likedByUser) {
+        stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
+    }
+
+
     // if (minSpeed) {
     //     stations = stations.filter(station => station.speed <= minSpeed)
     // }
@@ -150,27 +157,27 @@ async function addStationMsg(stationId, txt) {
     return msg
 }
 
-async function getRecentlyPlayed(userId = 'bob', size = 4){
+async function getRecentlyPlayed(userId = 'bob', size = 4) {
     //TODO write algorithm for fetching recentlyplayed playlists per user 
-    const stations = await query({stationType: 'playlist'})
+    const stations = await query({ stationType: 'playlist' })
     return utilService.getRandomItems(stations, size)
 }
-async function getTopMixes(userId = 'bob', size = 4){
+async function getTopMixes(userId = 'bob', size = 4) {
     //TODO write algorithm for fetching top mixes per user 
-    const stations = await query({stationType: 'playlist'})
+    const stations = await query({ stationType: 'playlist' })
     return utilService.getRandomItems(stations, size)
 }
-async function getMadeForYou(userId = 'bob', size = 4){
+async function getMadeForYou(userId = 'bob', size = 4) {
     //TODO write algorithm for fetching top mixes per user 
-    const stations = await query({stationType: 'playlist'})
+    const stations = await query({ stationType: 'playlist' })
     return utilService.getRandomItems(stations, size)
 }
 
-async function getSong(songId){
-    const station = await query({songId: songId})
+async function getSong(songId) {
+    const station = await query({ songId: songId })
     // const station = stations.find(station => station.songs.find(song => song.songId === songId))
     const song = station.songs.find(song => song.songId === songId)
-    
+
     return song
 }
 
