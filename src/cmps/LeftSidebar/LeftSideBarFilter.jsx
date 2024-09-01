@@ -23,8 +23,7 @@ export function LeftSideBarFilter() {
         icon: '',
         action: '',
         topDivision: '',
-        isChosen: false,
-        closeMenu: false
+        isChosen: false
     }
     const viewTitle ={...sortTitle, name: 'View as', topDivision: 'include-top-division'}
 
@@ -35,7 +34,6 @@ export function LeftSideBarFilter() {
         action: 'update-filter',
         topDivision: '',
         isChosen: true,
-        closeMenu: false, 
     }
 
     const recentlyAdded = {...recents, name:'Recently Added', isChosen: false}

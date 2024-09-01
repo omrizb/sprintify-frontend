@@ -2,7 +2,7 @@ import { SvgIcon } from "./SvgIcon"
 
 export function DropDownMenuItem({listItem}){
 
-    const { name, icon, action, closeMenu, isChosen, topDivision, type} = listItem
+    const { name, icon, isChosen, topDivision, type} = listItem
 
     
     function setClass(){

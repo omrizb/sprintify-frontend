@@ -1,7 +1,7 @@
 .drop-down-menu-item {
 
     padding: 12px 8px 12px 12px;
-    width: 152px;
+    min-width: 152px;
     
     border-radius: 4px;
     display: flex;
@@ -13,8 +13,10 @@
     }
 
     &:hover {
+
         &:not(.section-title){
             background-color: $transparentGray;
+            cursor: pointer;
         }
     }
 
