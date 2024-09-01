@@ -16,11 +16,13 @@
     .view-as,
     .show-more {
         position: relative;
+        z-index: 100;
     }
 
     .show-more {
         .drop-down-menu{
-            right: -130px;
+            right: -180px;
+            width: max-content;
         }
     }
 }

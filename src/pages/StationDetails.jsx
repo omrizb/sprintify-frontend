@@ -68,11 +68,12 @@ export function StationDetails() {
     const isLikedByUser = station.likedByUsers.includes(loggedinUser._id)
     const stationMeta = {
         isOwnedByUser,
+        userId: loggedinUser._id,
+        isLikedByUser,
         stationActionsBar: {
             'showPlay': station.type === 'playlist' && !isEmptyStation,
             'showRemoveFromLibrary': !isOwnedByUser && isLikedByUser,
             'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
-            'showFollowUnfollow': station.type === 'podcast',
             'showMore': !station.isLikedSongs,
             'songsDisplay': loggedinUser.songsDisplay || 'list'
         }

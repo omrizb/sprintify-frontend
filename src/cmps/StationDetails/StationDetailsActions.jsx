@@ -9,6 +9,7 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { Modal } from '../Modal.jsx'
 import { EditStation } from '../EditStation.jsx'
+import { addStation, removeStation, updateStation } from '../../store/actions/station.actions.js'
 
 export function StationDetailsActions({ station, stationMeta, onRemoveStation }) {
 
@@ -16,22 +17,29 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     const [showMoreMenu, setShowMoreMenu] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const { isOwnedByUser } = stationMeta
+    const { isOwnedByUser, userId, isLikedByUser } = stationMeta
     const {
         showPlay,
         showAddToLibrary,
         showRemoveFromLibrary,
-        showFollowUnfollow,
         showMore,
         songsDisplay,
     } = stationMeta.stationActionsBar
 
     const viewList = getViewList()
     const moreList = getMoreList()
-    
+
     const [listItemsView, setListItemsView] = useState(viewList)
     const [listItemsMore, setListItemsMore] = useState(moreList)
-    
+
+
+    useEffect(() => {
+        const updatedViewList = getViewList()
+        const updatedMoreList = getMoreList()
+        setListItemsView([...updatedViewList])
+        setListItemsMore([...updatedMoreList])
+    }, [isLikedByUser])
+
 
     function getViewList() {
         const title = {
@@ -54,18 +62,27 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     }
 
     function getMoreList() {
-        const addToQueque = {
-            type: 'list-item',
-            name: 'Add to queque',
-            icon: 'addToQueque',
-            topDivision: '',
-            isChosen: false
-        }
-        const editDetails = { ...addToQueque, name: 'Edit details', icon: 'editDetails' }
-        const deleteStation = { ...addToQueque, name: 'Delete', icon: 'delete' }
+        const addToQueue = buildListObj({ name: 'Add to queue', icon: 'addToQueue' })
 
-        if (isOwnedByUser) return [addToQueque, editDetails, deleteStation]
-        return [addToQueque]
+        const editDetails = { ...addToQueue, name: 'Edit details', icon: 'editDetails' }
+        const deleteStation = { ...addToQueue, name: 'Delete', icon: 'delete' }
+        const removeFromLibrary = { ...addToQueue, name: 'Remove from Your Library', icon: 'removeFromLibrary' }
+        const addToLibrary = { ...addToQueue, name: 'Add to Your Library', icon: 'addToLibrary' }
+
+        if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
+        if (!isOwnedByUser && isLikedByUser) return [removeFromLibrary, addToQueue]
+        if (!isOwnedByUser && !isLikedByUser) return [addToLibrary, addToQueue]
+    }
+
+    function buildListObj(props) {
+        return {
+            type: 'list-item',
+            name: '',
+            icon: '',
+            topDivision: '',
+            isChosen: false,
+            ...props
+        }
     }
 
     function findChosenItem() {
@@ -97,10 +114,19 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
 
     function handleMoreAction(listItem) {
         console.log(listItem.name)
-        if(listItem.name === 'Delete') onRemoveStation()
-        if(listItem.name === 'Edit details') {
+        if (listItem.name === 'Delete') onRemoveStation()
+        if (listItem.name === 'Edit details') {
             setIsModalOpen(true)
             setShowMoreMenu(false)
+        }
+        if (listItem.name === 'Remove from Your Library') {
+            const likedByArr = station.likedByUsers.filter(user => user !== userId)
+            updateStation({ ...station, likedByUsers: [...likedByArr] })
+            removeStation(station._id)
+        }
+        if (listItem.name === 'Add to Your Library') {
+            updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
+            addStation(station)
         }
     }
 
@@ -109,7 +135,7 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
     }
 
     return (
-        <div className="station-action-bar">
+        <div className="station-action-bar" >
 
             {showPlay && <PlayButton
                 type={'stationDetails'}
@@ -122,13 +148,6 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
             {showAddToLibrary && <AddToButton type="addToLibrary" />}
 
             {showRemoveFromLibrary && <VButton type="removeFromLibrary" />}
-
-            {showFollowUnfollow && (
-                <>
-                    <button className="following-btn">Following</button>
-                    <button className="following-btn">Follow</button>
-                </>
-            )}
 
             <div className="show-more"
                 onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
@@ -151,8 +170,6 @@ export function StationDetailsActions({ station, stationMeta, onRemoveStation })
                 </button>
                 {showViewMenu && <DropDownMenu listItems={listItemsView} handleAction={handleViewAction} />}
             </div>
-
-
 
             {isModalOpen &&
                 <Modal closeModal={() => setIsModalOpen(false)} >

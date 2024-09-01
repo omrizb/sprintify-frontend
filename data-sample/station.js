@@ -418,7 +418,7 @@ export const stations = [
             fullName: 'Ava Wilson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['P6Q7R8S9T0', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA','P6Q7R8S9T0', 'K1L2M3N4O5'],
         songs: [
             {
                 songId: 'lp-EO5I60KA',

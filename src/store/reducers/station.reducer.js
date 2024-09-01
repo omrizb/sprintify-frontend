@@ -23,8 +23,9 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, station: action.station }
             break
         case REMOVE_STATION:
+            const lastRemovedStation = state.stations.find(station => station._id === action.stationId)
             stations = state.stations.filter(station => station._id !== action.stationId)
-            newState = { ...state, stations, station: null }
+            newState = { ...state, stations, station: lastRemovedStation }
             break
         case ADD_STATION:
             newState = { ...state, stations: [action.station, ...state.stations] }
