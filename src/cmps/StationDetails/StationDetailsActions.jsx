@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-import { removeStation, updateStation } from '../../store/actions/station.actions.js'
+import { loadLibrary, removeStation, setStations, updateStation } from '../../store/actions/station.actions.js'
 
 import { EditStation } from '../EditStation.jsx'
 import { Modal } from '../Modal.jsx'
@@ -15,9 +16,11 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { updateFilterBy } from '../../store/actions/filterBy.actions.js'
 
+
 export function StationDetailsActions({ station, stationMeta }) {
 
     const navigate = useNavigate()
+    const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
@@ -111,14 +114,14 @@ export function StationDetailsActions({ station, stationMeta }) {
     function noop() { }
 
     function onRemoveFromLibrary() {
-        updateFilterBy({})
         const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
         updateStation({ ...station, likedByUsers: updatedLikedByArr })
+        loadLibrary({ filterBy }, userId)
     }
 
     function onAddToLibrary() {
-        updateFilterBy({})
         updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
+        loadLibrary({ filterBy }, userId)
     }
 
 

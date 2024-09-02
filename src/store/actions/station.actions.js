@@ -25,15 +25,27 @@ export async function loadStations(filterBy) {
 
 export async function loadLibrary(filterBy, userId) {
     try {
-        const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
 
         if (filterBy.createdBy) {
+            var stations = await stationService.query({ ...filterBy, createdBy: filterBy.createdBy, likedByUser: userId })
+        }
+
+        if (!filterBy.createdBy) {
             const myStations = await stationService.query({ ...filterBy, createdBy: userId })
+            const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
             const combined = [...myStations, ...likedStations]
             var stations = _.uniqBy(combined, '_id')
         }
 
-        stations = [...likedStations]
+        store.dispatch(getCmdSetStations(stations))
+    } catch (err) {
+        console.log('Cannot load stations', err)
+        throw err
+    }
+}
+
+export async function setStations(stations) {
+    try {
         store.dispatch(getCmdSetStations(stations))
     } catch (err) {
         console.log('Cannot load stations', err)
