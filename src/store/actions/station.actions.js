@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { stationService } from '../../services/station/station.service.local.js'
 import { store } from '../store.js'
 import {
@@ -23,9 +25,15 @@ export async function loadStations(filterBy) {
 
 export async function loadLibrary(filterBy, userId) {
     try {
-        const myStations = await stationService.query({ ...filterBy, createdBy: userId })
         const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
-        const stations = [...myStations, ...likedStations]
+
+        if (filterBy.createdBy) {
+            const myStations = await stationService.query({ ...filterBy, createdBy: userId })
+            const combined = [...myStations, ...likedStations]
+            var stations = _.uniqBy(combined, '_id')
+        }
+
+        stations = [...likedStations]
         store.dispatch(getCmdSetStations(stations))
     } catch (err) {
         console.log('Cannot load stations', err)
