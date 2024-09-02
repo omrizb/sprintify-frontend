@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import _ from 'lodash'
 
 import { loadLibrary, loadStations } from '../store/actions/station.actions.js'
 import { loadStationToPlayer } from '../store/actions/player.actions.js'
@@ -21,12 +20,13 @@ export function LeftSidebar() {
 
     useEffect(() => {
         loadLibrary(filterBy, userId)
-    }, [filterBy, stations])
+    }, [filterBy])
 
     useEffect(() => {
         if (!stations || !stations.length) return
         const station = stations.find(station => station.songs.length > 0)
         loadStationToPlayer(station._id, station.songs[0].songId)
+
     }, [stations])
 
 

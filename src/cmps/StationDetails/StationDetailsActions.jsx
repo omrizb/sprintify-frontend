@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { removeStation, updateStation } from '../../store/actions/station.actions.js'
@@ -13,10 +13,12 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
+import { updateFilterBy } from '../../store/actions/filterBy.actions.js'
 
 export function StationDetailsActions({ station, stationMeta }) {
 
     const navigate = useNavigate()
+
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
@@ -81,6 +83,7 @@ export function StationDetailsActions({ station, stationMeta }) {
             name: 'Remove from Your Library',
             icon: 'removeFromLibrary',
             onClick: () => {
+                updateFilterBy({})
                 const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
                 updateStation({ ...station, likedByUsers: updatedLikedByArr })
             }
@@ -89,7 +92,10 @@ export function StationDetailsActions({ station, stationMeta }) {
         const addToLibrary = buildListObj({
             name: 'Add to Your Library',
             icon: 'addToLibrary',
-            onClick: () => updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
+            onClick: () => {
+                updateFilterBy({})
+                updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
+            }
         })
 
         if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
