@@ -54,29 +54,32 @@ async function query(filterBy = {
 
     var stations = await storageService.query(STORAGE_KEY)
 
-    if (filterBy.txt) {
+    const { txt, likedByUser, stationType, createdBy, songId, sortField, sortDir } = filterBy
+
+    if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stations = stations.filter(station => regex.test(station.name) || regex.test(station.createdBy.fullName))
     }
 
-    if (filterBy.stationType) {
-        stations = stations.filter(station => station.type === filterBy.stationType)
+    if (stationType) {
+        stations = stations.filter(station => station.type === stationType)
     }
 
-    if (filterBy.createdBy) {
-        stations = stations.filter(station => station.createdBy.id === filterBy.createdBy)
+    if (createdBy) {
+        stations = stations.filter(station => station.createdBy.id === createdBy)
     }
 
-    if (filterBy.songId) {
-        stations = stations.find(station => station.songs.find(song => song.songId === filterBy.songId))
+    if (songId) {
+        stations = stations.find(station => station.songs.find(song => song.songId === songId))
     }
 
-    if (filterBy.likedByUser) {
-        stations = stations.filter(station => station.likedByUsers.includes(filterBy.likedByUser))
+    if (likedByUser) {
+        stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
     }
 
-    if (filterBy.sortField === 'alphabetical') {
-        stations = [...stations].sort((a, b) => a.name.localeCompare(b.name))
+    if (filterBy.sortField === 'name') {
+        stations.sort((station1, station2) =>
+            station1[sortField].localeCompare(station2[sortField]) * sortDir)
     }
 
 

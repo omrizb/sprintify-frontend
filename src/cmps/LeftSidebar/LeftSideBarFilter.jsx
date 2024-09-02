@@ -41,7 +41,7 @@ export function LeftSideBarFilter({ userId }) {
             isChosen: (sortType === 'alphabetical'),
             onClick: () => {
                 setSortType('alphabetical')
-                updateFilterBy({ ...filterBy, sortField: 'alphabetical' })
+                updateFilterBy({ ...filterBy, sortField: 'name', sortDir: 1 })
             }
         }),
 
