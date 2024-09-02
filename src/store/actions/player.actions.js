@@ -1,53 +1,111 @@
 import { stationService } from '../../services/station/station.service.local'
 
 import { store } from '../store'
-import { SET_PLAYER, SET_ACTION, SET_VOLUME, SET_STATION_ID, SET_STATION_NAME, SET_STATION_SONGS, MARK_STATION_SONG_AS_PLAYED, SET_SONG_HISTORY, ADD_TO_SONG_HISTORY, SET_QUEUE, ADD_TO_QUEUE } from '../reducers/player.reducer'
+import {
+    SET_PLAYER,
+    ADD_TO_ACTION_QUEUE,
+    POP_FROM_ACTION_QUEUE,
+    SET_STATION_ID,
+    SET_STATION_NAME,
+    SET_REMAINING_STATION_SONGS,
+    SET_ORIGINAL_STATION_SONGS,
+    POP_FROM_REMAINING_STATION_SONGS,
+    SET_QUEUE,
+    ADD_TO_QUEUE,
+    SET_SONGS_HISTORY,
+    ADD_TO_SONGS_HISTORY,
+    POP_FROM_SONGS_HISTORY
+} from '../reducers/player.reducer'
+
 
 export const playerActions = {
+    LOAD_SONG: 'loadSong',
+    LOAD_STATION: 'loadStation',
     PLAY: 'play',
     PAUSE: 'pause',
-    GOTO: 'goto'
+    GOTO: 'goto',
+    SET_VOLUME: 'setVolume',
+    MUTE: 'mute',
+    UNMUTE: 'unmute',
+    PLAY_NEXT: 'playNext',
+    PLAY_PREV: 'playPrev',
+    SET_SHUFFLE: 'setShuffle',
+    SET_REPEAT: 'setRepeat',
+    ADD_TO_QUEUE: 'addToQueue',
+    REMOVE_FROM_QUEUE: 'removeFromQueue',
+    CLEAR_QUEUE: 'clearQueue',
+    RESET_ACTION: ''
 }
 
-export function setPlayer(playerProps) {
+// To be used by app components to set an action
+
+export function setPlayerAction(action, params) {
+    store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params } })
+}
+
+// To be used ONLY by the player component component to execute action
+
+export const executePlayerAction = {
+    removeNextActionFromQueue,
+    setPlayer,
+    loadSongToPlayer,
+    loadStationToPlayer
+}
+
+function removeNextActionFromQueue() {
+    store.dispatch({ type: POP_FROM_ACTION_QUEUE })
+}
+
+function setPlayer(playerProps) {
     store.dispatch({ type: SET_PLAYER, playerProps })
 }
 
-export function loadSongToPlayer(songId) {
-    store.dispatch(getActionSetSong(songId))
+function loadSongToPlayer(songId) {
+    store.dispatch({ type: SET_PLAYER, playerProps: { songId } })
 }
 
-export async function loadStationToPlayer(stationId, firstSongId) {
+async function loadStationToPlayer(stationId, firstSongId) {
     try {
-        store.dispatch(getActionPausePlayer())
         const station = await stationService.getById(stationId)
-        store.dispatch(getActionSetSong(firstSongId))
+
+        if (!station.songs.find(song => song.songId === firstSongId)) {
+            throw 'Cannot find songId in station.'
+        }
+
+        const songsWithoutFirstSong = station.songs.map(song => song.songId !== firstSongId)
+        store.dispatch({ type: SET_PLAYER, playerProps: { songId: firstSongId } })
         store.dispatch({ type: SET_STATION_ID, stationId: station._id })
         store.dispatch({ type: SET_STATION_NAME, stationName: station.name })
-        store.dispatch({ type: SET_STATION_SONGS, stationSongs: station.songs })
+        store.dispatch({ type: SET_ORIGINAL_STATION_SONGS, songs: station.songs })
+        store.dispatch({ type: SET_REMAINING_STATION_SONGS, songs: songsWithoutFirstSong })
+
     } catch (err) {
         console.log('PlayerActions: Error in loadStationToPlayer', err)
     }
 }
 
-export function play() {
-    store.dispatch(getActionPlayPlayer())
+function play() {
+    store.dispatch({ type: SET_ACTION, action: playerActions.PLAY })
 }
 
-export function pause() {
+function pause() {
     store.dispatch(getActionPausePlayer())
 }
 
-export function goto(seconds) {
+function goto(seconds) {
     store.dispatch({ type: SET_ACTION, action: playerActions.GOTO, actionParam: seconds })
 }
 
 export function setVolume(volume) {
-    store.dispatch({ type: SET_VOLUME, volume })
+    store.dispatch({ type: SET_ACTION, action: playerActions.SET_VOLUME, actionParam: volume })
 }
 
 export function setQueue(queue) {
     store.dispatch({ type: SET_QUEUE, queue })
+}
+
+export function resetAction() {
+    store.dispatch({ type: SET_ACTION, action: playerActions.RESET_ACTION, actionParam: '' })
 }
 
 // Command Creators

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { setVolume } from '../../store/actions/player.actions'
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { Slider } from '../Slider'
 import { SvgButton } from '../SvgButton'
 
@@ -13,7 +13,7 @@ export function VolumeController() {
     const [isMute, setIsMute] = useState(false)
 
     function handleVolumeChange(volume) {
-        setVolume(volume)
+        setPlayerAction(playerActions.SET_VOLUME, { volume })
 
         if (volume === 0) {
             setIsMute(true)

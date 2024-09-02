@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { loadLibrary, loadStations } from '../store/actions/station.actions.js'
-import { loadStationToPlayer } from '../store/actions/player.actions.js'
+import { playerActions, setPlayerAction } from '../store/actions/player.actions.js'
 
 import { LeftSideBarHeader } from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
@@ -25,7 +25,7 @@ export function LeftSidebar() {
     useEffect(() => {
         if (!stations || !stations.length) return
         const station = stations.find(station => station.songs.length > 0)
-        loadStationToPlayer(station._id, station.songs[0].songId)
+        setPlayerAction(playerActions.LOAD_STATION, { stationId: station._id, firstSongId: station.songs[0].songId })
 
     }, [stations])
 

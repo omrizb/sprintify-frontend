@@ -1,14 +1,16 @@
 export const SET_PLAYER = 'SET_PLAYER'
-export const SET_ACTION = 'SET_ACTION'
-export const SET_VOLUME = 'SET_VOLUME'
-export const SET_STATION_SONGS = 'SET_STATION_SONGS'
+export const ADD_TO_ACTION_QUEUE = 'ADD_TO_ACTION_QUEUE'
+export const POP_FROM_ACTION_QUEUE = 'POP_FROM_ACTION_QUEUE'
 export const SET_STATION_ID = 'SET_STATION_ID'
 export const SET_STATION_NAME = 'SET_STATION_NAME'
-export const MARK_STATION_SONG_AS_PLAYED = 'MARK_STATION_SONG_AS_PLAYED'
-export const SET_SONG_HISTORY = 'SET_SONG_HISTORY'
-export const ADD_TO_SONG_HISTORY = 'ADD_TO_SONG_HISTORY'
+export const SET_ORIGINAL_STATION_SONGS = 'SET_ORIGINAL_STATION_SONGS'
+export const SET_REMAINING_STATION_SONGS = 'SET_REMAINING_STATION_SONGS'
+export const POP_FROM_REMAINING_STATION_SONGS = 'POP_FROM_REMAINING_STATION_SONGS'
 export const SET_QUEUE = 'SET_QUEUE'
 export const ADD_TO_QUEUE = 'ADD_TO_QUEUE'
+export const SET_SONGS_HISTORY = 'SET_SONGS_HISTORY'
+export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
+export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 
 const initialState = {
     player: {
@@ -17,14 +19,18 @@ const initialState = {
         elapsedDuration: 0,
         isPlaying: false,
         volume: 100,
-        action: '',
-        actionParam: ''
+        prevVolume: 100,
+    },
+    control: {
+        actionsQueue: [],
+        actionParams: []
     },
     stationId: '',
     stationName: '',
-    stationSongs: [],
-    playedSongsHistory: [],
+    originalStationSongs: [],
+    remainingStationSongs: [],
     queue: [],
+    playedSongsHistory: [],
 }
 
 export function playerReducer(state = initialState, action = {}) {
@@ -37,20 +43,24 @@ export function playerReducer(state = initialState, action = {}) {
                 player: { ...state.player, ...action.playerProps }
             }
             break
-        case SET_ACTION:
+        case ADD_TO_ACTION_QUEUE:
             newState = {
                 ...state,
-                player: {
-                    ...state.player,
-                    action: action.action,
-                    actionParam: action.actionParam
+                control: {
+                    ...state.control,
+                    actionsQueue: [...state.control.actionsQueue, action.action],
+                    actionParams: [...state.control.actionParams, { ...action.actionParams }]
                 }
             }
             break
-        case SET_VOLUME:
+        case POP_FROM_ACTION_QUEUE:
             newState = {
                 ...state,
-                player: { ...state.player, volume: action.volume }
+                control: {
+                    ...state.control,
+                    actionsQueue: state.control.actionsQueue.slice(1),
+                    actionParams: state.control.actionParams.slice(1)
+                }
             }
             break
         case SET_STATION_ID:
@@ -59,25 +69,16 @@ export function playerReducer(state = initialState, action = {}) {
         case SET_STATION_NAME:
             newState = { ...state, stationName: action.stationName }
             break
-        case SET_STATION_SONGS:
+        case SET_ORIGINAL_STATION_SONGS:
+            newState = { ...state, originalStationSongs: action.songs }
+            break
+        case SET_REMAINING_STATION_SONGS:
+            newState = { ...state, remainingStationSongs: action.songs }
+            break
+        case POP_FROM_REMAINING_STATION_SONGS:
             newState = {
                 ...state,
-                stationSongs: action.stationSongs.map(song => ({ songId: song.songId, played: false }))
-            }
-            break
-        case MARK_STATION_SONG_AS_PLAYED:
-            newState = {
-                ...state,
-                stationSongs: state.stationSongs.map(song => (song.songId === action.songId) ? ({ songId: song.songId, played: true }) : song)
-            }
-            break
-        case SET_SONG_HISTORY:
-            newState = { ...state, playedSongsHistory: action.playedSongsHistory }
-            break
-        case ADD_TO_SONG_HISTORY:
-            newState = {
-                ...state,
-                playedSongsHistory: [...state.playedSongsHistory, action.songId]
+                remainingStationSongs: state.remainingStationSongs.slice(1)
             }
             break
         case SET_QUEUE:
@@ -89,8 +90,20 @@ export function playerReducer(state = initialState, action = {}) {
                 queue: [...state.queue, action.songId]
             }
             break
+        case SET_SONGS_HISTORY:
+            newState = { ...state, playedSongsHistory: action.playedSongsHistory }
+            break
+        case ADD_TO_SONGS_HISTORY:
+            newState = {
+                ...state,
+                playedSongsHistory: [...state.playedSongsHistory, action.songId]
+            }
+            break
+        case POP_FROM_SONGS_HISTORY:
+            newState = { ...state, playedSongsHistory: state.playedSongsHistory.slice(0, -1) }
+            break
         default:
-
+            return state
     }
     return newState
 }

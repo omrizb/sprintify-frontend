@@ -16,6 +16,7 @@ export function SongPreview(props) {
             articleClassName = 'list dynamic-grid'
     }
 
+
     const { songId, songName, artist, album, url, imgUrl, duration } = song
     const isHovered = song.songId === hoveredSongId
     const isHighlighted = isHovered || song.songId === selectedSongId
@@ -47,7 +48,7 @@ export function SongPreview(props) {
                     onClick={() => onAddSong(song)}>Add
                 </button> */}
                 <div className="add-btn-container">
-                    {isHighlighted && <DynamicButton isLikedByUser={isLikedByUser} />}
+                    {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
                 </div>
                 <span>{utilService.getTimeStr(duration)}</span>
                 <div className="dots-container">{isHighlighted && <DotsButton type="songPreview" elementName={songName} />}</div>
@@ -56,10 +57,8 @@ export function SongPreview(props) {
     )
 }
 
-function DynamicButton({ isLikedByUser }) {
-
-    return (isLikedByUser)
-        ? <VButton type="addToStation" />
-        : <AddToButton type="addToLikedSongs" />
+function DynamicButton({ isLikedByUser, isHighlighted }) {
+    if (isLikedByUser) return <VButton type="addToStation" />
+    else if (isHighlighted) return <AddToButton type="addToLikedSongs" />
 }
 
