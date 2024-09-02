@@ -7,30 +7,10 @@
     column-gap: 0.2em;
     grid-template-columns: max-content;
 
-    .hidden-radio {
-        display: none;
-    }
-
+   
     .active {
         @include inside-out;
         justify-self: start;
-    }
-
-    button {
-        &:not(.clear-filter){
-
-            width: 75px;
-        }
-        
-    }
-    
-    .sub-filter {
-        display: grid;
-        grid-auto-flow: column;
-        column-gap: 0.2em;
-        width: max-content;
-        justify-items: start;
-
     }
 
     
