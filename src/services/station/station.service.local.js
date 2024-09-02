@@ -48,6 +48,8 @@ async function query(filterBy = {
     stationType: '',
     createdBy: '',
     songId: '',
+    sortField: '',
+    sortDir: ''
 }) {
 
     var stations = await storageService.query(STORAGE_KEY)
@@ -71,6 +73,10 @@ async function query(filterBy = {
 
     if (filterBy.likedByUser) {
         stations = stations.filter(station => station.likedByUsers.includes(filterBy.likedByUser))
+    }
+
+    if (filterBy.sortField === 'alphabetical') {
+        stations = [...stations].sort((a, b) => a.name.localeCompare(b.name))
     }
 
 
