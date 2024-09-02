@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 
 import { utilService } from '../../services/util.service'
 
-import { play, pause, goto } from '../../store/actions/player.actions'
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { SvgButton } from '../SvgButton'
 import { Slider } from '../Slider'
 
@@ -13,14 +13,14 @@ export function PlayerMiddlePanel({ getPlayerState }) {
     function handlePlayPause() {
         const playerState = getPlayerState()
         if (playerState !== 1) {
-            play()
+            setPlayerAction(playerActions.PLAY)
         } else {
-            pause()
+            setPlayerAction(playerActions.PAUSE)
         }
     }
 
     function handleDurationChange(duration) {
-        goto(Math.floor(duration))
+        setPlayerAction(playerActions.GOTO, { seconds: Math.floor(duration) })
     }
 
     return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { SvgButton } from '../SvgButton'
-import { loadSongToPlayer, loadStationToPlayer, pause, play } from '../../store/actions/player.actions'
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 
 export function PlayButton({ type, stationId, stationName, songId, songName }) {
 
@@ -15,7 +15,6 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
             setIsPlaying(false)
         } else if (type === 'songPreview' && player.songId === songId) {
             (player.songId === songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
-            console.log("sdf")
         } else {
             setIsPlaying(player.isPlaying)
         }
@@ -23,21 +22,21 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
 
     function handleClick() {
         if (playerStationId !== stationId) {
-            loadStationToPlayer(stationId, songId)
-            play()
+            setPlayerAction(playerActions.LOAD_STATION, { stationId, firstSongId: songId })
+            setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return
         } else if (player.songId !== songId) {
-            loadSongToPlayer(songId)
-            play()
+            setPlayerAction(playerActions.LOAD_SONG, { songId })
+            setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return
         }
 
         if (!player.isPlaying) {
-            play()
+            setPlayerAction(playerActions.PLAY)
         } else {
-            pause()
+            setPlayerAction(playerActions.PAUSE)
         }
     }
 
