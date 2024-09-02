@@ -13,35 +13,33 @@ export function StationFilterButtons({ filterBy, userId }) {
             name: 'X',
             type: '',
             showBtn: false,
-            onClick: onClickBtn
         }),
+
         buildBtnObj({
             name: 'Playlists',
-            onClick: onClickBtn
+            createdBy: ''
         }),
+
         buildBtnObj({
             name: 'Artists',
             type: 'artist',
-            showBtn: false,
-            onClick: () => console.log('artist')
         }),
+
         buildBtnObj({
             name: 'Albums',
             type: 'album',
-            showBtn: false,
-            onClick: () => updateFilterBy({ ...filterBy, type: 'album' })
         }),
+
         buildBtnObj({
             name: 'By you',
             createdBy: userId,
-            showBtn: true,
-            onClick: onClickBtn
+            showBtn: false,
         }),
+
         buildBtnObj({
             name: 'By Sprintify',
             createdBy: sprintifyId,
-            showBtn: true,
-            onClick: onClickBtn
+            showBtn: false,
         }),
     ]
 
@@ -57,23 +55,74 @@ export function StationFilterButtons({ filterBy, userId }) {
             createdBy: '',
             showBtn: true,
             btnClass: '',
-            onClick: noop,
+            onClick: onClickBtn,
             ...props
         }
     }
 
-    function noop() { }
 
     function onClickBtn(index, filterBtn) {
-        console.log(index)
-        console.log(filterBtn.type)
+        let { type, btnClass, createdBy, } = filterBtn
+
         setFilterBtns(prevFilterBtns =>
             prevFilterBtns.map((btn, i) =>
                 i === index ? { ...btn, btnClass: 'active' } : { ...btn, btnClass: '' }
+
             )
         )
-        updateFilterBy({ ...filterBy, type: filterBtn.type, createdBy: filterBtn.createdBy })
 
+        switch (type) {
+            case '':
+                reset()
+                return
+
+            case 'playlist':
+                if (btnClass) {
+                    reset()
+                    return
+                }
+                if (!btnClass) {
+                    setFilterBtns(prevFilterBtns =>
+                        prevFilterBtns.map(btn => ({
+                            ...btn,
+                            showBtn: (btn.type === 'playlist' || (!btn.type)),
+                        }))
+                    )
+                }
+                break
+
+            case 'artist':
+            case 'album':
+                if (btnClass) {
+                    reset()
+                    return
+                }
+                if (!btnClass) {
+                    setFilterBtns(prevFilterBtns =>
+                        prevFilterBtns.map(btn =>
+                            ((!btn.createdBy) || (!btn.type)) ? { ...btn, showBtn: true } : { ...btn, showBtn: false }
+                        ))
+                }
+                break
+        }
+
+        updateFilterBy({
+            ...filterBy,
+            stationType: type,
+            createdBy: createdBy
+        })
+    }
+
+    function reset() {
+        setFilterBtns(prevFilterBtns =>
+            prevFilterBtns.map(btn => ({
+                ...btn,
+                showBtn: (!btn.createdBy && btn.type),
+                btnClass: ''
+            }))
+        )
+
+        updateFilterBy({ ...filterBy, stationType: '', createdBy: '' });
     }
 
 
