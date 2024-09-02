@@ -97,6 +97,37 @@ export async function updateStation(station) {
     }
 }
 
+export async function removeStationFromLibrary(station, userId) {
+    try {
+        const updatedStation = {
+            ...station,
+            likedByUsers: station.likedByUsers.filter(user => user !== userId)
+        }
+        const savedStation = await stationService.save(updatedStation)
+        store.dispatch(getCmdUpdateStation(savedStation))
+        store.dispatch(getCmdRemoveStation(savedStation._id))
+        return savedStation
+    } catch (err) {
+        console.log('Cannot remove station from library', err)
+        throw err
+    }
+}
+
+export async function addStationToLibrary(station, userId) {
+    try {
+        const updatedStation = {
+            ...station,
+            likedByUsers: [...station.likedByUsers, userId]
+        }
+        const savedStation = await stationService.save(updatedStation)
+        store.dispatch(getCmdAddStation(savedStation))
+        return savedStation
+    } catch (err) {
+        console.log('Cannot add station to library', err)
+        throw err
+    }
+}
+
 export async function addSongToStation(stationId, song) {
     try {
         const savedSong = await stationService.addSongToStation(stationId, song)

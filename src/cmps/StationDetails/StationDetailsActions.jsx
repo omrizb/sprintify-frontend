@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
-import { loadLibrary, removeStation, setStations, updateStation } from '../../store/actions/station.actions.js'
+import { addStationToLibrary, removeStation, removeStationFromLibrary } from '../../store/actions/station.actions.js'
 
 import { EditStation } from '../EditStation.jsx'
 import { Modal } from '../Modal.jsx'
@@ -14,13 +13,11 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
-import { updateFilterBy } from '../../store/actions/filterBy.actions.js'
 
 
 export function StationDetailsActions({ station, stationMeta }) {
 
     const navigate = useNavigate()
-    const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
@@ -85,13 +82,13 @@ export function StationDetailsActions({ station, stationMeta }) {
         const removeFromLibrary = buildListObj({
             name: 'Remove from Your Library',
             icon: 'removeFromLibrary',
-            onClick: onRemoveFromLibrary
+            onClick: () => removeStationFromLibrary(station, userId)
         })
 
         const addToLibrary = buildListObj({
             name: 'Add to Your Library',
             icon: 'addToLibrary',
-            onClick: onAddToLibrary
+            onClick: () => addStationToLibrary(station, userId)
         })
 
         if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
@@ -113,17 +110,6 @@ export function StationDetailsActions({ station, stationMeta }) {
 
     function noop() { }
 
-    function onRemoveFromLibrary() {
-        const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
-        updateStation({ ...station, likedByUsers: updatedLikedByArr })
-        loadLibrary({ filterBy }, userId)
-    }
-
-    function onAddToLibrary() {
-        updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
-        loadLibrary({ filterBy }, userId)
-    }
-
 
     return (
         <div className="station-action-bar" >
@@ -137,11 +123,11 @@ export function StationDetailsActions({ station, stationMeta }) {
             />}
 
             {showAddToLibrary && <div
-                onClick={onAddToLibrary}>
+                onClick={() => addStationToLibrary(station, userId)}>
                 <AddToButton type="addToLibrary" /></div>}
 
             {showRemoveFromLibrary && <div
-                onClick={onRemoveFromLibrary}>
+                onClick={() => removeStationFromLibrary(station, userId)}>
                 <VButton type="removeFromLibrary" /></div>}
 
             <div className="show-more"
