@@ -6,8 +6,8 @@ export function StationPreview({ station: stationPreview, style }) {
 
     const station = useSelector(storeState => storeState.stationModule.station)
 
-    function isDisplayed() {
-        if (stationPreview._id === station._id) return 'chosen'
+    function isHighlighted() {
+        if (stationPreview._id === station._id) return 'highlighted'
         return ''
     }
 
@@ -30,7 +30,7 @@ export function StationPreview({ station: stationPreview, style }) {
     }
 
     return (
-        <article className={`station-preview ${articleClassName} ${isDisplayed()}`}>
+        <article className={`station-preview ${articleClassName} ${isHighlighted()}`}>
             <div className="image-container">
                 {(stationPreview.stationImgUrl) && <img src={stationPreview.stationImgUrl} alt="" />}
                 {(!stationPreview.stationImgUrl) && <div className="icon">
