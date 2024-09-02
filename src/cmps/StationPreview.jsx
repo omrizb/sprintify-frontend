@@ -1,7 +1,15 @@
+import { useSelector } from 'react-redux'
 import { PlayButton } from './Buttons/PlayButton'
 import { SvgIcon } from './SvgIcon'
 
-export function StationPreview({ station, style }) {
+export function StationPreview({ station: stationPreview, style }) {
+
+    const station = useSelector(storeState => storeState.stationModule.station)
+
+    function isDisplayed() {
+        if (stationPreview._id === station._id) return 'chosen'
+        return ''
+    }
 
     let articleClassName
     let stationPreviewType
@@ -22,23 +30,23 @@ export function StationPreview({ station, style }) {
     }
 
     return (
-        <article className={`station-preview ${articleClassName}`}>
+        <article className={`station-preview ${articleClassName} ${isDisplayed()}`}>
             <div className="image-container">
-                {(station.stationImgUrl) && <img src={station.stationImgUrl} alt="" />}
-                {(!station.stationImgUrl) && <div className="icon">
+                {(stationPreview.stationImgUrl) && <img src={stationPreview.stationImgUrl} alt="" />}
+                {(!stationPreview.stationImgUrl) && <div className="icon">
                     <SvgIcon iconName={"music"} />
                 </div>}
                 <PlayButton
                     type={stationPreviewType}
-                    stationId={station._id}
-                    stationName={station.name}
-                    songId={station.songs[0]?.songId}
-                    songName={station.songs[0]?.songName}
+                    stationId={stationPreview._id}
+                    stationName={stationPreview.name}
+                    songId={stationPreview.songs[0]?.songId}
+                    songName={stationPreview.songs[0]?.songName}
                 />
             </div>
             <div className="text">
-                <div className="station-name">{station.name}</div>
-                {style === 'leftSide' && <div className="station-info">{station.type} • {station.createdBy.fullName}</div>}
+                <div className="station-name">{stationPreview.name}</div>
+                {style === 'leftSide' && <div className="station-info">{stationPreview.type} • {stationPreview.createdBy.fullName}</div>}
             </div>
         </article>
     )

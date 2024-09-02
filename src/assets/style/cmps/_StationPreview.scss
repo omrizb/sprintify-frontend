@@ -4,6 +4,11 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    border-radius: 8px;
+
+    &.chosen {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 
     .play-button {
         opacity: 0;
