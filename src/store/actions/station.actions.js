@@ -26,11 +26,11 @@ export async function loadStations(filterBy) {
 export async function loadLibrary(filterBy, userId) {
     try {
 
-        if (filterBy.createdBy) {
+        if (filterBy.createdBy && (filterBy.createdBy !== userId)) {
             var stations = await stationService.query({ ...filterBy, createdBy: filterBy.createdBy, likedByUser: userId })
         }
 
-        if (!filterBy.createdBy) {
+        if (!filterBy.createdBy || (filterBy.createdBy === userId)) {
             const myStations = await stationService.query({ ...filterBy, createdBy: userId })
             const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
             const combined = [...myStations, ...likedStations]
