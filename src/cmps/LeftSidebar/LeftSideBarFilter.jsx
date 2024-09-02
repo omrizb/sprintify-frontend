@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { updateFilterBy } from '../../store/actions/filterBy.actions'
@@ -9,7 +9,7 @@ import { StationFilterButtons } from './StationFilterButtons'
 
 
 
-export function LeftSideBarFilter() {
+export function LeftSideBarFilter({ userId }) {
 
     const [viewType, setViewType] = useState('list')
     const [sortType, setSortType] = useState('recents')
@@ -112,7 +112,7 @@ export function LeftSideBarFilter() {
 
     return (
         <div className="sidebar-filter">
-            <StationFilterButtons />
+            <StationFilterButtons filterBy={filterBy} userId={userId} />
 
             <section className="sidebar-search">
 
