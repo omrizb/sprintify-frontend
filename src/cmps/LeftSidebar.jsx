@@ -21,7 +21,7 @@ export function LeftSidebar() {
 
     useEffect(() => {
         loadLibrary(filterBy, userId)
-    }, [filterBy])
+    }, [filterBy, stations])
 
     useEffect(() => {
         if (!stations || !stations.length) return
