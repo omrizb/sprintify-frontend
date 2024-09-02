@@ -19,7 +19,6 @@ const initialState = {
         elapsedDuration: 0,
         isPlaying: false,
         volume: 100,
-        prevVolume: 100,
     },
     control: {
         actionsQueue: [],

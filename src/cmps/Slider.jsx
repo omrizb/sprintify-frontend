@@ -22,6 +22,10 @@ export function Slider({ value = 50, min = 0, max = 100, setOnMouseup = false, o
     }, [sliderWidth])
 
     useEffect(() => {
+        if (!isDragging) setPointerOffset(value)
+    }, [value])
+
+    useEffect(() => {
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove)
             window.addEventListener('mouseup', handleMouseUp)

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
@@ -8,24 +8,29 @@ import { SvgButton } from '../SvgButton'
 export function VolumeController() {
 
     const player = useSelector(state => state.playerModule.player)
-
     const [volumeIcon, setVolumeIcon] = useState('playerVolumeHigh')
-    const [isMute, setIsMute] = useState(false)
+    const [volumeBeforeMute, setVolumeBeforeMute] = useState(0)
+
+    function handleMuteUnmute() {
+        if (player.volume > 0) {
+            setVolumeBeforeMute(player.volume)
+            handleVolumeChange(0)
+        } else {
+            handleVolumeChange(volumeBeforeMute)
+        }
+    }
 
     function handleVolumeChange(volume) {
+
         setPlayerAction(playerActions.SET_VOLUME, { volume })
 
         if (volume === 0) {
-            setIsMute(true)
             setVolumeIcon('playerVolumeMute')
         } else if (volume < 30) {
-            setIsMute(false)
             setVolumeIcon('playerVolumeLow')
         } else if (volume < 70) {
-            setIsMute(false)
             setVolumeIcon('playerVolumeMedium')
         } else {
-            setIsMute(false)
             setVolumeIcon('playerVolumeHigh')
         }
     }
@@ -36,7 +41,8 @@ export function VolumeController() {
                 btnClass="btn-dark2"
                 svgIcon={volumeIcon}
                 svgClass="svg-small1"
-                tooltipTxt={isMute ? 'Unmute' : 'Mute'}
+                tooltipTxt={player.isMute ? 'Unmute' : 'Mute'}
+                onClick={handleMuteUnmute}
             />
             <Slider value={player.volume} onChange={handleVolumeChange} />
         </div>

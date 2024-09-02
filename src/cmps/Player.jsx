@@ -12,10 +12,12 @@ export function Player() {
     const player = useSelector(state => state.playerModule.player)
     const control = useSelector(state => state.playerModule.control)
     const ytPlayerRef = useRef(null)
+    const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
     const isProcessingRef = useRef(false)
     const [intervalId, setIntervalId] = useState(null)
 
     // console.log(control)
+    // console.log(player)
 
     useEffect(() => {
         if (!ytPlayerRef.current) return
@@ -27,6 +29,7 @@ export function Player() {
 
     useEffect(() => {
         if (!ytPlayerRef.current
+            || !isYtPlayerReady
             || control.actionsQueue.length === 0
             || isProcessingRef.current
         ) return
@@ -35,7 +38,7 @@ export function Player() {
 
         const actionToExecute = control.actionsQueue[0]
         const { songId, stationId, firstSongId, seconds, volume } = control.actionParams[0]
-        console.log(control.actionParams[0])
+        console.log(actionToExecute, control.actionParams[0])
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
@@ -65,12 +68,6 @@ export function Player() {
             case playerActions.SET_VOLUME:
                 ytPlayerRef.current.setVolume(volume)
                 executePlayerAction.setPlayer({ volume })
-                break
-
-            case playerActions.MUTE:
-                break
-
-            case playerActions.UNMUTE:
                 break
 
             case playerActions.PLAY_NEXT:
@@ -116,7 +113,9 @@ export function Player() {
     }
 
     function onReady({ target }) {
+        target.setVolume(player.volume)
         ytPlayerRef.current = target
+        setIsYtPlayerReady(true)
         executePlayerAction.setPlayer({
             totalDuration: target.getDuration(),
             elapsedDuration: 0

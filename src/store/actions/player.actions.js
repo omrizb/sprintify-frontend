@@ -25,8 +25,6 @@ export const playerActions = {
     PAUSE: 'pause',
     GOTO: 'goto',
     SET_VOLUME: 'setVolume',
-    MUTE: 'mute',
-    UNMUTE: 'unmute',
     PLAY_NEXT: 'playNext',
     PLAY_PREV: 'playPrev',
     SET_SHUFFLE: 'setShuffle',
@@ -82,22 +80,6 @@ async function loadStationToPlayer(stationId, firstSongId) {
     } catch (err) {
         console.log('PlayerActions: Error in loadStationToPlayer', err)
     }
-}
-
-function play() {
-    store.dispatch({ type: SET_ACTION, action: playerActions.PLAY })
-}
-
-function pause() {
-    store.dispatch(getActionPausePlayer())
-}
-
-function goto(seconds) {
-    store.dispatch({ type: SET_ACTION, action: playerActions.GOTO, actionParam: seconds })
-}
-
-export function setVolume(volume) {
-    store.dispatch({ type: SET_ACTION, action: playerActions.SET_VOLUME, actionParam: volume })
 }
 
 export function setQueue(queue) {
