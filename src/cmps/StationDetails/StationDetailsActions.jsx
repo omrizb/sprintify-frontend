@@ -82,20 +82,13 @@ export function StationDetailsActions({ station, stationMeta }) {
         const removeFromLibrary = buildListObj({
             name: 'Remove from Your Library',
             icon: 'removeFromLibrary',
-            onClick: () => {
-                updateFilterBy({})
-                const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
-                updateStation({ ...station, likedByUsers: updatedLikedByArr })
-            }
+            onClick: onRemoveFromLibrary
         })
 
         const addToLibrary = buildListObj({
             name: 'Add to Your Library',
             icon: 'addToLibrary',
-            onClick: () => {
-                updateFilterBy({})
-                updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
-            }
+            onClick: onAddToLibrary
         })
 
         if (isOwnedByUser) return [addToQueue, editDetails, deleteStation]
@@ -117,6 +110,17 @@ export function StationDetailsActions({ station, stationMeta }) {
 
     function noop() { }
 
+    function onRemoveFromLibrary() {
+        updateFilterBy({})
+        const updatedLikedByArr = station.likedByUsers.filter(user => user !== userId)
+        updateStation({ ...station, likedByUsers: updatedLikedByArr })
+    }
+
+    function onAddToLibrary() {
+        updateFilterBy({})
+        updateStation({ ...station, likedByUsers: [...station.likedByUsers, userId] })
+    }
+
 
     return (
         <div className="station-action-bar" >
@@ -129,9 +133,13 @@ export function StationDetailsActions({ station, stationMeta }) {
                 songName={station.songs[0]?.songName}
             />}
 
-            {showAddToLibrary && <AddToButton type="addToLibrary" />}
+            {showAddToLibrary && <div
+                onClick={onAddToLibrary}>
+                <AddToButton type="addToLibrary" /></div>}
 
-            {showRemoveFromLibrary && <VButton type="removeFromLibrary" />}
+            {showRemoveFromLibrary && <div
+                onClick={onRemoveFromLibrary}>
+                <VButton type="removeFromLibrary" /></div>}
 
             <div className="show-more"
                 onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
@@ -141,7 +149,6 @@ export function StationDetailsActions({ station, stationMeta }) {
                     svgClass={"svg-big2"}
                     tooltipTxt={`More options for ${station.name}`}
                 />)}
-                {/* {showMoreMenu && <DropDownMenu listItems={listItemsMore} />} */}
                 {showMoreMenu && <DropDownMenu listItems={moreList} />}
 
             </div>
