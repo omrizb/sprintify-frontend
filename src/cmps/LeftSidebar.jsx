@@ -19,7 +19,7 @@ export function LeftSidebar() {
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     useEffect(() => {
-        loadLibrary(filterBy, userId)
+        loadStations({ ...filterBy, userId })
     }, [filterBy])
 
     useEffect(() => {

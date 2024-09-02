@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { storageService } from '../async-storage.service'
 import { utilService } from '../util.service.js'
 import { userService } from '../user'
@@ -49,12 +51,13 @@ async function query(filterBy = {
     createdBy: '',
     songId: '',
     sortField: '',
-    sortDir: ''
+    sortDir: '',
+    userId: ''
 }) {
 
     var stations = await storageService.query(STORAGE_KEY)
 
-    const { txt, likedByUser, stationType, createdBy, songId, sortField, sortDir } = filterBy
+    const { txt, likedByUser, stationType, createdBy, songId, sortField, sortDir, userId } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -75,6 +78,19 @@ async function query(filterBy = {
 
     if (likedByUser) {
         stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
+    }
+
+    if (userId) {
+        if (createdBy && (createdBy !== userId)) {
+            stations = stations.filter(station => station.likedByUsers.includes(userId))
+        }
+
+        if (!createdBy || (createdBy === userId)) {
+            const myStations = stations.filter(station => station.createdBy.id === userId)
+            const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
+            const combined = [...myStations, ...likedStations]
+            stations = _.uniqBy(combined, '_id')
+        }
     }
 
     if (sortField === 'name') {
