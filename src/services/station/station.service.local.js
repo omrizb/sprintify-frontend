@@ -3,7 +3,6 @@ import { utilService } from '../util.service.js'
 import { userService } from '../user'
 import { stations } from '../../../data-sample/station.js'
 
-
 const STORAGE_KEY = 'stationDB'
 
 export const stationService = {
@@ -43,7 +42,13 @@ function getEmptyStation() {
     }
 }
 
-async function query(filterBy = { txt: '', likedByUser: '', stationType: '', createdBy: '', songId: '' }) {
+async function query(filterBy = {
+    txt: '',
+    likedByUser: '',
+    stationType: '',
+    createdBy: '',
+    songId: '',
+}) {
 
     var stations = await storageService.query(STORAGE_KEY)
 
@@ -65,29 +70,11 @@ async function query(filterBy = { txt: '', likedByUser: '', stationType: '', cre
     }
 
     if (filterBy.likedByUser) {
-        stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
+        stations = stations.filter(station => station.likedByUsers.includes(filterBy.likedByUser))
     }
 
 
 
-
-
-    // if (minSpeed) {
-    //     stations = stations.filter(station => station.speed <= minSpeed)
-    // }
-    // if (maxPrice) {
-    //     stations = stations.filter(station => station.price <= maxPrice)
-    // }
-    // if (sortField === 'vendor' || sortField === 'owner') {
-    //     stations.sort((station1, station2) =>
-    //         station1[sortField].localeCompare(station2[sortField]) * +sortDir)
-    // }
-    // if (sortField === 'price' || sortField === 'speed') {
-    //     stations.sort((station1, station2) =>
-    //         (station1[sortField] - station2[sortField]) * +sortDir)
-    // }
-
-    // stations = stations.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
     return stations
 }
 

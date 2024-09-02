@@ -8,6 +8,7 @@ const initialState = {
         createdBy: '',
         sortField: '',
         sortDir: '',
+        likedByUser: '',
     }
 
 }

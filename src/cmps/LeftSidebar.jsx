@@ -1,27 +1,26 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
-import { loadStations } from '../store/actions/station.actions.js'
+import { loadLibrary, loadStations } from '../store/actions/station.actions.js'
 import { loadStationToPlayer } from '../store/actions/player.actions.js'
-import { stationService } from '../services/station/index.js'
 
 import { LeftSideBarHeader } from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
 import { LeftSideBarFilter } from './LeftSidebar/LeftSideBarFilter.jsx'
 import { StationList } from './StationList.jsx'
-import { updateFilterBy } from '../store/actions/filterBy.actions.js'
 
 
 export function LeftSidebar() {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
-    // const loggedinUser = false
+    const userId = loggedinUser._id
 
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     useEffect(() => {
-        loadStations(filterBy)
+        loadLibrary(filterBy, userId)
     }, [filterBy])
 
     useEffect(() => {

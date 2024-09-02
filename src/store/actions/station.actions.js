@@ -21,6 +21,18 @@ export async function loadStations(filterBy) {
     }
 }
 
+export async function loadLibrary(filterBy, userId) {
+    try {
+        const myStations = await stationService.query({ ...filterBy, createdBy: userId })
+        const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
+        const stations = [...myStations, ...likedStations]
+        store.dispatch(getCmdSetStations(stations))
+    } catch (err) {
+        console.log('Cannot load stations', err)
+        throw err
+    }
+}
+
 export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
