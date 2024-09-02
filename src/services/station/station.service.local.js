@@ -77,9 +77,16 @@ async function query(filterBy = {
         stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
     }
 
-    if (filterBy.sortField === 'name') {
+    if (sortField === 'name') {
+
         stations.sort((station1, station2) =>
             station1[sortField].localeCompare(station2[sortField]) * sortDir)
+    }
+
+    if (sortField === 'createdBy') {
+
+        stations.sort((station1, station2) =>
+            station1[sortField]['fullName'].localeCompare(station2[sortField]['fullName']) * sortDir)
     }
 
 

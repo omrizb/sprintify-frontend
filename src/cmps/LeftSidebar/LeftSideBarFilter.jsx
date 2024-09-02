@@ -48,7 +48,10 @@ export function LeftSideBarFilter({ userId }) {
         buildListObj({
             name: 'Creator',
             isChosen: (sortType === 'creator'),
-            onClick: () => setSortType('creator')
+            onClick: () => {
+                setSortType('creator')
+                updateFilterBy({ ...filterBy, sortField: 'createdBy', sortDir: 1 })
+            }
         }),
 
         buildListObj({
