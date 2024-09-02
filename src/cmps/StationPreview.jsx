@@ -7,7 +7,9 @@ export function StationPreview({ station: stationPreview, style }) {
     const station = useSelector(storeState => storeState.stationModule.station)
 
     function isHighlighted() {
-        if (stationPreview._id === station._id) return 'highlighted'
+        if (station) {
+            if (stationPreview._id === station._id) return 'highlighted'
+        }
         return ''
     }
 
