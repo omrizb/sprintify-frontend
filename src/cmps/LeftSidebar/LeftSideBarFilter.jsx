@@ -39,7 +39,10 @@ export function LeftSideBarFilter({ userId }) {
         buildListObj({
             name: 'Alphabetical',
             isChosen: (sortType === 'alphabetical'),
-            onClick: () => setSortType('alphabetical')
+            onClick: () => {
+                setSortType('alphabetical')
+                updateFilterBy({ ...filterBy, sortField: 'alphabetical' })
+            }
         }),
 
         buildListObj({

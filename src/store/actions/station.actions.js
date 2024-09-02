@@ -26,11 +26,11 @@ export async function loadStations(filterBy) {
 export async function loadLibrary(filterBy, userId) {
     try {
 
-        if (filterBy.createdBy) {
+        if (filterBy.createdBy && (filterBy.createdBy !== userId)) {
             var stations = await stationService.query({ ...filterBy, createdBy: filterBy.createdBy, likedByUser: userId })
         }
 
-        if (!filterBy.createdBy) {
+        if (!filterBy.createdBy || (filterBy.createdBy === userId)) {
             const myStations = await stationService.query({ ...filterBy, createdBy: userId })
             const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
             const combined = [...myStations, ...likedStations]
@@ -93,6 +93,37 @@ export async function updateStation(station) {
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
+        throw err
+    }
+}
+
+export async function removeStationFromLibrary(station, userId) {
+    try {
+        const updatedStation = {
+            ...station,
+            likedByUsers: station.likedByUsers.filter(user => user !== userId)
+        }
+        const savedStation = await stationService.save(updatedStation)
+        store.dispatch(getCmdUpdateStation(savedStation))
+        store.dispatch(getCmdRemoveStation(savedStation._id))
+        return savedStation
+    } catch (err) {
+        console.log('Cannot remove station from library', err)
+        throw err
+    }
+}
+
+export async function addStationToLibrary(station, userId) {
+    try {
+        const updatedStation = {
+            ...station,
+            likedByUsers: [...station.likedByUsers, userId]
+        }
+        const savedStation = await stationService.save(updatedStation)
+        store.dispatch(getCmdAddStation(savedStation))
+        return savedStation
+    } catch (err) {
+        console.log('Cannot add station to library', err)
         throw err
     }
 }

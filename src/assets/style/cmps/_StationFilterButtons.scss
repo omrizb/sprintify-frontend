@@ -1,18 +1,14 @@
 .station-filter-btns {
     display: grid;
-    
     grid-auto-flow: column;
+    justify-content: start;
     justify-items: center;
-    
+    width: max-content;
     column-gap: 0.2em;
-    grid-template-columns: max-content;
 
-   
     .active {
         @include inside-out;
         justify-self: start;
     }
 
-    
-  
 }
