@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { loadLibrary, loadStations } from '../store/actions/station.actions.js'
+import { loadStations } from '../store/actions/station.actions.js'
 import { playerActions, setPlayerAction } from '../store/actions/player.actions.js'
 
 import { LeftSideBarHeader } from './LeftSidebar/LeftSideBarHeader.jsx'
