@@ -21,15 +21,16 @@ export function Player() {
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
     const isProcessingRef = useRef(false)
     const [intervalId, setIntervalId] = useState(null)
+    const playerElapsedDurationRef = useRef(player.elapsedDuration)
 
     // console.log(control)
-    console.log(player)
-    console.log('stationId', stationId)
-    console.log('stationName', stationName)
-    console.log('originalStationSongs', originalStationSongs)
-    console.log('remainingStationSongs', remainingStationSongs)
-    console.log('queue', queue)
-    console.log('playedSongsHistory', playedSongsHistory)
+    // console.log(player)
+    // console.log('stationId', stationId)
+    // console.log('stationName', stationName)
+    // console.log('originalStationSongs', originalStationSongs)
+    // console.log('remainingStationSongs', remainingStationSongs)
+    // console.log('queue', queue)
+    // console.log('playedSongsHistory', playedSongsHistory)
 
     useEffect(() => {
         if (!ytPlayerRef.current) return
@@ -111,12 +112,18 @@ export function Player() {
         isProcessingRef.current = false
     }, [control])
 
+    useEffect(() => {
+        playerElapsedDurationRef.current = player.elapsedDuration
+    }, [player.elapsedDuration])
+
     function startSongDurationPolling() {
         if (intervalId) clearInterval(intervalId)
 
         const id = setInterval(() => {
             const elapsedDuration = Math.floor(ytPlayerRef.current.getCurrentTime())
-            executePlayerAction.setPlayer({ elapsedDuration })
+            if (elapsedDuration !== playerElapsedDurationRef.current) {
+                executePlayerAction.setPlayer({ elapsedDuration })
+            }
         }, 213)
         setIntervalId(id)
     }

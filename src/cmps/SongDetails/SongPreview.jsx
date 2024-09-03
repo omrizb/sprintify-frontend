@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { utilService } from '../../services/util.service.js'
+import { imgService } from '../../services/imgService.js'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
@@ -8,22 +10,32 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 
 export function SongPreview(props) {
 
+    const playerSongId = useSelector(store => store.playerModule.player.song.songId)
+    const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
+
     const { song, stationId, likedSongsIds, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
 
-    let articleClassName
+    let articleClassType
     switch (type) {
-        case 'list':
-            articleClassName = 'list dynamic-grid'
+        case 'table':
+            articleClassType = 'table dynamic-grid'
     }
-
 
     const { songId, songName, artist, album, url, imgUrl, duration } = song
     const isHovered = song.songId === hoveredSongId
     const isHighlighted = isHovered || song.songId === selectedSongId
     const isLikedByUser = likedSongsIds && likedSongsIds.includes(song.songId)
+    const isCurrentlyPlayedSong = song.songId === playerSongId && isPlaying
+
+    const songPreviewClass = [
+        'song-preview',
+        articleClassType,
+        isHighlighted ? 'highlight' : '',
+        isCurrentlyPlayedSong ? 'currently-playing' : ''
+    ].join(' ')
 
     return (
-        <article className={`song-preview ${articleClassName} ${isHighlighted ? 'highlight' : ''}`}>
+        <article className={songPreviewClass}>
             <div className="index flex">
                 {isHovered
                     ? <PlayButton
@@ -31,7 +43,9 @@ export function SongPreview(props) {
                         stationId={stationId}
                         song={song}
                     />
-                    : index}
+                    : isCurrentlyPlayedSong
+                        ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
+                        : index}
             </div>
             <div className="small-preview flex">
                 <img className="thumbnail" src={imgUrl} alt={songName} />
@@ -39,6 +53,7 @@ export function SongPreview(props) {
                 <span className="artist">{artist}</span>
             </div>
             <div className="album">{album}</div>
+            <div className="date-added"></div>
             <div className="song-duration">
                 {/* <button className="btn-tinted"
                     onClick={() => onRemoveSong(song.songId)}>X

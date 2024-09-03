@@ -12,7 +12,7 @@
         color: $primaryTxtClr;
     }
 
-    &.list {
+    &.table {
         .small-preview {
             display: grid;
             grid-template-areas:
@@ -52,6 +52,14 @@
             place-items: center end;
             width: 100%;
             font-size: $textSizeSmaller-1;
+        }
+
+        &.currently-playing {
+            .small-preview {
+                .song-name {
+                    color: $highlightedTxtClr;
+                }
+            }
         }
     }
 

@@ -100,6 +100,7 @@ export function StationDetails() {
                     station={station}
                     likedSongsIds={loggedinUser.likedSongsIds}
                     onRemoveSong={onRemoveSong}
+                    type="table"
                 />}
 
                 {isOwnedByUser && <AddSongs />}

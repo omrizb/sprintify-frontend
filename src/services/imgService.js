@@ -7,9 +7,6 @@ const imgs = {
     madeForYou: 'https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe',
     newReleases: 'https://i.scdn.co/image/ab67fb8200005caf194fec0fdc197fb9e4fe8e64',
     pop: 'https://i.scdn.co/image/ab67fb8200005caf66d545e6a69d0bfe8bd1e825',
-
-
-
 }
 
 function getImg(name) {

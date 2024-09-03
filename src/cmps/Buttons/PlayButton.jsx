@@ -10,10 +10,11 @@ export function PlayButton({ type, stationId, stationName, song }) {
     const playerStationId = useSelector(state => state.playerModule.stationId)
     const [isPlaying, setIsPlaying] = useState(false)
 
+
     useEffect(() => {
         if (playerStationId !== stationId) {
             setIsPlaying(false)
-        } else if (type === 'songPreview' && player.song.songId === song.songId) {
+        } else if (type === 'songPreview') {
             (player.song.songId === song.songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
         } else {
             setIsPlaying(player.isPlaying)
