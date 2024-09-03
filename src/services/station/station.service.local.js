@@ -154,6 +154,7 @@ async function save(station) {
             createdAt: station.createdAt,
             addedAt: station.addedAt,
             isPinned: station.isPinned,
+            lastIdx: station.lastIdx || ''
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
@@ -171,11 +172,11 @@ async function save(station) {
             songs: station.songs,
             createdAt: Date.now(),
             addedAt: Date.now(),
-            isPinned: station.isPinned
+            isPinned: station.isPinned,
+            lastIdx: ''
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }
-    console.log(savedStation.isPinned)
     return savedStation
 }
 

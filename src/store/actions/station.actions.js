@@ -64,12 +64,14 @@ export async function updateStation(station) {
     }
 }
 
-export async function removeStationFromLibrary(station, userId) {
+export async function removeStationFromLibrary(station, userId, lastIdx) {
     try {
         const updatedStation = {
             ...station,
-            likedByUsers: station.likedByUsers.filter(user => user !== userId)
+            likedByUsers: station.likedByUsers.filter(user => user !== userId),
+            lastIdx
         }
+
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdUpdateStation(savedStation))
         store.dispatch(getCmdRemoveStation(savedStation._id))

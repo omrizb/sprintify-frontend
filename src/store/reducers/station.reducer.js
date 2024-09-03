@@ -30,12 +30,19 @@ export function stationReducer(state = initialState, action) {
         case ADD_STATION:
             const pinnedStations = state.stations.filter(station => station.isPinned === true)
             const unPinnedStations = state.stations.filter(station => station.isPinned === false)
+
+            if (state.station.lastIdx) {
+                var idx = state.station.lastIdx - pinnedStations.length
+            }
+            else idx = 0
+
             newState = {
                 ...state,
                 stations: [
                     ...pinnedStations,
+                    ...unPinnedStations.slice(0, idx),
                     action.station,
-                    ...unPinnedStations
+                    ...unPinnedStations.slice(idx)
                 ],
                 station: action.station
             }
