@@ -23,13 +23,11 @@ export function PlayButton({ type, stationId, stationName, song }) {
 
     function handleClick() {
         if (!song) return
-        if (playerStationId !== stationId) {
+        if (playerStationId !== stationId ||
+            player.song.songId !== song.songId
+        ) {
+            setPlayerAction(playerActions.PAUSE)
             setPlayerAction(playerActions.LOAD_STATION, { stationId, song })
-            setPlayerAction(playerActions.PLAY)
-            setIsPlaying(true)
-            return
-        } else if (player.song.songId !== song.songId) {
-            setPlayerAction(playerActions.LOAD_SONG, { song })
             setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return

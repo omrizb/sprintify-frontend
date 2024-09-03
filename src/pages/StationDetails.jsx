@@ -58,7 +58,6 @@ export function StationDetails() {
 
     function onEdit() {
         if (!isOwnedByUser) return
-        console.log('onEdit from Station Details')
         setIsModalOpen(true)
     }
 
