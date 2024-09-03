@@ -6,8 +6,6 @@ import {
     SET_STATIONS,
     SET_STATION,
     UPDATE_STATION,
-    ADD_SONG_TO_STATION,
-    REMOVE_SONG_FROM_STATION,
 } from '../reducers/station.reducer.js'
 
 
@@ -106,26 +104,7 @@ export async function addStationToLibrary(station, userId) {
     }
 }
 
-export async function addSongToStation(stationId, song) {
-    try {
-        const savedSong = await stationService.addSongToStation(stationId, song)
-        store.dispatch(getCmdAddSongToStation(savedSong))
-        return savedSong
-    } catch (err) {
-        console.log('Cannot add song to station', err)
-        throw err
-    }
-}
 
-export async function removeSongFromStation(stationId, songId) {
-    try {
-        await stationService.removeSongFromStation(stationId, songId)
-        store.dispatch(getCmdRemoveSongFromStation(songId))
-    } catch (err) {
-        console.log('Cannot remove song from station', err)
-        throw err
-    }
-}
 
 // Command Creators:
 function getCmdSetStations(stations) {
