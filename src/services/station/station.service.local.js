@@ -52,12 +52,15 @@ async function query(filterBy = {
     songId: '',
     sortField: '',
     sortDir: '',
-    userId: ''
+    userId: '',
+    createdAt: '',
+    addedAt: ''
 }) {
 
     var stations = await storageService.query(STORAGE_KEY)
 
-    const { txt, likedByUser, stationType, createdBy, songId, sortField, sortDir, userId } = filterBy
+    const { txt, likedByUser, stationType, createdBy,
+        songId, sortField, sortDir, userId, createdAt, addedAt } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -103,6 +106,11 @@ async function query(filterBy = {
 
         stations.sort((station1, station2) =>
             station1[sortField]['fullName'].localeCompare(station2[sortField]['fullName']) * sortDir)
+    }
+
+    if (sortField === 'createdAt' || sortField === 'addedAt') {
+        stations.sort((station1, station2) =>
+            station1[sortField].localeCompare(station2[sortField]) * sortDir)
     }
 
 

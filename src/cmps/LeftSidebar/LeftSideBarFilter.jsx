@@ -27,13 +27,19 @@ export function LeftSideBarFilter({ userId }) {
         buildListObj({
             name: 'Recents',
             isChosen: (sortType === 'recents'),
-            onClick: () => setSortType('recents')
+            onClick: () => {
+                setSortType('recents')
+                updateFilterBy({ ...filterBy, sortField: 'createdAt', sortDir: 1 })
+            }
         }),
 
         buildListObj({
             name: 'Recently Added',
             isChosen: (sortType === 'recently-added'),
-            onClick: () => setSortType('recently-added')
+            onClick: () => {
+                setSortType('recently-added')
+                updateFilterBy({ ...filterBy, sortField: 'addedAt', sortDir: 1 })
+            }
         }),
 
         buildListObj({
