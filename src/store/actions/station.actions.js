@@ -44,6 +44,8 @@ export async function removeStation(stationId) {
 export async function addStation() {
     try {
         const newStation = stationService.getEmptyStation()
+        newStation.createdAt = Date.now()
+        newStation.addedAt = Date.now()
         const savedStation = await stationService.save(newStation)
         store.dispatch(getCmdAddStation(savedStation))
         return savedStation
@@ -84,7 +86,8 @@ export async function addStationToLibrary(station, userId) {
     try {
         const updatedStation = {
             ...station,
-            likedByUsers: [...station.likedByUsers, userId]
+            likedByUsers: [...station.likedByUsers, userId],
+            addedAt: Date.now(),
         }
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdAddStation(savedStation))
