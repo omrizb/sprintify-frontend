@@ -10,6 +10,7 @@ export const stations = [
         _id: 'LLLLLLL',
         name: 'Liked Songs',
         type: 'playlist',
+        isPinned: true,
         stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-64.png',
         tags: [],
         createdBy: {
@@ -54,6 +55,7 @@ export const stations = [
         _id: 'A1b2C3d4E5',
         name: 'Summer Vibes',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://i.scdn.co/image/ab67616d0000b27346e4e8079743a66a5467d091', // image of one of the songs
         tags: ['Happy', 'Chill', 'Upbeat'],
         createdBy: {
@@ -98,6 +100,7 @@ export const stations = [
         _id: 'F6g7H8i9J0',
         name: 'Chill Out',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://i2o.scdn.co/image/ab67706c0000cfa3a75e9e508f98d4947ddcd5c7', // image of one of the songs
         tags: ['Chill', 'Relaxing'],
         createdBy: {
@@ -142,6 +145,7 @@ export const stations = [
         _id: 'K1L2M3N4O5',
         name: 'Party Anthems',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://i.scdn.co/image/ab67616d0000b273a9b67dfd76675906302a597f', // image of one of the songs
         tags: ['Dance', 'Energetic', 'Upbeat'],
         createdBy: {
@@ -177,6 +181,7 @@ export const stations = [
         _id: 'P6Q7R8S9T0',
         name: 'Morning Motivation',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://i.scdn.co/image/ab67616d00001e02eb59c2fbb24ebef6d2db6975', // image of one of the songs
         tags: ['Upbeat', 'Rock', 'Pop'],
         createdBy: {
@@ -212,6 +217,7 @@ export const stations = [
         _id: 'U1V2W3X4Y5',
         name: 'Late Night Grooves',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs885ERZ0pPqPnCD0BkdwsTIglK9TNNaP6uOC3Vg2uGzLqjrIFHmGtWmwdw0g-y567Tg4&usqp=CAU', // image of one of the songs
         tags: ['Jazz', 'Soul', 'Funky'],
         createdBy: {
@@ -247,6 +253,7 @@ export const stations = [
         _id: 'X1Y2Z3A4B5',
         name: 'Chill Vibes',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqCc7WKSzQsR8ZThqj1viZ7BzON8nEfDmUKw&s', // image of one of the songs
         tags: ['Chill', 'Relaxing', 'Acoustic'],
         createdBy: {
@@ -336,6 +343,7 @@ export const stations = [
         _id: 'C6D7E8F9G0',
         name: 'Party Hits',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRVdg9uVAVQ2h1iPEQjaVlEFzBjWYLlvA2jw&s', // image of one of the songs
         tags: ['Dance', 'Upbeat', 'Funky'],
         createdBy: {
@@ -443,6 +451,7 @@ export const stations = [
         _id: 'H1I2J3K4L5',
         name: 'Melancholic Moods',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRBfL3bfXwAPlCwJN6_HcZ-iuME2JD1-QSPA&s', // image of one of the songs
         tags: ['Melancholic', 'Chill'],
         createdBy: {
@@ -478,6 +487,7 @@ export const stations = [
         _id: 'M6N7O8P9Q0',
         name: 'Acoustic Chill',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkA9wvQn1j53RmqmVUL5NhKPQ0IjouotzvlQ&s', // image of one of the songs
         tags: ['Acoustic', 'Chill', 'Relaxing'],
         createdBy: {
@@ -522,6 +532,7 @@ export const stations = [
         _id: 'R1S2T3U4V5',
         name: 'Retro Beats',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxZM4YYTFZFUWmN4oxU3nZqub2fWKaqpQdWQ&s',  // no songs in this playlist
         tags: ['Retro', 'Funky', 'Pop'],
         createdBy: {
@@ -538,6 +549,7 @@ export const stations = [
         _id: 'W6X7Y8Z9A0',
         name: 'Jazz & Blues',
         type: 'playlist',
+        isPinned: false,
         stationImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIEK3cIQSbW9eiZM_p0byZAi-D5YwgFSMmBQ&s', // image of one of the songs
         tags: ['Jazz', 'Blues', 'Soul'],
         createdBy: {

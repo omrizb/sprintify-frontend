@@ -29,6 +29,7 @@ function getEmptyStation() {
     return {
         name: 'My Playlist',
         type: 'playlist',
+        isPinned: false,
         isLikedSongs: false,
         tags: [],
         stationImgUrl: '',
@@ -115,11 +116,12 @@ async function query(filterBy = {
             (station1[sortField] - station2[sortField]) * sortDir)
     }
 
-    const likedStation = stations.find(station => station.name === 'Liked Songs')
 
-    if (likedStation) {
-        stations = stations.filter(station => station.name !== 'Liked Songs')
-        if (createdBy !== userId) stations = [likedStation, ...stations]
+    const pinnedStations = stations.filter(station => station.isPinned === true)
+    stations = stations.filter(station => station.isPinned !== true)
+
+    if (!createdBy) {
+        stations = [...pinnedStations, ...stations]
     }
 
     return stations
@@ -150,7 +152,8 @@ async function save(station) {
             likedByUsers: station.likedByUsers,
             songs: station.songs,
             createdAt: station.createdAt,
-            addedAt: station.addedAt
+            addedAt: station.addedAt,
+            isPinned: station.isPinned,
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
@@ -167,10 +170,12 @@ async function save(station) {
             likedByUsers: station.likedByUsers,
             songs: station.songs,
             createdAt: Date.now(),
-            addedAt: Date.now()
+            addedAt: Date.now(),
+            isPinned: station.isPinned
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }
+    console.log(savedStation.isPinned)
     return savedStation
 }
 
