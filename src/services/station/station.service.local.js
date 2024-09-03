@@ -113,7 +113,9 @@ async function query(filterBy = {
             (station1[sortField] - station2[sortField]) * sortDir)
     }
 
-
+    const likedStation = stations.find(station => station.name === 'Liked Songs')
+    stations = stations.filter(station => station.name !== 'Liked Songs')
+    stations = [likedStation, ...stations]
 
     return stations
 }
