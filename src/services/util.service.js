@@ -5,12 +5,10 @@ export const utilService = {
     makeLorem,
     getRandomIntInclusive,
     getRandomItems,
-    getRandomColor,
     getTimeStr,
     getDayName,
     getMonthName,
     animateCSS,
-    rgbToHex,
     deepEqual,
     deepMerge,
     debounce,
@@ -59,15 +57,6 @@ function getRandomItems(items, size, singleItem = false, duplicationAllowed = fa
     return (singleItem) ? res[0] : res
 }
 
-function getRandomColor() {
-    const chars = '0123456789abcdef'
-    let color = '#'
-    for (let i = 0; i < 6; i++) {
-        color += chars[Math.floor(Math.random() * chars.length)]
-    }
-    return color
-}
-
 function getTimeStr(timeInSeconds) {
     const hours = Math.floor(timeInSeconds / 3600)
     const minutes = Math.floor((timeInSeconds % 3600) / 60)
@@ -111,11 +100,6 @@ function animateCSS(el, animation = 'bounce') {
 
         el.addEventListener('animationend', handleAnimationEnd, { once: true })
     })
-}
-
-function rgbToHex(rgb) {
-    const result = rgb.match(/\d+/g)
-    return `#${((1 << 24) + (+result[0] << 16) + (+result[1] << 8) + +result[2]).toString(16).slice(1).toLowerCase()}`
 }
 
 function deepEqual(x, y) {

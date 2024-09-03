@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
+import { FastAverageColor } from 'fast-average-color'
 
+import { colorUtilService } from '../../services/color.util.service'
 import { SvgIcon } from '../SvgIcon'
 
-export function StationDetailsHeader({ station, bgColor, onEditStation }) {
+export function StationDetailsHeader({ station, onSetBgColor, onEditStation }) {
 
     const [stationNameClass, setStationNameClass] = useState('station-name')
+    const [headerBgColor, setHeaderBgColor] = useState()
+    const [headerDarkerBgColor, setHeaderDarkerBgColor] = useState()
     const stationNameRef = useRef(null)
+    const fac = new FastAverageColor()
 
     useEffect(() => {
         adjustStationNameSize()
@@ -56,11 +61,30 @@ export function StationDetailsHeader({ station, bgColor, onEditStation }) {
         console.log(station._id)
     }
 
+    function handleImageLoad(ev) {
+        fac.getColorAsync(ev.target)
+            .then(color => {
+                setHeaderBgColor(color.hex)
+                setHeaderDarkerBgColor(colorUtilService.adjustBrightness(color.hex, 0.4))
+                onSetBgColor(color.hex)
+            })
+            .catch(err => console.log('Error getting average color from image.', err))
+    }
+
     return (
-        <div className="station-details-header" style={{ backgroundColor: bgColor }}>
+        <div
+            className="station-details-header"
+            style={{ backgroundImage: `linear-gradient(to bottom, ${headerBgColor}cc, ${headerDarkerBgColor})` }}
+        >
             <div className="station-cover-container">
                 {(station.stationImgUrl)
-                    ? <img className="station-cover" src={station.stationImgUrl} alt="Station Cover" />
+                    ? <img
+                        crossOrigin="anonymous"
+                        className="station-cover"
+                        src={station.stationImgUrl}
+                        alt="Station Cover"
+                        onLoad={handleImageLoad}
+                    />
                     : <div className="icon new-playlist">
                         <SvgIcon iconName={"music"} />
                     </div>}
@@ -76,7 +100,8 @@ export function StationDetailsHeader({ station, bgColor, onEditStation }) {
 
             <div className="station-info">
                 <div className="station-type">{station.type}</div>
-                <div ref={stationNameRef} onClick={onEditStation} className={stationNameClass}>{station.name}</div>
+                <div ref={stationNameRef} onClick={onEditStation} className={`${stationNameClass} medium-title`}>{station.name}</div>
+                <div className="station-description">{station.description}</div>
                 <div className="bottom-info">
                     <span className="created-by">{station.createdBy.fullName}</span>
                     {songCount &&
