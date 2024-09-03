@@ -106,7 +106,7 @@ export function SongPreview(props) {
                 break
             case 'addToStation':
                 console.log('add to station')
-                setShowMenu(true)
+                setShowMenu(prevShowMenu => !prevShowMenu)
 
                 break
 

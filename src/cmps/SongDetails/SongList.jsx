@@ -29,7 +29,7 @@ export function SongList({ station, onRemoveSong, likedSongsStation, type, mySta
                     const selectedSongClass = (song.songId === selectedSongId) ? 'selected' : ''
                     return <li
                         key={song.songId}
-                        className={selectedSongClass}
+                        className={`song-list-item ${selectedSongClass}`}
                         onMouseEnter={() => setHoveredSongId(song.songId)}
                         onMouseLeave={() => setHoveredSongId('')}
                         onClick={() => onSetSelectedSongId(song.songId)}

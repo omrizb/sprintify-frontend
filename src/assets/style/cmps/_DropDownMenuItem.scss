@@ -32,7 +32,7 @@
     }
     
     .list-item {
-
+        
         font-size: 13px;
         font-weight: 400; 
     }
@@ -44,6 +44,10 @@
             fill: "#1ed760";
         }
 
+    }
+
+    li {
+        padding: 0;
     }
  
 }
