@@ -60,7 +60,9 @@ async function query(filterBy = {
     var stations = await storageService.query(STORAGE_KEY)
 
     const { txt, likedByUser, stationType, createdBy,
-        songId, sortField, sortDir, userId, createdAt, addedAt } = filterBy
+        songId, sortField, sortDir, userId } = filterBy
+
+
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -114,8 +116,11 @@ async function query(filterBy = {
     }
 
     const likedStation = stations.find(station => station.name === 'Liked Songs')
-    stations = stations.filter(station => station.name !== 'Liked Songs')
-    stations = [likedStation, ...stations]
+
+    if (likedStation) {
+        stations = stations.filter(station => station.name !== 'Liked Songs')
+        if (createdBy !== userId) stations = [likedStation, ...stations]
+    }
 
     return stations
 }

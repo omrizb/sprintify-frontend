@@ -27,8 +27,6 @@ export function StationDetails() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const bgColor = useRef(utilService.getRandomColor())
 
-    console.log(station)
-
     useEffect(() => {
         onLoad(id)
     }, [id])
