@@ -6,7 +6,7 @@ export function StationPreview({ station: stationPreview, style }) {
 
     const station = useSelector(storeState => storeState.stationModule.station)
 
-    const likedStation = (stationPreview.name === 'Liked Songs')
+    const pinnedStation = (stationPreview.isPinned === true)
 
     function isHighlighted() {
         if (station) {
@@ -50,12 +50,12 @@ export function StationPreview({ station: stationPreview, style }) {
             <div className="text">
                 <div className="station-name">{stationPreview.name}</div>
 
-                {(style === 'leftSide' && (!likedStation)) &&
+                {(style === 'leftSide' && (!pinnedStation)) &&
                     <div className="station-info">
                         {stationPreview.type} • {stationPreview.createdBy.fullName}
                     </div>}
 
-                {(style === 'leftSide' && (likedStation)) &&
+                {(style === 'leftSide' && (pinnedStation)) &&
                     <div className="station-info liked">
                         <SvgIcon iconName={"pin"} />
                         <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>

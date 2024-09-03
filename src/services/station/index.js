@@ -7,6 +7,7 @@ function getEmptyStation() {
     return {
         name: '',
         type: 'playlist',
+        isPinned: false,
         isLikedSongs: false,
         tags: [],
         stationImgUrl: '',
@@ -14,7 +15,7 @@ function getEmptyStation() {
         isOwnedByUser: true,
         createdBy: {},
         likedByUsers: [],
-        songs: []
+        songs: [],
     }
 }
 

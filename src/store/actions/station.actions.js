@@ -6,6 +6,7 @@ import {
     SET_STATIONS,
     SET_STATION,
     UPDATE_STATION,
+    ADD_SONG_TO_LIKED_STATION,
 } from '../reducers/station.reducer.js'
 
 
@@ -64,12 +65,25 @@ export async function updateStation(station) {
     }
 }
 
-export async function removeStationFromLibrary(station, userId) {
+export async function addToLikedSongs(station) {
+    try {
+        const savedStation = await stationService.save(station)
+        store.dispatch(getCmdAddToLikedStation(savedStation))
+        return savedStation
+    } catch (err) {
+        console.log('Cannot save station', err)
+        throw err
+    }
+}
+
+export async function removeStationFromLibrary(station, userId, lastIdx) {
     try {
         const updatedStation = {
             ...station,
-            likedByUsers: station.likedByUsers.filter(user => user !== userId)
+            likedByUsers: station.likedByUsers.filter(user => user !== userId),
+            lastIdx
         }
+
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdUpdateStation(savedStation))
         store.dispatch(getCmdRemoveStation(savedStation._id))
@@ -123,23 +137,22 @@ function getCmdAddStation(station) {
         station
     }
 }
+
 function getCmdUpdateStation(station) {
     return {
         type: UPDATE_STATION,
         station
     }
 }
-function getCmdAddSongToStation(song) {
+
+function getCmdAddToLikedStation(station) {
     return {
-        type: ADD_SONG_TO_STATION,
-        song
+        type: ADD_SONG_TO_LIKED_STATION,
+        station
     }
 }
-function getCmdRemoveSongFromStation(songId) {
-    return {
-        type: REMOVE_SONG_FROM_STATION,
-        songId
-    }
-}
+
+
+
 
 

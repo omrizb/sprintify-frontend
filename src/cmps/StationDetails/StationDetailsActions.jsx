@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { addStationToLibrary, removeStation, removeStationFromLibrary } from '../../store/actions/station.actions.js'
 
@@ -18,6 +19,8 @@ import { DotsButton } from '../Buttons/DotsButton.jsx'
 export function StationDetailsActions({ station, stationMeta }) {
 
     const navigate = useNavigate()
+    const stations = useSelector(storeState => storeState.stationModule.stations)
+    const pinnedStation = (station.isPinned === true)
 
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
@@ -82,7 +85,10 @@ export function StationDetailsActions({ station, stationMeta }) {
         const removeFromLibrary = buildListObj({
             name: 'Remove from Your Library',
             icon: 'removeFromLibrary',
-            onClick: () => removeStationFromLibrary(station, userId)
+            onClick: () => {
+                const lastIdx = stations.findIndex(item => item._id === station._id)
+                removeStationFromLibrary(station, userId, lastIdx)
+            }
         })
 
         const addToLibrary = buildListObj({
@@ -126,20 +132,24 @@ export function StationDetailsActions({ station, stationMeta }) {
                 <AddToButton type="addToLibrary" /></div>}
 
             {showRemoveFromLibrary && <div
-                onClick={() => removeStationFromLibrary(station, userId)}>
+                onClick={() => {
+                    const lastIdx = stations.findIndex(item => item._id === station._id)
+                    removeStationFromLibrary(station, userId, lastIdx)
+                }}>
                 <VButton type="removeFromLibrary" /></div>}
 
-            <div className="show-more"
-                onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
-                {showMore && (<SvgButton
-                    btnClass={"btn-dark2"}
-                    svgIcon={"dotsBig"}
-                    svgClass={"svg-big2"}
-                    tooltipTxt={`More options for ${station.name}`}
-                />)}
-                {showMoreMenu && <DropDownMenu listItems={moreList} />}
+            {(!pinnedStation) &&
+                <div className="show-more"
+                    onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
+                    {showMore && (<SvgButton
+                        btnClass={"btn-dark2"}
+                        svgIcon={"dotsBig"}
+                        svgClass={"svg-big2"}
+                        tooltipTxt={`More options for ${station.name}`}
+                    />)}
+                    {showMoreMenu && <DropDownMenu listItems={moreList} />}
 
-            </div>
+                </div>}
 
             <div className="view-as">
                 <button
