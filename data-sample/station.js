@@ -1,8 +1,8 @@
 function getRandomTimestamp(fromYear, toYear) {
-    const from = new Date(fromYear, 0, 1).getTime(); // January 1st of fromYear
-    const to = new Date(toYear, 0, 1).getTime(); // January 1st of toYear (not inclusive)
-    const randomTimestamp = Math.random() * (to - from) + from; // Random timestamp
-    return new Date(randomTimestamp).toISOString(); // Return as ISO string
+    const from = new Date(fromYear, 0, 1).getTime()
+    const to = new Date(toYear, 0, 1).getTime()
+    const randomTimestamp = Math.random() * (to - from) + from
+    return Math.floor(randomTimestamp)
 }
 
 export const stations = [

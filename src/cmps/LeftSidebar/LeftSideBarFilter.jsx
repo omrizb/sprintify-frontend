@@ -29,7 +29,7 @@ export function LeftSideBarFilter({ userId }) {
             isChosen: (sortType === 'recents'),
             onClick: () => {
                 setSortType('recents')
-                updateFilterBy({ ...filterBy, sortField: 'createdAt', sortDir: 1 })
+                updateFilterBy({ ...filterBy, sortField: 'createdAt', sortDir: -1 })
             }
         }),
 
@@ -38,7 +38,7 @@ export function LeftSideBarFilter({ userId }) {
             isChosen: (sortType === 'recently-added'),
             onClick: () => {
                 setSortType('recently-added')
-                updateFilterBy({ ...filterBy, sortField: 'addedAt', sortDir: 1 })
+                updateFilterBy({ ...filterBy, sortField: 'addedAt', sortDir: -1 })
             }
         }),
 

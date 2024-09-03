@@ -110,7 +110,7 @@ async function query(filterBy = {
 
     if (sortField === 'createdAt' || sortField === 'addedAt') {
         stations.sort((station1, station2) =>
-            station1[sortField].localeCompare(station2[sortField]) * sortDir)
+            (station1[sortField] - station2[sortField]) * sortDir)
     }
 
 
@@ -141,7 +141,9 @@ async function save(station) {
             isOwnedByUser: station.isOwnedByUser,
             createdBy: station.createdBy,
             likedByUsers: station.likedByUsers,
-            songs: station.songs
+            songs: station.songs,
+            createdAt: station.createdAt,
+            addedAt: station.addedAt
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
@@ -156,7 +158,9 @@ async function save(station) {
             isOwnedByUser: station.isOwnedByUser,
             createdBy: station.createdBy,
             likedByUsers: station.likedByUsers,
-            songs: station.songs
+            songs: station.songs,
+            createdAt: Date.now(),
+            addedAt: Date.now()
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }
