@@ -5,10 +5,11 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
+import { updateStation } from '../../store/actions/station.actions.js'
 
 export function SongPreview(props) {
 
-    const { song, stationId, likedSongsIds, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
+    const { song, stationId, likedSongsIds, likedSongsStation, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
 
     let articleClassName
     switch (type) {
@@ -16,11 +17,24 @@ export function SongPreview(props) {
             articleClassName = 'list dynamic-grid'
     }
 
-
     const { songId, songName, artist, album, url, imgUrl, duration } = song
     const isHovered = song.songId === hoveredSongId
     const isHighlighted = isHovered || song.songId === selectedSongId
     const isLikedByUser = likedSongsIds && likedSongsIds.includes(song.songId)
+
+    function addSong() {
+
+        var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
+        switch (status) {
+            case 'addToLikedSongs':
+                console.log('add to liked songs')
+                updateStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                break
+
+            default:
+                break
+        }
+    }
 
     return (
         <article className={`song-preview ${articleClassName} ${isHighlighted ? 'highlight' : ''}`}>
@@ -47,7 +61,7 @@ export function SongPreview(props) {
                 <button className="btn-tinted"
                     onClick={() => onAddSong(song)}>Add
                 </button> */}
-                <div className="add-btn-container">
+                <div className="add-btn-container" onClick={addSong}>
                     {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
                 </div>
                 <span>{utilService.getTimeStr(duration)}</span>
@@ -57,8 +71,8 @@ export function SongPreview(props) {
     )
 }
 
-function DynamicButton({ isLikedByUser, isHighlighted }) {
-    if (isLikedByUser) return <VButton type="addToStation" />
-    else if (isHighlighted) return <AddToButton type="addToLikedSongs" />
+function DynamicButton(props) {
+    if (props.isLikedByUser) return <VButton type="addToStation" />
+    else if (props.isHighlighted) return <AddToButton type="addToLikedSongs" />
 }
 
