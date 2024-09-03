@@ -28,12 +28,14 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations, station: lastRemovedStation }
             break
         case ADD_STATION:
+            const pinnedStations = state.stations.filter(station => station.isPinned === true)
+            const unPinnedStations = state.stations.filter(station => station.isPinned === false)
             newState = {
                 ...state,
                 stations: [
-                    ...state.stations.slice(0, 1),
+                    ...pinnedStations,
                     action.station,
-                    ...state.stations.slice(1)
+                    ...unPinnedStations
                 ],
                 station: action.station
             }
