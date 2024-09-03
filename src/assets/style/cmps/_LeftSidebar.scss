@@ -2,40 +2,39 @@
     display: flex;
     flex-direction: column;
     gap: $panelGap;
-    width: 280px;
+    width: 100%;
     height: 100%;
 
-   .my-library{
+    .sidebar-nav {
+        @include section;
+    }
+
+    .my-library{
         color: $secondaryTxtClr;
         display: grid;
         row-gap: 1em;
-        @include section;
-
-        .sidebar-nav {
-            @include section;
-        }
 
         .sidebar-header {
-           display: grid;
-           grid-auto-flow: column; 
-
-           .library {
-            justify-self: start;
             display: grid;
-            align-content: center;
-            grid-auto-flow: column;
-            column-gap: 0.5em;
+            grid-auto-flow: column; 
 
-            &:hover {
-                color: white;
-                cursor: pointer;
+            .library {
+                justify-self: start;
+                display: grid;
+                align-content: center;
+                grid-auto-flow: column;
+                column-gap: 0.5em;
+
+                &:hover {
+                    color: white;
+                    cursor: pointer;
+                }
             }
-           }
 
-           .plus {
+            .plus {
             justify-self: end;
             width: 32px;
-           }
+            }
         }
 
         

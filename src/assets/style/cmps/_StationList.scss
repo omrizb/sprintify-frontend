@@ -2,8 +2,10 @@
 
     ul {
         li{
+            border-radius: 8px;
+            
             &:hover{
-                background-color: rgba(179, 179, 179, 0.2);
+                background-color: rgba(179, 179, 179, 0.05);
                 cursor: pointer;
                 
             }

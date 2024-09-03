@@ -203,7 +203,7 @@
 
 // section
 @mixin section {
-    padding: $sectionPaddingInline $sectionPaddingBlock;
+    padding: $sectionPaddingBlock $sectionPaddingInline;
     border-radius: $sectionBorderRadius;
     background-color: $sectionBgClr;
 }
