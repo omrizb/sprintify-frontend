@@ -25,7 +25,7 @@ export function LeftSidebar() {
     useEffect(() => {
         if (!stations || !stations.length) return
         const station = stations.find(station => station.songs.length > 0)
-        setPlayerAction(playerActions.LOAD_STATION, { stationId: station._id, firstSongId: station.songs[0].songId })
+        setPlayerAction(playerActions.LOAD_STATION, { stationId: station._id, song: station.songs[0] })
 
     }, [stations])
 

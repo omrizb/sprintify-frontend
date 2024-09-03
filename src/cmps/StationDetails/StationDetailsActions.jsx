@@ -118,8 +118,7 @@ export function StationDetailsActions({ station, stationMeta }) {
                 type={'stationDetails'}
                 stationId={station._id}
                 stationName={station.name}
-                songId={station.songs[0]?.songId}
-                songName={station.songs[0]?.songName}
+                song={station.songs[0]}
             />}
 
             {showAddToLibrary && <div

@@ -11,13 +11,25 @@ export function Player() {
 
     const player = useSelector(state => state.playerModule.player)
     const control = useSelector(state => state.playerModule.control)
+    const stationId = useSelector(state => state.playerModule.stationId)
+    const stationName = useSelector(state => state.playerModule.stationName)
+    const originalStationSongs = useSelector(state => state.playerModule.originalStationSongs)
+    const remainingStationSongs = useSelector(state => state.playerModule.remainingStationSongs)
+    const queue = useSelector(state => state.playerModule.queue)
+    const playedSongsHistory = useSelector(state => state.playerModule.playedSongsHistory)
     const ytPlayerRef = useRef(null)
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
     const isProcessingRef = useRef(false)
     const [intervalId, setIntervalId] = useState(null)
 
     // console.log(control)
-    // console.log(player)
+    console.log(player)
+    console.log('stationId', stationId)
+    console.log('stationName', stationName)
+    console.log('originalStationSongs', originalStationSongs)
+    console.log('remainingStationSongs', remainingStationSongs)
+    console.log('queue', queue)
+    console.log('playedSongsHistory', playedSongsHistory)
 
     useEffect(() => {
         if (!ytPlayerRef.current) return
@@ -37,16 +49,16 @@ export function Player() {
         isProcessingRef.current = true
 
         const actionToExecute = control.actionsQueue[0]
-        const { songId, stationId, firstSongId, seconds, volume } = control.actionParams[0]
+        const { song, stationId, seconds, volume } = control.actionParams[0]
         console.log(actionToExecute, control.actionParams[0])
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
-                executePlayerAction.loadSongToPlayer(songId)
+                executePlayerAction.loadSongToPlayer(song)
                 break
 
             case playerActions.LOAD_STATION:
-                executePlayerAction.loadStationToPlayer(stationId, firstSongId)
+                executePlayerAction.loadStationToPlayer(stationId, song)
                 break
 
             case playerActions.PLAY:
@@ -71,6 +83,7 @@ export function Player() {
                 break
 
             case playerActions.PLAY_NEXT:
+                // if (
                 break
 
             case playerActions.PLAY_PREV:
@@ -147,7 +160,7 @@ export function Player() {
 
     return (
         <div className="player-container">
-            <YouTube key={player.songId} videoId={player.songId} opts={opts} onReady={onReady} />
+            <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
             <PlayerLeftPanel />
             <PlayerMiddlePanel getPlayerState={getPlayerState} />
             <PlayerRightPanel />

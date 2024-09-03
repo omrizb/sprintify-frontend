@@ -14,8 +14,8 @@ export function NowPlayingDetails() {
     const [song, setSong] = useState(null)
 
     useEffect(() => {
-        loadSong(player.songId)
-    }, [player.songId])
+        loadSong(player.song.songId)
+    }, [player.song.songId])
 
     async function loadSong(songId) {
         setIsLoading(true)

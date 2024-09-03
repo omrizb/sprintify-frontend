@@ -58,20 +58,20 @@ function setPlayer(playerProps) {
     store.dispatch({ type: SET_PLAYER, playerProps })
 }
 
-function loadSongToPlayer(songId) {
-    store.dispatch({ type: SET_PLAYER, playerProps: { songId } })
+function loadSongToPlayer(song) {
+    store.dispatch({ type: SET_PLAYER, playerProps: { song } })
 }
 
-async function loadStationToPlayer(stationId, firstSongId) {
+async function loadStationToPlayer(stationId, song) {
     try {
         const station = await stationService.getById(stationId)
 
-        if (!station.songs.find(song => song.songId === firstSongId)) {
+        if (!station.songs.find(currSong => currSong.songId === song.songId)) {
             throw 'Cannot find songId in station.'
         }
 
-        const songsWithoutFirstSong = station.songs.map(song => song.songId !== firstSongId)
-        store.dispatch({ type: SET_PLAYER, playerProps: { songId: firstSongId } })
+        const songsWithoutFirstSong = station.songs.filter(currSong => currSong.songId !== song.songId)
+        store.dispatch({ type: SET_PLAYER, playerProps: { song } })
         store.dispatch({ type: SET_STATION_ID, stationId: station._id })
         store.dispatch({ type: SET_STATION_NAME, stationName: station.name })
         store.dispatch({ type: SET_ORIGINAL_STATION_SONGS, songs: station.songs })

@@ -124,8 +124,7 @@ function renderHeader(station) {
                         type={'stationDetailsSmall'}
                         stationId={station._id}
                         stationName={station.name}
-                        songId={station.songs[0]?.songId}
-                        songName={station.songs[0]?.songName}
+                        song={station.songs[0]}
                     />
                     <div className="title-medium">{station.name}</div>
                 </>

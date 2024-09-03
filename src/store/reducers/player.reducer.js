@@ -14,7 +14,7 @@ export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 
 const initialState = {
     player: {
-        songId: '',
+        song: '',
         totalDuration: '',
         elapsedDuration: 0,
         isPlaying: false,

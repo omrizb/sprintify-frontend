@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { SvgButton } from '../SvgButton'
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 
-export function PlayButton({ type, stationId, stationName, songId, songName }) {
+export function PlayButton({ type, stationId, stationName, song }) {
 
     const player = useSelector(state => state.playerModule.player)
     const playerStationId = useSelector(state => state.playerModule.stationId)
@@ -13,21 +13,22 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
     useEffect(() => {
         if (playerStationId !== stationId) {
             setIsPlaying(false)
-        } else if (type === 'songPreview' && player.songId === songId) {
-            (player.songId === songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
+        } else if (type === 'songPreview' && player.song.songId === song.songId) {
+            (player.song.songId === song.songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
         } else {
             setIsPlaying(player.isPlaying)
         }
-    }, [player.isPlaying, player.songId, playerStationId])
+    }, [player.isPlaying, player.song.songId, playerStationId])
 
     function handleClick() {
+        if (!song) return
         if (playerStationId !== stationId) {
-            setPlayerAction(playerActions.LOAD_STATION, { stationId, firstSongId: songId })
+            setPlayerAction(playerActions.LOAD_STATION, { stationId, song })
             setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return
-        } else if (player.songId !== songId) {
-            setPlayerAction(playerActions.LOAD_SONG, { songId })
+        } else if (player.song.songId !== song.songId) {
+            setPlayerAction(playerActions.LOAD_SONG, { song })
             setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return
@@ -63,7 +64,7 @@ export function PlayButton({ type, stationId, stationName, songId, songName }) {
     } else if (type === 'songPreview') {
         btnClass = 'btn-song-preview'
         svgClass = 'svg-small2'
-        tooltipTxt = songName
+        tooltipTxt = song.songName
     }
 
     return (

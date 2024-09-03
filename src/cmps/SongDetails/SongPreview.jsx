@@ -29,8 +29,7 @@ export function SongPreview(props) {
                     ? <PlayButton
                         type="songPreview"
                         stationId={stationId}
-                        songId={songId}
-                        songName={songName}
+                        song={song}
                     />
                     : index}
             </div>

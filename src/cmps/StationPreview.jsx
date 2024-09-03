@@ -42,8 +42,7 @@ export function StationPreview({ station: stationPreview, style }) {
                     type={stationPreviewType}
                     stationId={stationPreview._id}
                     stationName={stationPreview.name}
-                    songId={stationPreview.songs[0]?.songId}
-                    songName={stationPreview.songs[0]?.songName}
+                    song={stationPreview.songs[0]}
                 />
             </div>
             <div className="text">
