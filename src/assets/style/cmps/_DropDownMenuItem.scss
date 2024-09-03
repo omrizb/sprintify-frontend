@@ -20,14 +20,19 @@
         }
     }
 
-    .section-title{
+    .section-title,
+    .list-item {
+        display: flex;
+        column-gap: 1em;  
+    }
+
+    .section-title {
         font-size: 11px;
         font-weight: 700; 
     }
     
     .list-item {
-        display: flex;
-        column-gap: 1em;
+
         font-size: 13px;
         font-weight: 400; 
     }

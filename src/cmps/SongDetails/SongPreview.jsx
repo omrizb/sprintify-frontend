@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -8,13 +9,15 @@ import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { addSongToStation } from '../../store/actions/station.actions.js'
+import { DropDownMenu } from '../DropDownMenu.jsx'
 
 export function SongPreview(props) {
 
     const playerSongId = useSelector(store => store.playerModule.player.song.songId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
+    const [showMenu, setShowMenu] = useState(false)
 
-    const { song, stationId, likedSongsStation, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
+    const { song, stationId, likedSongsStation, myStations, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
 
     let articleClassType
     switch (type) {
@@ -35,6 +38,63 @@ export function SongPreview(props) {
         isCurrentlyPlayedSong ? 'currently-playing' : ''
     ].join(' ')
 
+    const [listItems, setListItems] = useState([])
+
+    useEffect(() => {
+        if (!myStations) return
+        const list = buildMyStationsArr()
+        setListItems(list)
+        console.log(list)
+
+    }, [myStations])
+
+    function buildMyStationsArr() {
+        const titleObj = buildListObj({
+            type: 'title',
+            name: 'New Playlist',
+            icon: 'plus'
+        })
+        const stationsWithoutLiked = myStations.filter(station => station !== likedSongsStation)
+        const likedStationObj = buildListObj({
+            name: likedSongsStation.name,
+            imgUrl: `https://misc.scdn.co/liked-songs/liked-songs-64.png`,
+            onClick: onClickStation
+
+        })
+        const stationList = stationsWithoutLiked.map(station => {
+            return buildListObj({
+                name: station.name,
+                icon: 'musicSmall',
+                onClick: onClickStation
+            })
+        })
+
+        return [titleObj, likedStationObj, ...stationList]
+    }
+
+
+
+
+    function buildListObj(props) {
+        return {
+            type: 'list-item',
+            name: '',
+            icon: '',
+            imgUrl: '',
+            topDivision: '',
+            isChosen: false,
+            onClick: noop,
+            input: true,
+            ...props
+        }
+    }
+
+    function noop() { }
+
+    function onClickStation() {
+        console.log(songId)
+    }
+
     function addSong() {
 
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
@@ -42,6 +102,11 @@ export function SongPreview(props) {
             case 'addToLikedSongs':
                 console.log('add to liked songs')
                 addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+
+                break
+            case 'addToStation':
+                console.log('add to station')
+                setShowMenu(true)
 
                 break
 
@@ -79,6 +144,7 @@ export function SongPreview(props) {
                 </button> */}
                 <div className="add-btn-container" onClick={addSong}>
                     {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
+                    {showMenu && <DropDownMenu listItems={listItems} />}
                 </div>
                 <span>{utilService.getTimeStr(duration)}</span>
                 <div className="dots-container">{isHighlighted && <DotsButton type="songPreview" elementName={songName} />}</div>

@@ -15,10 +15,13 @@ export function DropDownMenuItem({ listItem }) {
 
             <div className={setClass()}>
                 {icon && <SvgIcon iconName={icon} />}
+                {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
                 <div>{name}</div>
             </div>
 
             {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
+
+            {(listItem.input && (listItem.type !== 'title')) && <input type="checkbox" />}
 
         </div>
     )
