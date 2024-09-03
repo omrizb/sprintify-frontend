@@ -9,6 +9,8 @@ const initialState = {
         sortField: '',
         sortDir: '',
         likedByUser: '',
+        createdAt: '',
+        addedAt: ''
     }
 
 }

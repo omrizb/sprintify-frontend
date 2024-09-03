@@ -81,7 +81,7 @@ export function GlobalNav() {
                         svgClass="svg-small1"
                         tooltipTxt={"What's New"}
                     />
-                    <span>installApp</span>
+                    <span>Install App</span>
                 </div>
 
                 <SvgButton

@@ -1,4 +1,55 @@
+function getRandomTimestamp(fromYear, toYear) {
+    const from = new Date(fromYear, 0, 1).getTime()
+    const to = new Date(toYear, 0, 1).getTime()
+    const randomTimestamp = Math.random() * (to - from) + from
+    return Math.floor(randomTimestamp)
+}
+
 export const stations = [
+    {
+        _id: 'LLLLLLL',
+        name: 'Liked Songs',
+        type: 'playlist',
+        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-64.png',
+        tags: [],
+        createdBy: {
+            id: 'AAAA',
+            fullName: 'Darr',
+            imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+        },
+        likedByUsers: [],
+        createdAt: 1725327612081,
+        addedAt: 1725327612081,
+        songs: [
+            {
+                songId: 'fJ9rUzIMcZQ',
+                songName: 'Bohemian Rhapsody',
+                artist: 'Queen',
+                album: 'A Night at the Opera',
+                url: 'https://www.youtube.com/embed/fJ9rUzIMcZQ',
+                imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
+                duration: 60
+            },
+            {
+                songId: 'JGwWNGJdvx8',
+                songName: 'Shape of You',
+                artist: 'Ed Sheeran',
+                album: '÷ (Divide)',
+                url: 'https://www.youtube.com/embed/JGwWNGJdvx8',
+                imgUrl: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg',
+                duration: 266
+            },
+            {
+                songId: 'Zi_XLOBDo_Y',
+                songName: 'Billie Jean',
+                artist: 'Michael Jackson',
+                album: 'Thriller',
+                url: 'https://www.youtube.com/embed/Zi_XLOBDo_Y',
+                imgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg',
+                duration: 296
+            }
+        ]
+    },
     {
         _id: 'A1b2C3d4E5',
         name: 'Summer Vibes',
@@ -10,7 +61,9 @@ export const stations = [
             fullName: 'Darr',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','F6g7H8i9J0', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA', 'F6g7H8i9J0', 'K1L2M3N4O5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'fJ9rUzIMcZQ',
@@ -52,7 +105,9 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
+        likedByUsers: ['AAAA', 'A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: '4NRXx6U8ABQ',
@@ -94,7 +149,9 @@ export const stations = [
             fullName: 'Sophia Brown',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','A1b2C3d4E5'],
+        likedByUsers: ['AAAA', 'A1b2C3d4E5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'lp-EO5I60KA',
@@ -128,6 +185,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'F6g7H8i9J0', 'K1L2M3N4O5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'kJQP7kiw5Fk',
@@ -160,7 +219,9 @@ export const stations = [
             fullName: 'Ava Wilson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','A1b2C3d4E5', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA', 'A1b2C3d4E5', 'K1L2M3N4O5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'DyDfgMOUjCI',
@@ -194,6 +255,8 @@ export const stations = [
             imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe8Qwq1QZXynKsPdWVPx2RI6VTsh2LyavhQg&s'
         },
         likedByUsers: ['A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'Zi_XLOBDo_Y',
@@ -280,7 +343,9 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','F6g7H8i9J0', 'P6Q7R8S9T0'],
+        likedByUsers: ['AAAA', 'F6g7H8i9J0', 'P6Q7R8S9T0'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'OPf0YbXqDm0',
@@ -385,7 +450,9 @@ export const stations = [
             fullName: 'sprintify',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','A1b2C3d4E5', 'F6g7H8i9J0'],
+        likedByUsers: ['AAAA', 'A1b2C3d4E5', 'F6g7H8i9J0'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: '6Ejga4kJUts',
@@ -418,7 +485,9 @@ export const stations = [
             fullName: 'Ava Wilson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','P6Q7R8S9T0', 'K1L2M3N4O5'],
+        likedByUsers: ['AAAA', 'P6Q7R8S9T0', 'K1L2M3N4O5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'lp-EO5I60KA',
@@ -461,6 +530,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['F6g7H8i9J0'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: []
     },
     {
@@ -474,7 +545,9 @@ export const stations = [
             fullName: 'Liam Johnson',
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
-        likedByUsers: ['AAAA','U1V2W3X4Y5'],
+        likedByUsers: ['AAAA', 'U1V2W3X4Y5'],
+        createdAt: getRandomTimestamp(2018, 2023),
+        addedAt: getRandomTimestamp(2022, 2023),
         songs: [
             {
                 songId: 'sOnqjkJTMaA',

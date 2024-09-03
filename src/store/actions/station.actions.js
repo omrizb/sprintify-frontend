@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import { stationService } from '../../services/station/station.service.local.js'
 import { store } from '../store.js'
 import {
@@ -8,8 +6,6 @@ import {
     SET_STATIONS,
     SET_STATION,
     UPDATE_STATION,
-    ADD_SONG_TO_STATION,
-    REMOVE_SONG_FROM_STATION,
 } from '../reducers/station.reducer.js'
 
 
@@ -23,35 +19,6 @@ export async function loadStations(filterBy) {
     }
 }
 
-export async function loadLibrary(filterBy, userId) {
-    try {
-
-        if (filterBy.createdBy && (filterBy.createdBy !== userId)) {
-            var stations = await stationService.query({ ...filterBy, createdBy: filterBy.createdBy, likedByUser: userId })
-        }
-
-        if (!filterBy.createdBy || (filterBy.createdBy === userId)) {
-            const myStations = await stationService.query({ ...filterBy, createdBy: userId })
-            const likedStations = await stationService.query({ ...filterBy, likedByUser: userId })
-            const combined = [...myStations, ...likedStations]
-            var stations = _.uniqBy(combined, '_id')
-        }
-
-        store.dispatch(getCmdSetStations(stations))
-    } catch (err) {
-        console.log('Cannot load stations', err)
-        throw err
-    }
-}
-
-export async function setStations(stations) {
-    try {
-        store.dispatch(getCmdSetStations(stations))
-    } catch (err) {
-        console.log('Cannot load stations', err)
-        throw err
-    }
-}
 
 export async function loadStation(stationId) {
     try {
@@ -117,7 +84,8 @@ export async function addStationToLibrary(station, userId) {
     try {
         const updatedStation = {
             ...station,
-            likedByUsers: [...station.likedByUsers, userId]
+            likedByUsers: [...station.likedByUsers, userId],
+            addedAt: Date.now(),
         }
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdAddStation(savedStation))
@@ -128,26 +96,7 @@ export async function addStationToLibrary(station, userId) {
     }
 }
 
-export async function addSongToStation(stationId, song) {
-    try {
-        const savedSong = await stationService.addSongToStation(stationId, song)
-        store.dispatch(getCmdAddSongToStation(savedSong))
-        return savedSong
-    } catch (err) {
-        console.log('Cannot add song to station', err)
-        throw err
-    }
-}
 
-export async function removeSongFromStation(stationId, songId) {
-    try {
-        await stationService.removeSongFromStation(stationId, songId)
-        store.dispatch(getCmdRemoveSongFromStation(songId))
-    } catch (err) {
-        console.log('Cannot remove song from station', err)
-        throw err
-    }
-}
 
 // Command Creators:
 function getCmdSetStations(stations) {

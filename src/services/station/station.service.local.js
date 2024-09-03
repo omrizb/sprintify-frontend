@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { storageService } from '../async-storage.service'
 import { utilService } from '../util.service.js'
 import { userService } from '../user'
@@ -49,37 +51,76 @@ async function query(filterBy = {
     createdBy: '',
     songId: '',
     sortField: '',
-    sortDir: ''
+    sortDir: '',
+    userId: '',
+    createdAt: '',
+    addedAt: ''
 }) {
 
     var stations = await storageService.query(STORAGE_KEY)
 
-    if (filterBy.txt) {
+    const { txt, likedByUser, stationType, createdBy,
+        songId, sortField, sortDir, userId } = filterBy
+
+
+
+    if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stations = stations.filter(station => regex.test(station.name) || regex.test(station.createdBy.fullName))
     }
 
-    if (filterBy.stationType) {
-        stations = stations.filter(station => station.type === filterBy.stationType)
+    if (stationType) {
+        stations = stations.filter(station => station.type === stationType)
     }
 
-    if (filterBy.createdBy) {
-        stations = stations.filter(station => station.createdBy.id === filterBy.createdBy)
+    if (createdBy) {
+        stations = stations.filter(station => station.createdBy.id === createdBy)
     }
 
-    if (filterBy.songId) {
-        stations = stations.find(station => station.songs.find(song => song.songId === filterBy.songId))
+    if (songId) {
+        stations = stations.find(station => station.songs.find(song => song.songId === songId))
     }
 
-    if (filterBy.likedByUser) {
-        stations = stations.filter(station => station.likedByUsers.includes(filterBy.likedByUser))
+    if (likedByUser) {
+        stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
     }
 
-    if (filterBy.sortField === 'alphabetical') {
-        stations = [...stations].sort((a, b) => a.name.localeCompare(b.name))
+    if (userId) {
+        if (createdBy && (createdBy !== userId)) {
+            stations = stations.filter(station => station.likedByUsers.includes(userId))
+        }
+
+        if (!createdBy || (createdBy === userId)) {
+            const myStations = stations.filter(station => station.createdBy.id === userId)
+            const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
+            const combined = [...myStations, ...likedStations]
+            stations = _.uniqBy(combined, '_id')
+        }
     }
 
+    if (sortField === 'name') {
 
+        stations.sort((station1, station2) =>
+            station1[sortField].localeCompare(station2[sortField]) * sortDir)
+    }
+
+    if (sortField === 'createdBy') {
+
+        stations.sort((station1, station2) =>
+            station1[sortField]['fullName'].localeCompare(station2[sortField]['fullName']) * sortDir)
+    }
+
+    if (sortField === 'createdAt' || sortField === 'addedAt') {
+        stations.sort((station1, station2) =>
+            (station1[sortField] - station2[sortField]) * sortDir)
+    }
+
+    const likedStation = stations.find(station => station.name === 'Liked Songs')
+
+    if (likedStation) {
+        stations = stations.filter(station => station.name !== 'Liked Songs')
+        if (createdBy !== userId) stations = [likedStation, ...stations]
+    }
 
     return stations
 }
@@ -107,7 +148,9 @@ async function save(station) {
             isOwnedByUser: station.isOwnedByUser,
             createdBy: station.createdBy,
             likedByUsers: station.likedByUsers,
-            songs: station.songs
+            songs: station.songs,
+            createdAt: station.createdAt,
+            addedAt: station.addedAt
         }
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
@@ -122,7 +165,9 @@ async function save(station) {
             isOwnedByUser: station.isOwnedByUser,
             createdBy: station.createdBy,
             likedByUsers: station.likedByUsers,
-            songs: station.songs
+            songs: station.songs,
+            createdAt: Date.now(),
+            addedAt: Date.now()
         }
         savedStation = await storageService.post(STORAGE_KEY, stationToSave)
     }

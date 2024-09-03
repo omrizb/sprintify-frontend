@@ -69,6 +69,10 @@
         font-size: $textSizeSmaller-1;
         z-index: 0;
 
+        .station-type{
+            text-transform: capitalize;
+        }
+
         .station-name {
             font-family: SprintifyUITitle;
             font-size: $textSizeLarger4;
