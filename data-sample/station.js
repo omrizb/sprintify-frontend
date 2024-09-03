@@ -7,6 +7,50 @@ function getRandomTimestamp(fromYear, toYear) {
 
 export const stations = [
     {
+        _id: 'LLLLLLL',
+        name: 'Liked Songs',
+        type: 'playlist',
+        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-64.png',
+        tags: [],
+        createdBy: {
+            id: 'AAAA',
+            fullName: 'Darr',
+            imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+        },
+        likedByUsers: [],
+        createdAt: 1725327612081,
+        addedAt: 1725327612081,
+        songs: [
+            {
+                songId: 'fJ9rUzIMcZQ',
+                songName: 'Bohemian Rhapsody',
+                artist: 'Queen',
+                album: 'A Night at the Opera',
+                url: 'https://www.youtube.com/embed/fJ9rUzIMcZQ',
+                imgUrl: 'https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg',
+                duration: 60
+            },
+            {
+                songId: 'JGwWNGJdvx8',
+                songName: 'Shape of You',
+                artist: 'Ed Sheeran',
+                album: '÷ (Divide)',
+                url: 'https://www.youtube.com/embed/JGwWNGJdvx8',
+                imgUrl: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg',
+                duration: 266
+            },
+            {
+                songId: 'Zi_XLOBDo_Y',
+                songName: 'Billie Jean',
+                artist: 'Michael Jackson',
+                album: 'Thriller',
+                url: 'https://www.youtube.com/embed/Zi_XLOBDo_Y',
+                imgUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/hqdefault.jpg',
+                duration: 296
+            }
+        ]
+    },
+    {
         _id: 'A1b2C3d4E5',
         name: 'Summer Vibes',
         type: 'playlist',
