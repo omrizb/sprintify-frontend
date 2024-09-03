@@ -14,7 +14,7 @@ export function SongPreview(props) {
     const playerSongId = useSelector(store => store.playerModule.player.song.songId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
 
-    const { song, stationId, likedSongsIds, likedSongsStation, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
+    const { song, stationId, likedSongsStation, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
 
     let articleClassType
     switch (type) {
@@ -25,7 +25,7 @@ export function SongPreview(props) {
     const { songId, songName, artist, album, url, imgUrl, duration } = song
     const isHovered = song.songId === hoveredSongId
     const isHighlighted = isHovered || song.songId === selectedSongId
-    const isLikedByUser = likedSongsIds && likedSongsIds.includes(song.songId)
+    const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.songId === songId)
     const isCurrentlyPlayedSong = song.songId === playerSongId && isPlaying
 
     const songPreviewClass = [

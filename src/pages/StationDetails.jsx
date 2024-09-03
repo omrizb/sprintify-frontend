@@ -28,8 +28,13 @@ export function StationDetails() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const bgColor = useRef(utilService.getRandomColor())
 
-    const likedSongsStation = stations.find(station => station.isPinned === true)
-    const likedSongsIds = likedSongsStation.songs.map(song => song.songId)
+    const [likedSongsStation, setLikedSongsStation] = useState()
+
+    useEffect(() => {
+        if (!stations) return
+        const likedStation = stations.find(station => station.isPinned)
+        setLikedSongsStation(likedStation)
+    }, [stations])
 
     useEffect(() => {
         onLoad(id)
@@ -102,8 +107,6 @@ export function StationDetails() {
 
                 {(station.songs.length > 0) && <SongList
                     station={station}
-                    // likedSongsIds={loggedinUser.likedSongsIds}
-                    likedSongsIds={likedSongsIds}
                     likedSongsStation={likedSongsStation}
                     onRemoveSong={onRemoveSong}
                     type="table"

@@ -168,7 +168,7 @@ export function Player() {
 
     return (
         <div className="player-container">
-            {isFirstSongLoaded && <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />}
+            <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
             <PlayerLeftPanel />
             <PlayerMiddlePanel getPlayerState={getPlayerState} />
             <PlayerRightPanel />

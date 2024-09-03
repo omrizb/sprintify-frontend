@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
 import { SvgIcon } from '../SvgIcon.jsx'
 
-export function SongList({ station, likedSongsIds, onRemoveSong, likedSongsStation, type }) {
+export function SongList({ station, onRemoveSong, likedSongsStation, type }) {
 
     const [hoveredSongId, setHoveredSongId] = useState(null)
     const [selectedSongId, setSelectedSongId] = useState(null)
@@ -38,7 +38,6 @@ export function SongList({ station, likedSongsIds, onRemoveSong, likedSongsStati
                             type={type}
                             song={song}
                             stationId={station._id}
-                            likedSongsIds={likedSongsIds}
                             likedSongsStation={likedSongsStation}
                             onRemoveSong={onRemoveSong}
                             hoveredSongId={hoveredSongId}
