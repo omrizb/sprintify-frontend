@@ -131,17 +131,6 @@ function getCmdUpdateStation(station) {
         station
     }
 }
-function getCmdAddSongToStation(song) {
-    return {
-        type: ADD_SONG_TO_STATION,
-        song
-    }
-}
-function getCmdRemoveSongFromStation(songId) {
-    return {
-        type: REMOVE_SONG_FROM_STATION,
-        songId
-    }
-}
+
 
 

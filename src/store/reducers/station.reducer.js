@@ -3,8 +3,6 @@ export const SET_STATION = 'SET_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
-export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
-export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 
 
 const initialState = {
@@ -51,13 +49,7 @@ export function stationReducer(state = initialState, action) {
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations, station: action.station }
             break
-        case ADD_SONG_TO_STATION:
-            newState = { ...state, station: { ...state.station, songs: [...state.station.songs || [], action.song] } }
-            break
-        case REMOVE_SONG_FROM_STATION:
-            const updatedSongs = state.station.songs.filter(song => song.songId !== action.songId)
-            newState = { ...state, station: { ...state.station, songs: updatedSongs } }
-            break
+
         default:
     }
     return newState
