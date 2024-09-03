@@ -9,14 +9,15 @@ import { PlayerRightPanel } from './Player/PlayerRightPanel'
 
 export function Player() {
 
+    const isFirstSongLoaded = useSelector(state => state.playerModule.isFirstSongLoaded)
     const player = useSelector(state => state.playerModule.player)
     const control = useSelector(state => state.playerModule.control)
-    const stationId = useSelector(state => state.playerModule.stationId)
-    const stationName = useSelector(state => state.playerModule.stationName)
-    const originalStationSongs = useSelector(state => state.playerModule.originalStationSongs)
-    const remainingStationSongs = useSelector(state => state.playerModule.remainingStationSongs)
-    const queue = useSelector(state => state.playerModule.queue)
-    const playedSongsHistory = useSelector(state => state.playerModule.playedSongsHistory)
+    // const stationId = useSelector(state => state.playerModule.stationId)
+    // const stationName = useSelector(state => state.playerModule.stationName)
+    // const originalStationSongs = useSelector(state => state.playerModule.originalStationSongs)
+    // const remainingStationSongs = useSelector(state => state.playerModule.remainingStationSongs)
+    // const queue = useSelector(state => state.playerModule.queue)
+    // const playedSongsHistory = useSelector(state => state.playerModule.playedSongsHistory)
     const ytPlayerRef = useRef(null)
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
     const isProcessingRef = useRef(false)
@@ -167,7 +168,7 @@ export function Player() {
 
     return (
         <div className="player-container">
-            <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
+            {isFirstSongLoaded && <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />}
             <PlayerLeftPanel />
             <PlayerMiddlePanel getPlayerState={getPlayerState} />
             <PlayerRightPanel />

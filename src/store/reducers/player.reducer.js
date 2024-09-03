@@ -1,3 +1,4 @@
+export const SET_FIRST_SONG_LOADED_TRUE = 'SET_FIRST_SONG_LOADED_TRUE'
 export const SET_PLAYER = 'SET_PLAYER'
 export const ADD_TO_ACTION_QUEUE = 'ADD_TO_ACTION_QUEUE'
 export const POP_FROM_ACTION_QUEUE = 'POP_FROM_ACTION_QUEUE'
@@ -13,6 +14,7 @@ export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 
 const initialState = {
+    isFirstSongLoaded: false,
     player: {
         song: '',
         totalDuration: '',
@@ -36,6 +38,9 @@ export function playerReducer(state = initialState, action = {}) {
     var newState = state
 
     switch (action.type) {
+        case SET_FIRST_SONG_LOADED_TRUE:
+            newState = { ...state, isFirstSongLoaded: true }
+            break
         case SET_PLAYER:
             newState = {
                 ...state,

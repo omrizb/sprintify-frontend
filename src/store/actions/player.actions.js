@@ -2,6 +2,7 @@ import { stationService } from '../../services/station/station.service.local'
 
 import { store } from '../store'
 import {
+    SET_FIRST_SONG_LOADED_TRUE,
     SET_PLAYER,
     ADD_TO_ACTION_QUEUE,
     POP_FROM_ACTION_QUEUE,
@@ -16,7 +17,6 @@ import {
     ADD_TO_SONGS_HISTORY,
     POP_FROM_SONGS_HISTORY
 } from '../reducers/player.reducer'
-
 
 export const playerActions = {
     LOAD_SONG: 'loadSong',
@@ -36,6 +36,11 @@ export const playerActions = {
 }
 
 // To be used by app components to set an action
+
+export function loadFirstStation(stationId, song) {
+    loadStationToPlayer(stationId, song)
+    store.dispatch({ type: SET_FIRST_SONG_LOADED_TRUE })
+}
 
 export function setPlayerAction(action, params) {
     store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params } })

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { loadStations } from '../store/actions/station.actions.js'
-import { playerActions, setPlayerAction } from '../store/actions/player.actions.js'
+import { loadFirstStation } from '../store/actions/player.actions.js'
 
 import { LeftSideBarHeader } from './LeftSidebar/LeftSideBarHeader.jsx'
 import { SidebarNav } from './LeftSidebar/SidebarNav.jsx'
@@ -16,6 +16,7 @@ export function LeftSidebar() {
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const userId = loggedinUser._id
 
+    const isFirstSongLoaded = useSelector(storeState => storeState.playerModule.isFirstSongLoaded)
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
@@ -28,12 +29,10 @@ export function LeftSidebar() {
     }, [filterBy])
 
     useEffect(() => {
-        if (!stations || !stations.length) return
+        if (!stations || !stations.length || isFirstSongLoaded) return
         const station = stations.find(station => station.songs.length > 0)
-        setPlayerAction(playerActions.LOAD_STATION, { stationId: station._id, song: station.songs[0] })
-
+        loadFirstStation(station._id, station.songs[0])
     }, [stations])
-
 
     return (
         <div className="left-sidebar">
