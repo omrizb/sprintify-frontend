@@ -3,6 +3,7 @@ export const SET_STATION = 'SET_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
+export const ADD_SONG_TO_LIKED_STATION = 'ADD_SONG_TO_LIKED_STATION'
 
 
 const initialState = {
@@ -48,6 +49,11 @@ export function stationReducer(state = initialState, action) {
         case UPDATE_STATION:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations, station: action.station }
+            break
+
+        case ADD_SONG_TO_LIKED_STATION:
+            stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
+            newState = { ...state, stations }
             break
 
         default:
