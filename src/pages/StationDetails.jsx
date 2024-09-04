@@ -26,7 +26,7 @@ export function StationDetails() {
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const [isLoading, setIsLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const bgColor = useRef(utilService.getRandomColor())
+    const [bgColor, setBgColor] = useState()
 
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
@@ -61,7 +61,6 @@ export function StationDetails() {
 
     function onEdit() {
         if (!isOwnedByUser) return
-        console.log('onEdit from Station Details')
         setIsModalOpen(true)
     }
 
@@ -83,6 +82,7 @@ export function StationDetails() {
             'songsDisplay': loggedinUser.songsDisplay || 'list'
         }
     }
+    console.log(bgColor)
 
     return (isLoading)
         ? <Loader />
@@ -90,18 +90,18 @@ export function StationDetails() {
             <HeaderFixer
                 header={renderHeader(station)}
                 className="padded-top-rounded-box"
-                bgColor={bgColor.current}
+                bgColor={bgColor}
                 showFromY={150}
             >
                 <StationDetailsHeader
                     station={station}
-                    bgColor={bgColor.current}
+                    onSetBgColor={setBgColor}
                     onEdit={onEdit}
                     onEditStation={() => setIsModalOpen(true)}
 
                 />
 
-                <div className="secondary-background" style={{ backgroundColor: bgColor.current }}></div>
+                <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>
 
                 <StationDetailsActions
                     station={station}

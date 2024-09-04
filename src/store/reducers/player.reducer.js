@@ -7,8 +7,9 @@ export const SET_STATION_NAME = 'SET_STATION_NAME'
 export const SET_ORIGINAL_STATION_SONGS = 'SET_ORIGINAL_STATION_SONGS'
 export const SET_REMAINING_STATION_SONGS = 'SET_REMAINING_STATION_SONGS'
 export const POP_FROM_REMAINING_STATION_SONGS = 'POP_FROM_REMAINING_STATION_SONGS'
-export const SET_QUEUE = 'SET_QUEUE'
-export const ADD_TO_QUEUE = 'ADD_TO_QUEUE'
+export const SET_SONGS_ADDED_MANUALLY = 'SET_SONGS_ADDED_MANUALLY'
+export const ADD_TO_SONGS_ADDED_MANUALLY = 'ADD_TO_SONGS_ADDED_MANUALLY'
+export const POP_FROM_SONGS_ADDED_MANUALLY = 'ADD_TO_SONGS_ADDED_MANUALLY'
 export const SET_SONGS_HISTORY = 'SET_SONGS_HISTORY'
 export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
@@ -22,16 +23,20 @@ const initialState = {
         isPlaying: false,
         volume: 100,
     },
+    queue: {
+        originalStationSongs: [],
+        remainingStationSongs: [],
+        songsAddedManually: [],
+        playedSongsHistory: [],
+        isShuffle: false,
+        isRepeat: false
+    },
     control: {
         actionsQueue: [],
         actionParams: []
     },
     stationId: '',
     stationName: '',
-    originalStationSongs: [],
-    remainingStationSongs: [],
-    queue: [],
-    playedSongsHistory: [],
 }
 
 export function playerReducer(state = initialState, action = {}) {
@@ -74,37 +79,73 @@ export function playerReducer(state = initialState, action = {}) {
             newState = { ...state, stationName: action.stationName }
             break
         case SET_ORIGINAL_STATION_SONGS:
-            newState = { ...state, originalStationSongs: action.songs }
+            newState = {
+                ...state,
+                queue: { ...state.queue, originalStationSongs: action.songs }
+            }
             break
         case SET_REMAINING_STATION_SONGS:
-            newState = { ...state, remainingStationSongs: action.songs }
+            newState = {
+                ...state,
+                queue: { ...state.queue, remainingStationSongs: action.songs }
+            }
             break
         case POP_FROM_REMAINING_STATION_SONGS:
             newState = {
                 ...state,
-                remainingStationSongs: state.remainingStationSongs.slice(1)
+                queue: {
+                    ...state.queue,
+                    remainingStationSongs: state.queue.remainingStationSongs.slice(1)
+                }
             }
             break
-        case SET_QUEUE:
-            newState = { ...state, queue: [...action.queue] }
-            break
-        case ADD_TO_QUEUE:
+        case SET_SONGS_ADDED_MANUALLY:
             newState = {
                 ...state,
-                queue: [...state.queue, action.songId]
+                queue: { ...state.queue, songsAddedManually: action.songs }
+            }
+            break
+        case ADD_TO_SONGS_ADDED_MANUALLY:
+            newState = {
+                ...state,
+                queue: {
+                    ...state.queue,
+                    songsAddedManually: [...state.queue.songsAddedManually, action.song],
+                }
+            }
+            break
+        case POP_FROM_SONGS_ADDED_MANUALLY:
+            newState = {
+                ...state,
+                queue: {
+                    ...state.queue,
+                    songsAddedManually: state.songsAddedManually.slice(1)
+                }
             }
             break
         case SET_SONGS_HISTORY:
-            newState = { ...state, playedSongsHistory: action.playedSongsHistory }
+            newState = {
+                ...state,
+                queue: { ...state.queue, playedSongsHistory: action.songs }
+            }
             break
         case ADD_TO_SONGS_HISTORY:
             newState = {
                 ...state,
-                playedSongsHistory: [...state.playedSongsHistory, action.songId]
+                queue: {
+                    ...state.queue,
+                    playedSongsHistory: [...state.queue.playedSongsHistory, action.song],
+                }
             }
             break
         case POP_FROM_SONGS_HISTORY:
-            newState = { ...state, playedSongsHistory: state.playedSongsHistory.slice(0, -1) }
+            newState = {
+                ...state,
+                queue: {
+                    ...state.queue,
+                    playedSongsHistory: state.queue.playedSongsHistory.slice(0, -1)
+                }
+            }
             break
         default:
             return state

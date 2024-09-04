@@ -5,10 +5,12 @@ import { utilService } from '../../services/util.service'
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { SvgButton } from '../SvgButton'
 import { Slider } from '../Slider'
+import { PanelIcon } from './PanelIcon'
 
 export function PlayerMiddlePanel({ getPlayerState }) {
 
     const player = useSelector(state => state.playerModule.player)
+    const queue = useSelector(state => state.playerModule.queue)
 
     function handlePlayPause() {
         const playerState = getPlayerState()
@@ -27,18 +29,16 @@ export function PlayerMiddlePanel({ getPlayerState }) {
         <div className="player-middle-panel">
             <div className="actions">
 
-                <SvgButton
-                    btnClass="btn-dark2"
+                <PanelIcon
                     svgIcon="playerShuffle"
-                    svgClass="svg-small1"
                     tooltipTxt="Shuffle"
+                    isActive={queue.isShuffle}
+                    onClick={() => setPlayerAction(playerActions.SET_SHUFFLE)}
                 />
-                <SvgButton
-                    btnClass="btn-dark2"
+                <PanelIcon
                     svgIcon="playerPreviousSong"
-                    svgClass="svg-small1"
                     tooltipTxt="Previous song"
-
+                    onClick={() => setPlayerAction(playerActions.PLAY_PREV)}
                 />
                 <SvgButton
                     btnClass="btn-player-play"
@@ -47,17 +47,15 @@ export function PlayerMiddlePanel({ getPlayerState }) {
                     tooltipTxt={player.isPlaying ? 'Pause' : 'Play'}
                     onClick={handlePlayPause}
                 />
-                <SvgButton
-                    btnClass="btn-dark2"
+                <PanelIcon
                     svgIcon="playerNextSong"
-                    svgClass="svg-small1"
                     tooltipTxt="Next song"
+                    onClick={() => setPlayerAction(playerActions.PLAY_NEXT)}
                 />
-                <SvgButton
-                    btnClass="btn-dark2"
+                <PanelIcon
                     svgIcon="playerRepeat"
-                    svgClass="svg-small1"
                     tooltipTxt="Repeat"
+                    onClick={() => setPlayerAction(playerActions.SET_REPEAT)}
                 />
             </div>
             <div className="duration-bar">

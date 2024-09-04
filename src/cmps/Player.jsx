@@ -16,7 +16,7 @@ export function Player() {
     // const stationName = useSelector(state => state.playerModule.stationName)
     // const originalStationSongs = useSelector(state => state.playerModule.originalStationSongs)
     // const remainingStationSongs = useSelector(state => state.playerModule.remainingStationSongs)
-    // const queue = useSelector(state => state.playerModule.queue)
+    const queue = useSelector(state => state.playerModule.queue)
     // const playedSongsHistory = useSelector(state => state.playerModule.playedSongsHistory)
     const ytPlayerRef = useRef(null)
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
@@ -24,8 +24,8 @@ export function Player() {
     const [intervalId, setIntervalId] = useState(null)
     const playerElapsedDurationRef = useRef(player.elapsedDuration)
 
-    // console.log(control)
-    // console.log(player)
+    // console.log('control', control)
+    // console.log('player', player)
     // console.log('stationId', stationId)
     // console.log('stationName', stationName)
     // console.log('originalStationSongs', originalStationSongs)
@@ -52,7 +52,9 @@ export function Player() {
 
         const actionToExecute = control.actionsQueue[0]
         const { song, stationId, seconds, volume } = control.actionParams[0]
-        console.log(actionToExecute, control.actionParams[0])
+
+        // Check the next action to execute
+        // console.log('Executing action:', actionToExecute, control.actionParams[0])
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
@@ -60,6 +62,7 @@ export function Player() {
                 break
 
             case playerActions.LOAD_STATION:
+                executePlayerAction.addSongToSongsHistory(player.song)
                 executePlayerAction.loadStationToPlayer(stationId, song)
                 break
 
@@ -85,10 +88,35 @@ export function Player() {
                 break
 
             case playerActions.PLAY_NEXT:
-                // if (
+                let nextSong
+
+                if (queue.songsAddedManually.length > 0) {
+                    nextSong = queue.songsAddedManually[0]
+                    executePlayerAction.removeNextSongFromAddedManuallyQueue()
+
+                } else if (queue.remainingStationSongs.length > 0) {
+                    nextSong = queue.remainingStationSongs[0]
+                    executePlayerAction.removeNextSongFromRemainingStationQueue()
+
+                } else {
+                    executePlayerAction.setPlayer({ isPlaying: false })
+                    break
+                }
+
+                executePlayerAction.addSongToSongsHistory(player.song)
+                executePlayerAction.setPlayer({ song: nextSong })
                 break
 
             case playerActions.PLAY_PREV:
+                let prevSong
+                if (queue.playedSongsHistory.length > 0) {
+                    prevSong = queue.playedSongsHistory[0]
+                    executePlayerAction.removeSongFromSongsHistory()
+                } else {
+                    break
+                }
+
+                executePlayerAction.setPlayer({ song: prevSong })
                 break
 
             case playerActions.SET_SHUFFLE:
@@ -109,7 +137,7 @@ export function Player() {
             case playerActions.RESET_ACTION:
                 break
         }
-        executePlayerAction.removeNextActionFromQueue()
+        executePlayerAction.removeTopActionFromQueue()
         isProcessingRef.current = false
     }, [control])
 
@@ -145,12 +173,21 @@ export function Player() {
 
     function onUpdatePlayerState(ev) {
 
-        console.log(ev.data)
-        //         YT.PlayerState.ENDED
-        // YT.PlayerState.PLAYING
-        // YT.PlayerState.PAUSED
-        // YT.PlayerState.BUFFERING
-        // YT.PlayerState.CUE
+        switch (ev.data) {
+            case -1:
+                break
+            case YT.PlayerState.ENDED:
+                playerActions
+                break
+            case YT.PlayerState.PLAYING:
+                break
+            case YT.PlayerState.PAUSED:
+                break
+            case YT.PlayerState.BUFFERING:
+                break
+            case YT.PlayerState.CUE:
+                break
+        }
     }
 
     function getPlayerState() {
@@ -168,7 +205,10 @@ export function Player() {
 
     return (
         <div className="player-container">
-            <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
+            {player.song
+                ? <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
+                : <div></div>
+            }
             <PlayerLeftPanel />
             <PlayerMiddlePanel getPlayerState={getPlayerState} />
             <PlayerRightPanel />
