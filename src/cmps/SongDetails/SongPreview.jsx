@@ -112,35 +112,35 @@ export function SongPreview(props) {
         checkedStations.forEach(item => console.log('checked:', item.name, item._id))
         unCheckedStations.forEach(item => console.log('unChecked:', item.name, item._id))
 
-        const stationsToAddSong = checkedStations.filter(station =>
-            station.songs.every(song => song.songId !== songId)
+
+        //First I will find all the checked station that do not contain the song and need to be updated
+
+        const stationsToAdd = checkedStations.filter(station =>
+
+            !station.songs.some(song => song.songId === songId)
         )
 
-
-        const updatedAdd = stationsToAddSong.map(station => {
-            station.songs = [...station.songs, song]
-            console.log(station.name, station.songs)
-
-            return station
+        const updatedAdd = stationsToAdd.map(station => {
+            const updatedSongs = [...station.songs, song]
+            return { ...station, songs: updatedSongs }
         })
 
+        updateStations(updatedAdd)
 
-        // Only these stations contain the song and I need to remove
+
+        // Now I will look for the unchecked stations that contain the song and need to be updated
+
         const stationsToRemove = unCheckedStations.filter(station => {
 
             return station.songs.some(song => song.songId === songId);
         })
-
-
 
         const updatedRemoved = stationsToRemove.map(station => {
             const updatedSongs = station.songs.filter(song => song.songId != songId)
             return { ...station, songs: updatedSongs }
         })
 
-
         updateStations(updatedRemoved)
-
 
     }
 
