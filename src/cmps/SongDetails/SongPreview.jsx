@@ -53,6 +53,11 @@ export function SongPreview(props) {
     function buildMyStationsArr() {
         const titleObj = buildListObj({
             type: 'title',
+            name: 'Add to playlist',
+            icon: ''
+        })
+        const newStationObj = buildListObj({
+            type: 'list-item',
             name: 'New Playlist',
             icon: 'plus',
             onClick: handleAddStation
@@ -72,7 +77,8 @@ export function SongPreview(props) {
             return buildListObj({
                 name: station.name,
                 station: station,
-                icon: 'musicSmall',
+                // icon: 'musicSmall',
+                imgUrl: station.stationImgUrl,
                 isChecked: isInStation
             })
         })
@@ -83,7 +89,7 @@ export function SongPreview(props) {
             onClick: (list) => handleSave(list)
         })
 
-        return [titleObj, likedStationObj, ...stationList, saveBtn]
+        return [titleObj, newStationObj, likedStationObj, ...stationList, saveBtn]
     }
 
     function buildListObj(props) {

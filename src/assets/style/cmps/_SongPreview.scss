@@ -3,6 +3,30 @@
     width: 100%;
     color: $secondaryTxtClr;
 
+    .drop-down-menu{
+        width: 290px;
+
+        .drop-down-menu-item{
+            .section-title
+             {
+                color: $secondaryTxtClr;
+                padding-inline: 12px;
+                
+            }
+
+            .icon {
+                width:32px;
+            }
+
+            i {
+                svg{
+                    fill: white;
+                }
+            }
+        }
+    
+    }
+
     a:hover {
         text-decoration: underline;
         color: $primaryTxtClr;

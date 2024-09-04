@@ -5,7 +5,27 @@
     
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    align-items:center;
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+    
+    .icon {
+        margin-right: 8px;
+    }
+
+    .right-align {
+        display: flex;
+        align-items: center;
+        margin-left: auto; /* Pushes this container to the right */
+    }
+    
+    .save-btn {
+        margin-left: auto; 
+    }
 
     &.include-top-division {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
@@ -24,6 +44,9 @@
     .list-item {
         display: flex;
         column-gap: 1em;  
+        align-items: center;
+
+        
     }
 
     .section-title {
@@ -45,6 +68,10 @@
         }
 
     }
+
+    
+
+    
 
 
     /* Hide the default checkbox */

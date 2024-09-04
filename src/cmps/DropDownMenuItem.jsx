@@ -31,29 +31,31 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
     return (
         <div className={`drop-down-menu-item ${topDivision}`}>
 
-            {(listItem.type !== 'button') &&
-                <div className={setClass()}>
-                    {icon && <SvgIcon iconName={icon} />}
-                    {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
-                    <div>{name}</div>
-                </div>}
+            <div className="content">
+                {(listItem.type !== 'button') &&
+                    <div className={setClass()}>
+                        {icon && <div className='icon'><SvgIcon iconName={icon} /></div>}
+                        {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
+                        <div>{name}</div>
+                    </div>}
 
-            {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
+                <div className="right-align">
+                    {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
 
-            {(listItem.type === 'checkBox')
-                &&
-                <label className="custom-checkbox">
-                    <input
-                        type="checkbox"
-                        checked={listItemToEdit.isChecked}
-                        onChange={handleChecboxChange}
-                    />
-                    <span></span>
-                </label>
-            }
+                    {(listItem.type === 'checkBox') &&
+                        <label className="custom-checkbox">
+                            <input
+                                type="checkbox"
+                                checked={listItemToEdit.isChecked}
+                                onChange={handleChecboxChange}
+                            />
+                            <span></span>
+                        </label>}
+                </div>
+            </div>
 
             {(listItem.type === 'button') &&
-                <button onClick={() => onSave([...list])} className='btn-tinted'>{listItem.name} </button>}
+                <button onClick={() => onSave([...list])} className='btn-tinted save-btn'>{listItem.name}</button>}
 
         </div>
     )
