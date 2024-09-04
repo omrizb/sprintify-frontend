@@ -1,13 +1,20 @@
+import { useState, useEffect } from 'react'
 import { SvgIcon } from "./SvgIcon"
 
 export function DropDownMenuItem({ listItem }) {
 
     const { name, icon, isChosen, topDivision, type } = listItem
 
+    const [listItemToEdit, setListItemToEdit] = useState(listItem)
+
     function setClass() {
         if (type === 'title') return 'section-title'
         if (isChosen) return 'list-item chosen'
         return 'list-item'
+    }
+
+    function handleChecboxChange(ev) {
+        setListItemToEdit(prevListItemToEdit => ({ ...prevListItemToEdit, isChecked: ev.target.checked }))
     }
 
     return (
@@ -21,7 +28,13 @@ export function DropDownMenuItem({ listItem }) {
 
             {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
 
-            {(listItem.input && (listItem.type !== 'title')) && <input type="checkbox" />}
+            {(listItemToEdit.input && (listItemToEdit.type !== 'title'))
+                &&
+                <input
+                    type="checkbox"
+                    checked={listItemToEdit.isChecked}
+                    onChange={handleChecboxChange}
+                />}
 
         </div>
     )

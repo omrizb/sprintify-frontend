@@ -42,9 +42,7 @@ export function SongPreview(props) {
 
     useEffect(() => {
         if (!myStations) return
-        const list = buildMyStationsArr()
-        setListItems(list)
-        console.log(list)
+        setListItems(buildMyStationsArr())
 
     }, [myStations])
 
@@ -55,17 +53,20 @@ export function SongPreview(props) {
             icon: 'plus'
         })
         const stationsWithoutLiked = myStations.filter(station => station !== likedSongsStation)
+
+        const isSongLiked = likedSongsStation.songs.some(song => song.songId === songId)
         const likedStationObj = buildListObj({
             name: likedSongsStation.name,
             imgUrl: `https://misc.scdn.co/liked-songs/liked-songs-64.png`,
-            onClick: onClickStation
+            isChecked: isSongLiked
 
         })
         const stationList = stationsWithoutLiked.map(station => {
+            const isInStation = station.songs.some(song => song.songId === songId)
             return buildListObj({
                 name: station.name,
                 icon: 'musicSmall',
-                onClick: onClickStation
+                isChecked: isInStation
             })
         })
 
@@ -85,14 +86,35 @@ export function SongPreview(props) {
             isChosen: false,
             onClick: noop,
             input: true,
+            isChecked: false,
+            inputFunction: (ev, listItem) => handleChecboxChange(ev, listItem),
             ...props
         }
     }
 
     function noop() { }
 
+    // function handleChecboxChange(ev, listItem) {
+    //     console.log('Checkbox clicked:', listItem.name, 'Checked:', ev.target.checked)
+    //     const updatedItems = listItems.map(item =>
+    //         item.name === listItem.name ? { ...item, isChecked: ev.target.checked } : item
+    //     )
+    //     console.log('Updated Items:', updatedItems)
+    //     setListItems(updatedItems)
+    // }
+
+
+    const handleSave = () => {
+        const checkedItems = listItems.filter(item => item.isChecked);
+        const uncheckedItems = listItems.filter(item => !item.isChecked);
+
+        console.log("Checked Items:", checkedItems);
+        console.log("Unchecked Items:", uncheckedItems);
+
+    }
+
     function onClickStation() {
-        console.log(songId)
+        // console.log(songId)
     }
 
     function addSong() {
@@ -100,12 +122,10 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                console.log('add to liked songs')
                 addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break
             case 'addToStation':
-                console.log('add to station')
                 setShowMenu(prevShowMenu => !prevShowMenu)
 
                 break
