@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { utilService } from '../../services/util.service.js'
 import { imgService } from '../../services/imgService.js'
@@ -8,11 +8,14 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { addSongsToLiked, updateStation, updateStations } from '../../store/actions/station.actions.js'
+import { addSongsToLiked, addStation, updateStation, updateStations } from '../../store/actions/station.actions.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 import { stationService } from '../../services/station/station.service.local.js'
 
 export function SongPreview(props) {
+
+
+    const navigate = useNavigate()
 
     const playerSongId = useSelector(store => store.playerModule.player.song.songId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
@@ -51,7 +54,8 @@ export function SongPreview(props) {
         const titleObj = buildListObj({
             type: 'title',
             name: 'New Playlist',
-            icon: 'plus'
+            icon: 'plus',
+            onClick: handleAddStation
         })
         const stationsWithoutLiked = myStations.filter(station => station !== likedSongsStation)
 
@@ -100,6 +104,19 @@ export function SongPreview(props) {
 
     function noop() { }
 
+
+    async function handleAddStation() {
+        setShowMenu(false)
+        try {
+            const station = await addStation()
+            const updatedStation = { ...station, songs: [song] }
+            const savedStation = await updateStation(updatedStation)
+            navigate(`/station/${savedStation._id}`)
+        } catch (err) {
+            console.log('Cannot add a station')
+        }
+    }
+
     async function handleSave(list) {
         setShowMenu(false)
         const checkedItems = list?.filter(item => item.isChecked)
@@ -125,10 +142,6 @@ export function SongPreview(props) {
             return { ...station, songs: updatedSongs }
         })
 
-        updateStations(updatedAdd)
-
-
-        // Now I will look for the unchecked stations that contain the song and need to be updated
 
         const stationsToRemove = unCheckedStations.filter(station => {
 
@@ -140,7 +153,9 @@ export function SongPreview(props) {
             return { ...station, songs: updatedSongs }
         })
 
-        updateStations(updatedRemoved)
+        const updatedStations = [...updatedAdd, ...updatedRemoved]
+
+        updatedStations.forEach(station => updateStation(station))
 
     }
 
