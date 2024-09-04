@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { SvgIcon } from "./SvgIcon"
 
-export function DropDownMenuItem({ listItem }) {
+export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
     const { name, icon, isChosen, topDivision, type } = listItem
 
+
+    const [list, setList] = useState([...listItems])
     const [listItemToEdit, setListItemToEdit] = useState(listItem)
 
     function setClass() {
@@ -14,23 +16,36 @@ export function DropDownMenuItem({ listItem }) {
     }
 
     function handleChecboxChange(ev) {
-        setListItemToEdit(prevListItemToEdit => ({ ...prevListItemToEdit, isChecked: ev.target.checked }))
+        const updatedItem = { ...listItemToEdit, isChecked: ev.target.checked }
+        setListItemToEdit(updatedItem)
+        const updatedListItems = list.map(item => {
+            if (item.name === listItemToEdit.name) { item.isChecked = ev.target.checked }
+        }
+        )
+
+        setList([...updatedListItems])
     }
+
+    // function onClickSave() {
+    //     onSave(list)
+    // }
+
 
     return (
         <div className={`drop-down-menu-item ${topDivision}`}>
 
-            <div className={setClass()}>
-                {icon && <SvgIcon iconName={icon} />}
-                {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
-                <div>{name}</div>
-            </div>
+            {(listItem.type !== 'button') &&
+                <div className={setClass()}>
+                    {icon && <SvgIcon iconName={icon} />}
+                    {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
+                    <div>{name}</div>
+                </div>}
 
             {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
 
-            {(listItemToEdit.input && (listItemToEdit.type !== 'title'))
+            {(listItem.type === 'checkBox')
                 &&
-                <label class="custom-checkbox">
+                <label className="custom-checkbox">
                     <input
                         type="checkbox"
                         checked={listItemToEdit.isChecked}
@@ -39,6 +54,10 @@ export function DropDownMenuItem({ listItem }) {
                     <span></span>
                 </label>
             }
+
+            {(listItem.type === 'button') &&
+                // <button onClick={onClickSave} className='btn-tinted'>{listItem.name} </button>}
+                <button onClick={() => onSave([...list])} className='btn-tinted'>{listItem.name} </button>}
 
         </div>
     )

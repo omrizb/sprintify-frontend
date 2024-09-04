@@ -70,15 +70,18 @@ export function SongPreview(props) {
             })
         })
 
-        return [titleObj, likedStationObj, ...stationList]
+        const saveBtn = buildListObj({
+            name: 'Save',
+            type: 'button',
+            onClick: (list) => handleSave(list)
+        })
+
+        return [titleObj, likedStationObj, ...stationList, saveBtn]
     }
-
-
-
 
     function buildListObj(props) {
         return {
-            type: 'list-item',
+            type: 'checkBox',
             name: '',
             icon: '',
             imgUrl: '',
@@ -94,24 +97,16 @@ export function SongPreview(props) {
 
     function noop() { }
 
-    // function handleChecboxChange(ev, listItem) {
-    //     console.log('Checkbox clicked:', listItem.name, 'Checked:', ev.target.checked)
-    //     const updatedItems = listItems.map(item =>
-    //         item.name === listItem.name ? { ...item, isChecked: ev.target.checked } : item
-    //     )
-    //     console.log('Updated Items:', updatedItems)
-    //     setListItems(updatedItems)
-    // }
-
-
-    const handleSave = () => {
-        const checkedItems = listItems.filter(item => item.isChecked);
-        const uncheckedItems = listItems.filter(item => !item.isChecked);
-
-        console.log("Checked Items:", checkedItems);
-        console.log("Unchecked Items:", uncheckedItems);
-
+    function handleSave(list) {
+        list.forEach(item => {
+            console.log(item.name, item.isChecked)
+        })
     }
+
+
+
+
+
 
     function onClickStation() {
         // console.log(songId)
