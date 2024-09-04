@@ -8,7 +8,7 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { addSongToStation } from '../../store/actions/station.actions.js'
+import { updateSongsInStation } from '../../store/actions/station.actions.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 
 export function SongPreview(props) {
@@ -57,6 +57,7 @@ export function SongPreview(props) {
         const isSongLiked = likedSongsStation.songs.some(song => song.songId === songId)
         const likedStationObj = buildListObj({
             name: likedSongsStation.name,
+            station: likedSongsStation,
             imgUrl: `https://misc.scdn.co/liked-songs/liked-songs-64.png`,
             isChecked: isSongLiked
 
@@ -65,6 +66,7 @@ export function SongPreview(props) {
             const isInStation = station.songs.some(song => song.songId === songId)
             return buildListObj({
                 name: station.name,
+                station: station,
                 icon: 'musicSmall',
                 isChecked: isInStation
             })
@@ -83,10 +85,10 @@ export function SongPreview(props) {
         return {
             type: 'checkBox',
             name: '',
+            id: '',
             icon: '',
             imgUrl: '',
-            topDivision: '',
-            isChosen: false,
+
             onClick: noop,
             input: true,
             isChecked: false,
@@ -98,8 +100,28 @@ export function SongPreview(props) {
     function noop() { }
 
     function handleSave(list) {
-        list.forEach(item => {
-            console.log(item.name, item.isChecked)
+        setShowMenu(false)
+        const checkedItems = list.filter(item => item.isChecked)
+        const unCheckedItems = list.filter(item => (!item.isChecked && (item.type === 'checkBox')))
+
+        const checkedStations = checkedItems.map(item => item = item.station)
+        const unCheckedStations = unCheckedItems.map(item => item = item.station)
+        console.log(unCheckedStations)
+
+        const stationsToAddSong = checkedStations.filter(station =>
+            station.songs.every(song => song.songId !== songId)
+        )
+
+
+        stationsToAddSong.forEach(station => {
+            const updatedStation = { ...station, songs: [...station.songs, song] }
+            updateSongsInStation(updatedStation)
+        })
+
+        unCheckedStations.forEach(station => {
+            const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
+            const updatedStation = { ...station, songs: updatedSongsArr }
+            updateSongsInStation(updatedStation)
         })
     }
 
@@ -117,7 +139,7 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                updateSongsInStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break
             case 'addToStation':
