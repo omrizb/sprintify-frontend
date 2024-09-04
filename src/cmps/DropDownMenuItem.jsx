@@ -30,11 +30,15 @@ export function DropDownMenuItem({ listItem }) {
 
             {(listItemToEdit.input && (listItemToEdit.type !== 'title'))
                 &&
-                <input
-                    type="checkbox"
-                    checked={listItemToEdit.isChecked}
-                    onChange={handleChecboxChange}
-                />}
+                <label class="custom-checkbox">
+                    <input
+                        type="checkbox"
+                        checked={listItemToEdit.isChecked}
+                        onChange={handleChecboxChange}
+                    />
+                    <span></span>
+                </label>
+            }
 
         </div>
     )
