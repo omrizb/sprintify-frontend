@@ -77,7 +77,7 @@ export function SongPreview(props) {
             return buildListObj({
                 name: station.name,
                 station: station,
-                // icon: 'musicSmall',
+                icon: 'musicSmall',
                 imgUrl: station.stationImgUrl,
                 isChecked: isInStation
             })

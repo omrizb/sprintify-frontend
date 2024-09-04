@@ -34,7 +34,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
             <div className="content">
                 {(listItem.type !== 'button') &&
                     <div className={setClass()}>
-                        {icon && <div className='icon'><SvgIcon iconName={icon} /></div>}
+                        {(icon && !listItem.imgUrl) && <div className='icon'><SvgIcon iconName={icon} /></div>}
                         {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
                         <div>{name}</div>
                     </div>}

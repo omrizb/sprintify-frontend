@@ -16,7 +16,8 @@
         align-items: center;
     }
 
-    .list-item{
+    .list-item,
+    .checkBox{
 
         &:hover {
             background-color: $transparentGray;
