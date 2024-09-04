@@ -5,7 +5,11 @@ export function DropDownMenu({ listItems }) {
 
     function onClick(ev, listItem) {
         ev.stopPropagation()
-        if (listItem.type !== 'button') listItem.onClick()
+
+        const types = ['button', 'checkBox']
+        if (types.includes(listItem.type)) return
+
+        listItem.onClick()
     }
 
     function handleSave(list) {

@@ -20,15 +20,12 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
         setListItemToEdit(updatedItem)
         const updatedListItems = list.map(item => {
             if (item.name === listItemToEdit.name) { item.isChecked = ev.target.checked }
+            return item
         }
         )
 
         setList([...updatedListItems])
     }
-
-    // function onClickSave() {
-    //     onSave(list)
-    // }
 
 
     return (
@@ -56,7 +53,6 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
             }
 
             {(listItem.type === 'button') &&
-                // <button onClick={onClickSave} className='btn-tinted'>{listItem.name} </button>}
                 <button onClick={() => onSave([...list])} className='btn-tinted'>{listItem.name} </button>}
 
         </div>

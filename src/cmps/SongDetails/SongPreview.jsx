@@ -8,8 +8,9 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { addSongsToLiked, updateStation } from '../../store/actions/station.actions.js'
+import { addSongsToLiked, updateStation, updateStations } from '../../store/actions/station.actions.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
+import { stationService } from '../../services/station/station.service.local.js'
 
 export function SongPreview(props) {
 
@@ -99,30 +100,47 @@ export function SongPreview(props) {
 
     function noop() { }
 
-    function handleSave(list) {
+    async function handleSave(list) {
+        console.log(list)
+        console.trace()
         setShowMenu(false)
-        const checkedItems = list.filter(item => item.isChecked)
-        const unCheckedItems = list.filter(item => (!item.isChecked && (item.type === 'checkBox')))
+        const checkedItems = list?.filter(item => item.isChecked)
+        const unCheckedItems = list?.filter(item => (!item.isChecked && (item.type === 'checkBox')))
 
         const checkedStations = checkedItems.map(item => item = item.station)
         const unCheckedStations = unCheckedItems.map(item => item = item.station)
-        console.log(unCheckedStations)
+
+        console.log(song.songName)
+        checkedStations.forEach(item => console.log('checked:', item.name, item._id))
+        unCheckedStations.forEach(item => console.log('unChecked:', item.name, item._id))
 
         const stationsToAddSong = checkedStations.filter(station =>
             station.songs.every(song => song.songId !== songId)
         )
 
 
-        stationsToAddSong.forEach(station => {
-            const updatedStation = { ...station, songs: [...station.songs, song] }
-            updateStation(updatedStation)
+        const updatedStations = stationsToAddSong.map(station => {
+            station.songs = [...station.songs, song]
+            console.log(station.name, station.songs)
+
+            return station
         })
 
-        unCheckedStations.forEach(station => {
-            const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
-            const updatedStation = { ...station, songs: updatedSongsArr }
-            updateStation(updatedStation)
-        })
+        console.log(updatedStations)
+
+        updateStations(updatedStations)
+
+
+
+
+        // const stationsToRemoveSong = checkedStations.filter(station =>
+        //     station.songs.every(song => song.songId === songId)
+        // )
+        // stationsToRemoveSong.forEach(station => {
+        //     station.songs = station.songs.filter(song => song.songId !== songId)
+        // })
+
+        // await updateStations(stationsToRemoveSong)
     }
 
 
@@ -165,12 +183,7 @@ export function SongPreview(props) {
             <div className="album">{album}</div>
             <div className="date-added"></div>
             <div className="song-duration">
-                {/* <button className="btn-tinted"
-                    onClick={() => onRemoveSong(song.songId)}>X
-                </button>
-                <button className="btn-tinted"
-                    onClick={() => onAddSong(song)}>Add
-                </button> */}
+
                 <div className="add-btn-container" onClick={addSong}>
                     {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
                     {showMenu && <DropDownMenu listItems={listItems} />}

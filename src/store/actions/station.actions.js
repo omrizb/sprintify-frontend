@@ -6,6 +6,7 @@ import {
     SET_STATIONS,
     SET_STATION,
     UPDATE_STATION,
+    UPDATE_STATIONS,
     ADD_SONG_TO_STATION as ADD_SONGS_TO_LIKED,
 } from '../reducers/station.reducer.js'
 
@@ -59,6 +60,21 @@ export async function updateStation(station) {
         const savedStation = await stationService.save(station)
         store.dispatch(getCmdUpdateStation(savedStation))
         return savedStation
+    } catch (err) {
+        console.log('Cannot save station', err)
+        throw err
+    }
+}
+
+export async function updateStations(stations) {
+    try {
+        const savedStations = []
+        for (var i = 0; i < stations.length; i++) {
+            savedStations[i] = await stationService.save(stations[i])
+        }
+        console.log(savedStations)
+        store.dispatch(getCmdUpdateStations(savedStations))
+        return savedStations
     } catch (err) {
         console.log('Cannot save station', err)
         throw err
@@ -142,6 +158,12 @@ function getCmdUpdateStation(station) {
     return {
         type: UPDATE_STATION,
         station
+    }
+}
+function getCmdUpdateStations(stations) {
+    return {
+        type: UPDATE_STATIONS,
+        stations
     }
 }
 
