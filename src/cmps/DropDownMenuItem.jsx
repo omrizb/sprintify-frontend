@@ -11,8 +11,8 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
     function setClass() {
         if (type === 'title') return 'section-title'
-        if (isChosen) return 'list-item chosen'
-        return 'list-item'
+        if (isChosen) return 'item chosen'
+        return 'item'
     }
 
     function handleChecboxChange(ev) {
