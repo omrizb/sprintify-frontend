@@ -4,6 +4,7 @@ import { Outlet, useParams } from 'react-router-dom'
 
 import { rightSidebarContentKeys } from '../store/actions/system.actions.js'
 
+import { spotifyService } from '../services/spotify.service.js'
 import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { Player } from '../cmps/Player.jsx'

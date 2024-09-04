@@ -15,8 +15,6 @@ export function SongDetailsHeader({ song, songDurationTxt, viewMode }) {
                 <div>
                     <span>{song.artist}</span>
                     •
-                    <span>{song.album}</span>
-                    •
                     <span>{new Date(song.publishedAt).getFullYear()}</span>
                     •
                     <span>{songDurationTxt}</span>

@@ -101,8 +101,15 @@
     justify-content: space-between;
 }
 
-.btn-global-nav {
-    @include tinted;
+.btn-global-nav-gray {
+    fill: $secondaryTxtClr;
+    background-color: $tintedBgClr;
+    @include btn($type: animated, $circleSize: 48px);
+} 
+
+.btn-global-nav-white {
+    fill: $primaryTxtClr;
+    background-color: $tintedBgClr;
     @include btn($type: animated, $circleSize: 48px);
 } 
 
