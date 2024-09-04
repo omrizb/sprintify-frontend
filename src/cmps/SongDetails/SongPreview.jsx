@@ -8,7 +8,7 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { updateSongsInStation } from '../../store/actions/station.actions.js'
+import { addSongsToLiked, updateStation } from '../../store/actions/station.actions.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 
 export function SongPreview(props) {
@@ -115,31 +115,23 @@ export function SongPreview(props) {
 
         stationsToAddSong.forEach(station => {
             const updatedStation = { ...station, songs: [...station.songs, song] }
-            updateSongsInStation(updatedStation)
+            updateStation(updatedStation)
         })
 
         unCheckedStations.forEach(station => {
             const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
             const updatedStation = { ...station, songs: updatedSongsArr }
-            updateSongsInStation(updatedStation)
+            updateStation(updatedStation)
         })
     }
 
-
-
-
-
-
-    function onClickStation() {
-        // console.log(songId)
-    }
 
     function addSong() {
 
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                updateSongsInStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                addSongsToLiked({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break
             case 'addToStation':
