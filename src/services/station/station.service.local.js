@@ -156,6 +156,7 @@ async function save(station) {
             isPinned: station.isPinned,
             lastIdx: station.lastIdx || ''
         }
+
         savedStation = await storageService.put(STORAGE_KEY, stationToSave)
     } else {
         const stationToSave = {

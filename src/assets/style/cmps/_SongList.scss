@@ -18,7 +18,7 @@
         }
     }
 
-    li {
+    .song-list-item {
         @include flex;
         height: 56px;
         padding: 0 16px;
