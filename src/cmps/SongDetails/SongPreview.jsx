@@ -101,8 +101,6 @@ export function SongPreview(props) {
     function noop() { }
 
     async function handleSave(list) {
-        console.log(list)
-        console.trace()
         setShowMenu(false)
         const checkedItems = list?.filter(item => item.isChecked)
         const unCheckedItems = list?.filter(item => (!item.isChecked && (item.type === 'checkBox')))
@@ -119,28 +117,31 @@ export function SongPreview(props) {
         )
 
 
-        const updatedStations = stationsToAddSong.map(station => {
+        const updatedAdd = stationsToAddSong.map(station => {
             station.songs = [...station.songs, song]
             console.log(station.name, station.songs)
 
             return station
         })
 
-        console.log(updatedStations)
 
-        updateStations(updatedStations)
+        // Only these stations contain the song and I need to remove
+        const stationsToRemove = unCheckedStations.filter(station => {
+
+            return station.songs.some(song => song.songId === songId);
+        })
 
 
 
+        const updatedRemoved = stationsToRemove.map(station => {
+            const updatedSongs = station.songs.filter(song => song.songId != songId)
+            return { ...station, songs: updatedSongs }
+        })
 
-        // const stationsToRemoveSong = checkedStations.filter(station =>
-        //     station.songs.every(song => song.songId === songId)
-        // )
-        // stationsToRemoveSong.forEach(station => {
-        //     station.songs = station.songs.filter(song => song.songId !== songId)
-        // })
 
-        // await updateStations(stationsToRemoveSong)
+        updateStations(updatedRemoved)
+
+
     }
 
 
