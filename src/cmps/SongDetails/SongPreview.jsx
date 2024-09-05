@@ -11,6 +11,7 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { updateStationAndStay } from '../../store/actions/station.actions.js'
 import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
+import { MiniSongPreview } from './MiniSongPreview.jsx'
 
 export function SongPreview(props) {
 
@@ -74,11 +75,7 @@ export function SongPreview(props) {
                         ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
                         : index}
             </div>
-            <div className="small-preview flex">
-                <img className="thumbnail" src={imgUrl} alt={songName} />
-                <span className="song-name"><Link to={`/track/${songId}`}>{songName}</Link></span>
-                <span className="artist">{artist}</span>
-            </div>
+            <MiniSongPreview song={song} />
             <div className="album">{album}</div>
             <div className="date-added"></div>
             <div className="song-duration">

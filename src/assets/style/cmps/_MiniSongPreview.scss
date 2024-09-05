@@ -1,0 +1,38 @@
+.mini-song-preview {
+
+    @include flex;
+    height: 100%;
+
+    .thumbnail {
+        width: 40px;
+        height: 40px;
+        margin-inline-end: 12px;
+        border-radius: 4px;
+
+        &.bigger {
+            width: 56px;
+            height: 56px;
+        }
+    }
+
+    .song-info {
+        @include flex($direction: column, $align: start);
+        
+        .song-name {
+            color: $primaryTxtClr;
+        }
+    
+        .artist {
+    
+            font-size: $textSizeSmaller-1;
+            color: $secondaryTxtClr;
+        }
+    }
+
+
+    &.currently-playing {
+        .song-name {
+            color: $highlightedTxtClr;
+        }
+    }
+}
