@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, updateStation } from '../../store/actions/station.actions'
+import { addStation, updateStationAndStay, updateStation } from '../../store/actions/station.actions'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
@@ -30,7 +30,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
             return buildListObj({
                 name: station.name,
                 station: station,
-                onClick: () => console.log('CLICK')
+                onClick: () => addSong(station)
             })
         })
 
@@ -48,6 +48,23 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
     }
 
     function noop() { }
+
+    function addSong(station) {
+        const songExists = station.songs.some(song => song.songId === songId)
+        if (songExists) {
+            console.log('song already there')
+            setShowMenu(false)
+            return
+        }
+
+        const updatedStation = { ...station, songs: [...station.songs, song] }
+        // updateStation(updatedStation)
+        updateStationAndStay(updatedStation)
+        setShowMenu(false)
+
+
+
+    }
 
     async function handleAddStation() {
         setShowMenu(false)

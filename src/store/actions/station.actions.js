@@ -7,7 +7,7 @@ import {
     SET_STATION,
     UPDATE_STATION,
     UPDATE_STATIONS,
-    ADD_SONG_TO_STATION as UPDATE_LIKED_SONGS_STATION,
+    ADD_SONG_TO_STATION as UPDATE_STATION_AND_STAY,
 } from '../reducers/station.reducer.js'
 
 
@@ -81,10 +81,10 @@ export async function updateStations(stations) {
     }
 }
 
-export async function updateLikedSongsStation(station) {
+export async function updateStationAndStay(station) {
     try {
         const savedStation = await stationService.save(station)
-        store.dispatch(getCmdUpdateLikedSongsStation(savedStation))
+        store.dispatch(getCmdUpdateAndStay(savedStation))
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
@@ -167,9 +167,9 @@ function getCmdUpdateStations(stations) {
     }
 }
 
-function getCmdUpdateLikedSongsStation(station) {
+function getCmdUpdateAndStay(station) {
     return {
-        type: UPDATE_LIKED_SONGS_STATION,
+        type: UPDATE_STATION_AND_STAY,
         station
     }
 }

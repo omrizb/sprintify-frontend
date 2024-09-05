@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { updateLikedSongsStation, updateStation } from "../../store/actions/station.actions"
+import { updateStationAndStay, updateStation } from "../../store/actions/station.actions"
 import { DropDownMenu } from "./DropDownMenu"
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
@@ -35,7 +35,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             icon: 'save',
             onClick: () => {
                 const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
-                updateLikedSongsStation(updatedStation)
+                updateStationAndStay(updatedStation)
             }
         })
 
@@ -45,7 +45,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             onClick: () => {
                 const updatedSongs = likedSongsStation.songs.filter(song => song.songId !== songId)
                 const updatedStation = { ...likedSongsStation, songs: updatedSongs }
-                updateLikedSongsStation(updatedStation)
+                updateStationAndStay(updatedStation)
             }
         })
 
