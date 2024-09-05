@@ -8,7 +8,7 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { updateStationAndStay } from '../../store/actions/station.actions.js'
+import { addSongToStation } from '../../store/actions/station.actions.js'
 import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
 
@@ -48,7 +48,7 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                updateStationAndStay({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break
             case 'addToStation':

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, updateStation } from '../../store/actions/station.actions'
+import { addStation, updateStation, addSongToStation, removeSongFromStation } from '../../store/actions/station.actions'
 
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
@@ -114,8 +114,9 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
             return { ...station, songs: updatedSongs }
         })
 
-        const updatedStations = [...updatedAdd, ...updatedRemoved]
-        updatedStations.forEach(station => updateStation(station))
+
+        updatedAdd.forEach(station => addSongToStation(station))
+        updatedRemoved.forEach(station => removeSongFromStation(station))
     }
 
     return (

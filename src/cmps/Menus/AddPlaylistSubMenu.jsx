@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, updateStationAndStay, updateStation } from '../../store/actions/station.actions'
+import { addStation, addSongToStation, updateStation } from '../../store/actions/station.actions'
 import { showSuccessMsg } from '../../services/event-bus.service'
 
 
@@ -60,7 +60,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, station: currS
         }
 
         const updatedStation = { ...station, songs: [...station.songs, song] }
-        updateStationAndStay(updatedStation)
+        addSongToStation(updatedStation)
         setShowMenu(false)
     }
 

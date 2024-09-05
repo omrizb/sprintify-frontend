@@ -81,11 +81,24 @@ export async function updateStations(stations) {
     }
 }
 
-export async function updateStationAndStay(station) {
+export async function addSongToStation(station) {
     try {
         const savedStation = await stationService.save(station)
         store.dispatch(getCmdUpdateAndStay(savedStation))
         showSuccessMsg(`Added to ${savedStation.name}`)
+        return savedStation
+    } catch (err) {
+        console.log('Cannot save station', err)
+        showErrorMsg(`Could not add to ${savedStation.name}`)
+        throw err
+    }
+}
+
+export async function removeSongFromStation(station) {
+    try {
+        const savedStation = await stationService.save(station)
+        store.dispatch(getCmdUpdateAndStay(savedStation))
+        showSuccessMsg(`Removed from ${savedStation.name}`)
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
