@@ -48,7 +48,21 @@
 
 .btn-medium {
     @include medium;
-    @include btn();
+    @include btn($circleSize: 32px);
+}
+
+.btn-medium-hover-white {
+    @include medium;
+    @include btn($circleSize: 32px);
+
+    &:hover {
+        @include transparent;
+    }
+}
+
+.btn-medium-with-hover {
+    @include medium;
+    @include btn($circleSize: 32px);
 
     &:hover {
         background-color:  $tintedBgClr;

@@ -90,7 +90,7 @@ export function StationDetailsHeader({ station, onSetBgColor, onEditStation }) {
                     </div>}
                 <div className="overlay">
                     <div className="overlay-content">
-                        <button className="editImage icon btn-medium">
+                        <button className="editImage icon btn-medium-with-hover">
                             <SvgIcon iconName="editImage" />
                         </button>
                         <span>Choose photo</span>

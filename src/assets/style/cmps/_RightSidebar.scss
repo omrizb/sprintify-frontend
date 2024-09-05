@@ -1,0 +1,14 @@
+.right-side-bar {
+    padding-inline: 16px;
+
+    header {
+        @include flex();
+        padding-block: 8px;
+
+        & > *:first-child {
+            flex: 1;
+            font-size: $textSizeBase;
+            font-weight: 500;
+        }
+    }
+}

@@ -33,7 +33,6 @@ export async function loadStation(stationId) {
     }
 }
 
-
 export async function removeStation(stationId) {
     try {
         await stationService.remove(stationId)

@@ -10,7 +10,7 @@ export function SongDetailsActions({ song }) {
             <div className="song-action-bar-row">
                 <div className="song-action-bar-container">
                     <div className="wrap-playPlaylist">
-                        <button className="action-bar-btn playPlaylist icon btn-medium">
+                        <button className="action-bar-btn playPlaylist icon btn-medium-with-hover">
                             <SvgIcon iconName={"playPlaylist"} />
                         </button>
                     </div>

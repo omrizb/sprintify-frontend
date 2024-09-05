@@ -130,7 +130,7 @@ export function LeftSideBarFilter({ userId }) {
 
                 <div className="search-container">
                     <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)}
-                        className="search icon btn-medium">
+                        className="search icon btn-medium-with-hover">
                         <SvgIcon iconName={"search"} />
                     </button>
 

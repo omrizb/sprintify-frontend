@@ -36,7 +36,7 @@ export function LeftSideBarHeader() {
             </div>
 
             <div className="add-playlist">
-                <button className="plus icon btn-medium"
+                <button className="plus icon btn-medium-with-hover"
                     onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
                     <SvgIcon iconName={"plus"} />
                 </button>

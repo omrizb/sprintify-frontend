@@ -1,58 +1,23 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-import { youtubeService } from '../../services/youtube.service'
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
 import { SvgButton } from '../SvgButton.jsx'
 
-export function NowPlayingDetails() {
-
-    const player = useSelector(state => state.playerModule.player)
-    const stationName = useSelector(state => state.playerModule.stationName)
-    const [isLoading, setIsLoading] = useState(true)
-    const [song, setSong] = useState(null)
-
-    useEffect(() => {
-        loadSong(player.song.songId)
-    }, [player.song.songId])
-
-    async function loadSong(songId) {
-        setIsLoading(true)
-        try {
-            const ytSong = await youtubeService.getSongById(songId)
-            setSong(ytSong)
-        } catch (err) {
-            console.error(`Couldn't load song from song details`, err)
-        } finally {
-            setIsLoading(false)
-        }
-    }
+export function NowPlayingDetails({ song }) {
 
     return (
         <div className="now-playing-details">
-            {isLoading && <div>Loading...</div>}
+            <pre>
+                {JSON.stringify(song, false, 4)}
+            </pre>
 
-            {song && (
+            {/* {song && (
                 <>
                     <section className="header-container">
                         <Link to={`/track/${song.songId}`} className="link text-normal">
                             {song.songName}
                         </Link>
-                        <div className="action-bar-row">
-                            <SvgButton
-                                btnClass={"btn-action-bar"}
-                                svgIcon={"dots"}
-                                svgClass={"svg-small1"}
-                                tooltipTxt={`More options for ${song.songName}`}
-                            />
-                            <SvgButton
-                                btnClass={"btn-action-bar"}
-                                svgIcon={"close"}
-                                svgClass={"svg-small1"}
-                                tooltipTxt={"close"}
-                            />
-                        </div>
+                        
                     </section>
                     <div className="scroll-container">
                         <section className="content">
@@ -63,7 +28,7 @@ export function NowPlayingDetails() {
                         </section>
                     </div>
                 </>
-            )}
+            )} */}
         </div>
     )
 
