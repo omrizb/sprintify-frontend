@@ -5,6 +5,7 @@ import { updateStation } from '../store/actions/station.actions'
 import { SvgIcon } from '../cmps/SvgIcon'
 
 import { utilService } from '../services/util.service'
+import { spotifyService } from '../services/spotify.service'
 
 
 export function AddSongs() {
@@ -21,7 +22,11 @@ export function AddSongs() {
     async function loadSongs(value) {
         if (!value) return
         try {
-            const loadedSongs = await youtubeService.getVideos(value, 10)
+            // const loadedSongs = await youtubeService.getVideos(value, 10)
+            const results = await spotifyService.search(value, 10)
+            const loadedSongs = results.songs
+            console.log(loadedSongs)
+            console.log(loadedSongs[0].artist)
             setSongs(loadedSongs)
 
         } catch (err) {
@@ -63,9 +68,9 @@ export function AddSongs() {
             {(songs) &&
                 <ul className="" >
                     {songs.map((song) =>
-                        <li key={song.songId}  >
+                        <li key={song.spotifyId}  >
                             <div className="list">
-                                <img src={song.imgUrl} alt="" />
+                                <img src={song.imgUrl.small} alt="" />
                                 <div className="text">
                                     <div>{song.songName}</div>
                                     <div>{song.artist}</div>
