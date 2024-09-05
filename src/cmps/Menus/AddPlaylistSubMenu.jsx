@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, addSongToStation, updateStation } from '../../store/actions/station.actions'
+import { addStation, addSongToStation } from '../../store/actions/station.actions'
 import { showSuccessMsg } from '../../services/event-bus.service'
 import { stationService } from '../../services/station/station.service.local'
 
 
-export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, station: currStation, myStations, likedSongsStation }) {
+export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
 
-    const navigate = useNavigate()
     const songId = song.songId
     const [listItems, setListItems] = useState([])
 
@@ -70,14 +68,11 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, station: currS
         try {
             const newStation = stationService.getEmptyStation()
             const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
-            const savedStation = await addStation(station)
-            // await updateStation(currStation)
+            await addStation(station)
+            showSuccessMsg(`Added to ${station.name}`)
 
         } catch (err) {
             console.log('Cannot add a station')
-        } finally {
-            console.log(currStation.name)
-            navigate(`/station/${currStation._id}`)
         }
     }
 

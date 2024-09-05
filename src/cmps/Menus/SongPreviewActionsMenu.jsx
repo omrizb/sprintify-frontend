@@ -77,7 +77,6 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             <DropDownMenu listItems={listItems} />
             {showMenu &&
                 <AddPlaylistSubMenu
-                    station={station}
                     song={song}
                     myStations={myStations}
                     likedSongsStation={likedSongsStation}

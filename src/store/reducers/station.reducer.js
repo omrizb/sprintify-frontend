@@ -44,7 +44,6 @@ export function stationReducer(state = initialState, action) {
                     action.station,
                     ...unPinnedStations.slice(idx)
                 ],
-                station: action.station
             }
             break
         case UPDATE_STATION:
