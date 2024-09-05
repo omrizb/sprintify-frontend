@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, addSongToStation, updateStation } from '../../store/actions/station.actions'
 import { showSuccessMsg } from '../../services/event-bus.service'
+import { stationService } from '../../services/station/station.service.local'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, station: currStation, myStations, likedSongsStation }) {
@@ -67,9 +68,9 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, station: currS
     async function handleAddStation() {
         setShowMenu(false)
         try {
-            const station = await addStation()
-            const updatedStation = { ...station, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
-            const savedStation = await updateStation(updatedStation)
+            const newStation = stationService.getEmptyStation()
+            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
+            const savedStation = await addStation(station)
             // await updateStation(currStation)
 
         } catch (err) {

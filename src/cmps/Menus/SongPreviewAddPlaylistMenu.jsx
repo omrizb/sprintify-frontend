@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, updateStation, addSongToStation, removeSongFromStation } from '../../store/actions/station.actions'
+import { stationService } from '../../services/station/station.service.local'
 
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
@@ -78,9 +79,10 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
     async function handleAddStation() {
         setShowMenu(false)
         try {
-            const station = await addStation()
-            const updatedStation = { ...station, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
-            const savedStation = await updateStation(updatedStation)
+            const newStation = stationService.getEmptyStation()
+            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
+            const savedStation = await addStation(station)
+            // const savedStation = await updateStation(updatedStation)
             navigate(`/station/${savedStation._id}`)
         } catch (err) {
             console.log('Cannot add a station')
