@@ -8,9 +8,9 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { addSongsToLiked, addStation, updateStation, updateStations } from '../../store/actions/station.actions.js'
-import { DropDownMenu } from '../DropDownMenu.jsx'
-import { stationService } from '../../services/station/station.service.local.js'
+import { updateLikedSongsStation, addStation, updateStation } from '../../store/actions/station.actions.js'
+import { DropDownMenu } from '../Menus/DropDownMenu.jsx'
+import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 
 export function SongPreview(props) {
 
@@ -20,8 +20,10 @@ export function SongPreview(props) {
     const playerSongId = useSelector(store => store.playerModule.player.song.songId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
     const [showMenu, setShowMenu] = useState(false)
+    const [showMoreMenu, setShowMoreMenu] = useState(false)
 
-    const { song, stationId, likedSongsStation, myStations, hoveredSongId, selectedSongId, index, type, onRemoveSong } = props
+    const { song, stationId, likedSongsStation, myStations, hoveredSongId,
+        selectedSongId, index, type, onRemoveSong, isOwnedByUser, station } = props
 
     let articleClassType
     switch (type) {
@@ -34,6 +36,7 @@ export function SongPreview(props) {
     const isHighlighted = isHovered || song.songId === selectedSongId
     const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.songId === songId)
     const isCurrentlyPlayedSong = song.songId === playerSongId && isPlaying
+
 
     const songPreviewClass = [
         'song-preview',
@@ -124,6 +127,7 @@ export function SongPreview(props) {
     }
 
     async function handleSave(list) {
+
         setShowMenu(false)
         const checkedItems = list?.filter(item => item.isChecked)
         const unCheckedItems = list?.filter(item => (!item.isChecked && (item.type === 'checkBox')))
@@ -131,12 +135,9 @@ export function SongPreview(props) {
         const checkedStations = checkedItems.map(item => item = item.station)
         const unCheckedStations = unCheckedItems.map(item => item = item.station)
 
-        console.log(song.songName)
-        checkedStations.forEach(item => console.log('checked:', item.name, item._id))
-        unCheckedStations.forEach(item => console.log('unChecked:', item.name, item._id))
-
-
-        //First I will find all the checked station that do not contain the song and need to be updated
+        // console.log(song.songName)
+        // checkedStations.forEach(item => console.log('checked:', item.name, item._id))
+        // unCheckedStations.forEach(item => console.log('unChecked:', item.name, item._id))
 
         const stationsToAdd = checkedStations.filter(station =>
 
@@ -171,7 +172,7 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                addSongsToLiked({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                updateLikedSongsStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break
             case 'addToStation':
@@ -211,7 +212,17 @@ export function SongPreview(props) {
                     {showMenu && <DropDownMenu listItems={listItems} />}
                 </div>
                 <span>{utilService.getTimeStr(duration)}</span>
-                <div className="dots-container">{isHighlighted && <DotsButton type="songPreview" elementName={songName} />}</div>
+                <div onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}
+                    className="dots-container">
+                    {isHighlighted && <DotsButton type="songPreview" elementName={songName} />}
+                </div>
+                {showMoreMenu && <SongPreviewActionsMenu
+                    song={song}
+                    station={station}
+                    isOwnedByUser={isOwnedByUser}
+                    likedSongsStation={likedSongsStation}
+
+                />}
             </div>
         </article>
     )

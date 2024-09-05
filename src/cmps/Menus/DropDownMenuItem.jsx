@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SvgIcon } from "./SvgIcon"
+import { SvgIcon } from "../SvgIcon"
 
 export function DropDownMenuItem({ listItem, listItems, onSave }) {
 

@@ -3,7 +3,7 @@ import { addStation } from '../../store/actions/station.actions'
 import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
-import { DropDownMenu } from '../DropDownMenu'
+import { DropDownMenu } from '../Menus/DropDownMenu'
 
 export function LeftSideBarHeader() {
     const navigate = useNavigate()

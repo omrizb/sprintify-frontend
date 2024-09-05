@@ -109,6 +109,7 @@ export function StationDetails() {
 
                 {(station.songs.length > 0) && <SongList
                     station={station}
+                    isOwnedByUser={isOwnedByUser}
                     likedSongsStation={likedSongsStation}
                     myStations={myStations}
                     onRemoveSong={onRemoveSong}

@@ -1,0 +1,75 @@
+import { useNavigate } from 'react-router-dom'
+import { updateLikedSongsStation, updateStation } from "../../store/actions/station.actions"
+import { DropDownMenu } from "./DropDownMenu"
+
+export function SongPreviewActionsMenu({ song, station, isOwnedByUser, likedSongsStation }) {
+
+    const navigate = useNavigate()
+    const { songId } = song
+    const isLikedByUser = likedSongsStation.songs.some(song => song.songId === songId)
+
+    const listItems = getList()
+
+    function getList() {
+        const addToQueue = buildListObj({
+            name: 'Add to queue',
+            icon: 'addToQueue',
+            onClick: () => console.log('add to queue')
+        })
+
+        const removeFromPlaylist = buildListObj({
+            name: 'Remove from this playlist',
+            icon: 'trash',
+            onClick: () => {
+                const updatedSongs = station.songs.filter(song => song.songId !== songId)
+                const updatedStation = { ...station, songs: updatedSongs }
+                updateStation(updatedStation)
+            }
+        })
+
+        const saveToLikedSongs = buildListObj({
+            name: 'Save to your Liked Songs',
+            icon: 'save',
+            onClick: () => {
+                const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
+                updateLikedSongsStation(updatedStation)
+            }
+        })
+
+        const removeFromLikedSongs = buildListObj({
+            name: 'Remove from your Liked Songs',
+            icon: 'removeFromLibrary',
+            onClick: () => {
+                const updatedSongs = likedSongsStation.songs.filter(song => song.songId !== songId)
+                const updatedStation = { ...likedSongsStation, songs: updatedSongs }
+                updateLikedSongsStation(updatedStation)
+            }
+        })
+
+        const addToPlaylist = buildListObj({
+            name: 'Add to playlist',
+            icon: 'plus',
+            onClick: () => console.log('add to playlist')
+        })
+
+        if (isOwnedByUser) return [addToPlaylist, removeFromPlaylist, removeFromLikedSongs, addToQueue]
+        if (!isOwnedByUser && isLikedByUser) return [addToPlaylist, removeFromLikedSongs, addToQueue]
+        if (!isOwnedByUser && !isLikedByUser) return [addToPlaylist, saveToLikedSongs, addToQueue]
+    }
+
+    function buildListObj(props) {
+        return {
+            type: 'list-item',
+            name: '',
+            icon: '',
+            onClick: noop,
+            ...props
+        }
+    }
+
+    function noop() { }
+
+    return (
+        <DropDownMenu listItems={listItems} />
+    )
+}
