@@ -9,7 +9,7 @@ export const SET_REMAINING_STATION_SONGS = 'SET_REMAINING_STATION_SONGS'
 export const POP_FROM_REMAINING_STATION_SONGS = 'POP_FROM_REMAINING_STATION_SONGS'
 export const SET_SONGS_ADDED_MANUALLY = 'SET_SONGS_ADDED_MANUALLY'
 export const ADD_TO_SONGS_ADDED_MANUALLY = 'ADD_TO_SONGS_ADDED_MANUALLY'
-export const POP_FROM_SONGS_ADDED_MANUALLY = 'ADD_TO_SONGS_ADDED_MANUALLY'
+export const POP_FROM_SONGS_ADDED_MANUALLY = 'POP_FROM_SONGS_ADDED_MANUALLY'
 export const SET_SONGS_HISTORY = 'SET_SONGS_HISTORY'
 export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
@@ -106,11 +106,12 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case ADD_TO_SONGS_ADDED_MANUALLY:
+            console.log(action)
             newState = {
                 ...state,
                 queue: {
                     ...state.queue,
-                    songsAddedManually: [...state.queue.songsAddedManually, action.song],
+                    songsAddedManually: [...state.queue.songsAddedManually, ...action.songs],
                 }
             }
             break

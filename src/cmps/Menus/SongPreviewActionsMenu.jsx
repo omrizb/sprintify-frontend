@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { updateStationAndStay, updateStation } from "../../store/actions/station.actions"
-import { DropDownMenu } from "./DropDownMenu"
+
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
+import { updateStationAndStay, updateStation } from '../../store/actions/station.actions'
+import { DropDownMenu } from './DropDownMenu'
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
 export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
@@ -15,7 +17,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
         const addToQueue = buildListObj({
             name: 'Add to queue',
             icon: 'addToQueue',
-            onClick: () => console.log('add to queue')
+            onClick: () => setPlayerAction(playerActions.ADD_TO_QUEUE, { songs: [song] })
         })
 
         const removeFromPlaylist = buildListObj({

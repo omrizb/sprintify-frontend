@@ -51,10 +51,10 @@ export function Player() {
         isProcessingRef.current = true
 
         const actionToExecute = control.actionsQueue[0]
-        const { song, stationId, seconds, volume } = control.actionParams[0]
+        const { song, songs, stationId, seconds, volume } = control.actionParams[0]
 
         // Check the next action to execute
-        // console.log('Executing action:', actionToExecute, control.actionParams[0])
+        console.log('Executing action:', actionToExecute, control.actionParams[0])
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
@@ -126,6 +126,7 @@ export function Player() {
                 break
 
             case playerActions.ADD_TO_QUEUE:
+                executePlayerAction.addSongsToAddedManuallyQueue(songs)
                 break
 
             case playerActions.REMOVE_FROM_QUEUE:

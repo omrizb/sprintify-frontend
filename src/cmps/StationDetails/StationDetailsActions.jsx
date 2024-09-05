@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions.js'
 import { addStationToLibrary, removeStation, removeStationFromLibrary } from '../../store/actions/station.actions.js'
 
 import { EditStation } from '../EditStation.jsx'
@@ -60,7 +61,8 @@ export function StationDetailsActions({ station, stationMeta }) {
     function getMoreList() {
         const addToQueue = buildListObj({
             name: 'Add to queue',
-            icon: 'addToQueue'
+            icon: 'addToQueue',
+            onClick: () => setPlayerAction(playerActions.ADD_TO_QUEUE, { songs: station.songs })
         })
 
         const deleteStation = buildListObj({

@@ -55,7 +55,7 @@ export const executePlayerAction = {
     loadSongToPlayer,
     loadStationToPlayer,
     removeNextSongFromRemainingStationQueue,
-    addSongToAddedManuallyQueue,
+    addSongsToAddedManuallyQueue,
     removeNextSongFromAddedManuallyQueue,
     addSongToSongsHistory,
     removeSongFromSongsHistory,
@@ -101,8 +101,8 @@ function removeNextSongFromRemainingStationQueue() {
     store.dispatch({ type: POP_FROM_REMAINING_STATION_SONGS })
 }
 
-function addSongToAddedManuallyQueue(song) {
-    store.dispatch({ type: ADD_TO_SONGS_ADDED_MANUALLY, song })
+function addSongsToAddedManuallyQueue(songs) {
+    store.dispatch({ type: ADD_TO_SONGS_ADDED_MANUALLY, songs })
 }
 
 function removeNextSongFromAddedManuallyQueue() {
