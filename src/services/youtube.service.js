@@ -43,14 +43,15 @@ async function getVideos(value, maxResults = 5) {
 
 async function getTopVideo(value) {
     try {
-        const apiKey = utilService.getRandomItems(YOUTUBE_DATA_API_KEYS)
+        const apiKey = VITE_YOUTUBE_EINAT_API_KEY
         const search = await getVideos(value, 1)
         const video = search[0]
+        console.log(video)
 
         const videoDetails = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: 'contentDetails',
-                id: video.videoId,
+                id: video.songId,
                 key: apiKey,
             }
         })

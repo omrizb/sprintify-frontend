@@ -32,7 +32,7 @@ export function GlobalNav() {
                 <div className="homeIcon">
                     <Link to={`/`}>
                         <SvgButton
-                            btnClass="btn-global-nav"
+                            btnClass={isHome ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
                             svgIcon={isHome ? 'homeFull' : 'home'}
                             svgClass="svg-big1"
                             tooltipTxt="Home"

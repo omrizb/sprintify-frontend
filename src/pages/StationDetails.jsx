@@ -82,7 +82,6 @@ export function StationDetails() {
             'songsDisplay': loggedinUser.songsDisplay || 'list'
         }
     }
-    console.log(bgColor)
 
     return (isLoading)
         ? <Loader />
