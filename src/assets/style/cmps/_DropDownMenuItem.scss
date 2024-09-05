@@ -2,28 +2,47 @@
 
     padding: 12px 8px 12px 12px;
     min-width: 152px;
+    color: #b3b3b3;
     
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    align-items:center;
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+    
+    .icon {
+        margin-right: 8px;
+    }
+
+    .right-align {
+        display: flex;
+        align-items: center;
+        margin-left: auto; /* Pushes this container to the right */
+    }
+    
+    .save-btn {
+        margin-left: auto; 
+    }
 
     &.include-top-division {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
         border-block-start: 1px solid  rgba(0, 0, 0, 0.3);
     }
 
-    &:hover {
+   
 
-        &:not(.section-title){
-            background-color: $transparentGray;
-            cursor: pointer;
-        }
-    }
-
+    
     .section-title,
-    .list-item {
+    .item {
         display: flex;
         column-gap: 1em;  
+        align-items: center;
+
+        
     }
 
     .section-title {
@@ -31,7 +50,7 @@
         font-weight: 700; 
     }
     
-    .list-item {
+    .item {
         
         font-size: 13px;
         font-weight: 400; 
@@ -41,13 +60,14 @@
         color: $buttonBgGreen;
 
         i {
+            
+
             fill: "#1ed760";
+            
         }
 
     }
 
-
-    /* Hide the default checkbox */
 .custom-checkbox {
     position: relative;
     cursor: pointer;
@@ -59,7 +79,6 @@
     cursor: pointer;
 }
 
-/* Create a custom checkbox */
 .custom-checkbox input[type="checkbox"] + span {
     width: 16px;
     height: 16px;

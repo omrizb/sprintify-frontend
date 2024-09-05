@@ -11,7 +11,7 @@ export const stations = [
         name: 'Liked Songs',
         type: 'playlist',
         isPinned: true,
-        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-64.png',
+        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-300.png',
         tags: [],
         createdBy: {
             id: 'AAAA',

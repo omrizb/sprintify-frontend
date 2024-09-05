@@ -6,7 +6,7 @@ import { addStationToLibrary, removeStation, removeStationFromLibrary } from '..
 
 import { EditStation } from '../EditStation.jsx'
 import { Modal } from '../Modal.jsx'
-import { DropDownMenu } from '../DropDownMenu.jsx'
+import { DropDownMenu } from '../Menus/DropDownMenu.jsx'
 import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
 import { PlayButton } from '../Buttons/PlayButton.jsx'

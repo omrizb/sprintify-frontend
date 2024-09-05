@@ -24,7 +24,7 @@ export function DropDownMenu({ listItems }) {
 
             <ul className="list">
                 {listItems.map((listItem, index) =>
-                    <li key={index} onClick={(ev) => onClick(ev, listItem)} >
+                    <li key={index} className={listItem.type} onClick={(ev) => onClick(ev, listItem)} >
                         <DropDownMenuItem l
                             listItem={listItem}
                             listItems={listItems}

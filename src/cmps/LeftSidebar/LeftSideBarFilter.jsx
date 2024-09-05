@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { updateFilterBy } from '../../store/actions/filterBy.actions'
 
-import { DropDownMenu } from "../DropDownMenu"
+import { DropDownMenu } from "../Menus/DropDownMenu"
 import { SvgIcon } from "../SvgIcon"
 import { StationFilterButtons } from './StationFilterButtons'
 
