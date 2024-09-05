@@ -79,7 +79,7 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         setShowMenu(false)
         try {
             const station = await addStation()
-            const updatedStation = { ...station, songs: [song] }
+            const updatedStation = { ...station, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
             const savedStation = await updateStation(updatedStation)
             navigate(`/station/${savedStation._id}`)
         } catch (err) {

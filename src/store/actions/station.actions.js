@@ -85,9 +85,11 @@ export async function updateStationAndStay(station) {
     try {
         const savedStation = await stationService.save(station)
         store.dispatch(getCmdUpdateAndStay(savedStation))
+        showSuccessMsg(`Added to ${savedStation.name}`)
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
+        showErrorMsg(`Could not add to ${savedStation.name}`)
         throw err
     }
 }
