@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { updateStation } from '../../store/actions/station.actions'
+import { addStation, updateStation } from '../../store/actions/station.actions'
 
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
+
+    const navigate = useNavigate()
     const songId = song.songId
     const [listItems, setListItems] = useState([])
 
