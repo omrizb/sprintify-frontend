@@ -1,3 +1,4 @@
+import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
 import { stationService } from '../../services/station/station.service.local.js'
 import { store } from '../store.js'
 import {
@@ -103,9 +104,11 @@ export async function removeStationFromLibrary(station, userId, lastIdx) {
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdUpdateStation(savedStation))
         store.dispatch(getCmdRemoveStation(savedStation._id))
+        showSuccessMsg('Removed from Your Library')
         return savedStation
     } catch (err) {
         console.log('Cannot remove station from library', err)
+        showErrorMsg('Could not remove from Your Library')
         throw err
     }
 }
@@ -119,9 +122,11 @@ export async function addStationToLibrary(station, userId) {
         }
         const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdAddStation(savedStation))
+        showSuccessMsg('Added to Your Library')
         return savedStation
     } catch (err) {
         console.log('Cannot add station to library', err)
+        showErrorMsg('Could not add to Your Library')
         throw err
     }
 }

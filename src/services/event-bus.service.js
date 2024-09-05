@@ -1,6 +1,4 @@
-export const SHOW_MSG = 'show-msg'
-export const VIEW_MODE_CHANGE = 'view-mode-change'
-export const VIEW_MODE_GET = 'view-mode-get'
+export const SHOW_MSG = 'show-user-msg'
 
 function createEventEmitter() {
     const listenersMap = {}
@@ -18,11 +16,8 @@ function createEventEmitter() {
     }
 }
 
-export const eventBus = createEventEmitter()
+export const eventBusService = createEventEmitter()
 
-export function showUserMsg(msg) {
-    eventBus.emit(SHOW_MSG, msg)
-}
 
 export function showSuccessMsg(txt) {
     showUserMsg({ txt, type: 'success' })
@@ -30,12 +25,9 @@ export function showSuccessMsg(txt) {
 export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
-export function changeViewMode(newMode) {
-    eventBus.emit(VIEW_MODE_CHANGE, newMode);
-}
 
-export function getViewMode(callback) {
-    eventBus.on(VIEW_MODE_GET, callback)
+function showUserMsg(msg) {
+    eventBusService.emit(SHOW_MSG, msg)
 }
 
 window.showUserMsg = showUserMsg

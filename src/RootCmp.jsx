@@ -11,12 +11,13 @@ import { SongDetails } from './pages/SongDetails.jsx'
 
 import './assets/style/main.scss'
 import { AddStation } from './pages/AddStation.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 export function App() {
     return (
         <Provider store={store}>
             <Router>
-                {/* <UserMsg /> */}
+                <UserMsg />
                 <Routes>
                     <Route path="/" element={<StationIndex />}>
                         <Route index element={<MainView />} />

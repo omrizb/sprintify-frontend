@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
-import { changeViewMode } from '../../services/event-bus.service.js'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 
 export function SongDetailsActions({ song }) {

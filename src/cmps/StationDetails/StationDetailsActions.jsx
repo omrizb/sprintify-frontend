@@ -9,7 +9,6 @@ import { Modal } from '../Modal.jsx'
 import { DropDownMenu } from '../DropDownMenu.jsx'
 import { SvgIcon } from "../SvgIcon"
 import { SvgButton } from "../SvgButton.jsx"
-import { changeViewMode } from '../../services/event-bus.service.js'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'

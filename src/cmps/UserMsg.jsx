@@ -11,8 +11,8 @@ export function UserMsg() {
         const unsubscribe = eventBusService.on('show-user-msg', (msg) => {
             setMsg(msg)
             if (timeoutIdRef.current) {
-                timeoutIdRef.current = null
                 clearTimeout(timeoutIdRef.current)
+                timeoutIdRef.current = null
             }
             timeoutIdRef.current = setTimeout(closeMsg, 5000)
         })
@@ -23,11 +23,10 @@ export function UserMsg() {
         setMsg(null)
     }
 
-    if (!msg) return <span></span>
+    const msgClass = msg ? `${msg.type} show` : ''
     return (
-        <section className={`user-msg ${msg.type}`}>
-            <p>{msg.txt}</p>
-            <button className="btn" onClick={closeMsg}>Close</button>
-        </section>
+        <div className={`user-msg ${msgClass}`} onClick={closeMsg}>
+            {msg && <span>{msg.txt}</span>}
+        </div>
     )
 }
