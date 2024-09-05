@@ -5,7 +5,6 @@ import { addStation, updateStation } from '../../store/actions/station.actions'
 
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
-
     const navigate = useNavigate()
     const songId = song.songId
     const [listItems, setListItems] = useState([])
@@ -13,7 +12,6 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
     useEffect(() => {
         if (!myStations) return
         setListItems(buildMyStationsArr())
-
     }, [myStations])
 
     function buildMyStationsArr() {
@@ -99,7 +97,6 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         const unCheckedStations = unCheckedItems.map(item => item = item.station)
 
         const stationsToAdd = checkedStations.filter(station =>
-
             !station.songs.some(song => song.songId === songId)
         )
 
@@ -108,10 +105,8 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
             return { ...station, songs: updatedSongs }
         })
 
-
         const stationsToRemove = unCheckedStations.filter(station => {
-
-            return station.songs.some(song => song.songId === songId);
+            return station.songs.some(song => song.songId === songId)
         })
 
         const updatedRemoved = stationsToRemove.map(station => {
@@ -120,17 +115,10 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         })
 
         const updatedStations = [...updatedAdd, ...updatedRemoved]
-
         updatedStations.forEach(station => updateStation(station))
-
     }
 
     return (
-
         <DropDownMenu listItems={listItems} />
-
-
     )
-
-
 }

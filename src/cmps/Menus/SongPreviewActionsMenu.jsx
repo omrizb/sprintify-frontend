@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { updateStationAndStay, updateStation } from "../../store/actions/station.actions"
 import { DropDownMenu } from "./DropDownMenu"
@@ -6,7 +5,6 @@ import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
 export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
 
-    const navigate = useNavigate()
     const { songId } = song
     const isLikedByUser = likedSongsStation.songs.some(song => song.songId === songId)
     const [showMenu, setShowMenu] = useState(false)
@@ -86,6 +84,5 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
                     showMenu={showMenu} />}
 
         </div>
-
     )
 }

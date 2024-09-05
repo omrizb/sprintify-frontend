@@ -5,7 +5,6 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
     const { name, icon, isChosen, topDivision, type } = listItem
 
-
     const [list, setList] = useState([...listItems])
     const [listItemToEdit, setListItemToEdit] = useState(listItem)
 
