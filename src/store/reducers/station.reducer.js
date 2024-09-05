@@ -4,7 +4,7 @@ export const REMOVE_STATION = 'REMOVE_STATION'
 export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const UPDATE_STATIONS = 'UPDATE_STATIONS'
-export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_LIKED_STATION'
+export const UPDATE_STATION_AND_STAY = 'UPDATE_STATION_AND_STAY'
 
 
 const initialState = {
@@ -61,7 +61,7 @@ export function stationReducer(state = initialState, action) {
             newState = { ...state, stations: updatedStations }
             break
 
-        case ADD_SONG_TO_STATION:
+        case UPDATE_STATION_AND_STAY:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations }
             break

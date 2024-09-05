@@ -8,7 +8,7 @@ import {
     SET_STATION,
     UPDATE_STATION,
     UPDATE_STATIONS,
-    ADD_SONG_TO_STATION as UPDATE_STATION_AND_STAY,
+    UPDATE_STATION_AND_STAY as UPDATE_STATION_AND_STAY,
 } from '../reducers/station.reducer.js'
 
 
