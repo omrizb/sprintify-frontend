@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { updateLikedSongsStation, updateStation } from "../../store/actions/station.actions"
 import { DropDownMenu } from "./DropDownMenu"
+import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
-export function SongPreviewActionsMenu({ song, station, isOwnedByUser, likedSongsStation }) {
+export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
 
     const navigate = useNavigate()
     const { songId } = song
     const isLikedByUser = likedSongsStation.songs.some(song => song.songId === songId)
+    const [showMenu, setShowMenu] = useState(false)
 
     const listItems = getList()
 
@@ -48,8 +51,10 @@ export function SongPreviewActionsMenu({ song, station, isOwnedByUser, likedSong
 
         const addToPlaylist = buildListObj({
             name: 'Add to playlist',
+            type: 'list-item',
             icon: 'plus',
-            onClick: () => console.log('add to playlist')
+            secondIcon: 'more-menu',
+            onClick: () => setShowMenu(prevShowMenu => !prevShowMenu)
         })
 
         if (isOwnedByUser) return [addToPlaylist, removeFromPlaylist, removeFromLikedSongs, addToQueue]
@@ -70,6 +75,17 @@ export function SongPreviewActionsMenu({ song, station, isOwnedByUser, likedSong
     function noop() { }
 
     return (
-        <DropDownMenu listItems={listItems} />
+        <div className="actions-menu">
+            <DropDownMenu listItems={listItems} />
+            {showMenu &&
+                <AddPlaylistSubMenu
+                    song={song}
+                    myStations={myStations}
+                    likedSongsStation={likedSongsStation}
+                    setShowMenu={setShowMenu}
+                    showMenu={showMenu} />}
+
+        </div>
+
     )
 }

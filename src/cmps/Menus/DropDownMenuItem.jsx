@@ -41,6 +41,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
                 <div className="right-align">
                     {isChosen && <SvgIcon iconName={"check"} svgClass="check-icon" />}
+                    {listItem.secondIcon && <SvgIcon iconName={"moreMenu"} svgClass="check-icon" />}
 
                     {(listItem.type === 'checkBox') &&
                         <label className="custom-checkbox">

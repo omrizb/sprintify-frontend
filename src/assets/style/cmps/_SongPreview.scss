@@ -16,6 +16,7 @@
 
             .icon {
                 width:32px;
+                margin: 0;
             }
 
             i {
@@ -25,6 +26,35 @@
             }
         }
     
+    }
+
+    .actions-menu {
+        .drop-down-menu{
+            width: 240px;
+
+            i{
+                svg {
+                    fill: #b3b3b3;
+                    height: 16px;
+                }
+                
+            }
+        }
+
+
+        .sub-menu{
+            .drop-down-menu{
+                right: 245px;
+                top: -200px;
+                width: 200px;
+
+                li:first-child {
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
+                    border-block-end: 2px solid  rgba(62, 62, 62, 0.3);
+                }
+            }
+            
+        }
     }
 
     a:hover {

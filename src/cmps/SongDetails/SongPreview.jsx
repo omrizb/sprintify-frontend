@@ -85,7 +85,6 @@ export function SongPreview(props) {
 
                 <div className="add-btn-container" onClick={addSong}>
                     {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
-                    {/* {showMenu && <DropDownMenu listItems={listItems} />} */}
                     {showMenu && <SongPreviewAddPlaylistMenu
                         song={song}
                         myStations={myStations}
@@ -102,6 +101,7 @@ export function SongPreview(props) {
                     station={station}
                     isOwnedByUser={isOwnedByUser}
                     likedSongsStation={likedSongsStation}
+                    myStations={myStations}
 
                 />}
             </div>

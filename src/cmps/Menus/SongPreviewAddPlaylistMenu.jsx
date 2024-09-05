@@ -98,10 +98,6 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         const checkedStations = checkedItems.map(item => item = item.station)
         const unCheckedStations = unCheckedItems.map(item => item = item.station)
 
-        // console.log(song.songName)
-        // checkedStations.forEach(item => console.log('checked:', item.name, item._id))
-        // unCheckedStations.forEach(item => console.log('unChecked:', item.name, item._id))
-
         const stationsToAdd = checkedStations.filter(station =>
 
             !station.songs.some(song => song.songId === songId)
@@ -130,7 +126,10 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
     }
 
     return (
+
         <DropDownMenu listItems={listItems} />
+
+
     )
 
 
