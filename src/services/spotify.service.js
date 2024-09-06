@@ -26,9 +26,10 @@ async function search(query, limit = 4) {
         songs: songs.tracks.items.map(track => ({
             spotifyId: track.id,
             songName: track.name,
-            artist: track.artists[0].name,
+            artist: track.artists[0],
+            album: { name: track.album.name, spotifyId: track.album.id },
             imgUrl: _getImageUrls(track.album),
-            duration: Math.floor(track.duration_ms / 1000)
+            duration: Math.floor(track.duration_ms / 1000),
         })),
         artists: artists.artists.items.map(artist => ({
             spotifyId: artist.id,
@@ -53,7 +54,15 @@ async function search(query, limit = 4) {
 
 async function getSong(spotifyId) {
     const song = await _https(`/tracks/${spotifyId}`)
-    return song
+    // console.log(song)
+    return {
+        songName: song.name,
+        artist: { name: song.artists[0].name, spotifyId: song.artists[0].id },
+        album: { name: song.album.name, spotifyId: song.album.id },
+        duration: song.duration_ms / 1000,
+        imgUrl: { big: song.album.images[0].url, small: song.album.images[2].url },
+        releaseDate: song.album.release_date,
+    }
 }
 
 async function getArtist(spotifyId) {
@@ -224,3 +233,5 @@ function _getImageUrls(elementWithImages) {
         small: elementWithImages.images[elementWithImages.images.length - 1].url
     }
 }
+
+

@@ -6,27 +6,31 @@ import { SvgIcon } from '../cmps/SvgIcon'
 
 import { utilService } from '../services/util.service'
 import { spotifyService } from '../services/spotify.service'
+import { MiniSongList } from './SongDetails/MiniSongList'
+import { youtubeService } from '../services/youtube.service'
+import { showSuccessMsg } from '../services/event-bus.service'
 
 
 export function AddSongs() {
 
     const station = useSelector(storeState => storeState.stationModule.station)
     const [songs, setSongs] = useState([])
+    const [searchText, setSearchText] = useState('')
+
     const debouncedLoadSongs = utilService.debounce(loadSongs, 1000)
 
     function handleChange(ev) {
-        const value = ev.target.value
-        debouncedLoadSongs(value)
+        setSearchText(ev.target.value)
+        debouncedLoadSongs(ev.target.value)
     }
 
     async function loadSongs(value) {
         if (!value) return
         try {
-            // const loadedSongs = await youtubeService.getVideos(value, 10)
             const results = await spotifyService.search(value, 10)
             const loadedSongs = results.songs
             console.log(loadedSongs)
-            console.log(loadedSongs[0].artist.name)
+
             setSongs(loadedSongs)
 
         } catch (err) {
@@ -34,52 +38,47 @@ export function AddSongs() {
         }
     }
 
-    function onAddSong(song) {
-        const stationToSave = { ...station, songs: [...station.songs, song] }
-        update(stationToSave)
+    async function onAddSong(newSong) {
+        const isInStation = station.songs.some(song => song.spotifyId === newSong.spotifyId)
+        if (isInStation) {
+            showSuccessMsg(`Already included in ${station.name}`)
+            return
+        }
+        const ytSong = await youtubeService.getTopVideo(`song: ${newSong.songName} by ${newSong.artist.name}`)
+        newSong.ytId = ytSong.songId
+        const updatedStation = { ...station, songs: [...station.songs, newSong] }
+        updateStation(updatedStation)
     }
 
-    async function update(stationToSave) {
-        try {
-            const updatedStation = await updateStation(stationToSave)
-            console.log(updatedStation)
-        } catch (err) {
-            console.log('Cannot add a station')
-        }
-    }
+
+
 
     return (
         <div className="add-songs">
 
             <h1>Let's find something for your playlist</h1>
 
-            <div className="global-nav text-container">
+            <div className="search-box">
                 <div className="search icon"><SvgIcon iconName={"search"} /> </div>
                 <input
                     type="text"
                     name="txt"
                     placeholder="Search for songs?"
+                    value={searchText}
                     onChange={handleChange}
                     required
                 />
+                <div className="clear-search"
+                    onClick={() => {
+                        setSearchText('')
+                        setSongs([])
+                    }}>X</div>
             </div>
 
-            {(!songs) && <h2>Youtube is blocking us!!</h2>}
-            {(songs) &&
-                <ul className="" >
-                    {songs.map((song) =>
-                        <li key={song.spotifyId}  >
-                            <div className="list">
-                                <img src={song.imgUrl.small} alt="" />
-                                <div className="text">
-                                    <div>{song.songName}</div>
-                                    <div>{song.artist.name}</div>
-                                </div>
-                                <button onClick={() => onAddSong(song)} className="btn-tinted">Add</button>
-                            </div>
-                        </li>)
-                    }
-                </ul>}
+
+            {songs &&
+                <MiniSongList songs={songs} onClickAdd={onAddSong} />}
+
 
         </div>
     )

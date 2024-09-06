@@ -21,40 +21,7 @@
                 .search-container{
                     flex-grow: 1;
 
-                    .text-container{
-                        margin-inline: 8px;
-                        width: 100%;
-                        border-radius: 500px;
-                        @include tinted;
-                        display: flex;
-                        justify-content: space-between;
-                        box-sizing: border-box;
-                        transition: border 0.3s;
-
-                        input{
-                            all: unset;
-                            flex-grow: 1;
-                            
-                            &:hover::before,
-                            &:hover::after {
-                                display: none !important; 
-                            }
-                        }
-
-                        .border-element{
-                            height: 24px;
-                            border-inline-start: 1px solid;
-                        }
-
-                        &:hover,
-                        &:focus-within { 
-                            border: 2px solid $lightBgClr;
-                        }
-                    }
                 }
-                    .search-container :focus {
-                    outline: none;
-                    }
             }
 
         .global-nav-right{
