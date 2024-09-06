@@ -15,6 +15,7 @@ import { Modal } from '../cmps/Modal.jsx'
 import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
 import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
+import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
 
 
 export function StationDetails() {
@@ -92,13 +93,22 @@ export function StationDetails() {
                 bgColor={bgColor && colorUtilService.adjustBrightness(bgColor, 0.4)}
                 showFromY={150}
             >
-                <StationDetailsHeader
+                <DetailsPageHeader
+                    station={station}
+                    onSetBgColor={setBgColor}
+                    onEdit={onEdit}
+                    pageType={'station'}
+                    onEditStation={() => setIsModalOpen(true)
+                    }
+
+                />
+                {/* <StationDetailsHeader
                     station={station}
                     onSetBgColor={setBgColor}
                     onEdit={onEdit}
                     onEditStation={() => setIsModalOpen(true)}
 
-                />
+                /> */}
 
                 <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>
 

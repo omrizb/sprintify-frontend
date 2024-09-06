@@ -15,7 +15,6 @@ export const spotifyService = {
     getAlbum,
     getStation,
     _search,
-    _createDemoData,
 }
 
 // For debug
@@ -83,7 +82,15 @@ async function getNewSongs() {
 
 async function getSong(spotifyId) {
     const song = await _https(`/tracks/${spotifyId}`)
-    return song
+    // console.log(song)
+    return {
+        songName: song.name,
+        artist: { name: song.artists[0].name, spotifyId: song.artists[0].id },
+        album: { name: song.album.name, spotifyId: song.album.id },
+        duration: song.duration_ms / 1000,
+        imgUrl: { big: song.album.images[0].url, small: song.album.images[2].url },
+        releaseDate: song.album.release_date,
+    }
 }
 
 async function getArtist(spotifyId) {
@@ -255,55 +262,4 @@ function _getImageUrls(elementWithImages) {
     }
 }
 
-async function _createDemoData() {
 
-    const songs = [
-        'Shape of You',
-        'Thriller',
-        'Bohemian Rhapsody',
-        'Hotel California',
-        'Billie Jean',
-        'Smells Like Teen Spirit',
-        'Rolling in the Deep',
-        'Hey Jude',
-        'Stairway to Heaven',
-        'Like a Rolling Stone',
-        'Uptown Funk',
-        `Sweet Child O’ Mine`,
-        'Imagine',
-        `What’s Going On`,
-        'Purple Rain',
-        'Let It Be',
-        'Wonderwall',
-        'Blinding Lights',
-        'All of Me',
-        'I Will Always Love You',
-        'Despacito',
-        `Livin’ on a Prayer`,
-        'Shallow',
-        'Take On Me',
-        'Dancing Queen',
-        'Lose Yourself',
-        'We Will Rock You',
-        `Stayin’ Alive`,
-        'Eye of the Tiger',
-        'Call Me Maybe'
-    ]
-
-
-    const spotiSongs = []
-    const combinedSongs = []
-    const ytSongs = []
-
-    for (var i = 0; i < songs.length; i++) {
-        spotiSongs[i] = await search(songs[i], 1)
-        combinedSongs[i] = [...spotiSongs[i].songs]
-
-        ytSongs[i] = await youtubeService.getTopVideo(songs[i])
-        combinedSongs[i].songId = ytSongs[i].songId
-
-    }
-
-    console.log(combinedSongs)
-
-}

@@ -3,14 +3,20 @@ import { FastAverageColor } from 'fast-average-color'
 
 import { colorUtilService } from '../../services/color.util.service'
 import { SvgIcon } from '../SvgIcon'
+import { StationHeaderInfo } from './StationHeaderInfo'
+import { SongHeaderInfo } from './SongHeaderInfo'
 
-export function StationDetailsHeader({ station, onSetBgColor, onEditStation }) {
+
+export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, pageType }) {
 
     const [stationNameClass, setStationNameClass] = useState('station-name')
     const [headerBgColor, setHeaderBgColor] = useState()
     const [headerDarkerBgColor, setHeaderDarkerBgColor] = useState()
     const stationNameRef = useRef(null)
     const fac = new FastAverageColor()
+
+    const headerImg = pageType === 'station' ? station.stationImgUrl : song.imgUrl.big
+    console.log(song)
 
     useEffect(() => {
         adjustStationNameSize()
@@ -35,32 +41,6 @@ export function StationDetailsHeader({ station, onSetBgColor, onEditStation }) {
         // console.log(stationNameRef.current.scrollHeight)
     }
 
-    const songCount = station.songs.length
-    const songCountTxt = formatSongCountTxt()
-    const durationTxt = formatDurationTxt()
-
-    function formatSongCountTxt() {
-        if (songCount > 1) return `${songCount} songs`
-        else if (songCount === 1) return `${songCount} song`
-        else return ''
-    }
-
-    function formatDurationTxt() {
-        const totalDuration = station.songs.reduce((acc, song) => {
-            return acc + song.duration
-        }, 0)
-
-        const hours = Math.floor(totalDuration / 3600)
-        const minutes = Math.floor((totalDuration % 3600) / 60)
-        const seconds = totalDuration % 60
-
-        return `${hours > 0 ? `${hours} hr ` : ''}${minutes > 0 ? `${minutes} min ` : ''}${seconds > 0 ? `${seconds} sec` : ''}`
-    }
-
-    // function onUpdateStation(station) {
-    //     console.log(station._id)
-    // }
-
     function handleImageLoad(ev) {
         fac.getColorAsync(ev.target)
             .then(color => {
@@ -77,41 +57,39 @@ export function StationDetailsHeader({ station, onSetBgColor, onEditStation }) {
             style={{ backgroundImage: `linear-gradient(to bottom, ${headerBgColor}cc, ${headerDarkerBgColor})` }}
         >
             <div className="station-cover-container">
-                {(station.stationImgUrl)
+                {(headerImg)
                     ? <img
                         crossOrigin="anonymous"
                         className="station-cover"
-                        src={station.stationImgUrl}
+                        src={headerImg}
                         alt="Station Cover"
                         onLoad={handleImageLoad}
                     />
                     : <div className="icon new-playlist">
                         <SvgIcon iconName={"music"} />
                     </div>}
-                <div className="overlay">
+
+                {(pageType === 'station') && <div className="overlay">
                     <div className="overlay-content">
                         <button className="editImage icon btn-medium-with-hover">
                             <SvgIcon iconName="editImage" />
                         </button>
                         <span>Choose photo</span>
                     </div>
-                </div>
+                </div>}
             </div>
 
-            <div className="station-info">
-                <div className="station-type">{station.type}</div>
-                <div ref={stationNameRef} onClick={onEditStation} className={`${stationNameClass} medium-title`}>{station.name}</div>
-                <div className="station-description">{station.description}</div>
-                <div className="bottom-info">
-                    <span className="created-by">{station.createdBy.fullName}</span>
-                    {songCount &&
-                        <>
-                            <span className="dot"></span>
-                            <span className="song-count">{songCountTxt}, </span>
-                            <span className="total-duration">{durationTxt}</span>
-                        </>}
-                </div>
-            </div>
+
+            {(pageType === 'station') && <StationHeaderInfo
+                station={station}
+                onEditStation={onEditStation}
+            />}
+
+            {(pageType === 'song') && <SongHeaderInfo
+                song={song}
+            />}
+
+
         </div >
     )
 }
