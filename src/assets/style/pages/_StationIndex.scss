@@ -22,13 +22,10 @@
     }
 
     .right-sidebar-container {
-        // @include section;
-        // grid-area: right-sidebar;
-        // overflow: auto;
         border-radius: 8px;
         background-color: $sectionBgClr;
         grid-area: right-sidebar;
-        overflow: hidden; 
+        overflow-y: auto; 
     }
 
     .right-sidebar-closed {
