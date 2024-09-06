@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { youtubeService } from './youtube.service'
+
 const BASE_URL = 'https://api.spotify.com/v1'
 const CLIENT_ID = '027bef80bb424459a75e045ed471f024'
 const CLIENT_SECRET = '4cb7b55ab1fa409185026d058403fe2f'
@@ -10,7 +12,8 @@ export const spotifyService = {
     getArtist,
     getAlbum,
     getStation,
-    _search
+    _search,
+    _createDemoData
 }
 
 // For debug
@@ -26,7 +29,7 @@ async function search(query, limit = 4) {
         songs: songs.tracks.items.map(track => ({
             spotifyId: track.id,
             songName: track.name,
-            artist: track.artists[0].name,
+            artist: track.artists[0],
             imgUrl: _getImageUrls(track.album),
             duration: Math.floor(track.duration_ms / 1000)
         })),
@@ -223,4 +226,57 @@ function _getImageUrls(elementWithImages) {
         big: elementWithImages.images[0].url,
         small: elementWithImages.images[elementWithImages.images.length - 1].url
     }
+}
+
+async function _createDemoData() {
+
+    const songs = [
+        'Shape of You',
+        'Thriller',
+        'Bohemian Rhapsody',
+        'Hotel California',
+        'Billie Jean',
+        'Smells Like Teen Spirit',
+        'Rolling in the Deep',
+        'Hey Jude',
+        'Stairway to Heaven',
+        'Like a Rolling Stone',
+        'Uptown Funk',
+        `Sweet Child O’ Mine`,
+        'Imagine',
+        `What’s Going On`,
+        'Purple Rain',
+        'Let It Be',
+        'Wonderwall',
+        'Blinding Lights',
+        'All of Me',
+        'I Will Always Love You',
+        'Despacito',
+        `Livin’ on a Prayer`,
+        'Shallow',
+        'Take On Me',
+        'Dancing Queen',
+        'Lose Yourself',
+        'We Will Rock You',
+        `Stayin’ Alive`,
+        'Eye of the Tiger',
+        'Call Me Maybe'
+    ]
+
+
+    const spotiSongs = []
+    const combinedSongs = []
+    const ytSongs = []
+
+    for (var i = 0; i < songs.length; i++) {
+        spotiSongs[i] = await search(songs[i], 1)
+        combinedSongs[i] = [...spotiSongs[i].songs]
+
+        ytSongs[i] = await youtubeService.getTopVideo(songs[i])
+        combinedSongs[i].songId = ytSongs[i].songId
+
+    }
+
+    console.log(combinedSongs)
+
 }
