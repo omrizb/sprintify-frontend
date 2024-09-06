@@ -33,14 +33,14 @@ export function SongPreview(props) {
     const isHovered = song.spotifyId === hoveredSpotifyId
     const isHighlighted = isHovered || song.spotifyId === selectedSpotifyId
     const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
-    const isCurrentlyPlayedSong = song.spotifyId === playerSpotifyId && isPlaying
+    const isCurrentlyPlaying = song.spotifyId === playerSpotifyId && isPlaying
 
 
     const songPreviewClass = [
         'song-preview',
         articleClassType,
         isHighlighted ? 'highlight' : '',
-        isCurrentlyPlayedSong ? 'currently-playing' : ''
+        isCurrentlyPlaying ? 'currently-playing' : ''
     ].join(' ')
 
 
@@ -71,11 +71,11 @@ export function SongPreview(props) {
                         stationId={stationId}
                         song={song}
                     />
-                    : isCurrentlyPlayedSong
+                    : isCurrentlyPlaying
                         ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
                         : index}
             </div>
-            <MiniSongPreview song={song} />
+            <MiniSongPreview song={song} isCurrentlyPlaying={isCurrentlyPlaying} />
             <div className="album">{album.name}</div>
             <div className="date-added"></div>
             <div className="song-duration">

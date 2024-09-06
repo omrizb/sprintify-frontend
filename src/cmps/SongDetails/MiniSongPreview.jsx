@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export function MiniSongPreview({ song, type = 'simple', isSongPlaying, onClickAdd }) {
+export function MiniSongPreview({ song, type = 'simple', isCurrentlyPlaying, onClickAdd }) {
 
     let articleClassName
     let imgClassName
@@ -20,7 +20,7 @@ export function MiniSongPreview({ song, type = 'simple', isSongPlaying, onClickA
     }
 
     return (
-        <article className={`${articleClassName} ${isSongPlaying && 'currently-playing'}`}>
+        <article className={`${articleClassName} ${isCurrentlyPlaying && 'currently-playing'}`}>
             <img className={imgClassName} src={song.imgUrl.big} alt={song.songName} />
             <div className="song-info">
                 <div className="song-name">
