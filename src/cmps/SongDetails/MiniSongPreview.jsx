@@ -21,10 +21,10 @@ export function MiniSongPreview({ song, type = 'simple', isSongPlaying }) {
 
     return (
         <article className={`${articleClassName} ${isSongPlaying && 'currently-playing'}`}>
-            <img className={imgClassName} src={song.imgUrl} alt={song.songName} />
+            <img className={imgClassName} src={song.imgUrl.big} alt={song.songName} />
             <div className="song-info">
-                <span className="song-name"><Link to={`/track/${song.songId}`}>{song.songName}</Link></span>
-                <span className="artist">{song.artist}</span>
+                <span className="song-name"><Link to={`/track/${song.spotifyId}`}>{song.songName}</Link></span>
+                <span className="artist">{song.artist.name}</span>
             </div>
         </article>
     )

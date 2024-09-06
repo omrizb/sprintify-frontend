@@ -7,7 +7,7 @@ import { stationService } from '../../services/station/station.service.local'
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
 
-    const songId = song.songId
+    const spotifyId = song.spotifyId
     const [listItems, setListItems] = useState([])
 
 
@@ -50,7 +50,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
     function noop() { }
 
     function addSong(station) {
-        const songExists = station.songs.some(song => song.songId === songId)
+        const songExists = station.songs.some(song => song.spotifyId === spotifyId)
         if (songExists) {
             showSuccessMsg(`Already in ${station.name}`)
             console.log('song already there')
@@ -67,7 +67,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
         setShowMenu(false)
         try {
             const newStation = stationService.getEmptyStation()
-            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
+            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl.big, songs: [song] }
             await addStation(station)
             showSuccessMsg(`Added to ${station.name}`)
 

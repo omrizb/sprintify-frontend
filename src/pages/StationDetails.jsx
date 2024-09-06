@@ -53,8 +53,8 @@ export function StationDetails() {
         }
     }
 
-    function onRemoveSong(songId) {
-        const updatedSongsArr = station.songs.filter(song => song.songId !== songId)
+    function onRemoveSong(spotifyId) {
+        const updatedSongsArr = station.songs.filter(song => song.spotifyId !== spotifyId)
         const stationToSave = { ...station, songs: updatedSongsArr }
         updateStation(stationToSave)
     }

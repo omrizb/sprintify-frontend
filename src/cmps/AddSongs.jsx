@@ -26,7 +26,7 @@ export function AddSongs() {
             const results = await spotifyService.search(value, 10)
             const loadedSongs = results.songs
             console.log(loadedSongs)
-            console.log(loadedSongs[0].artist)
+            console.log(loadedSongs[0].artist.name)
             setSongs(loadedSongs)
 
         } catch (err) {
@@ -73,7 +73,7 @@ export function AddSongs() {
                                 <img src={song.imgUrl.small} alt="" />
                                 <div className="text">
                                     <div>{song.songName}</div>
-                                    <div>{song.artist}</div>
+                                    <div>{song.artist.name}</div>
                                 </div>
                                 <button onClick={() => onAddSong(song)} className="btn-tinted">Add</button>
                             </div>

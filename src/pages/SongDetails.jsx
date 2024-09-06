@@ -77,11 +77,11 @@ export function SongDetails() {
                         </div>
                         <div className="text">
                             <div className="type"> Artist </div>
-                            <div className="name">{song.artist}</div>
+                            <div className="name">{song.artist.name}</div>
                         </div>
                     </section>
                     <AddSongs
-                        value={song.artist}
+                        value={song.artist.name}
                         style={"recommended"}
                         viewArea={'songDetails'}
                     />

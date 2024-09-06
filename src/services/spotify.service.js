@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { newSongs } from '../../data-sample/songs.transition'
+
 const BASE_URL = 'https://api.spotify.com/v1'
 const CLIENT_ID = '027bef80bb424459a75e045ed471f024'
 const CLIENT_SECRET = '4cb7b55ab1fa409185026d058403fe2f'
@@ -10,7 +12,7 @@ export const spotifyService = {
     getArtist,
     getAlbum,
     getStation,
-    _search
+    _search,
 }
 
 // For debug
@@ -49,6 +51,29 @@ async function search(query, limit = 4) {
             imgUrl: _getImageUrls(playlist),
         }))
     }
+}
+
+async function getNewSongs() {
+
+    const res = []
+
+    for (let i = 0; i < newSongs.length; i++) {
+
+        const search = await _search(newSongs[i].query, 'track', 1)
+        const currSong = search.tracks.items[0]
+
+        res.push({
+            spotifyId: currSong.id,
+            ytId: newSongs[i].ytId,
+            songName: currSong.name,
+            artist: { name: currSong.artists[0].name, spotifyId: currSong.artists[0].id },
+            album: { name: currSong.album.name, spotifyId: currSong.album.id },
+            imgUrl: _getImageUrls(currSong.album),
+            duration: Math.floor(currSong.duration_ms / 1000)
+        })
+    }
+
+    return res
 }
 
 
@@ -206,12 +231,13 @@ async function _getFullSongs(spotifySongs) {
         const currSong = songs.tracks[i]
 
         res.push({
-            songId: '',
+            spotifyId: currSong.id,
+            ytId: '',
             songName: currSong.name,
             artist: { name: currSong.artists[0].name, spotifyId: currSong.artists[0].id },
             album: { name: currSong.album.name, spotifyId: currSong.album.id },
             imgUrl: _getImageUrls(currSong.album),
-            duration: Math.floor(track.duration_ms / 1000)
+            duration: Math.floor(currSong.duration_ms / 1000)
         })
     }
 

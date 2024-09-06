@@ -15,16 +15,16 @@ export function PlayButton({ type, stationId, stationName, song }) {
         if (playerStationId !== stationId) {
             setIsPlaying(false)
         } else if (type === 'songPreview') {
-            (player.song.songId === song.songId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
+            (player.song.spotifyId === song.spotifyId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
         } else {
             setIsPlaying(player.isPlaying)
         }
-    }, [player.isPlaying, player.song.songId, playerStationId])
+    }, [player.isPlaying, player.song.spotifyId, playerStationId])
 
     function handleClick() {
         if (!song) return
         if (playerStationId !== stationId ||
-            player.song.songId !== song.songId
+            player.song.spotifyId !== song.spotifyId
         ) {
             setPlayerAction(playerActions.PAUSE)
             setPlayerAction(playerActions.LOAD_STATION, { stationId, song })

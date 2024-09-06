@@ -14,16 +14,16 @@ export function MiniSongList({ songs }) {
     // useEffect(() => {
     //     const newAnimateClasses = {};
     //     songs.forEach((song, idx) => {
-    //         if (visibleSongs[idx]?.songId !== song.songId) {
-    //             newAnimateClasses[song.songId] = 'slide-in'
+    //         if (visibleSongs[idx]?.spotifyId !== song.spotifyId) {
+    //             newAnimateClasses[song.spotifyId] = 'slide-in'
     //         } else {
-    //             newAnimateClasses[song.songId] = 'enter'
+    //             newAnimateClasses[song.spotifyId] = 'enter'
     //         }
     //     })
 
     //     visibleSongs.forEach(song => {
-    //         if (!songs.find(s => s.songId === song.songId)) {
-    //             newAnimateClasses[song.songId] = 'slide-out'
+    //         if (!songs.find(s => s.spotifyId === song.spotifyId)) {
+    //             newAnimateClasses[song.spotifyId] = 'slide-out'
     //         }
     //     })
 
@@ -36,8 +36,8 @@ export function MiniSongList({ songs }) {
     return (currPlayingSong &&
         <ul className="mini-song-list">
             {songs.map(song => {
-                const isSongPlaying = song.songId === currPlayingSong.songId && isPlaying
-                return <li key={song.songId}>
+                const isSongPlaying = song.spotifyId === currPlayingSong.spotifyId && isPlaying
+                return <li key={song.spotifyId}>
                     <MiniSongPreview song={song} isSongPlaying={isSongPlaying} />
                 </li>
             })}

@@ -15,13 +15,13 @@ import { MiniSongPreview } from './MiniSongPreview.jsx'
 
 export function SongPreview(props) {
 
-    const playerSongId = useSelector(store => store.playerModule.player.song.songId)
+    const playerSpotifyId = useSelector(store => store.playerModule.player.song.spotifyId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
     const [showMenu, setShowMenu] = useState(false)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
 
-    const { song, stationId, likedSongsStation, myStations, hoveredSongId,
-        selectedSongId, index, type, isOwnedByUser, station } = props
+    const { song, stationId, likedSongsStation, myStations, hoveredSpotifyId,
+        selectedSpotifyId, index, type, isOwnedByUser, station } = props
 
     let articleClassType
     switch (type) {
@@ -29,11 +29,11 @@ export function SongPreview(props) {
             articleClassType = 'table dynamic-grid'
     }
 
-    const { songId, songName, artist, album, url, imgUrl, duration } = song
-    const isHovered = song.songId === hoveredSongId
-    const isHighlighted = isHovered || song.songId === selectedSongId
-    const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.songId === songId)
-    const isCurrentlyPlayedSong = song.songId === playerSongId && isPlaying
+    const { spotifyId, songName, album, duration } = song
+    const isHovered = song.spotifyId === hoveredSpotifyId
+    const isHighlighted = isHovered || song.spotifyId === selectedSpotifyId
+    const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
+    const isCurrentlyPlayedSong = song.spotifyId === playerSpotifyId && isPlaying
 
 
     const songPreviewClass = [
@@ -76,7 +76,7 @@ export function SongPreview(props) {
                         : index}
             </div>
             <MiniSongPreview song={song} />
-            <div className="album">{album}</div>
+            <div className="album">{album.name}</div>
             <div className="date-added"></div>
             <div className="song-duration">
 
