@@ -1,0 +1,22 @@
+.artist-preview {
+    position: relative;
+    border-radius: 8px;
+    color: $secondaryTxtClr;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .about {
+        position: absolute;
+        top: 20px;
+        right: 16px;
+    }
+
+    .artist-info {
+        @include flex($direction: column, $align: left, $gap: 16px);
+        padding: 16px;
+    }
+}

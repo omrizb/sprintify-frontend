@@ -1,51 +1,5 @@
 .now-playing-details {
     display: flex;
     flex-direction: column;
-    background-color: $sectionBgClr;
-    color:  $primaryTxtClr;
-    height: 100%; 
-    overflow: hidden;
-    box-sizing: border-box;
-
-    .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 16px 8px 16px;
-        // padding-bottom: 8px;
-        // padding-inline: 16px; // Make sure the padding matches the scroll container's
-        height: 64px;
-        width: 100%;
-        position: sticky; 
-        top: 0; 
-        z-index: 1000; 
-
-        .action-bar-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-            .btn-action-bar {
-                @include transparent;
-                @include btn($type: animated, $circleSize: 32px);
-            } 
-        }
-    }
-
-        
-
-        .scroll-container {
-            flex-grow: 1; 
-            overflow-y: auto;
-            padding-left: 16px;
-            /* Custom Scrollbar */
-            scrollbar-width:16px; 
-            scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent; 
-
-            .content {
-                height: 100%;
-                position: relative;
-            }
-        }
-    
+    gap: 16px;
 }

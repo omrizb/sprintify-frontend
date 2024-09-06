@@ -2,8 +2,10 @@
     padding-inline: 16px;
 
     .header-text {
+        @include overflow-ellipsis;
         font-size: $textSizeBase;
         font-weight: 500;
+        color: $primaryTxtClr;
     }
 
     header {
