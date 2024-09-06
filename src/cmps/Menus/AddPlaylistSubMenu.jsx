@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, updateStationAndStay, updateStation } from '../../store/actions/station.actions'
+import { addStation, addSongToStation } from '../../store/actions/station.actions'
+import { showSuccessMsg } from '../../services/event-bus.service'
+import { stationService } from '../../services/station/station.service.local'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
 
-    const navigate = useNavigate()
     const songId = song.songId
     const [listItems, setListItems] = useState([])
 
@@ -52,27 +52,25 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
     function addSong(station) {
         const songExists = station.songs.some(song => song.songId === songId)
         if (songExists) {
+            showSuccessMsg(`Already in ${station.name}`)
             console.log('song already there')
             setShowMenu(false)
             return
         }
 
         const updatedStation = { ...station, songs: [...station.songs, song] }
-        // updateStation(updatedStation)
-        updateStationAndStay(updatedStation)
+        addSongToStation(updatedStation)
         setShowMenu(false)
-
-
-
     }
 
     async function handleAddStation() {
         setShowMenu(false)
         try {
-            const station = await addStation()
-            const updatedStation = { ...station, songs: [song] }
-            const savedStation = await updateStation(updatedStation)
-            navigate(`/station/${savedStation._id}`)
+            const newStation = stationService.getEmptyStation()
+            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
+            await addStation(station)
+            showSuccessMsg(`Added to ${station.name}`)
+
         } catch (err) {
             console.log('Cannot add a station')
         }

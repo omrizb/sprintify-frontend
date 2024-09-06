@@ -8,7 +8,7 @@ import {
     SET_STATION,
     UPDATE_STATION,
     UPDATE_STATIONS,
-    ADD_SONG_TO_STATION as UPDATE_STATION_AND_STAY,
+    UPDATE_STATION_AND_STAY as UPDATE_STATION_AND_STAY,
 } from '../reducers/station.reducer.js'
 
 
@@ -43,9 +43,9 @@ export async function removeStation(stationId) {
     }
 }
 
-export async function addStation() {
+export async function addStation(newStation) {
     try {
-        const newStation = stationService.getEmptyStation()
+        // const newStation = stationService.getEmptyStation()
         const savedStation = await stationService.save(newStation)
         store.dispatch(getCmdAddStation(savedStation))
         return savedStation
@@ -81,13 +81,28 @@ export async function updateStations(stations) {
     }
 }
 
-export async function updateStationAndStay(station) {
+export async function addSongToStation(station) {
     try {
         const savedStation = await stationService.save(station)
         store.dispatch(getCmdUpdateAndStay(savedStation))
+        showSuccessMsg(`Added to ${savedStation.name}`)
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
+        showErrorMsg(`Could not add to ${savedStation.name}`)
+        throw err
+    }
+}
+
+export async function removeSongFromStation(station) {
+    try {
+        const savedStation = await stationService.save(station)
+        store.dispatch(getCmdUpdateAndStay(savedStation))
+        showSuccessMsg(`Removed from ${savedStation.name}`)
+        return savedStation
+    } catch (err) {
+        console.log('Cannot save station', err)
+        showErrorMsg(`Could not add to ${savedStation.name}`)
         throw err
     }
 }

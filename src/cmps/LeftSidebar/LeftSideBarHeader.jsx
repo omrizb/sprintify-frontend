@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
 import { DropDownMenu } from '../Menus/DropDownMenu'
+import { stationService } from '../../services/station/station.service.local'
 
 export function LeftSideBarHeader() {
     const navigate = useNavigate()
@@ -21,7 +22,8 @@ export function LeftSideBarHeader() {
     async function handleAddStation() {
         setShowMenu(prevShowMenu => !prevShowMenu)
         try {
-            const station = await addStation()
+            const newStation = stationService.getEmptyStation()
+            const station = await addStation(newStation)
             navigate(`/station/${station._id}`)
         } catch (err) {
             console.log('Cannot add a station')

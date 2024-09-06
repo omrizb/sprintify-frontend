@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
-import { updateStationAndStay, updateStation } from '../../store/actions/station.actions'
+import { addSongToStation, removeSongFromStation, updateStation } from '../../store/actions/station.actions'
 import { DropDownMenu } from './DropDownMenu'
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
@@ -35,7 +35,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             icon: 'save',
             onClick: () => {
                 const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
-                updateStationAndStay(updatedStation)
+                addSongToStation(updatedStation)
             }
         })
 
@@ -45,7 +45,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             onClick: () => {
                 const updatedSongs = likedSongsStation.songs.filter(song => song.songId !== songId)
                 const updatedStation = { ...likedSongsStation, songs: updatedSongs }
-                updateStationAndStay(updatedStation)
+                removeSongFromStation(updatedStation)
             }
         })
 

@@ -10,6 +10,7 @@ export const spotifyService = {
     getArtist,
     getAlbum,
     getStation,
+    _search
 }
 
 // For debug
@@ -24,8 +25,8 @@ async function search(query, limit = 4) {
     return {
         songs: songs.tracks.items.map(track => ({
             spotifyId: track.id,
-            name: track.name,
-            artist: track.artist,
+            songName: track.name,
+            artist: track.artists[0].name,
             imgUrl: _getImageUrls(track.album),
             duration: Math.floor(track.duration_ms / 1000)
         })),
