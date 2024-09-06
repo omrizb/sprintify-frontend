@@ -207,7 +207,7 @@ export function Player() {
     return (
         <div className="player-container">
             {player.song
-                ? <YouTube key={player.song.songId} videoId={player.song.songId} opts={opts} onReady={onReady} />
+                ? <YouTube key={player.song.ytId} videoId={player.song.ytId} opts={opts} onReady={onReady} />
                 : <div></div>
             }
             <PlayerLeftPanel />

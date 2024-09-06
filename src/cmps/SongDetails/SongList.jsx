@@ -4,11 +4,11 @@ import { SvgIcon } from '../SvgIcon.jsx'
 
 export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStation, type, myStations }) {
 
-    const [hoveredSongId, setHoveredSongId] = useState(null)
-    const [selectedSongId, setSelectedSongId] = useState(null)
+    const [hoveredSpotifyId, setHoveredSpotifyId] = useState(null)
+    const [selectedSpotifyId, setSelectedSpotifyId] = useState(null)
 
-    function onSetSelectedSongId(songId) {
-        setSelectedSongId(songId)
+    function onSetSelectedSpotifyId(spotifyId) {
+        setSelectedSpotifyId(spotifyId)
     }
 
     return (
@@ -26,13 +26,13 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
 
             <ul className="list-body">
                 {station.songs.map((song, index) => {
-                    const selectedSongClass = (song.songId === selectedSongId) ? 'selected' : ''
+                    const selectedSongClass = (song.spotifyId === selectedSpotifyId) ? 'selected' : ''
                     return <li
-                        key={song.songId}
+                        key={song.spotifyId}
                         className={`song-list-item ${selectedSongClass}`}
-                        onMouseEnter={() => setHoveredSongId(song.songId)}
-                        onMouseLeave={() => setHoveredSongId('')}
-                        onClick={() => onSetSelectedSongId(song.songId)}
+                        onMouseEnter={() => setHoveredSpotifyId(song.spotifyId)}
+                        onMouseLeave={() => setHoveredSpotifyId('')}
+                        onClick={() => onSetSelectedSpotifyId(song.spotifyId)}
                     >
                         <SongPreview
                             type={type}
@@ -43,8 +43,8 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
                             stationId={station._id}
                             likedSongsStation={likedSongsStation}
                             onRemoveSong={onRemoveSong}
-                            hoveredSongId={hoveredSongId}
-                            selectedSongId={selectedSongId}
+                            hoveredSpotifyId={hoveredSpotifyId}
+                            selectedSpotifyId={selectedSpotifyId}
                             index={index + 1} />
                     </li>
                 })}

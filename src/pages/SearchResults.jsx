@@ -38,7 +38,7 @@ export function SearchResults() {
             {songs &&
                 <ul >
                     {songs.map((song, index) =>
-                        <li key={song.songId} >
+                        <li key={song.spotifyId} >
                             <SongPreview song={song} index={0} style={'search'} />
                         </li>)
                     }

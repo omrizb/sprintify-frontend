@@ -17,9 +17,9 @@ export async function loadSongs() {
     }
 }
 
-export async function loadSong(songId) {
+export async function loadSong(spotifyId) {
     try {
-        const song = await songService.getById(songId)
+        const song = await songService.getById(spotifyId)
         store.dispatch(getCmdSetSong(song))
     } catch (err) {
         console.log('Cannot load song', err)

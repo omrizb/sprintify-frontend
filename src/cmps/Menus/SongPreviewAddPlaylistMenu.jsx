@@ -7,7 +7,7 @@ import { stationService } from '../../services/station/station.service.local'
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
     const navigate = useNavigate()
-    const songId = song.songId
+    const spotifyId = song.spotifyId
     const [listItems, setListItems] = useState([])
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         })
         const stationsWithoutLiked = myStations.filter(station => station !== likedSongsStation)
 
-        const isSongLiked = likedSongsStation.songs.some(song => song.songId === songId)
+        const isSongLiked = likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
         const likedStationObj = buildListObj({
             name: likedSongsStation.name,
             station: likedSongsStation,
@@ -38,7 +38,7 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
 
         })
         const stationList = stationsWithoutLiked.map(station => {
-            const isInStation = station.songs.some(song => song.songId === songId)
+            const isInStation = station.songs.some(song => song.spotifyId === spotifyId)
             return buildListObj({
                 name: station.name,
                 station: station,
@@ -80,7 +80,7 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         setShowMenu(false)
         try {
             const newStation = stationService.getEmptyStation()
-            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl, songs: [song] }
+            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl.big, songs: [song] }
             const savedStation = await addStation(station)
             // const savedStation = await updateStation(updatedStation)
             navigate(`/station/${savedStation._id}`)
@@ -99,7 +99,7 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         const unCheckedStations = unCheckedItems.map(item => item = item.station)
 
         const stationsToAdd = checkedStations.filter(station =>
-            !station.songs.some(song => song.songId === songId)
+            !station.songs.some(song => song.spotifyId === spotifyId)
         )
 
         const updatedAdd = stationsToAdd.map(station => {
@@ -108,11 +108,11 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         })
 
         const stationsToRemove = unCheckedStations.filter(station => {
-            return station.songs.some(song => song.songId === songId)
+            return station.songs.some(song => song.spotifyId === spotifyId)
         })
 
         const updatedRemoved = stationsToRemove.map(station => {
-            const updatedSongs = station.songs.filter(song => song.songId != songId)
+            const updatedSongs = station.songs.filter(song => song.spotifyId != spotifyId)
             return { ...station, songs: updatedSongs }
         })
 

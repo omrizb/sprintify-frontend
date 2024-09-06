@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { storageService } from '../async-storage.service'
 import { utilService } from '../util.service.js'
 import { userService } from '../user'
-import { stations } from '../../../data-sample/station.js'
+import { stations } from '../../../data-sample/newStations.js'
 
 const STORAGE_KEY = 'stationDB'
 
@@ -50,7 +50,7 @@ async function query(filterBy = {
     likedByUser: '',
     stationType: '',
     createdBy: '',
-    songId: '',
+    spotifyId: '',
     sortField: '',
     sortDir: '',
     userId: '',
@@ -61,7 +61,7 @@ async function query(filterBy = {
     var stations = await storageService.query(STORAGE_KEY)
 
     const { txt, likedByUser, stationType, createdBy,
-        songId, sortField, sortDir, userId } = filterBy
+        spotifyId, sortField, sortDir, userId } = filterBy
 
 
 
@@ -78,8 +78,8 @@ async function query(filterBy = {
         stations = stations.filter(station => station.createdBy.id === createdBy)
     }
 
-    if (songId) {
-        stations = stations.find(station => station.songs.find(song => song.songId === songId))
+    if (spotifyId) {
+        stations = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
     }
 
     if (likedByUser) {
@@ -212,10 +212,10 @@ async function getMadeForYou(userId = 'bob', size = 4) {
     return utilService.getRandomItems(stations, size)
 }
 
-async function getSong(songId) {
-    const station = await query({ songId: songId })
-    // const station = stations.find(station => station.songs.find(song => song.songId === songId))
-    const song = station.songs.find(song => song.songId === songId)
+async function getSong(spotifyId) {
+    const station = await query({ spotifyId: spotifyId })
+    // const station = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
+    const song = station.songs.find(song => song.spotifyId === spotifyId)
 
     return song
 }

@@ -77,7 +77,7 @@ async function loadStationToPlayer(stationId, song, isShuffle) {
     try {
         const station = await stationService.getById(stationId)
 
-        const firstSongIdx = station.songs.findIndex(currSong => currSong.songId === song.songId)
+        const firstSongIdx = station.songs.findIndex(currSong => currSong.spotifyId === song.spotifyId)
         if (firstSongIdx === -1) {
             throw 'Cannot find songId in station.'
         }

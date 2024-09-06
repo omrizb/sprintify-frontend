@@ -7,8 +7,8 @@ import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 
 export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
 
-    const { songId } = song
-    const isLikedByUser = likedSongsStation.songs.some(song => song.songId === songId)
+    const { spotifyId } = song
+    const isLikedByUser = likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
     const [showMenu, setShowMenu] = useState(false)
 
     const listItems = getList()
@@ -24,7 +24,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             name: 'Remove from this playlist',
             icon: 'trash',
             onClick: () => {
-                const updatedSongs = station.songs.filter(song => song.songId !== songId)
+                const updatedSongs = station.songs.filter(song => song.spotifyId !== spotifyId)
                 const updatedStation = { ...station, songs: updatedSongs }
                 updateStation(updatedStation)
             }
@@ -43,7 +43,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             name: 'Remove from your Liked Songs',
             icon: 'removeFromLibrary',
             onClick: () => {
-                const updatedSongs = likedSongsStation.songs.filter(song => song.songId !== songId)
+                const updatedSongs = likedSongsStation.songs.filter(song => song.spotifyId !== spotifyId)
                 const updatedStation = { ...likedSongsStation, songs: updatedSongs }
                 removeSongFromStation(updatedStation)
             }
