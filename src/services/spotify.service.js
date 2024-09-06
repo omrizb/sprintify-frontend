@@ -32,8 +32,9 @@ async function search(query, limit = 4) {
             spotifyId: track.id,
             songName: track.name,
             artist: track.artists[0],
+            album: { name: track.album.name, spotifyId: track.album.id },
             imgUrl: _getImageUrls(track.album),
-            duration: Math.floor(track.duration_ms / 1000)
+            duration: Math.floor(track.duration_ms / 1000),
         })),
         artists: artists.artists.items.map(artist => ({
             spotifyId: artist.id,

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { SvgButton } from "./SvgButton.jsx"
 import { SvgIcon } from './SvgIcon'
 import { utilService } from '../services/util.service.js'
+import { SearchBox } from './SearchBox.jsx'
 
 
 export function GlobalNav() {
@@ -11,7 +12,7 @@ export function GlobalNav() {
     const debouncedNavigate = utilService.debounce(navToResults, 1500)
     const location = useLocation()
     const isHome = location.pathname === '/'
-    const isbrowse = location.pathname === '/search'
+    const isBrowse = location.pathname === '/search'
 
     function handleChange(ev) {
         var value = ev.target.value
@@ -41,35 +42,7 @@ export function GlobalNav() {
                 </div>
                 <div className="search-container">
                     <Link to={`/search`}>
-                        <div className="text-container">
-                            <div>
-                                <SvgButton
-                                    btnClass="btn-search-nav"
-                                    svgIcon="search"
-                                    svgClass="svg-big1"
-                                    tooltipTxt="Search"
-                                />
-                            </div>
-                            <input
-                                type="text"
-                                name="txt"
-                                placeholder="What do you want to play?"
-                                onChange={handleChange}
-                                required
-                            />
-                            <div className="flex-center-center">
-                                <div className="border-element">
-                                </div>
-                            </div>
-                            <div>
-                                <SvgButton
-                                    btnClass="btn-search-nav"
-                                    svgIcon={isbrowse ? 'browseFull' : 'browse'}
-                                    svgClass="svg-big1"
-                                    tooltipTxt="Browse"
-                                />
-                            </div>
-                        </div>
+                        <SearchBox handleChange={handleChange} isBrowse={isBrowse} />
                     </Link>
                 </div>
             </div>

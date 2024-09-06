@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { MiniSongPreview } from './MiniSongPreview'
 
-export function MiniSongList({ songs }) {
+export function MiniSongList({ songs, onClickAdd }) {
 
     const currPlayingSong = useSelector(store => store.playerModule.player.song)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
@@ -38,7 +38,7 @@ export function MiniSongList({ songs }) {
             {songs.map(song => {
                 const isSongPlaying = song.spotifyId === currPlayingSong.spotifyId && isPlaying
                 return <li key={song.spotifyId}>
-                    <MiniSongPreview song={song} isSongPlaying={isSongPlaying} />
+                    <MiniSongPreview song={song} isSongPlaying={isSongPlaying} onClickAdd={onClickAdd} />
                 </li>
             })}
         </ul >

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export function MiniSongPreview({ song, type = 'simple', isSongPlaying }) {
+export function MiniSongPreview({ song, type = 'simple', isSongPlaying, onClickAdd }) {
 
     let articleClassName
     let imgClassName
@@ -26,6 +26,10 @@ export function MiniSongPreview({ song, type = 'simple', isSongPlaying }) {
                 <span className="song-name"><Link to={`/track/${song.spotifyId}`}>{song.songName}</Link></span>
                 <span className="artist">{song.artist.name}</span>
             </div>
+            {(!song.ytId) && <div className="search-songs">
+                <span className="album-name">{song.album.name}</span>
+                <button onClick={() => onClickAdd(song)} className="btn-tinted add-btn">Add</button>
+            </div>}
         </article>
     )
 }

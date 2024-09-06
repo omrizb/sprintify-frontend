@@ -2,6 +2,7 @@
 
     @include flex($justify: start);
     height: 100%;
+    
 
     &.card {
         flex-direction: column;
@@ -43,6 +44,7 @@
 
     .song-info {
         @include flex($direction: column, $align: start);
+        width: 220px;
 
         .song-name {
             color: $primaryTxtClr;
@@ -52,6 +54,25 @@
     
             font-size: $textSizeSmaller-1;
             color: $secondaryTxtClr;
+        }
+    }
+
+    .search-songs {
+        width: 220px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .album-name {
+            // text-align: center;
+            flex-grow: 1;
+            font-size: $textSizeSmaller-1;
+            color: $secondaryTxtClr;
+        }
+
+        .add-btn {
+            margin-left: auto;
+            background-color: transparent;
+            border: 1px solid $secondaryTxtClr;
         }
     }
 

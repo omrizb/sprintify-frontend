@@ -46,7 +46,6 @@ async function getTopVideo(value) {
         const apiKey = VITE_YOUTUBE_EINAT_API_KEY
         const search = await getVideos(value, 1)
         const video = search[0]
-        console.log(video)
 
         const videoDetails = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
