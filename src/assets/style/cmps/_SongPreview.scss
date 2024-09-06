@@ -41,7 +41,6 @@
             }
         }
 
-
         .sub-menu{
             .drop-down-menu{
                 right: 245px;
@@ -69,6 +68,7 @@
     &.table {
 
         .album {
+            @include overflow-ellipsis;
             font-size: $textSizeSmaller-1;
         }
 

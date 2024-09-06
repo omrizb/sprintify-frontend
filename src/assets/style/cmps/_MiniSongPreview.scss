@@ -2,6 +2,7 @@
 
     @include flex($justify: start);
     height: 100%;
+    width: 100%;
 
     &.card {
         flex-direction: column;
@@ -45,11 +46,12 @@
         @include flex($direction: column, $align: start);
 
         .song-name {
+            @include overflow-ellipsis;
             color: $primaryTxtClr;
         }
     
         .artist {
-    
+            @include overflow-ellipsis;
             font-size: $textSizeSmaller-1;
             color: $secondaryTxtClr;
         }

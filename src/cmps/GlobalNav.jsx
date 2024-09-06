@@ -91,7 +91,7 @@ export function GlobalNav() {
                     tooltipTxt={"What's New"}
                 />
 
-                <div className="btn-global-nav">
+                <div className="btn-global-nav-gray">
                     <button className="profile-btn">D</button>
                 </div>
             </div>

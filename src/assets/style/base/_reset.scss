@@ -14,9 +14,9 @@ html {
 }
 
 body {
+    -webkit-font-smoothing: antialiased;
     margin: 0;
     font-family: $fonts, $fallbackFonts;
-    font-weight: 300;
     color: $primaryTxtClr;
 }
 

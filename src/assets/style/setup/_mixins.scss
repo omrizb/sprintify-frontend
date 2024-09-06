@@ -39,6 +39,7 @@
     align-items: $align;
     flex-direction: $direction;
     gap: $gap;
+    min-width: 0;
 }
 
 @mixin align-to-end-flex() {
@@ -46,6 +47,13 @@
     display: flex;
     justify-content: end;
     align-items: center;
+}
+
+@mixin overflow-ellipsis() {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 //aspect ratio mixin
