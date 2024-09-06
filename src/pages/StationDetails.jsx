@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { updateStation, loadStation } from '../store/actions/station.actions.js'
+import { colorUtilService } from '../services/color.util.service.js'
 
 import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -88,7 +89,7 @@ export function StationDetails() {
             <HeaderFixer
                 header={renderHeader(station)}
                 className="padded-top-rounded-box"
-                bgColor={bgColor}
+                bgColor={bgColor && colorUtilService.adjustBrightness(bgColor, 0.4)}
                 showFromY={150}
             >
                 <StationDetailsHeader

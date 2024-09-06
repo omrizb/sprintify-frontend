@@ -1,7 +1,28 @@
 .mini-song-preview {
 
-    @include flex;
+    @include flex($justify: start);
     height: 100%;
+
+    &.card {
+        flex-direction: column;
+        gap: 16px;
+
+        &.card {
+            .song-info {
+                width: 100%;
+
+                .song-name {
+                    font-family: SprintifyUITitle;
+                    font-size: $textSizeLarger1;
+                    font-weight: 700;
+                }
+
+                .artist {
+                    font-size: $textSizeBase;
+                }
+            }
+        }
+    }
 
     .thumbnail {
         width: 40px;
@@ -13,11 +34,16 @@
             width: 56px;
             height: 56px;
         }
+
+        &.card {
+            width: 100%;
+            height: auto;
+        }
     }
 
     .song-info {
         @include flex($direction: column, $align: start);
-        
+
         .song-name {
             color: $primaryTxtClr;
         }
@@ -28,7 +54,6 @@
             color: $secondaryTxtClr;
         }
     }
-
 
     &.currently-playing {
         .song-name {

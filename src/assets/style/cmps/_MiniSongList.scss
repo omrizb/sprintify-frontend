@@ -1,0 +1,38 @@
+.mini-song-list {
+    margin: 0 0 24px;
+    overflow: hidden;
+    
+    li {
+        position: relative;
+        @include flex($justify:start);
+        height: 56px;
+        padding: 0 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+
+        &.slide-out {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        &.slide-in {
+            transform: translateY(-100%);
+            opacity: 1;
+        }
+
+        &.enter {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        &.selected {
+            background-color: $listSelectedClr;
+        }
+
+        &:hover {
+            background-color: $listHoverClr;
+        }
+        
+    }
+}

@@ -106,7 +106,6 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case ADD_TO_SONGS_ADDED_MANUALLY:
-            console.log(action)
             newState = {
                 ...state,
                 queue: {
@@ -116,11 +115,12 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case POP_FROM_SONGS_ADDED_MANUALLY:
+            console.log
             newState = {
                 ...state,
                 queue: {
                     ...state.queue,
-                    songsAddedManually: state.songsAddedManually.slice(1)
+                    songsAddedManually: state.queue.songsAddedManually.slice(1)
                 }
             }
             break
