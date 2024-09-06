@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { spotifyService } from '../services/spotify.service.js'
 import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
+import { Loader } from '../cmps/Loader.jsx'
 
 
 export function SongDetails() {
@@ -29,26 +30,15 @@ export function SongDetails() {
         }
     }
 
-    // const songDuration = !song
-    //     ? 0
-    //     : (song.duration.hours * 3600) + (song.duration.minutes * 60) + song.duration.seconds
 
-    // const songDurationTxt = utilService.getTimeStr(songDuration)
-
-
-
-    return (
+    return (isLoading)
+        ? <Loader /> :
         <div className="song-details">
 
-            {isLoading && <div>Loading...</div>}
-
-            {(!isLoading) &&
-                <DetailsPageHeader song={song} pageType={'song'} />
-            }
-
+            <DetailsPageHeader song={song} pageType={'song'} />
 
         </div>
-    )
+
 }
 
 

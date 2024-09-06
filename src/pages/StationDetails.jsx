@@ -100,15 +100,7 @@ export function StationDetails() {
                     pageType={'station'}
                     onEditStation={() => setIsModalOpen(true)
                     }
-
                 />
-                {/* <StationDetailsHeader
-                    station={station}
-                    onSetBgColor={setBgColor}
-                    onEdit={onEdit}
-                    onEditStation={() => setIsModalOpen(true)}
-
-                /> */}
 
                 <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>
 
