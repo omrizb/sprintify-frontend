@@ -16,7 +16,6 @@ export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, 
     const fac = new FastAverageColor()
 
     const headerImg = pageType === 'station' ? station.stationImgUrl : song.imgUrl.big
-    console.log(song)
 
     useEffect(() => {
         adjustStationNameSize()
