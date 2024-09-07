@@ -55,10 +55,10 @@ export function HeaderFixer({ header, className, bgColor, showFromY = -1, childr
         <>
             <div className="header-fixer">
                 <div
-                    className={`background ${className}`}
+                    className={`header-fixer-background ${className}`}
                     style={{ ...style, backgroundColor: bgColor }}
                 ></div>
-                <header className={className} style={{ ...style, opacity: (opacity) ? 1 : 0 }}>
+                <header className={`header-fixer-header ${className}`} style={{ ...style, opacity: (opacity) ? 1 : 0 }}>
                     {header}
                 </header>
             </div>
