@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { updateStation, loadStation } from '../store/actions/station.actions.js'
 import { colorUtilService } from '../services/color.util.service.js'
 
-import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeader.jsx'
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
 import { SongList } from '../cmps/SongDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
@@ -102,7 +101,8 @@ export function StationDetails() {
                     }
                 />
 
-                <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>
+                {(station.songs > 0) &&
+                    <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>}
 
                 <StationDetailsActions
                     station={station}
