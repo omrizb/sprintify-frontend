@@ -27,7 +27,7 @@ export function Player() {
     // console.log('stationName', stationName)
     // console.log('originalStationSongs', originalStationSongs)
     // console.log('remainingStationSongs', remainingStationSongs)
-    console.log('queue', queue)
+    // console.log('queue', queue)
     // console.log('playedSongsHistory', playedSongsHistory)
 
     useEffect(() => {
