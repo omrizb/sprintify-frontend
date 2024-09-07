@@ -44,22 +44,22 @@
     .player-right-panel {
         @include flex($justify: flex-end);
         width: 100%;
+    }
 
-        .active-icon {
-            color: $iconActive;
-            fill: $iconActive;
+    .active-icon {
+        color: $iconActive;
+        fill: $iconActive;
 
-            i::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 4px;
-                height: 4px;
-                border-radius: 100vh;
-                background-color: $iconActive;
-            }
+        i::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 100vh;
+            background-color: $iconActive;
         }
     }
 

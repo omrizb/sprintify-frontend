@@ -16,7 +16,9 @@ import {
     POP_FROM_SONGS_ADDED_MANUALLY,
     SET_SONGS_HISTORY,
     ADD_TO_SONGS_HISTORY,
-    POP_FROM_SONGS_HISTORY
+    POP_FROM_SONGS_HISTORY,
+    TOGGLE_SHUFFLE,
+    TOGGLE_REPEAT
 } from '../reducers/player.reducer'
 
 export const playerActions = {
@@ -28,8 +30,8 @@ export const playerActions = {
     SET_VOLUME: 'setVolume',
     PLAY_NEXT: 'playNext',
     PLAY_PREV: 'playPrev',
-    SET_SHUFFLE: 'setShuffle',
-    SET_REPEAT: 'setRepeat',
+    TOGGLE_SHUFFLE: 'toggleShuffle',
+    TOGGLE_REPEAT: 'toggleRepeat',
     ADD_TO_QUEUE: 'addToQueue',
     REMOVE_FROM_QUEUE: 'removeFromQueue',
     CLEAR_QUEUE: 'clearQueue',
@@ -59,7 +61,9 @@ export const executePlayerAction = {
     removeNextSongFromAddedManuallyQueue,
     addSongToSongsHistory,
     removeSongFromSongsHistory,
-    setSongsAddedManuallyQueue
+    setSongsAddedManuallyQueue,
+    toggleShuffle,
+    toggleRepeat
 }
 
 function removeTopActionFromQueue() {
@@ -120,5 +124,13 @@ function addSongToSongsHistory(song) {
 
 function removeSongFromSongsHistory() {
     store.dispatch({ type: POP_FROM_SONGS_HISTORY })
+}
+
+function toggleShuffle() {
+    store.dispatch({ type: TOGGLE_SHUFFLE })
+}
+
+function toggleRepeat() {
+    store.dispatch({ type: TOGGLE_REPEAT })
 }
 

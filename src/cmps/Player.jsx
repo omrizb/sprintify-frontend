@@ -12,12 +12,8 @@ export function Player() {
     const isFirstSongLoaded = useSelector(state => state.playerModule.isFirstSongLoaded)
     const player = useSelector(state => state.playerModule.player)
     const control = useSelector(state => state.playerModule.control)
-    // const stationId = useSelector(state => state.playerModule.stationId)
-    // const stationName = useSelector(state => state.playerModule.stationName)
-    // const originalStationSongs = useSelector(state => state.playerModule.originalStationSongs)
-    // const remainingStationSongs = useSelector(state => state.playerModule.remainingStationSongs)
     const queue = useSelector(state => state.playerModule.queue)
-    // const playedSongsHistory = useSelector(state => state.playerModule.playedSongsHistory)
+
     const ytPlayerRef = useRef(null)
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
     const isProcessingRef = useRef(false)
@@ -30,7 +26,7 @@ export function Player() {
     // console.log('stationName', stationName)
     // console.log('originalStationSongs', originalStationSongs)
     // console.log('remainingStationSongs', remainingStationSongs)
-    // console.log('queue', queue)
+    console.log('queue', queue)
     // console.log('playedSongsHistory', playedSongsHistory)
 
     useEffect(() => {
@@ -119,10 +115,12 @@ export function Player() {
                 executePlayerAction.setPlayer({ song: prevSong })
                 break
 
-            case playerActions.SET_SHUFFLE:
+            case playerActions.TOGGLE_SHUFFLE:
+                executePlayerAction.toggleShuffle()
                 break
 
-            case playerActions.SET_REPEAT:
+            case playerActions.TOGGLE_REPEAT:
+                executePlayerAction.toggleRepeat()
                 break
 
             case playerActions.ADD_TO_QUEUE:

@@ -33,7 +33,7 @@ export function PlayerMiddlePanel({ getPlayerState }) {
                     svgIcon="playerShuffle"
                     tooltipTxt="Shuffle"
                     isActive={queue.isShuffle}
-                    onClick={() => setPlayerAction(playerActions.SET_SHUFFLE)}
+                    onClick={() => setPlayerAction(playerActions.TOGGLE_SHUFFLE)}
                 />
                 <PanelIcon
                     svgIcon="playerPreviousSong"
@@ -55,7 +55,8 @@ export function PlayerMiddlePanel({ getPlayerState }) {
                 <PanelIcon
                     svgIcon="playerRepeat"
                     tooltipTxt="Repeat"
-                    onClick={() => setPlayerAction(playerActions.SET_REPEAT)}
+                    isActive={queue.isRepeat}
+                    onClick={() => setPlayerAction(playerActions.TOGGLE_REPEAT)}
                 />
             </div>
             <div className="duration-bar">

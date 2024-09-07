@@ -13,6 +13,8 @@ export const POP_FROM_SONGS_ADDED_MANUALLY = 'POP_FROM_SONGS_ADDED_MANUALLY'
 export const SET_SONGS_HISTORY = 'SET_SONGS_HISTORY'
 export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
+export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
+export const TOGGLE_REPEAT = 'TOGGLE_REPEAT'
 
 const initialState = {
     isFirstSongLoaded: false,
@@ -146,6 +148,12 @@ export function playerReducer(state = initialState, action = {}) {
                     playedSongsHistory: state.queue.playedSongsHistory.slice(0, -1)
                 }
             }
+            break
+        case TOGGLE_SHUFFLE:
+            newState = { ...state, queue: { ...state.queue, isShuffle: !state.queue.isShuffle } }
+            break
+        case TOGGLE_REPEAT:
+            newState = { ...state, queue: { ...state.queue, isRepeat: !state.queue.isRepeat } }
             break
         default:
             return state
