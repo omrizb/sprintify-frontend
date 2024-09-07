@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import YouTube from 'react-youtube'
+import _ from 'lodash'
 
 import { playerActions, executePlayerAction } from '../store/actions/player.actions'
 import { PlayerLeftPanel } from './Player/PlayerLeftPanel'
@@ -116,6 +117,17 @@ export function Player() {
                 break
 
             case playerActions.TOGGLE_SHUFFLE:
+                console.log('shuffle', queue.isShuffle)
+                if (queue.isShuffle) {
+                    const currSongIdx = queue.originalStationSongs.findIndex(song => song.spotifyId === player.song.spotifyId)
+                    const songsAfterCurrSong = (currSongIdx + 1 === queue.originalStationSongs.length)
+                        ? []
+                        : queue.originalStationSongs.slice(currSongIdx + 1)
+                    executePlayerAction.setSongsRemainingStationQueue(songsAfterCurrSong)
+                } else {
+                    const shuffledSongs = _.shuffle(queue.originalStationSongs)
+                    executePlayerAction.setSongsRemainingStationQueue(shuffledSongs)
+                }
                 executePlayerAction.toggleShuffle()
                 break
 

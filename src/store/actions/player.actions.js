@@ -57,11 +57,12 @@ export const executePlayerAction = {
     loadSongToPlayer,
     loadStationToPlayer,
     removeNextSongFromRemainingStationQueue,
+    setSongsRemainingStationQueue,
     addSongsToAddedManuallyQueue,
     removeNextSongFromAddedManuallyQueue,
+    setSongsAddedManuallyQueue,
     addSongToSongsHistory,
     removeSongFromSongsHistory,
-    setSongsAddedManuallyQueue,
     toggleShuffle,
     toggleRepeat
 }
@@ -104,6 +105,10 @@ async function loadStationToPlayer(stationId, song, isShuffle) {
 
 function removeNextSongFromRemainingStationQueue() {
     store.dispatch({ type: POP_FROM_REMAINING_STATION_SONGS })
+}
+
+function setSongsRemainingStationQueue(songs) {
+    store.dispatch({ type: SET_REMAINING_STATION_SONGS, songs })
 }
 
 function addSongsToAddedManuallyQueue(songs) {
