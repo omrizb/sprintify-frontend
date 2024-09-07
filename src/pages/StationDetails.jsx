@@ -9,7 +9,7 @@ import { StationDetailsHeader } from '../cmps/StationDetails/StationDetailsHeade
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
 import { SongList } from '../cmps/SongDetails/SongList.jsx'
 import { Footer } from '../cmps/Footer.jsx'
-import { AddSongs } from '../cmps/AddSongs.jsx'
+import { MoreSongs } from '../cmps/StationDetails/MoreSongs.jsx'
 import { Loader } from '../cmps/Loader.jsx'
 import { Modal } from '../cmps/Modal.jsx'
 import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
@@ -118,7 +118,7 @@ export function StationDetails() {
                     type="table"
                 />}
 
-                {isOwnedByUser && <AddSongs />}
+                {isOwnedByUser && <MoreSongs />}
 
                 <Footer />
             </HeaderFixer>

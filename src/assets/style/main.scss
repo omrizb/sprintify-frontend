@@ -23,7 +23,6 @@
 @import "pages/AddStation";
 
 /* Components */
-@import "cmps/AddSongs";
 @import "cmps/ArtistPreview";
 @import "cmps/DisplayFooter";
 @import "cmps/DropDownMenu";
@@ -40,6 +39,7 @@
 @import "cmps/MiniSongList";
 @import "cmps/MiniSongPreview";
 @import "cmps/Modal";
+@import "cmps/MoreSongs";
 @import "cmps/NowPlayingDetails";
 @import "cmps/PlayButton";
 @import "cmps/Player";
@@ -62,3 +62,4 @@
 @import "cmps/UserMsg";
 @import "cmps/VolumeController";
 @import "cmps/SearchBox";
+@import "cmps/RecommendedSongs";
