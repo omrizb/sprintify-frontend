@@ -49,6 +49,12 @@
     align-items: center;
 }
 
+@mixin margin-top-box($height) {
+    display: flex;
+    align-items: end;
+    height: $height;
+}
+
 @mixin overflow-ellipsis() {
     max-width: 100%;
     white-space: nowrap;

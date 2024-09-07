@@ -40,7 +40,7 @@ export function LeftSidebar() {
             <div className="my-library" >
                 <LeftSideBarHeader />
                 <LeftSideBarFilter userId={userId} />
-                <StationList stations={stations} viewArea={'leftSide'} />
+                <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
             </div>
         </div>
 

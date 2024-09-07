@@ -96,14 +96,13 @@
         position: relative;
         flex-direction: column;
         gap: 12px;
-        padding: 8px;
         border-radius: 8px;
 
         .image-container {
             position: relative;
             
             img {
-                width: 150px;
+                width: 100%;
                 border-radius: 4px;
             }
 

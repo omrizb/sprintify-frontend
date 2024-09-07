@@ -1,4 +1,16 @@
 .main-view-body{
+    display: grid;
+    gap: 32px;
+    padding-inline: 16px;
     
-   @include section;
+    .stations-top {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5em;
+    }
+
+    .card-stations {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
 }

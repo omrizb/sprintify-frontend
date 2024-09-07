@@ -184,6 +184,11 @@
     padding: 0 $sectionPaddingInline;
 }
 
+.top-rounded-box {
+    border-top-left-radius: $sectionBorderRadius;
+    border-top-right-radius: $sectionBorderRadius;
+}
+
 .padded-top-rounded-box {
     padding: $sectionPaddingInline $sectionPaddingBlock;
     border-top-left-radius: $sectionBorderRadius;

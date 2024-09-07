@@ -1,60 +1,31 @@
-.station-list{
+.station-list {
 
-    ul {
+    &.left-side-stations {
         li{
             border-radius: 8px;
+            cursor: pointer;
             
             &:hover{
                 background-color: rgba(179, 179, 179, 0.05);
-                cursor: pointer;
-                
             }
         }
     }
 
-    .main-view-stations{
+    &.card-stations {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-rows: 1fr;
+        grid-auto-rows: 0;
+        margin: -8px;
 
-        header{
-            display: grid;
-            grid-auto-flow: column;
-            align-items: center;
-            font-weight: 700;
-            height: 60px;
-            
-            h2 {
-                font-size: 20px;
-                display: grid;
-                justify-self: start;
-                font-weight: inherit;
+        li {
+            padding: 8px;
+            border-radius: 8px;
 
-                &:hover {
-                    text-decoration: underline;
-                    cursor: pointer;
-                }
+            &:hover{
+                background-color: rgba(179, 179, 179, 0.05);
             }
-
-            p {
-                justify-self: end;
-                font-size: 13px;
-                color: $mediumTxtClr;
-
-                &:hover {
-                    text-decoration: underline;
-                    cursor: pointer;
-                }
-            }
-
-            
-        }
-        .stations-top {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5em;
-        }
-
-        .card-stations {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         }
     }
+
 }

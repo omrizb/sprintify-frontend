@@ -21,7 +21,9 @@ export function PlayButton({ type, stationId, stationName, song }) {
         }
     }, [player.isPlaying, player.song.spotifyId, playerStationId])
 
-    function handleClick() {
+    function handleClick(ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
         if (!song) return
         if (playerStationId !== stationId ||
             player.song.spotifyId !== song.spotifyId
