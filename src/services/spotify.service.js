@@ -10,6 +10,7 @@ export const spotifyService = {
     getArtist,
     getAlbum,
     getStation,
+    getRecommendations,
     _search,
 }
 
@@ -56,10 +57,11 @@ async function getSong(spotifyId) {
     const song = await _https(`/tracks/${spotifyId}`)
     // console.log(song)
     return {
+        spotifyId: song.id,
         songName: song.name,
         artist: { name: song.artists[0].name, spotifyId: song.artists[0].id },
         album: { name: song.album.name, spotifyId: song.album.id },
-        duration: song.duration_ms / 1000,
+        duration: Math.floor(song.duration_ms / 1000),
         imgUrl: { big: song.album.images[0].url, small: song.album.images[2].url },
         releaseDate: song.album.release_date,
     }
@@ -96,25 +98,29 @@ async function getAlbum(spotifyId) {
     }
 }
 
-// name: 'Summer Vibes',
-//         type: 'playlist',
-//         isPinned: false,
-//         stationImgUrl: 'https://i.scdn.co/image/ab67616d0000b27346e4e8079743a66a5467d091', // image of one of the songs
-//         tags: ['Happy', 'Chill', 'Upbeat'],
-//         createdBy: {
-//             id: 'AAAA',
-//             fullName: 'Darr',
-//             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-//         },
-//         likedByUsers: ['AAAA', 'F6g7H8i9J0', 'K1L2M3N4O5'],
-//         createdAt: getRandomTimestamp(2018, 2023),
-//         addedAt: getRandomTimestamp(2022, 2023),
-//         songs: [
-//             {
-//                
-//             },
+async function getRecommendations(songs) {
+    const songsList = (songs.length <= 5) ? songs : songs.slice(0, 5)
+    const songsIdsStr = songsList.map(song => song.spotifyId).join(',')
+    const res = await _https(`/recommendations?seed_tracks=${songsIdsStr}`)
 
-//         ]
+    const recommendedSongs = res.tracks.map(track => {
+        return {
+            spotifyId: track.id,
+            songName: track.name,
+            artist: { name: track.artists[0].name, spotifyId: track.artists[0].id },
+            album: { name: track.album.name, spotifyId: track.album.id },
+            duration: Math.floor(track.duration_ms / 1000),
+            imgUrl: { big: track.album.images[0].url, small: track.album.images[2].url },
+            releaseDate: track.album.release_date,
+
+        }
+    })
+
+    return recommendedSongs
+
+}
+
+
 async function getStation(spotifyId) {
     const station = await _https(`/stations/${spotifyId}`)
     const songs = await _getFullSongs(station.tracks.items)
@@ -132,25 +138,7 @@ async function getStation(spotifyId) {
         },
         songs
     }
-    // const searchResults = await _search(stationName, 'playlist')
-    // const station = searchResults.playlists.items[0]
-    // const songsResults = await _https(station.tracks.href.match(/playlists\/.+$/)[0])
-    // const songs = songsResults.items.length > 20 ? songsResults.items.slice(0, 20) : songsResults.items
-    // return songs
-    // return {
-    //     name: station.name,
-    //     type:
-    //     isPinned:
-    //     stationImgUrl
-    //     tags
-    //     createdBy:
-    //     likedByUsers:
-    //     createdAt
-    //     addedAt
-    //     songs
 
-    // }
-    // return _https(`playlists/${artistId}`)
 }
 
 async function _search(query, type, limit = 20) {
@@ -210,7 +198,7 @@ async function _getFullSongs(spotifySongs) {
     const songsIds = spotifySongs.map(song => song.id).join(',')
     const songs = await _https(`/tracks?ids=${songsIds}`)
 
-    for (let i = 0; i < songs.length; i++) {
+    for (let i = 0; i < songs.tracks.length; i++) {
         const currSong = songs.tracks[i]
 
         res.push({
