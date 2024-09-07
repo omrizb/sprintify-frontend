@@ -6,7 +6,11 @@
     .stations-top {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.5em;
+        gap: 8px;
+
+        @container (min-width: 815px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     .card-stations {
