@@ -95,6 +95,14 @@ export function Player() {
                     nextSong = queue.remainingStationSongs[0]
                     executePlayerAction.removeNextSongFromRemainingStationQueue()
 
+                } else if (queue.isRepeat) {
+                    const songs = (queue.isShuffle)
+                        ? _.shuffle(queue.originalStationSongs)
+                        : queue.originalStationSongs
+
+                    nextSong = songs[0]
+                    executePlayerAction.setSongsRemainingStationQueue(songs.slice(1))
+
                 } else {
                     executePlayerAction.setPlayer({ isPlaying: false })
                     break
@@ -117,7 +125,6 @@ export function Player() {
                 break
 
             case playerActions.TOGGLE_SHUFFLE:
-                console.log('shuffle', queue.isShuffle)
                 if (queue.isShuffle) {
                     const currSongIdx = queue.originalStationSongs.findIndex(song => song.spotifyId === player.song.spotifyId)
                     const songsAfterCurrSong = (currSongIdx + 1 === queue.originalStationSongs.length)
