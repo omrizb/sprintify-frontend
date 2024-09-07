@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux'
+
+import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { MiniSongList } from '../SongDetails/MiniSongList'
 
 export function SongsQueue() {
@@ -15,7 +17,12 @@ export function SongsQueue() {
             <MiniSongList songs={[currPlayingSong]} />
 
             {songsAddedManually.length > 0 && <>
-                <div className="header-text">Next in queue</div>
+                <div className="queue-header">
+                    <div className="header-text">Next in queue</div>
+                    <div className="clear-queue" onClick={() => setPlayerAction(playerActions.CLEAR_QUEUE)}>
+                        Clear queue
+                    </div>
+                </div>
                 <MiniSongList songs={songsAddedManually} />
             </>}
 

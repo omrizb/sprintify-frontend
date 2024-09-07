@@ -115,7 +115,6 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case POP_FROM_SONGS_ADDED_MANUALLY:
-            console.log
             newState = {
                 ...state,
                 queue: {

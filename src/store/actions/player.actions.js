@@ -59,6 +59,7 @@ export const executePlayerAction = {
     removeNextSongFromAddedManuallyQueue,
     addSongToSongsHistory,
     removeSongFromSongsHistory,
+    setSongsAddedManuallyQueue
 }
 
 function removeTopActionFromQueue() {
@@ -109,6 +110,10 @@ function removeNextSongFromAddedManuallyQueue() {
     store.dispatch({ type: POP_FROM_SONGS_ADDED_MANUALLY })
 }
 
+function setSongsAddedManuallyQueue(songs) {
+    store.dispatch({ type: SET_SONGS_ADDED_MANUALLY, songs })
+}
+
 function addSongToSongsHistory(song) {
     store.dispatch({ type: ADD_TO_SONGS_HISTORY, song })
 }
@@ -117,6 +122,3 @@ function removeSongFromSongsHistory() {
     store.dispatch({ type: POP_FROM_SONGS_HISTORY })
 }
 
-export function setQueue(queue) {
-    store.dispatch({ type: SET_SONGS_ADDED_MANUALLY, queue })
-}

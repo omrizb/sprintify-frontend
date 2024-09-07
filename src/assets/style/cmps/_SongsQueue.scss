@@ -1,0 +1,22 @@
+.songs-queue {
+    .queue-header {
+        @include flex($justify: space-between);
+
+        .clear-queue {
+            font-size: $textSizeSmaller-1;
+            font-weight: 700;
+            color: $secondaryTxtClr;
+            cursor: pointer;
+
+            &:hover {
+                color:  $primaryTxtClr;
+                transform: scale(1.05);
+            }
+        
+            &:active {
+                color: $pressedTxtClr;
+                transform: scale(1);
+            }
+        }
+    }
+}

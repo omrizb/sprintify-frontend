@@ -133,6 +133,7 @@ export function Player() {
                 break
 
             case playerActions.CLEAR_QUEUE:
+                executePlayerAction.setSongsAddedManuallyQueue([])
                 break
 
             case playerActions.RESET_ACTION:
