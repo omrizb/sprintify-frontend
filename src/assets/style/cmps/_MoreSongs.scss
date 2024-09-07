@@ -1,9 +1,11 @@
-.add-songs {
+.more-songs {
     
     @include section;
     border-radius: 0;
 
     h1 {
+        display: flex;
+        justify-content: space-between;
         font: inherit;
         font-weight: 700;
         font-size: 24px;
@@ -87,6 +89,18 @@
 
             }
             
+        }
+    }
+
+    p{
+        margin: 0;
+        padding-right: 10px;
+        width: max-content;
+        margin-left: auto; 
+        font-size: 14px;
+
+        &:hover{
+            cursor: pointer;
         }
     }
 
