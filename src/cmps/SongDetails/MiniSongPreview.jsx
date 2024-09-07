@@ -29,7 +29,7 @@ export function MiniSongPreview({ song, type = 'simple', isCurrentlyPlaying, onC
                 <div className="artist">{song.artist.name}</div>
             </div>
             {(!song.ytId) && <div className="search-songs">
-                <span className="album-name">{song.album.name}</span>
+                <span className="album">{song.album.name}</span>
                 <button onClick={() => onClickAdd(song)} className="btn-tinted add-btn">Add</button>
             </div>}
         </article>

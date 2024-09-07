@@ -47,7 +47,8 @@
     .song-info {
         @include flex($direction: column, $align: start);
         width: 220px;
-
+        
+        
         .song-name {
             @include overflow-ellipsis;
             color: $primaryTxtClr;
@@ -61,21 +62,25 @@
     }
 
     .search-songs {
-        width: 220px;
+        
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .album-name {
-            // text-align: center;
-            flex-grow: 1;
-            font-size: $textSizeSmaller-1;
-            color: $secondaryTxtClr;
-        }
-
+       
         .add-btn {
             margin-left: auto;
+            margin-inline-start: 0.8em;
             background-color: transparent;
             border: 1px solid $secondaryTxtClr;
+        }
+
+        .album {
+            width: 180px;
+            margin-inline-start: 0.8em;
+            @include overflow-ellipsis;
+            font-size: $textSizeSmaller-1;
+            color: $secondaryTxtClr;
+            
         }
     }
 
