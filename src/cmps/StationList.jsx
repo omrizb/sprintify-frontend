@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { StationPreview } from './StationPreview.jsx'
 
-export function StationList({ stations, className, previewStyle }) {
+export function StationList({ stations, className, previewStyle, onSetBgColor }) {
 
+    const [colorActiveStationId, setColorActiveStationId] = useState(null)
     const listContainer = useRef(null)
 
     useEffect(() => {
@@ -20,7 +21,6 @@ export function StationList({ stations, className, previewStyle }) {
     function hideOverflowCards() {
         const listContainerWidth = listContainer.current.getBoundingClientRect().width
         const listCards = Array.from(listContainer.current.querySelectorAll('li'))
-        console.log("asdf")
 
         let totalCardsWidth = 0
 
@@ -35,12 +35,24 @@ export function StationList({ stations, className, previewStyle }) {
         })
     }
 
+    function handleMouseEnter(stationId) {
+        if (previewStyle !== 'minimal') return
+        setColorActiveStationId(stationId)
+    }
+
     return (
         <ul ref={listContainer} className={`station-list ${className}`}>
             {stations.map(station =>
-                <li key={station._id} >
+                <li
+                    key={station._id}
+                    onMouseEnter={() => handleMouseEnter(station._id)}
+                >
                     <Link to={`/station/${station._id}`}>
-                        <StationPreview station={station} style={previewStyle} />
+                        <StationPreview
+                            station={station}
+                            style={previewStyle}
+                            colorActiveStationId={colorActiveStationId}
+                            onSetBgColor={onSetBgColor} />
                     </Link>
                 </li>)
             }

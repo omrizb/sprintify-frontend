@@ -7,19 +7,18 @@ import { HeaderFixer } from '../cmps/HeaderFixer'
 
 export function MainView() {
 
-    const [bgColor, setBgColor] = useState(null)
+    const [bgColor, setBgColor] = useState('#121212')
 
     return (
         <div className="main-view">
             <HeaderFixer
                 header={<MainViewHeader />}
                 className="top-rounded-box"
-                // bgColor={bgColor && colorUtilService.adjustBrightness(bgColor, 0.4)}
-                bgColor='gray'
+                bgColor={colorUtilService.adjustBrightness(bgColor, 0.4)}
             >
-                <div className="secondary-background" style={{ backgroundColor: 'gray' }}></div>
+                <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>
                 <div className="empty-header" style={{ height: '64px' }} />
-                <MainViewBody />
+                <MainViewBody onSetBgColor={setBgColor} />
 
             </HeaderFixer>
         </div>

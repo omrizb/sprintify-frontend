@@ -9,7 +9,7 @@ import { Footer } from '../Footer'
 import { StationSection } from '../StationSection'
 
 
-export function MainViewBody() {
+export function MainViewBody({ onSetBgColor }) {
 
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const stations = useSelector(storeState => storeState.stationModule.stations)
@@ -50,6 +50,7 @@ export function MainViewBody() {
                 stations={stationsMain}
                 className="stations-top"
                 previewStyle="minimal"
+                onSetBgColor={onSetBgColor}
             />
 
             <StationSection

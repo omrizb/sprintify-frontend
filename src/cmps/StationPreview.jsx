@@ -1,18 +1,35 @@
 import { useSelector } from 'react-redux'
+import { FastAverageColor } from 'fast-average-color'
+
 import { PlayButton } from './Buttons/PlayButton'
 import { SvgIcon } from './SvgIcon'
+import { useEffect, useState } from 'react'
 
-export function StationPreview({ station: stationPreview, style }) {
+export function StationPreview({ station: stationPreview, style, colorActiveStationId, onSetBgColor }) {
 
     const station = useSelector(storeState => storeState.stationModule.station)
+    const [stationPreviewImageColor, setStationPreviewImageColor] = useState(null)
+    const fac = new FastAverageColor()
 
     const pinnedStation = (stationPreview.isPinned === true)
+
+    useEffect(() => {
+        if (stationPreview._id === colorActiveStationId && stationPreviewImageColor) {
+            onSetBgColor(stationPreviewImageColor)
+        }
+    }, [colorActiveStationId])
 
     function isHighlighted() {
         if (station) {
             if (stationPreview._id === station._id) return 'highlighted'
         }
         return ''
+    }
+
+    function handleImageLoad(ev) {
+        fac.getColorAsync(ev.target)
+            .then(color => setStationPreviewImageColor(color.hex))
+            .catch(err => console.log('Error getting average color from image.', err))
     }
 
     let articleClassName
@@ -36,7 +53,12 @@ export function StationPreview({ station: stationPreview, style }) {
     return (
         <article className={`station-preview ${articleClassName} ${isHighlighted()}`}>
             <div className="image-container">
-                {(stationPreview.stationImgUrl) && <img src={stationPreview.stationImgUrl} alt="" />}
+                {(stationPreview.stationImgUrl) && <img
+                    crossOrigin="anonymous"
+                    src={stationPreview.stationImgUrl}
+                    alt=""
+                    onLoad={handleImageLoad}
+                />}
                 {(!stationPreview.stationImgUrl) && <div className="icon">
                     <SvgIcon iconName={"music"} />
                 </div>}
