@@ -39,7 +39,7 @@ export function MoreSongs() {
 
             {(!showSearchBox) && <div>
                 <p onClick={() => setShowSearchBox(true)}>Find more</p>
-                <RecommendedSongs station={station} />
+                <RecommendedSongs station={station} setSongs={setSongs} />
             </div>
 
             }

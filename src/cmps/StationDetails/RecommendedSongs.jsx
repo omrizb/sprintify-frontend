@@ -1,4 +1,29 @@
-export function RecommendedSongs({ station }) {
+import { useState, useEffect } from 'react'
+import { utilService } from '../../services/util.service'
+import { spotifyService } from '../../services/spotify.service'
+
+
+
+export function RecommendedSongs({ station, setSongs }) {
+
+
+    useEffect(() => {
+        loadSongs()
+    }, [])
+
+
+    async function loadSongs() {
+
+        try {
+
+            const songs = await spotifyService.getRecommendations(station.songs)
+            setSongs(songs)
+
+
+        } catch (err) {
+            console.log(`Couldn't load songs`, err)
+        }
+    }
 
     return (
         <div className="recommended-songs">
