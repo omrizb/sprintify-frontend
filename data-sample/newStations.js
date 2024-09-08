@@ -271,8 +271,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'F6g7H8i9J0', 'K1L2M3N4O5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1520746778065,
+        addedAt: 1658912695416,
         songs: [
             {
                 spotifyId: `7snQQk1zcKl8gZ92AnueZW`,
@@ -343,8 +343,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'A1b2C3d4E5', 'K1L2M3N4O5', 'P6Q7R8S9T0'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1663456894661,
+        addedAt: 1670568999136,
         songs: [
             {
                 spotifyId: `4eHbdreAnSOrDDsFfc4Fpm`,
@@ -433,8 +433,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'A1b2C3d4E5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1536351131722,
+        addedAt: 1672042571160,
         songs: [
             {
                 spotifyId: `2WfaOiMkCvy7F5fcp2zZ8L`,
@@ -649,8 +649,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['A1b2C3d4E5', 'F6g7H8i9J0', 'K1L2M3N4O5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1525122704915,
+        addedAt: 1655214546560,
         songs: [
             {
                 spotifyId: `6v3KW9xbzN5yKLt9YKDYA2`,
@@ -757,8 +757,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'A1b2C3d4E5', 'K1L2M3N4O5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1589509512211,
+        addedAt: 1660260425775,
         songs: [
             {
                 spotifyId: `5Z01UMMf7V1o0MzF86s6WJ`,
@@ -901,8 +901,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'F6g7H8i9J0', 'P6Q7R8S9T0'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1595198626770,
+        addedAt: 1650599371425,
         songs: [
             {
                 spotifyId: `3Um9toULmYFGCpvaIPFw7l`,
@@ -1009,8 +1009,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'A1b2C3d4E5', 'F6g7H8i9J0'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1577358440904,
+        addedAt: 1669613834324,
         songs: [
             {
                 spotifyId: `0SiywuOBRcynK0uKGWdCnn`,
@@ -1099,8 +1099,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'P6Q7R8S9T0', 'K1L2M3N4O5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1597770432182,
+        addedAt: 1652134109479,
         songs: [
             {
                 spotifyId: `2H1047e0oMSj10dgp7p2VG`,
@@ -1207,8 +1207,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['F6g7H8i9J0'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1660877122924,
+        addedAt: 1651289543848,
         songs: [
             {
                 spotifyId: `7vggqxNKwd6xdRoYS0pQtM`,
@@ -1387,8 +1387,8 @@ export const stations = [
             imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
         },
         likedByUsers: ['AAAA', 'U1V2W3X4Y5'],
-        createdAt: getRandomTimestamp(2018, 2023),
-        addedAt: getRandomTimestamp(2022, 2023),
+        createdAt: 1666031807756,
+        addedAt: 1650371352006,
         songs: [
             {
                 spotifyId: `5HMiF48eiKHttTtSGg7XPb`,
