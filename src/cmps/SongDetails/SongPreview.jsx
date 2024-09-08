@@ -12,6 +12,7 @@ import { addSongToStation } from '../../store/actions/station.actions.js'
 import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
 import { MiniSongPreview } from './MiniSongPreview.jsx'
+import { showErrorMsg } from '../../services/event-bus.service.js'
 
 export function SongPreview(props) {
 
@@ -52,6 +53,10 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
+                if (!song.ytId) {
+                    showErrorMsg('Defective song')
+                    return
+                }
                 addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
 
                 break

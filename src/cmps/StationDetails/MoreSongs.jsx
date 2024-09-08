@@ -5,7 +5,7 @@ import { updateStation } from '../../store/actions/station.actions'
 
 import { MiniSongList } from '../SongDetails/MiniSongList'
 import { youtubeService } from '../../services/youtube.service'
-import { showSuccessMsg } from '../../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 import { RecommendedSongs } from './RecommendedSongs'
 import { SearchAndAdd } from './SearchAndAdd'
 
@@ -22,10 +22,18 @@ export function MoreSongs() {
             showSuccessMsg(`Already included in ${station.name}`)
             return
         }
-        const ytSong = await youtubeService.getTopVideo(`song: ${newSong.songName} by ${newSong.artist.name}`)
-        newSong.ytId = ytSong.songId
-        const updatedStation = { ...station, songs: [...station.songs, newSong] }
-        updateStation(updatedStation)
+
+        try {
+            const ytSong = await youtubeService.getTopVideo(`song: ${newSong.songName} by ${newSong.artist.name}`)
+            newSong.ytId = ytSong.songId
+            const updatedStation = { ...station, songs: [...station.songs, newSong] }
+            updateStation(updatedStation)
+
+        } catch (error) {
+            showErrorMsg('Cannot add song - youTube is blocking')
+
+        }
+
     }
 
 
