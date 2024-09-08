@@ -27,6 +27,9 @@ export function SongPreview(props) {
     switch (type) {
         case 'table':
             articleClassType = 'table dynamic-grid'
+            break
+        case 'mini-table':
+            articleClassType = 'table dynamic-grid'
     }
 
     const { spotifyId, songName, album, duration } = song
@@ -65,7 +68,7 @@ export function SongPreview(props) {
     return (
         <article className={songPreviewClass}>
             <div className="index flex">
-                {(isHovered && (!props.isSearchOrigin))
+                {isHovered
                     ? <PlayButton
                         type="songPreview"
                         stationId={stationId}

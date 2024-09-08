@@ -9,7 +9,7 @@ import { SearchBox } from './SearchBox.jsx'
 export function GlobalNav() {
 
     const navigate = useNavigate()
-    const debouncedNavigate = utilService.debounce(navToResults, 1500)
+    const debouncedNavigate = utilService.debounce(navToResults, 500)
     const location = useLocation()
     const isHome = location.pathname === '/'
     const isBrowse = location.pathname === '/search'

@@ -3,18 +3,14 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 
-import { SongPreview } from '../cmps/SongDetails/SongPreview.jsx'
 import { spotifyService } from '../services/spotify.service.js'
 import { Loader } from '../cmps/Loader.jsx'
-import { MiniSongPreview } from '../cmps/SongDetails/MiniSongPreview.jsx'
-import { SongList } from '../cmps/SongDetails/SongList.jsx'
+import { SongListSearchPage } from '../cmps/SongDetails/SongListSearchPage.jsx'
 
 export function SearchResults() {
 
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
-    const playerSpotifyId = useSelector(store => store.playerModule.player.song.spotifyId)
-    const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
 
     const [isLoading, setIsLoading] = useState(true)
     const { txt } = useParams()
@@ -27,14 +23,7 @@ export function SearchResults() {
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
 
-    const [hoveredSpotifyId, setHoveredSpotifyId] = useState(null)
-    const [selectedSpotifyId, setSelectedSpotifyId] = useState(null)
 
-    const isSearchOrigin = true
-
-    function onSetSelectedSpotifyId(spotifyId) {
-        setSelectedSpotifyId(spotifyId)
-    }
 
     useEffect(() => {
         if (!stations) return
@@ -55,8 +44,14 @@ export function SearchResults() {
     async function loadResults(value) {
         setIsLoading(true)
         try {
-            // const loadedSongs = await youtubeService.getVideos(value)
             const res = await spotifyService.search(value)
+            const ytSongs = []
+
+            for (let i = 0; i < res.songs.length; i++) {
+                ytSongs[i] = await youtubeService.getTopVideo(`song: ${res.songs[i].songName} by ${res.songs[i].artist.name}`)
+                res.songs[i].ytId = ytSongs[i].songId
+            }
+
             setSongs(res.songs)
             setArtists(res.artists)
             setAlbums(res.albums)
@@ -75,30 +70,20 @@ export function SearchResults() {
         ? <Loader />
         :
         <div className="search-results">
-            <h2>Songs</h2>
-            <ul className="list-body">
-                {songs.map(song => {
-                    const selectedSongClass = (song.spotifyId === selectedSpotifyId) ? 'selected' : ''
-                    return <li
-                        key={song.spotifyId}
-                        className={`song-list-item ${selectedSongClass}`}
-                        onMouseEnter={() => setHoveredSpotifyId(song.spotifyId)}
-                        onMouseLeave={() => setHoveredSpotifyId('')}
-                        onClick={() => onSetSelectedSpotifyId(song.spotifyId)}
-                    >
-                        <SongPreview
-                            isSearchOrigin={isSearchOrigin}
-                            type={'table'}
-                            song={song}
-                            isOwnedByUser={false}
-                            myStations={myStations}
-                            likedSongsStation={likedSongsStation}
-                            hoveredSpotifyId={hoveredSpotifyId}
-                            selectedSpotifyId={selectedSpotifyId}
-                        />
-                    </li>
-                })}
-            </ul>
+
+            <div className="top-results">
+                <h2>Top Result</h2>
+            </div>
+
+            <SongListSearchPage
+                songs={songs}
+                myStations={myStations}
+                likedSongsStation={likedSongsStation}
+            />
+
+
+
+
 
         </div>
 
