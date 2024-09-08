@@ -56,7 +56,6 @@ export function SearchResults() {
                 res.songs[i].ytId = ytSongs[i].songId
             }
 
-
             setSongs(res.songs)
             setArtists(res.artists)
             setAlbums(res.albums)

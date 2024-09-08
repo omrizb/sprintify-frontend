@@ -14,6 +14,7 @@ export function MoreSongs() {
 
     const station = useSelector(storeState => storeState.stationModule.station)
     const [songs, setSongs] = useState([])
+    const [recommendedSongs, setRecommendedSongs] = useState([])
     const [showSearchBox, setShowSearchBox] = useState(true)
 
     async function onAddSong(newSong) {
@@ -40,21 +41,20 @@ export function MoreSongs() {
     return (
         <div className="more-songs">
 
-            {showSearchBox &&
+            {showSearchBox && <div>
                 <SearchAndAdd setShowSearchBox={setShowSearchBox} setSongs={setSongs} />
-            }
-
-
-            {(!showSearchBox) && <div>
-                <p onClick={() => setShowSearchBox(true)}>Find more</p>
-                <RecommendedSongs type={'with-add-btn'} station={station} setSongs={setSongs} />
+                {songs &&
+                    <MiniSongList type={'with-add-btn'} songs={songs} onClickAdd={onAddSong} />}
             </div>
-
             }
 
+            {(!showSearchBox) && <p onClick={() => setShowSearchBox(true)}>Find more</p>}
 
-            {songs &&
-                <MiniSongList type={'with-add-btn'} songs={songs} onClickAdd={onAddSong} />}
+            <RecommendedSongs type={'with-add-btn'} station={station} setSongs={setRecommendedSongs} />
+
+            {recommendedSongs &&
+                <MiniSongList type={'with-add-btn'} songs={recommendedSongs} onClickAdd={onAddSong} />}
+
         </div>
     )
 }
