@@ -89,7 +89,7 @@ export async function addSongToStation(station) {
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
-        showErrorMsg(`Could not add to ${savedStation.name}`)
+        showErrorMsg(`Could not add to ${station.name}`)
         throw err
     }
 }
@@ -102,7 +102,7 @@ export async function removeSongFromStation(station) {
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
-        showErrorMsg(`Could not add to ${savedStation.name}`)
+        showErrorMsg(`Could not add to ${station.name}`)
         throw err
     }
 }
