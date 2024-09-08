@@ -1,11 +1,12 @@
 import { httpService } from '../http.service'
 
 export const stationService = {
+    getEmptyStation,
     query,
     getById,
     save,
     remove,
-    addStationMsg
+    addStationMsg,
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
