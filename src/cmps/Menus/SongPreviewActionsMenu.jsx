@@ -93,7 +93,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
 
     return (
         <div className="actions-menu">
-            <DropDownMenu listItems={listItems} />
+            <DropDownMenu listItems={listItems} setShowMenu={setShowMenu} />
             {showMenu &&
                 <AddPlaylistSubMenu
                     song={song}

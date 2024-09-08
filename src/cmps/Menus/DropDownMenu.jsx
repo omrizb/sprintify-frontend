@@ -1,6 +1,7 @@
 import { DropDownMenuItem } from "./DropDownMenuItem";
 
-export function DropDownMenu({ listItems }) {
+export function DropDownMenu({ listItems, setShowMenu = null }) {
+
 
 
     function onClick(ev, listItem) {
@@ -24,8 +25,17 @@ export function DropDownMenu({ listItems }) {
 
             <ul className="list">
                 {listItems.map((listItem, index) =>
-                    <li key={index} className={listItem.type} onClick={(ev) => onClick(ev, listItem)} >
-                        <DropDownMenuItem l
+                    <li
+                        key={index}
+                        className={listItem.type}
+                        onClick={(ev) => onClick(ev, listItem)}
+                        onMouseEnter={() => {
+                            if (setShowMenu && listItem.name === 'Add to playlist')
+                                setShowMenu(true)
+                            if (setShowMenu && listItem.name !== 'Add to playlist') setShowMenu(false)
+                        }}
+                    >
+                        <DropDownMenuItem
                             listItem={listItem}
                             listItems={listItems}
                             onSave={handleSave}
