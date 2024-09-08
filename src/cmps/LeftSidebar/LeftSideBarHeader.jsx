@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { SvgIcon } from "../SvgIcon"
 import { DropDownMenu } from '../Menus/DropDownMenu'
 import { stationService } from '../../services/station/station.service.local'
+import { PopUp } from '../PopUp'
 
 export function LeftSideBarHeader() {
     const navigate = useNavigate()
@@ -44,7 +45,9 @@ export function LeftSideBarHeader() {
                 </button>
 
                 {showMenu &&
-                    <DropDownMenu listItems={listItems} />
+                    <PopUp closePopUp={() => setShowMenu(false)} >
+                        <DropDownMenu listItems={listItems} />
+                    </PopUp>
                 }
             </div>
         </div>

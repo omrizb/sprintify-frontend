@@ -18,6 +18,7 @@ export function MoreSongs() {
     const [showSearchBox, setShowSearchBox] = useState(true)
 
     async function onAddSong(newSong) {
+
         const isInStation = station.songs.some(song => song.spotifyId === newSong.spotifyId)
         if (isInStation) {
             showSuccessMsg(`Already included in ${station.name}`)
@@ -44,18 +45,31 @@ export function MoreSongs() {
         <div className="more-songs">
 
             {showSearchBox && <div>
-                <SearchAndAdd setShowSearchBox={setShowSearchBox} setSongs={setSongs} />
+                <SearchAndAdd
+                    setShowSearchBox={setShowSearchBox}
+                    setSongs={setSongs} />
                 {songs &&
-                    <MiniSongList type={'with-add-btn'} songs={songs} onClickAdd={onAddSong} />}
+                    <MiniSongList
+                        type={'with-add-btn'}
+                        songs={songs}
+                        onClickAdd={onAddSong} />}
             </div>
             }
 
-            {(!showSearchBox) && <p onClick={() => setShowSearchBox(true)}>Find more</p>}
-
-            <RecommendedSongs type={'with-add-btn'} station={station} setSongs={setRecommendedSongs} />
+            {(!showSearchBox) &&
+                <p onClick={() => setShowSearchBox(true)}>Find more</p>}
 
             {recommendedSongs &&
-                <MiniSongList type={'with-add-btn'} songs={recommendedSongs} onClickAdd={onAddSong} />}
+                <RecommendedSongs
+                    type={'with-add-btn'}
+                    station={station}
+                    setSongs={setRecommendedSongs} />}
+
+            {recommendedSongs &&
+                <MiniSongList
+                    type={'with-add-btn'}
+                    songs={recommendedSongs}
+                    onClickAdd={onAddSong} />}
 
         </div>
     )

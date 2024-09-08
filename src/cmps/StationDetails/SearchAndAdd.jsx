@@ -23,7 +23,6 @@ export function SearchAndAdd({ setShowSearchBox, setSongs }) {
         try {
             const results = await spotifyService.search(value, 10)
             const loadedSongs = results.songs
-            console.log(loadedSongs)
 
             setSongs(loadedSongs)
 

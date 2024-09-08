@@ -14,6 +14,7 @@ import { PlayButton } from '../Buttons/PlayButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
+import { PopUp } from '../PopUp.jsx'
 
 
 export function StationDetailsActions({ station, stationMeta }) {
@@ -150,6 +151,7 @@ export function StationDetailsActions({ station, stationMeta }) {
                     />)}
                     {showMoreMenu && <DropDownMenu listItems={moreList} />}
 
+
                 </div>}
 
             <div className="view-as">
@@ -159,7 +161,10 @@ export function StationDetailsActions({ station, stationMeta }) {
                     <span>{viewType}</span>
                     <SvgIcon iconName={viewType} svgClass="svg-small1" />
                 </button>
-                {showViewMenu && <DropDownMenu listItems={viewList} />}
+
+                {showViewMenu && <PopUp closePopUp={() => setShowViewMenu(false)} >
+                    <DropDownMenu listItems={viewList} />
+                </PopUp>}
             </div>
 
             {isModalOpen &&

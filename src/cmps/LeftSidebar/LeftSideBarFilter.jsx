@@ -6,6 +6,7 @@ import { updateFilterBy } from '../../store/actions/filterBy.actions'
 import { DropDownMenu } from "../Menus/DropDownMenu"
 import { SvgIcon } from "../SvgIcon"
 import { StationFilterButtons } from './StationFilterButtons'
+import { PopUp } from '../PopUp'
 
 
 
@@ -151,7 +152,13 @@ export function LeftSideBarFilter({ userId }) {
                         <span>{sortType}</span>
                         <SvgIcon iconName={viewType} svgClass="svg=small" />
                     </div>
-                    {showMenu && <DropDownMenu listItems={listMenu} />}
+                    {/* {showMenu && <DropDownMenu listItems={listMenu} />} */}
+
+                    {showMenu &&
+                        <PopUp closePopUp={() => setShowMenu(false)} >
+                            <DropDownMenu listItems={listMenu} />
+                        </PopUp>}
+
                 </div>
 
             </section>
