@@ -47,7 +47,6 @@ function getEmptyStation() {
 
 async function query(filterBy = {
     txt: '',
-    likedByUser: '',
     stationType: '',
     createdBy: '',
     spotifyId: '',
@@ -60,7 +59,7 @@ async function query(filterBy = {
 
     var stations = await storageService.query(STORAGE_KEY)
 
-    const { txt, likedByUser, stationType, createdBy,
+    const { txt, stationType, createdBy,
         spotifyId, sortField, sortDir, userId } = filterBy
 
 
@@ -82,9 +81,9 @@ async function query(filterBy = {
         stations = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
     }
 
-    if (likedByUser) {
-        stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
-    }
+    // if (likedByUser) {
+    //     stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
+    // }
 
     if (userId) {
         if (createdBy && (createdBy !== userId)) {
