@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
-import { updateStation } from '../../store/actions/station.actions'
+import { addSongToStation, updateStation } from '../../store/actions/station.actions'
 
 import { MiniSongList } from '../SongDetails/MiniSongList'
 import { youtubeService } from '../../services/youtube.service'
@@ -29,6 +29,8 @@ export function MoreSongs() {
             newSong.ytId = ytSong.songId
             const updatedStation = { ...station, songs: [...station.songs, newSong] }
             updateStation(updatedStation)
+            showSuccessMsg(`Added to ${updatedStation.name}`)
+
 
         } catch (error) {
             showErrorMsg('Cannot add song - youTube is blocking')
