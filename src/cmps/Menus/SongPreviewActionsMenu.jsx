@@ -4,6 +4,7 @@ import { playerActions, setPlayerAction } from '../../store/actions/player.actio
 import { addSongToStation, removeSongFromStation, updateStation } from '../../store/actions/station.actions'
 import { DropDownMenu } from './DropDownMenu'
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
+import { showErrorMsg } from '../../services/event-bus.service'
 
 export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
 
@@ -17,7 +18,13 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
         const addToQueue = buildListObj({
             name: 'Add to queue',
             icon: 'addToQueue',
-            onClick: () => setPlayerAction(playerActions.ADD_TO_QUEUE, { songs: [song] })
+            onClick: () => {
+                if (!song.ytId) {
+                    showErrorMsg('Defective song')
+                    return
+                }
+                setPlayerAction(playerActions.ADD_TO_QUEUE, { songs: [song] })
+            }
         })
 
         const removeFromPlaylist = buildListObj({
@@ -34,6 +41,10 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             name: 'Save to your Liked Songs',
             icon: 'save',
             onClick: () => {
+                if (!song.ytId) {
+                    showErrorMsg('Defective song')
+                    return
+                }
                 const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
                 addSongToStation(updatedStation)
             }
@@ -54,7 +65,13 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             type: 'list-item',
             icon: 'plus',
             secondIcon: 'more-menu',
-            onClick: () => setShowMenu(prevShowMenu => !prevShowMenu)
+            onClick: () => {
+                if (!song.ytId) {
+                    showErrorMsg('Defective song')
+                    return
+                }
+                setShowMenu(prevShowMenu => !prevShowMenu)
+            }
         })
 
         if (isOwnedByUser) return [addToPlaylist, removeFromPlaylist, removeFromLikedSongs, addToQueue]

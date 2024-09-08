@@ -1,8 +1,35 @@
 .search-results {
     
-
+    @include section;
     h2{
         font-size: 24px;
-        margin: 20px 0 20px 30px;
+        margin-block-start: 20px;;
+    }
+
+    .song-list{
+        padding:0;
+    }
+
+    li.song-list-item{
+        padding: 0 8px;
+
+        .song-preview.table {
+
+            display:flex;
+            justify-content: space-between;
+           
+            .index,
+            .date-added{
+                display: none;
+            }
+
+            .mini-song-preview{
+                width: 200px;
+            }
+
+            .song-duration {
+                width: 120px;
+            }
+        }
     }
 }

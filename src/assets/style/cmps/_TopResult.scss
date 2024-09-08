@@ -1,0 +1,44 @@
+.top-result{
+    
+    h2{
+        font-size: 24px;
+        margin-block-start: 20px;
+    }
+
+    .top-result-card{
+
+        display: grid;
+        height: 200px;
+        // width: 420px;
+        background-color: rgb(41,41,41);
+        border-radius: 8px;
+        padding: 20px;
+    
+        img {
+            height: 90px;
+            border-radius: 8px;
+            margin-block-end: 4px;
+        }
+
+        .name {
+            @include overflow-ellipsis;
+            margin-block-start: 5px;
+            font-size: 28px;
+            font-weight: 500;
+            padding: 0 0 4px 0;
+            font-family: inherit;
+            line-height: 0.8;
+        }
+
+        .bottom-line {
+            margin-block-start: 5px;
+            font-size: 14px;
+
+            .type,
+            .dot {
+                color: $secondaryTxtClr; 
+            }
+        }
+    }
+
+}

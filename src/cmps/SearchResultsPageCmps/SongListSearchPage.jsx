@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SongPreview } from './SongPreview'
+import { SongPreview } from '../SongDetails/SongPreview'
 
 
 export function SongListSearchPage({ songs, myStations, likedSongsStation }) {
