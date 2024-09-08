@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-import { addSongToStation, updateStation } from '../../store/actions/station.actions'
+import { updateStation } from '../../store/actions/station.actions'
 
 import { MiniSongList } from '../SongDetails/MiniSongList'
 import { youtubeService } from '../../services/youtube.service'
@@ -17,12 +17,19 @@ export function MoreSongs() {
     const [recommendedSongs, setRecommendedSongs] = useState([])
     const [showSearchBox, setShowSearchBox] = useState(true)
 
+
+    useEffect(() => {
+
+    }, [station.songs])
+
     async function onAddSong(newSong) {
 
-        const isInStation = station.songs.some(song => song.spotifyId === newSong.spotifyId)
-        if (isInStation) {
-            showSuccessMsg(`Already included in ${station.name}`)
-            return
+        if (station.songs.length > 0) {
+            const isInStation = station.songs.some(song => song.spotifyId === newSong.spotifyId)
+            if (isInStation) {
+                showSuccessMsg(`Already included in ${station.name}`)
+                return
+            }
         }
 
         try {
@@ -59,7 +66,7 @@ export function MoreSongs() {
             {(!showSearchBox) &&
                 <p onClick={() => setShowSearchBox(true)}>Find more</p>}
 
-            {recommendedSongs &&
+            {(station.songs.length > 0) &&
                 <RecommendedSongs
                     type={'with-add-btn'}
                     station={station}
