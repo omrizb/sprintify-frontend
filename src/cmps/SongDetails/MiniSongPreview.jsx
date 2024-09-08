@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 
-export function MiniSongPreview({ song, type = 'simple', isCurrentlyPlaying, onClickAdd }) {
+export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onClickAdd }) {
 
     let articleClassName
     let imgClassName
     switch (type) {
+        case 'with-add-btn':
         case 'simple':
             articleClassName = 'mini-song-preview'
             imgClassName = 'thumbnail'
@@ -28,7 +29,7 @@ export function MiniSongPreview({ song, type = 'simple', isCurrentlyPlaying, onC
                 </div>
                 <div className="artist">{song.artist.name}</div>
             </div>
-            {(!song.ytId) && <div className="search-songs">
+            {(type === 'with-add-btn') && <div className="search-songs">
                 <span className="album">{song.album.name}</span>
                 <button onClick={() => onClickAdd(song)} className="btn-tinted add-btn">Add</button>
             </div>}

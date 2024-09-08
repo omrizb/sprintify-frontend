@@ -65,7 +65,7 @@ export function SongPreview(props) {
     return (
         <article className={songPreviewClass}>
             <div className="index flex">
-                {isHovered
+                {(isHovered && (!props.isSearchOrigin))
                     ? <PlayButton
                         type="songPreview"
                         stationId={stationId}
@@ -76,7 +76,7 @@ export function SongPreview(props) {
                         : index}
             </div>
             <MiniSongPreview song={song} isCurrentlyPlaying={isCurrentlyPlaying} />
-            <div className="album">{album.name}</div>
+            {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
             <div className="date-added"></div>
             <div className="song-duration">
 
