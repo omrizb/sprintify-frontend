@@ -1,7 +1,7 @@
 import { httpService } from '../http.service'
 
 export const stationService = {
-    getEmptyStation,
+    // getEmptyStation,
     query,
     getById,
     save,

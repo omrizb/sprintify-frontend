@@ -80,9 +80,6 @@ async function query(filterBy = {
         stations = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
     }
 
-    // if (likedByUser) {
-    //     stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
-    // }
 
     if (userId) {
         if (createdBy && (createdBy !== userId)) {
@@ -115,12 +112,12 @@ async function query(filterBy = {
     }
 
 
-    const pinnedStations = stations.filter(station => station.isPinned === true)
-    stations = stations.filter(station => station.isPinned !== true)
+    // const pinnedStations = stations.filter(station => station.isPinned === true)
+    // stations = stations.filter(station => station.isPinned !== true)
 
-    if (!createdBy) {
-        stations = [...pinnedStations, ...stations]
-    }
+    // if (!createdBy) {
+    //     stations = [...pinnedStations, ...stations]
+    // }
 
     return stations
 }
