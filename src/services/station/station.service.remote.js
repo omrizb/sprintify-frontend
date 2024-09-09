@@ -1,12 +1,27 @@
 import { httpService } from '../http.service'
 
 export const stationService = {
-    // getEmptyStation,
+    getEmptyStation,
     query,
     getById,
     save,
     remove,
     addStationMsg,
+}
+
+function getEmptyStation() {
+    return {
+        name: 'My Playlist',
+        type: 'playlist',
+        isPinned: false,
+        tags: [],
+        stationImgUrl: '',
+        description: '',
+        isOwnedByUser: true,
+        createdBy: {},
+        likedByUsers: [],
+        songs: []
+    }
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
