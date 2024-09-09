@@ -30,7 +30,6 @@ function getEmptyStation() {
         name: 'My Playlist',
         type: 'playlist',
         isPinned: false,
-        isLikedSongs: false,
         tags: [],
         stationImgUrl: '',
         description: '',
