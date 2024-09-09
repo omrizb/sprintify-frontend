@@ -82,16 +82,18 @@ async function query(filterBy = {
 
 
     if (userId) {
-        if (createdBy && (createdBy !== userId)) {
-            stations = stations.filter(station => station.likedByUsers.includes(userId))
+
+        const myStations = stations.filter(station => station.createdBy.id === userId)
+        const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
+        const combined = [...myStations, ...likedStations]
+        stations = _.uniqBy(combined, '_id')
+
+
+        if (createdBy === userId) {
+            stations = stations.filter(station => station.isPinned === false)
+            console.log(stations)
         }
 
-        if (!createdBy || (createdBy === userId)) {
-            const myStations = stations.filter(station => station.createdBy.id === userId)
-            const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
-            const combined = [...myStations, ...likedStations]
-            stations = _.uniqBy(combined, '_id')
-        }
     }
 
     if (sortField === 'name') {
@@ -111,13 +113,6 @@ async function query(filterBy = {
             (station1[sortField] - station2[sortField]) * sortDir)
     }
 
-
-    // const pinnedStations = stations.filter(station => station.isPinned === true)
-    // stations = stations.filter(station => station.isPinned !== true)
-
-    // if (!createdBy) {
-    //     stations = [...pinnedStations, ...stations]
-    // }
 
     return stations
 }
