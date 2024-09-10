@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
 import { DropDownMenu } from '../Menus/DropDownMenu'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 import { PopUp } from '../PopUp'
 
 export function LeftSideBarHeader({ loggedinUser }) {

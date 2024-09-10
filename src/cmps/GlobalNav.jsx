@@ -1,18 +1,35 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { SvgButton } from "./SvgButton.jsx"
 import { SvgIcon } from './SvgIcon'
 import { utilService } from '../services/util.service.js'
 import { SearchBox } from './SearchBox.jsx'
+import { logout } from '../store/actions/user.actions.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { LoginSignup } from './LoginSignup.jsx'
 
 
 export function GlobalNav() {
 
+
+    const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const navigate = useNavigate()
     const debouncedNavigate = utilService.debounce(navToResults, 500)
     const location = useLocation()
     const isHome = location.pathname === '/'
     const isBrowse = location.pathname === '/search'
+
+    async function onLogout() {
+        try {
+            await logout()
+            showSuccessMsg('Logout successfully')
+            navigate('/')
+        } catch (err) {
+            console.log('err:', err)
+            showErrorMsg('Cannot logout')
+        }
+    }
 
     function handleChange(ev) {
         var value = ev.target.value
@@ -67,6 +84,11 @@ export function GlobalNav() {
                 <div className="btn-global-nav-gray">
                     <button className="profile-btn">D</button>
                 </div>
+                {!user && (
+                    <section className="user-info">
+                        <LoginSignup />
+                    </section>
+                )}
             </div>
         </div>
     )

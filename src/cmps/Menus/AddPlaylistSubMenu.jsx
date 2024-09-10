@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, addSongToStation } from '../../store/actions/station.actions'
 import { showSuccessMsg } from '../../services/event-bus.service'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {

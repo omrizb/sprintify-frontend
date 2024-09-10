@@ -1,4 +1,5 @@
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 
 import { store } from '../store'
 import {

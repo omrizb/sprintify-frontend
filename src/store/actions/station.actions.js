@@ -1,5 +1,6 @@
 import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
-import { stationService } from '../../services/station/station.service.local.js'
+// import { stationService } from '../../services/station/station.service.local.js'
+import { stationService } from '../../services/station/station.service.remote.js'
 import { store } from '../store.js'
 import {
     ADD_STATION,

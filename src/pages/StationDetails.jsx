@@ -31,6 +31,9 @@ export function StationDetails() {
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
 
+    // console.log(loggedinUser)
+    // console.log(station._id)
+
     useEffect(() => {
         if (!stations) return
         const likedStation = stations.find(station => station.isPinned)

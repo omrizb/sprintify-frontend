@@ -26,6 +26,7 @@ export function LeftSidebar() {
 
     useEffect(() => {
         loadStations(filterBy)
+        // loadStations()
     }, [filterBy])
 
     useEffect(() => {
