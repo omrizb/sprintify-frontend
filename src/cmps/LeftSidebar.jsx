@@ -40,7 +40,7 @@ export function LeftSidebar() {
         <div className="left-sidebar">
             {!user && <SidebarNav />}
             <div className="my-library" >
-                <LeftSideBarHeader loggedinUser={loggedinUser} />
+                <LeftSideBarHeader loggedinUser={user} />
                 <LeftSideBarFilter userId={user._id} />
                 <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
             </div>

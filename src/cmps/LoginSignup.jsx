@@ -1,6 +1,8 @@
-import {useState} from 'react'
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service.js'
-import {login, signup} from '../store/actions/user.actions.js'
+import { useState } from 'react'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { login, signup } from '../store/actions/user.actions.js'
+import { stationService } from '../services/station/station.service.remote.js'
+import { addStation } from '../store/actions/station.actions.js'
 
 function getEmptyCredentials() {
   return {
@@ -17,7 +19,7 @@ export function LoginSignup() {
   function handleCredentialsChange(ev) {
     const field = ev.target.name
     const value = ev.target.value
-    setCredentials((credentials) => ({...credentials, [field]: value}))
+    setCredentials((credentials) => ({ ...credentials, [field]: value }))
   }
 
   async function onSubmit(ev) {
@@ -26,6 +28,15 @@ export function LoginSignup() {
       try {
         const user = await signup(credentials)
         showSuccessMsg(`Welcome ${user.fullname}`)
+
+        const likedStation = stationService.getEmptyStation()
+        likedStation.createdBy = {
+          id: user._id,
+          fullName: user.fullName,
+          imgUrl: user.imgUrl
+        }
+        addStation(likedStation)
+
       } catch (err) {
         showErrorMsg('Cannot signup')
       }
@@ -43,7 +54,7 @@ export function LoginSignup() {
     setIsSignupState((isSignupState) => !isSignupState)
   }
 
-  const {username, password, fullname} = credentials
+  const { username, password, fullname } = credentials
 
   return (
     <div className="login-page">
