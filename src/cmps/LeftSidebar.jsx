@@ -15,13 +15,12 @@ export function LeftSidebar() {
 
     const user = useSelector(storeState => storeState.userModule.user)
 
-    if (!user) return
-
     const isFirstSongLoaded = useSelector(storeState => storeState.playerModule.isFirstSongLoaded)
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     useEffect(() => {
+        if (!user) return
         updateFilterBy({ ...filterBy, userId: user._id })
     }, [])
 
@@ -38,13 +37,14 @@ export function LeftSidebar() {
 
     return (
         <div className="left-sidebar">
-            {!user && <SidebarNav />}
-            <div className="my-library" >
-                <LeftSideBarHeader loggedinUser={user} />
-                <LeftSideBarFilter userId={user._id} />
-                <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
-            </div>
+            {user
+                ? <div className="my-library" >
+                    <LeftSideBarHeader loggedinUser={user} />
+                    <LeftSideBarFilter userId={user._id} />
+                    <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
+                </div>
+                : <SidebarNav />
+            }
         </div>
-
     )
 }

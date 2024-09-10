@@ -70,23 +70,30 @@ export function StationDetails() {
     if (isLoading) return <Loader />
     if (!station) return <div className="station-details">No station to display</div>
 
-    const isEmptyStation = station.songs.length === 0
-    const isOwnedByUser = station.createdBy.id === loggedinUser._id
-    const isLikedByUser = station.likedByUsers.includes(loggedinUser._id)
-    const stationMeta = {
-        isOwnedByUser,
-        userId: loggedinUser._id,
-        isLikedByUser,
-        stationActionsBar: {
-            'showPlay': station.type === 'playlist' && !isEmptyStation,
-            'showRemoveFromLibrary': !isOwnedByUser && isLikedByUser,
-            'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
-            'showMore': !station.isLikedSongs,
-            'songsDisplay': loggedinUser.songsDisplay || 'list'
+    let isEmptyStation
+    let stationMeta
+    let isOwnedByUser
+    let isLikedByUser
+
+    if (loggedinUser) {
+        isEmptyStation = station.songs.length === 0
+        isOwnedByUser = station.createdBy.id === loggedinUser._id
+        isLikedByUser = station.likedByUsers.includes(loggedinUser._id)
+        stationMeta = {
+            isOwnedByUser,
+            userId: loggedinUser._id,
+            isLikedByUser,
+            stationActionsBar: {
+                'showPlay': station.type === 'playlist' && !isEmptyStation,
+                'showRemoveFromLibrary': !isOwnedByUser && isLikedByUser,
+                'showAddToLibrary': !isOwnedByUser && !isLikedByUser,
+                'showMore': !station.isLikedSongs,
+                'songsDisplay': loggedinUser.songsDisplay || 'list'
+            }
         }
     }
 
-    return (isLoading)
+    return (isLoading || !loggedinUser)
         ? <Loader />
         : <div className="station-details">
             <HeaderFixer

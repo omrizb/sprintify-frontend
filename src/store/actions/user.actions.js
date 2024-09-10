@@ -1,6 +1,6 @@
-import { userService } from "../../services/user/user.service.remote.js"
-import { SET_USER } from "../reducers/user.reducer.js"
-import { store } from "../store.js"
+import { userService } from '../../services/user/user.service.remote.js'
+import { SET_USER } from '../reducers/user.reducer.js'
+import { store } from '../store.js'
 
 export async function login(credentials) {
     try {
@@ -13,7 +13,6 @@ export async function login(credentials) {
     }
 }
 
-
 export async function signup(credentials) {
     try {
         const user = await userService.signup(credentials)
@@ -24,7 +23,6 @@ export async function signup(credentials) {
         throw err
     }
 }
-
 
 export async function logout() {
     try {

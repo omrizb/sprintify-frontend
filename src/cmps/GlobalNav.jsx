@@ -1,12 +1,15 @@
+import { useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { SvgButton } from './SvgButton.jsx'
-import { SvgIcon } from './SvgIcon'
 import { utilService } from '../services/util.service.js'
 import { SearchBox } from './SearchBox.jsx'
 import { logout } from '../store/actions/user.actions.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { PopUp } from './PopUp.jsx'
+import { DropDownMenu } from './Menus/DropDownMenu.jsx'
+import { SvgButton } from './SvgButton.jsx'
+import { SvgIcon } from './SvgIcon'
 
 
 export function GlobalNav() {
@@ -15,6 +18,10 @@ export function GlobalNav() {
     const user = useSelector((storeState) => storeState.userModule.user)
     const debouncedNavigate = utilService.debounce(navToResults, 500)
     const location = useLocation()
+
+    const [showUserMenu, setShowUserMenu] = useState(false)
+    const userMenuBtnRef = useRef(null)
+
     const isHome = location.pathname === '/'
     const isBrowse = location.pathname === '/search'
 
@@ -37,6 +44,19 @@ export function GlobalNav() {
     function navToResults(value) {
         navigate(`/search/${value}`)
     }
+
+    async function onLogout() {
+        await logout()
+        navigate('/')
+    }
+
+    const userMenuItems = [
+        {
+            type: 'list-item',
+            name: 'Logout',
+            onClick: onLogout,
+        }
+    ]
 
     return (
         <div className="global-nav flex-center-space-between">
@@ -81,7 +101,16 @@ export function GlobalNav() {
                             tooltipTxt={"What's New"}
                         />
                         <div className="btn-global-nav-gray">
-                            <button className="profile-btn">{user.username[0].toUpperCase()}</button>
+                            <button
+                                ref={userMenuBtnRef}
+                                className="profile-btn"
+                                onClick={() => setShowUserMenu(true)}
+                            >
+                                {user.username[0].toUpperCase()}
+                            </button>
+                            {showUserMenu && <PopUp btnRef={userMenuBtnRef} onClosePopUp={() => setShowUserMenu(false)} >
+                                <DropDownMenu listItems={userMenuItems} />
+                            </PopUp>}
                         </div>
                     </>
                     : <div className="login-signup">
