@@ -16,18 +16,30 @@ export function stationReducer(state = initialState, action) {
     var newState = state
     var stations
     switch (action.type) {
+
         case SET_STATIONS:
             newState = { ...state, stations: action.stations }
             break
+
         case SET_STATION:
             newState = { ...state, station: action.station }
             break
+
         case REMOVE_STATION:
             const lastRemovedStation = state.stations.find(station => station._id === action.stationId)
             stations = state.stations.filter(station => station._id !== action.stationId)
             newState = { ...state, stations, station: lastRemovedStation }
             break
+
         case ADD_STATION:
+            if (state.stations.length === 0) {
+                newState = {
+                    ...state,
+                    stations: [action.station]
+                }
+                break
+            }
+
             const pinnedStations = state.stations.filter(station => station.isPinned === true)
             const unPinnedStations = state.stations.filter(station => station.isPinned === false)
 
@@ -48,6 +60,7 @@ export function stationReducer(state = initialState, action) {
                 station: action.station
             }
             break
+
         case UPDATE_STATION:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations, station: action.station }

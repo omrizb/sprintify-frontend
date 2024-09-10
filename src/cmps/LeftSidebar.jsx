@@ -25,12 +25,12 @@ export function LeftSidebar() {
     }, [])
 
     useEffect(() => {
+        if (!user) return
         loadStations(filterBy)
-        // loadStations()
     }, [filterBy])
 
     useEffect(() => {
-        if (!stations || !stations.length || isFirstSongLoaded) return
+        if (!user || !stations || !stations.length || isFirstSongLoaded) return
         const station = stations.find(station => station.songs.length > 0)
         loadFirstStation(station._id, station.songs[0])
     }, [stations])

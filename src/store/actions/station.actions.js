@@ -11,7 +11,6 @@ import {
     UPDATE_STATIONS,
     UPDATE_STATION_AND_STAY as UPDATE_STATION_AND_STAY,
 } from '../reducers/station.reducer.js'
-import { constant } from 'lodash'
 
 
 export async function loadStations(filterBy) {
@@ -27,7 +26,6 @@ export async function loadStations(filterBy) {
         throw err
     }
 }
-
 
 export async function loadStation(stationId) {
     try {
