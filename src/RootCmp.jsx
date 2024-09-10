@@ -8,8 +8,9 @@ import { Search } from './pages/Search.jsx'
 import { SearchResults } from './pages/SearchResults.jsx'
 import { StationDetails } from './pages/StationDetails.jsx'
 import { SongDetails } from './pages/SongDetails.jsx'
+import { Login } from './pages/Login.jsx'
+import { Signup } from './pages/Signup.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
-import { Login } from './cmps/Login.jsx'
 
 import './assets/style/main.scss'
 
@@ -20,6 +21,7 @@ export function App() {
                 <UserMsg />
                 <Routes>
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/" element={<StationIndex />}>
                         <Route index element={<MainView />} />
                         <Route path="/station/:id" element={<StationDetails />} />

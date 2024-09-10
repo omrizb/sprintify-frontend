@@ -9,6 +9,7 @@ const STORAGE_KEY = 'stationDB'
 
 export const stationService = {
     getEmptyStation,
+    getLikedSongsStation,
     query,
     getById,
     save,
@@ -34,7 +35,22 @@ function getEmptyStation() {
         isOwnedByUser: true,
         createdBy: {},
         likedByUsers: [],
-        songs: []
+        songs: [],
+        lastIdx: ''
+    }
+}
+
+function getLikedSongsStation(user) {
+    return {
+        ...getEmptyStation(),
+        name: 'Liked Songs',
+        createdBy: {
+            id: user._id,
+            fullName: user.fullName,
+            imgUrl: user.imgUrl
+        },
+        isPinned: true,
+        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-300.png'
     }
 }
 

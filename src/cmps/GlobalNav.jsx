@@ -114,7 +114,7 @@ export function GlobalNav() {
                         </div>
                     </>
                     : <div className="login-signup">
-                        <button className="btn-dark-big">Sign up</button>
+                        <button className="btn-dark-big" onClick={() => navigate('/signup')}>Sign up</button>
                         <button className="btn-white-big" onClick={() => navigate('/login')}>Login</button>
                     </div>
                 }

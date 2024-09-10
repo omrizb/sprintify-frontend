@@ -1,5 +1,4 @@
 import { httpService } from '../http.service'
-import { utilService } from '../util.service'
 
 export const stationService = {
     getEmptyStation,
@@ -10,6 +9,7 @@ export const stationService = {
     getRecentlyPlayed,
     getTopMixes,
     getMadeForYou,
+    getLikedSongsStation
 }
 
 function getEmptyStation() {
@@ -23,7 +23,22 @@ function getEmptyStation() {
         isOwnedByUser: true,
         createdBy: {},
         likedByUsers: [],
-        songs: []
+        songs: [],
+        lastIdx: ''
+    }
+}
+
+function getLikedSongsStation(user) {
+    return {
+        ...getEmptyStation(),
+        name: 'Liked Songs',
+        createdBy: {
+            id: user._id,
+            fullName: user.fullName,
+            imgUrl: user.imgUrl
+        },
+        isPinned: true,
+        stationImgUrl: 'https://misc.scdn.co/liked-songs/liked-songs-300.png'
     }
 }
 

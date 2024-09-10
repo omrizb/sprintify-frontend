@@ -25,6 +25,7 @@ export function Login() {
         <div className="login">
             <div className="login-container">
                 <div className="login-content">
+                    <h1>Login</h1>
                     <form className="login-form" onSubmit={onLogin}>
 
                         <span>Email or username</span>
