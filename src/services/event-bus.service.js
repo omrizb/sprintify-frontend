@@ -2,6 +2,10 @@ export const SHOW_MSG = 'show-user-msg'
 
 function createEventEmitter() {
     const listenersMap = {}
+
+    // DEBUG
+    // window.listenersMap = listenersMap
+
     return {
         on(evName, listener) {
             listenersMap[evName] = (listenersMap[evName]) ? [...listenersMap[evName], listener] : [listener]
@@ -17,7 +21,6 @@ function createEventEmitter() {
 }
 
 export const eventBusService = createEventEmitter()
-
 
 export function showSuccessMsg(txt) {
     showUserMsg({ txt, type: 'success' })

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { addStation } from '../../store/actions/station.actions'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +10,7 @@ import { PopUp } from '../PopUp'
 export function LeftSideBarHeader() {
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
+    const addBtnRef = useRef(null)
 
     const listItems = [{
         type: 'list-item',
@@ -39,13 +40,13 @@ export function LeftSideBarHeader() {
             </div>
 
             <div className="add-playlist">
-                <button className="plus icon btn-medium-with-hover"
+                <button ref={addBtnRef} className="plus icon btn-medium-with-hover"
                     onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
                     <SvgIcon iconName={"plus"} />
                 </button>
 
                 {showMenu &&
-                    <PopUp closePopUp={() => setShowMenu(false)} >
+                    <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
                         <DropDownMenu listItems={listItems} />
                     </PopUp>
                 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -25,7 +25,9 @@ export function StationDetailsActions({ station, stationMeta }) {
 
     const [viewType, setViewType] = useState('list')
     const [showViewMenu, setShowViewMenu] = useState(false)
+    const showViewBtnRef = useRef(null)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
+    const showMoreBtnRef = useRef(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const { isOwnedByUser, userId, isLikedByUser } = stationMeta
@@ -141,7 +143,7 @@ export function StationDetailsActions({ station, stationMeta }) {
                 <VButton type="removeFromLibrary" /></div>}
 
             {(!pinnedStation) &&
-                <div className="show-more"
+                <div ref={showMoreBtnRef} className="show-more"
                     onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}>
                     {showMore && (<SvgButton
                         btnClass={"btn-dark2"}
@@ -149,22 +151,25 @@ export function StationDetailsActions({ station, stationMeta }) {
                         svgClass={"svg-big2"}
                         tooltipTxt={`More options for ${station.name}`}
                     />)}
-                    {showMoreMenu && <DropDownMenu listItems={moreList} />}
-
+                    {showMoreMenu && <PopUp btnRef={showMoreBtnRef} onClosePopUp={() => setShowMoreMenu(false)} >
+                        <DropDownMenu listItems={moreList} />
+                    </PopUp>}
 
                 </div>}
 
             <div className="view-as">
                 <button
+                    ref={showViewBtnRef}
                     className="btn-dark2-simple flex-regular-gap"
                     onClick={() => setShowViewMenu(prevShowViewMenu => !prevShowViewMenu)}>
                     <span>{viewType}</span>
                     <SvgIcon iconName={viewType} svgClass="svg-small1" />
                 </button>
 
-                {showViewMenu && <PopUp closePopUp={() => setShowViewMenu(false)} >
+                {showViewMenu && <PopUp btnRef={showViewBtnRef} onClosePopUp={() => setShowViewMenu(false)} >
                     <DropDownMenu listItems={viewList} />
                 </PopUp>}
+
             </div>
 
             {isModalOpen &&

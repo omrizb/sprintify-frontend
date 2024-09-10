@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { utilService } from '../../services/util.service.js'
 import { imgService } from '../../services/imgService.js'
+import { showErrorMsg } from '../../services/event-bus.service.js'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
@@ -12,14 +13,16 @@ import { addSongToStation } from '../../store/actions/station.actions.js'
 import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
 import { MiniSongPreview } from './MiniSongPreview.jsx'
-import { showErrorMsg } from '../../services/event-bus.service.js'
+import { PopUp } from '../PopUp.jsx'
 
 export function SongPreview(props) {
 
     const playerSpotifyId = useSelector(store => store.playerModule.player.song.spotifyId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
     const [showMenu, setShowMenu] = useState(false)
+    const addBtnRef = useRef(null)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
+    const dotsBtnRef = useRef(null)
 
     const { song, stationId, likedSongsStation, myStations, hoveredSpotifyId,
         selectedSpotifyId, index, type, isOwnedByUser, station } = props
@@ -88,27 +91,32 @@ export function SongPreview(props) {
             <div className="date-added"></div>
             <div className="song-duration">
 
-                <div className="add-btn-container" onClick={addSong}>
+                <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>
                     {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
-                    {showMenu && <SongPreviewAddPlaylistMenu
-                        song={song}
-                        myStations={myStations}
-                        likedSongsStation={likedSongsStation}
-                        setShowMenu={setShowMenu} />}
+                    {showMenu && <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
+                        <SongPreviewAddPlaylistMenu
+                            song={song}
+                            myStations={myStations}
+                            likedSongsStation={likedSongsStation}
+                            setShowMenu={setShowMenu} />
+                    </PopUp>}
                 </div>
                 <span>{utilService.getTimeStr(duration)}</span>
-                <div onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}
+                <div ref={dotsBtnRef} onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}
                     className="dots-container">
                     {isHighlighted && <DotsButton type="songPreview" elementName={songName} />}
                 </div>
-                {showMoreMenu && <SongPreviewActionsMenu
-                    song={song}
-                    station={station}
-                    isOwnedByUser={isOwnedByUser}
-                    likedSongsStation={likedSongsStation}
-                    myStations={myStations}
 
-                />}
+                {showMoreMenu && <PopUp btnRef={dotsBtnRef} onClosePopUp={() => setShowMoreMenu(false)} >
+                    <SongPreviewActionsMenu
+                        song={song}
+                        station={station}
+                        isOwnedByUser={isOwnedByUser}
+                        likedSongsStation={likedSongsStation}
+                        myStations={myStations}
+
+                    />
+                </PopUp>}
             </div>
         </article>
     )

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { updateFilterBy } from '../../store/actions/filterBy.actions'
@@ -17,6 +17,7 @@ export function LeftSideBarFilter({ userId }) {
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     const [showMenu, setShowMenu] = useState(false)
+    const sortByBtnRef = useRef(null)
     const [showSearch, setShowSearch] = useState(false)
 
     const listMenu = [
@@ -148,14 +149,13 @@ export function LeftSideBarFilter({ userId }) {
 
 
                 <div className="sort-by">
-                    <div onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
+                    <div ref={sortByBtnRef} onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
                         <span>{sortType}</span>
                         <SvgIcon iconName={viewType} svgClass="svg=small" />
                     </div>
-                    {/* {showMenu && <DropDownMenu listItems={listMenu} />} */}
 
                     {showMenu &&
-                        <PopUp closePopUp={() => setShowMenu(false)} >
+                        <PopUp btnRef={sortByBtnRef} onClosePopUp={() => setShowMenu(false)} >
                             <DropDownMenu listItems={listMenu} />
                         </PopUp>}
 

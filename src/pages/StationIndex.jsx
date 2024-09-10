@@ -1,8 +1,7 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useParams } from 'react-router-dom'
 
-import { spotifyService } from '../services/spotify.service.js'
 import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { RightSideBar } from '../cmps/RightSideBar.jsx'
@@ -23,14 +22,14 @@ export function StationIndex() {
             {loggedinUser && <div className="global-nav-container">
                 <GlobalNav />
             </div>}
-            <div className="left-sidebar-container">
+            <div className="left-sidebar-container scrollable-container">
                 <LeftSidebar />
             </div>
-            <div className="main-view-container" ref={mainViewContainerRef}>
+            <div className="main-view-container scrollable-container" ref={mainViewContainerRef}>
                 <Outlet key={useParams().id} context={{ containerRef: mainViewContainerRef }} />
             </div>
             <div
-                className={`right-sidebar-container ${!isRightSidebarOpen && 'right-sidebar-closed'}`}
+                className={`right-sidebar-container scrollable-container ${!isRightSidebarOpen && 'right-sidebar-closed'}`}
                 style={{ width: rightSidebarWidth }}
             >
                 <RightSideBar />

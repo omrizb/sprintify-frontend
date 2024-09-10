@@ -14,7 +14,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
         return 'item'
     }
 
-    function handleChecboxChange(ev) {
+    function handleCheckboxChange(ev) {
         const updatedItem = { ...listItemToEdit, isChecked: ev.target.checked }
         setListItemToEdit(updatedItem)
         const updatedListItems = list.map(item => {
@@ -47,7 +47,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
                             <input
                                 type="checkbox"
                                 checked={listItemToEdit.isChecked}
-                                onChange={handleChecboxChange}
+                                onChange={handleCheckboxChange}
                             />
                             <span></span>
                         </label>}
