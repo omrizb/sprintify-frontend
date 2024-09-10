@@ -109,7 +109,8 @@ export function StationFilterButtons({ filterBy, userId }) {
         updateFilterBy({
             ...filterBy,
             stationType: type,
-            createdBy: createdBy
+            createdBy: createdBy,
+            userId: userId
         })
     }
 

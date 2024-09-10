@@ -1,15 +1,17 @@
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, addSongToStation } from '../../store/actions/station.actions'
 import { showSuccessMsg } from '../../services/event-bus.service'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
 
     const spotifyId = song.spotifyId
     const [listItems, setListItems] = useState([])
-
+    const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         if (!myStations) return
@@ -67,7 +69,18 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
         setShowMenu(false)
         try {
             const newStation = stationService.getEmptyStation()
-            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl.big, songs: [song] }
+            const { _id, fullName, imgUrl } = loggedinUser
+            const station = {
+                ...newStation,
+                name: song.songName,
+                stationImgUrl: song.imgUrl.big,
+                createdBy: {
+                    id: _id,
+                    fullName,
+                    imgUrl
+                },
+                songs: [song]
+            }
             await addStation(station)
             showSuccessMsg(`Added to ${station.name}`)
 

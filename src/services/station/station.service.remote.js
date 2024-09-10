@@ -1,4 +1,5 @@
 import { httpService } from '../http.service'
+import { utilService } from '../util.service'
 
 export const stationService = {
     getEmptyStation,
@@ -6,10 +7,27 @@ export const stationService = {
     getById,
     save,
     remove,
-    addStationMsg,
+    getRecentlyPlayed,
+    getTopMixes,
+    getMadeForYou,
 }
 
-async function query(filterBy = { txt: '', price: 0 }) {
+function getEmptyStation() {
+    return {
+        name: 'My Playlist',
+        type: 'playlist',
+        isPinned: false,
+        tags: [],
+        stationImgUrl: '',
+        description: '',
+        isOwnedByUser: true,
+        createdBy: {},
+        likedByUsers: [],
+        songs: []
+    }
+}
+
+async function query(filterBy = { txt: '' }) {
     return httpService.get(`station`, filterBy)
 }
 
@@ -23,15 +41,61 @@ async function remove(stationId) {
 
 async function save(station) {
     var savedStation
+
     if (station._id) {
-        savedStation = await httpService.put(`station/${station._id}`, station)
+        const stationToSave = {
+            _id: station._id,
+            name: station.name,
+            type: station.type,
+            isLikedSongs: station.isLikedSongs,
+            tags: station.tags,
+            stationImgUrl: station.stationImgUrl,
+            description: station.description,
+            isOwnedByUser: station.isOwnedByUser,
+            createdBy: station.createdBy,
+            likedByUsers: station.likedByUsers,
+            songs: station.songs,
+            createdAt: station.createdAt,
+            addedAt: station.addedAt,
+            isPinned: station.isPinned,
+            lastIdx: station.lastIdx || ''
+        }
+        savedStation = await httpService.put(`station/${station._id}`, stationToSave)
+        console.log(savedStation)
     } else {
-        savedStation = await httpService.post('station', station)
+        const stationToSave = {
+            name: station.name,
+            type: station.type,
+            isLikedSongs: station.isLikedSongs,
+            tags: station.tags,
+            stationImgUrl: station.stationImgUrl,
+            description: station.description,
+            isOwnedByUser: station.isOwnedByUser,
+            createdBy: station.createdBy,
+            likedByUsers: station.likedByUsers,
+            songs: station.songs,
+            createdAt: Date.now(),
+            addedAt: Date.now(),
+            isPinned: station.isPinned,
+            lastIdx: ''
+        }
+        savedStation = await httpService.post('station', stationToSave)
     }
     return savedStation
 }
 
-async function addStationMsg(stationId, txt) {
-    const savedMsg = await httpService.post(`station/${stationId}/msg`, { txt })
-    return savedMsg
+async function getRecentlyPlayed(userId, size = 4) {
+    //TODO write algorithm for fetching recentlyplayed playlists per user 
+
+    return httpService.get(`station`, { stationType: 'album' })
+
 }
+async function getTopMixes(userId, size = 4) {
+    //TODO write algorithm for fetching top mixes per user 
+    return httpService.get(`station`, { stationType: 'playlist' })
+}
+async function getMadeForYou(userId, size = 4) {
+    //TODO write algorithm for fetching top mixes per user 
+    return httpService.get(`station`, { stationType: 'playlist' })
+}
+

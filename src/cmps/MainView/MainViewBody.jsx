@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { utilService } from '../../services/util.service'
 
 import { StationList } from '../StationList'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 import { Footer } from '../Footer'
 import { StationSection } from '../StationSection'
 

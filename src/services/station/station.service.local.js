@@ -13,11 +13,9 @@ export const stationService = {
     getById,
     save,
     remove,
-    addStationMsg,
     getRecentlyPlayed,
     getTopMixes,
     getMadeForYou,
-    getSong
 }
 
 // DEBUG:
@@ -34,11 +32,7 @@ function getEmptyStation() {
         stationImgUrl: '',
         description: '',
         isOwnedByUser: true,
-        createdBy: {
-            id: 'AAAA',
-            fullName: 'Darr',
-            imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-        },
+        createdBy: {},
         likedByUsers: [],
         songs: []
     }
@@ -48,7 +42,6 @@ async function query(filterBy = {
     txt: '',
     stationType: '',
     createdBy: '',
-    spotifyId: '',
     sortField: '',
     sortDir: '',
     userId: '',
@@ -80,21 +73,20 @@ async function query(filterBy = {
         stations = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
     }
 
-    // if (likedByUser) {
-    //     stations = stations.filter(station => station.likedByUsers.includes(likedByUser))
-    // }
 
     if (userId) {
-        if (createdBy && (createdBy !== userId)) {
-            stations = stations.filter(station => station.likedByUsers.includes(userId))
+
+        const myStations = stations.filter(station => station.createdBy.id === userId)
+        const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
+        const combined = [...myStations, ...likedStations]
+        stations = _.uniqBy(combined, '_id')
+
+
+        if (createdBy === userId) {
+            stations = stations.filter(station => station.isPinned === false)
+            console.log(stations)
         }
 
-        if (!createdBy || (createdBy === userId)) {
-            const myStations = stations.filter(station => station.createdBy.id === userId)
-            const likedStations = stations.filter(station => station.likedByUsers.includes(userId))
-            const combined = [...myStations, ...likedStations]
-            stations = _.uniqBy(combined, '_id')
-        }
     }
 
     if (sortField === 'name') {
@@ -114,13 +106,6 @@ async function query(filterBy = {
             (station1[sortField] - station2[sortField]) * sortDir)
     }
 
-
-    const pinnedStations = stations.filter(station => station.isPinned === true)
-    stations = stations.filter(station => station.isPinned !== true)
-
-    if (!createdBy) {
-        stations = [...pinnedStations, ...stations]
-    }
 
     return stations
 }
@@ -179,20 +164,6 @@ async function save(station) {
     return savedStation
 }
 
-async function addStationMsg(stationId, txt) {
-    // Later, this is all done by the backend
-    const station = await getById(stationId)
-
-    const msg = {
-        id: makeId(),
-        by: userService.getLoggedinUser(),
-        txt
-    }
-    station.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, station)
-
-    return msg
-}
 
 async function getRecentlyPlayed(userId, size = 4) {
     //TODO write algorithm for fetching recentlyplayed playlists per user 
@@ -210,13 +181,6 @@ async function getMadeForYou(userId, size = 4) {
     return utilService.getRandomItems(stations, size)
 }
 
-async function getSong(spotifyId) {
-    const station = await query({ spotifyId: spotifyId })
-    // const station = stations.find(station => station.songs.find(song => song.spotifyId === spotifyId))
-    const song = station.songs.find(song => song.spotifyId === spotifyId)
-
-    return song
-}
 
 function _createStations() {
     let currStations = utilService.loadFromStorage(STORAGE_KEY)

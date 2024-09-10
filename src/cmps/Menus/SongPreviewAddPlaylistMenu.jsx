@@ -1,11 +1,14 @@
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, updateStation, addSongToStation, removeSongFromStation } from '../../store/actions/station.actions'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 
 export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, likedSongsStation }) {
 
+    const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const navigate = useNavigate()
     const spotifyId = song.spotifyId
     const [listItems, setListItems] = useState([])
@@ -80,7 +83,16 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         setShowMenu(false)
         try {
             const newStation = stationService.getEmptyStation()
-            const station = { ...newStation, name: song.songName, stationImgUrl: song.imgUrl.big, songs: [song] }
+
+            const { _id, fullName, imgUrl } = loggedinUser
+
+            const station = {
+                ...newStation,
+                name: song.songName,
+                stationImgUrl: song.imgUrl.big,
+                createdBy: { id: _id, fullName, imgUrl },
+                songs: [song]
+            }
             const savedStation = await addStation(station)
             // const savedStation = await updateStation(updatedStation)
             navigate(`/station/${savedStation._id}`)

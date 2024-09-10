@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom'
 
 import { SvgIcon } from "../SvgIcon"
 import { DropDownMenu } from '../Menus/DropDownMenu'
-import { stationService } from '../../services/station/station.service.local'
+// import { stationService } from '../../services/station/station.service.local'
+import { stationService } from '../../services/station/station.service.remote'
 import { PopUp } from '../PopUp'
 
-export function LeftSideBarHeader() {
+export function LeftSideBarHeader({ loggedinUser }) {
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
     const addBtnRef = useRef(null)
@@ -25,6 +26,14 @@ export function LeftSideBarHeader() {
         setShowMenu(prevShowMenu => !prevShowMenu)
         try {
             const newStation = stationService.getEmptyStation()
+
+            const { _id, fullName, imgUrl } = loggedinUser
+            newStation.createdBy = {
+                id: _id,
+                fullName,
+                imgUrl
+            }
+
             const station = await addStation(newStation)
             navigate(`/station/${station._id}`)
         } catch (err) {

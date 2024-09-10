@@ -1,5 +1,6 @@
 import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
-import { stationService } from '../../services/station/station.service.local.js'
+// import { stationService } from '../../services/station/station.service.local.js'
+import { stationService } from '../../services/station/station.service.remote.js'
 import { store } from '../store.js'
 import {
     ADD_STATION,
@@ -10,11 +11,16 @@ import {
     UPDATE_STATIONS,
     UPDATE_STATION_AND_STAY as UPDATE_STATION_AND_STAY,
 } from '../reducers/station.reducer.js'
+import { constant } from 'lodash'
 
 
 export async function loadStations(filterBy) {
     try {
-        const stations = await stationService.query(filterBy)
+        var stations = await stationService.query(filterBy)
+
+        const likedStation = stations.filter(station => station.isPinned === true)
+        stations = [...likedStation, ...stations.filter(station => station.isPinned === false)]
+
         store.dispatch(getCmdSetStations(stations))
     } catch (err) {
         console.log('Cannot load stations', err)
@@ -45,7 +51,6 @@ export async function removeStation(stationId) {
 
 export async function addStation(newStation) {
     try {
-        // const newStation = stationService.getEmptyStation()
         const savedStation = await stationService.save(newStation)
         store.dispatch(getCmdAddStation(savedStation))
         return savedStation
