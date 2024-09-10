@@ -101,7 +101,7 @@ export function StationDetails() {
                     }
                 />
 
-                {(station.songs > 0) &&
+                {(station.songs.length > 0) &&
                     <div className="secondary-background" style={{ backgroundColor: bgColor }}></div>}
 
                 <StationDetailsActions
