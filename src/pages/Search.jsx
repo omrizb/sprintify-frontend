@@ -43,6 +43,11 @@ export function Search() {
         ...Array.from({ length: 50 }, () => first10Items[Math.floor(Math.random() * first10Items.length)])
     ]
 
+    function onClick(topic) {
+        console.log(topic)
+
+    }
+
 
     return (
         <div className="search-page">
@@ -52,7 +57,11 @@ export function Search() {
                 {topics.map((topic, index) => {
 
                     return <li key={index}>
-                        <SearchTopic topic={topic} imgKey={imgKeys[index]} color={colors[index]} />
+                        <SearchTopic
+                            topic={topic}
+                            imgKey={imgKeys[index]}
+                            color={colors[index]}
+                            onClick={onClick} />
                     </li>
                 })}
             </ul >
