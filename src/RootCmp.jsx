@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import { store } from './store/store.js'
@@ -8,9 +8,10 @@ import { Search } from './pages/Search.jsx'
 import { SearchResults } from './pages/SearchResults.jsx'
 import { StationDetails } from './pages/StationDetails.jsx'
 import { SongDetails } from './pages/SongDetails.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
+import { Login } from './cmps/Login.jsx'
 
 import './assets/style/main.scss'
-import { UserMsg } from './cmps/UserMsg.jsx'
 
 export function App() {
     return (
@@ -18,6 +19,7 @@ export function App() {
             <Router>
                 <UserMsg />
                 <Routes>
+                    <Route path="/login" element={<Login />} />
                     <Route path="/" element={<StationIndex />}>
                         <Route index element={<MainView />} />
                         <Route path="/station/:id" element={<StationDetails />} />
@@ -25,6 +27,7 @@ export function App() {
                         <Route path="/search" element={<Search />} />
                         <Route path="/search/:txt" element={<SearchResults />} />
                     </Route>
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </Router>
         </Provider>

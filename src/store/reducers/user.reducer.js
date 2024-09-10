@@ -6,19 +6,7 @@ export const SET_USERS = 'SET_USERS'
 export const SET_SCORE = 'SET_SCORE'
 
 const initialState = {
-    // user: userService.getLoggedinUser(),
-    // user: {
-    //     _id: 'AAAA',
-    //     fullName: 'Darr',
-    //     imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
-    //     likedSongsIds: [],
-    //     settings: { songsDisplay: 'list' }
-    // },
-    user: {
-        _id: "66de2eb16260c20fa8d47f9f",
-        fullname: "darr",
-        imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
-    },
+    user: userService.getLoggedinUser(),
     users: [],
     watchedUser: null
 }

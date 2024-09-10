@@ -134,6 +134,30 @@
     }
 }
 
+.btn-white-big {
+    @include light;
+    @include btn($type: animated, $size: big);
+
+    &:active {
+        background-color: $lightBgClrPress;
+    }
+}
+
+.btn-dark-big {
+    @include dark2;
+    @include btn($type: animated, $size: big);
+
+    &:hover {
+        fill:  $primaryTxtClr;
+        color:  $primaryTxtClr;
+    }
+
+    &:active {
+        fill: $pressedTxtClr;
+        color: $pressedTxtClr;
+    }
+}
+
 .btn-v {
     background-color: transparent;
     fill: $buttonBgGreen;

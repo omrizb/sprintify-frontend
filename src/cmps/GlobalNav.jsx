@@ -1,20 +1,18 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { SvgButton } from "./SvgButton.jsx"
+import { SvgButton } from './SvgButton.jsx'
 import { SvgIcon } from './SvgIcon'
 import { utilService } from '../services/util.service.js'
 import { SearchBox } from './SearchBox.jsx'
 import { logout } from '../store/actions/user.actions.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { LoginSignup } from './LoginSignup.jsx'
 
 
 export function GlobalNav() {
 
-
-    const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const navigate = useNavigate()
+    const user = useSelector((storeState) => storeState.userModule.user)
     const debouncedNavigate = utilService.debounce(navToResults, 500)
     const location = useLocation()
     const isHome = location.pathname === '/'
@@ -64,31 +62,33 @@ export function GlobalNav() {
                 </div>
             </div>
             <div className="global-nav-right">
-                <div className="installApp">
-                    <SvgButton
-                        btnClass="btn-installApp-nav smaller-margin"
-                        svgIcon='installApp'
-                        svgClass="svg-small1"
-                        tooltipTxt={"What's New"}
-                    />
-                    <span>Install App</span>
-                </div>
+                {user
+                    ? <>
+                        <div className="installApp">
+                            <SvgButton
+                                btnClass="btn-installApp-nav smaller-margin"
+                                svgIcon='installApp'
+                                svgClass="svg-small1"
+                                tooltipTxt={"What's New"}
+                            />
+                            <span>Install App</span>
+                        </div>
 
-                <SvgButton
-                    btnClass="btn-search-nav"
-                    svgIcon='bell'
-                    svgClass="svg-small1"
-                    tooltipTxt={"What's New"}
-                />
-
-                <div className="btn-global-nav-gray">
-                    <button className="profile-btn">D</button>
-                </div>
-                {!user && (
-                    <section className="user-info">
-                        <LoginSignup />
-                    </section>
-                )}
+                        <SvgButton
+                            btnClass="btn-search-nav"
+                            svgIcon='bell'
+                            svgClass="svg-small1"
+                            tooltipTxt={"What's New"}
+                        />
+                        <div className="btn-global-nav-gray">
+                            <button className="profile-btn">{user.username[0].toUpperCase()}</button>
+                        </div>
+                    </>
+                    : <div className="login-signup">
+                        <button className="btn-dark-big">Sign up</button>
+                        <button className="btn-white-big" onClick={() => navigate('/login')}>Login</button>
+                    </div>
+                }
             </div>
         </div>
     )

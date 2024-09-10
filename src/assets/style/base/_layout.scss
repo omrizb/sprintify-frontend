@@ -1,11 +1,11 @@
 .main-layout {
     @include main-grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
+    "global-nav         global-nav      global-nav"
     "left-sidebar       main-view       right-sidebar"
     "now-playing-bar    now-playing-bar now-playing-bar";
-    
 }
 
 .main-layout-loggedin {

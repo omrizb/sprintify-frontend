@@ -59,7 +59,7 @@ function getLoggedinUser() {
 }
 
 function _saveLocalUser(user) {
-	user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score, isAdmin: user.isAdmin }
+	user = { _id: user._id, username: user.username, fullName: user.fullName, imgUrl: user.imgUrl, isAdmin: user.isAdmin }
 	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
 	return user
 }

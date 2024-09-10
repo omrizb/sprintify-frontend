@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useParams } from 'react-router-dom'
 
@@ -10,18 +10,18 @@ import { Player } from '../cmps/Player.jsx'
 
 export function StationIndex() {
 
-    const loggedinUser = useSelector(state => state.userModule.user)
+    const user = useSelector(state => state.userModule.user)
 
     const rightSidebarWidth = useSelector(state => state.systemModule.rightSidebarWidth)
     const isRightSidebarOpen = useSelector(state => state.systemModule.isRightSidebarOpen)
     const mainViewContainerRef = useRef()
 
-    const mainLayout = loggedinUser ? 'main-layout-loggedin' : 'main-layout'
+    const mainLayout = user ? 'main-layout-loggedin' : 'main-layout'
     return (
         <div className={`station-index ${mainLayout}`}>
-            {loggedinUser && <div className="global-nav-container">
+            <div className="global-nav-container">
                 <GlobalNav />
-            </div>}
+            </div>
             <div className="left-sidebar-container scrollable-container">
                 <LeftSidebar />
             </div>

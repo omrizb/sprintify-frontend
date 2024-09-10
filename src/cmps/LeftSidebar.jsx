@@ -13,15 +13,16 @@ import { updateFilterBy } from '../store/actions/filterBy.actions.js'
 
 export function LeftSidebar() {
 
-    const loggedinUser = useSelector(storeState => storeState.userModule.user)
-    const userId = loggedinUser._id
+    const user = useSelector(storeState => storeState.userModule.user)
+
+    if (!user) return
 
     const isFirstSongLoaded = useSelector(storeState => storeState.playerModule.isFirstSongLoaded)
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
     useEffect(() => {
-        updateFilterBy({ ...filterBy, userId })
+        updateFilterBy({ ...filterBy, userId: user._id })
     }, [])
 
     useEffect(() => {
@@ -37,10 +38,10 @@ export function LeftSidebar() {
 
     return (
         <div className="left-sidebar">
-            {!loggedinUser && <SidebarNav />}
+            {!user && <SidebarNav />}
             <div className="my-library" >
                 <LeftSideBarHeader loggedinUser={loggedinUser} />
-                <LeftSideBarFilter userId={userId} />
+                <LeftSideBarFilter userId={user._id} />
                 <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
             </div>
         </div>

@@ -49,9 +49,18 @@
                     }
         
                 }
+
                 .profile-btn{
                     @include green;
                     @include btn($type: animated, $size: small);
+                }
+
+                .login-signup {
+                    display: flex;
+                    
+                    & > *:last-child {
+                        margin-inline-end: 30px;
+                    }
                 }
             }
     }

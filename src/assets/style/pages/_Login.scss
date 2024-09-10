@@ -1,0 +1,57 @@
+.login {
+    @include flex($direction: column);
+    width: 100%;
+    min-height: 100vh;
+
+    .login-container {
+        flex: 1;
+        @include flex($direction: column);
+        width: 100%;
+        padding: 32px;
+        background: linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgb(0, 0, 0) 100%);
+        background-color: $sectionBgClr;
+
+        .login-content {
+            flex: 1;
+            @include flex($direction: column);
+            width: 734px;
+            margin-inline: auto;
+            padding-bottom: 32px;
+            border-radius: 32px;
+            background: linear-gradient( $sectionBgClr 0%, rgba(255, 255, 255, 0.1) 100%,);
+    
+            & > * {
+                width: 324px;
+            }
+
+            .login-form {
+                @include flex($direction: column, $align: stretch, $gap: 8px);
+
+                span {
+                    font-size: $textSizeSmaller-1;
+                    font-weight: 700
+                }
+
+                input {
+                    padding: 12px;
+                    border-radius: 4px;
+                    border: 1px solid $secondaryTxtClr;
+                    font-size: $textSizeBase;
+                }
+            }
+        }
+    }
+
+    footer {
+        @include flex;
+        width: 100%;
+        padding: 32px;
+        font-size: $textSizeSmaller-2;
+        color: $secondaryTxtClr;
+        background-color: $sectionBgClr;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}

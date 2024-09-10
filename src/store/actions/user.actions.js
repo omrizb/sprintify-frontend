@@ -1,9 +1,6 @@
-
 import { userService } from "../../services/user/user.service.remote.js"
 import { SET_USER } from "../reducers/user.reducer.js"
 import { store } from "../store.js"
-
-
 
 export async function login(credentials) {
     try {

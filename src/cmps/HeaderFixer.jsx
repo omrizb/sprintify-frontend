@@ -22,7 +22,7 @@ export function HeaderFixer({ header, className, bgColor, showFromY = -1, childr
 
         return () => {
             resizeObserver.disconnect()
-            scrollableContainerRef.current.removeEventListener('scroll', handleScroll)
+            scrollableContainerRef.current && scrollableContainerRef.current.removeEventListener('scroll', handleScroll)
         }
     }, [])
 
