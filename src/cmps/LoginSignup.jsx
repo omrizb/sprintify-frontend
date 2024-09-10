@@ -35,6 +35,7 @@ export function LoginSignup() {
           fullName: user.fullName,
           imgUrl: user.imgUrl
         }
+        likedStation.stationImgUrl = 'https://misc.scdn.co/liked-songs/liked-songs-300.png'
         addStation(likedStation)
 
       } catch (err) {
