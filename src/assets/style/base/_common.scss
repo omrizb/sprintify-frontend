@@ -63,6 +63,7 @@
 .btn-medium-with-hover {
     @include medium;
     @include btn($circleSize: 32px);
+    background-color: transparent;
 
     &:hover {
         background-color:  $tintedBgClr;

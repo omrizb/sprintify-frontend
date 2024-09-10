@@ -3,6 +3,7 @@ import { SvgIcon } from "./SvgIcon"
 import { updateStation } from '../store/actions/station.actions'
 import { utilService } from '../services/util.service'
 import { uploadService } from '../services/upload.service'
+import { SvgButton } from './SvgButton'
 
 
 export function EditStation({ station, onCloseEdit }) {
@@ -49,22 +50,23 @@ export function EditStation({ station, onCloseEdit }) {
 
             <div className="header">
                 <h1>Edit details</h1>
-                <button onClick={onCloseEdit}>X</button>
+                <SvgButton
+                    btnClass="btn-medium-with-hover"
+                    svgIcon="close"
+                    svgClass="svg-small"
+                    tooltipTxt="Close"
+                    onClick={onCloseEdit}
+                />
             </div>
 
             <div className="body">
-
                 <div className="album-image">
-
                     <div className="choose-photo">
                         <div>
-                            {stationToEdit.stationImgUrl ? (
-                                <img src={stationToEdit.stationImgUrl} alt="" />
-                            ) : (
-                                <SvgIcon iconName={'music'} />
-                            )}
-
-                            {/* <SvgIcon iconName={'music'} /> */}
+                            {stationToEdit.stationImgUrl
+                                ? <img src={stationToEdit.stationImgUrl} alt="" />
+                                : <SvgIcon iconName={'music'} />
+                            }
 
                         </div>
                     </div>
