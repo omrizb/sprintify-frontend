@@ -98,10 +98,14 @@ async function getAlbum(spotifyId) {
     }
 }
 
-async function getRecommendations(songs) {
-    const songsList = (songs.length <= 5) ? songs : songs.slice(0, 5)
-    const songsIdsStr = songsList.map(song => song.spotifyId).join(',')
-    const res = await _https(`/recommendations?seed_tracks=${songsIdsStr}`)
+async function getRecommendations(songs, type = 'song') {
+
+    if (type === 'song') {
+
+        const songsList = (songs.length <= 5) ? songs : songs.slice(0, 5)
+        const songsIdsStr = songsList.map(song => song.spotifyId).join(',')
+        var res = await _https(`/recommendations?seed_tracks=${songsIdsStr}`)
+    }
 
     const recommendedSongs = res.tracks.map(track => {
         return {
@@ -119,6 +123,8 @@ async function getRecommendations(songs) {
     return recommendedSongs
 
 }
+
+
 
 
 async function getStation(spotifyId) {

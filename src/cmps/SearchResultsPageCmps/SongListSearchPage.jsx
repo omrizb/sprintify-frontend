@@ -29,13 +29,13 @@ export function SongListSearchPage({ songs, myStations, likedSongsStation }) {
                         onMouseLeave={() => setHoveredSpotifyId('')}
                         onClick={() => onSetSelectedSpotifyId(song.spotifyId)}
                     >
-                        <div className="image-container">
+                        {/* <div className="image-container">
 
                             <PlayButton
                                 type="songPreview"
                                 song={song}
                             />
-                        </div>
+                        </div> */}
                         <SongPreview
                             isSearchOrigin={isSearchOrigin}
                             type={'mini-table'}

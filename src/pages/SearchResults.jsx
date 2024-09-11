@@ -49,6 +49,10 @@ export function SearchResults() {
         try {
             const res = await spotifyService.search(value)
             setSongs(res.songs)
+            setArtists(res.artists)
+            setAlbums(res.albums)
+            setPlaylists(res.stations)
+
             const ytSongs = []
 
             for (let i = 0; i < res.songs.length; i++) {
@@ -57,9 +61,7 @@ export function SearchResults() {
             }
 
             setSongs(res.songs)
-            setArtists(res.artists)
-            setAlbums(res.albums)
-            setPlaylists(res.stations)
+
 
         } catch (err) {
             console.error(`Couldn't load videos`, err)
@@ -89,6 +91,9 @@ export function SearchResults() {
                 myStations={myStations}
                 likedSongsStation={likedSongsStation}
             />}
+
+            {artists.length > 0 && <h2>Artists</h2>}
+            {albums.length > 0 && <h2>Albums</h2>}
 
 
         </div>

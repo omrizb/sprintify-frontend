@@ -8,6 +8,11 @@
 
     .song-list{
         padding:0;
+
+        ul {
+
+            margin-block-start: 1em;
+        }
     }
 
     li.song-list-item{

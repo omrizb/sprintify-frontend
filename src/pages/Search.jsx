@@ -62,6 +62,11 @@ export function Search() {
                             imgKey={imgKeys[index]}
                             color={colors[index]}
                             onClick={onClick} />
+                        <SearchTopic
+                            topic={topic}
+                            imgKey={imgKeys[index]}
+                            color={colors[index]}
+                            onClick={onClick} />
                     </li>
                 })}
             </ul >
