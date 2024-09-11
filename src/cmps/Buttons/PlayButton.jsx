@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { SvgButton } from '../SvgButton'
+import { youtubeService } from '../../services/youtube.service'
+import { showErrorMsg } from '../../services/event-bus.service'
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
+import { SvgButton } from '../SvgButton'
 
 export function PlayButton({ type, stationId, stationName, song }) {
 
@@ -12,7 +14,7 @@ export function PlayButton({ type, stationId, stationName, song }) {
 
 
     useEffect(() => {
-        if (playerStationId !== stationId) {
+        if (stationId && playerStationId !== stationId) {
             setIsPlaying(false)
         } else if (type === 'songPreview') {
             (player.song.spotifyId === song.spotifyId) ? setIsPlaying(player.isPlaying) : setIsPlaying(false)
@@ -21,11 +23,11 @@ export function PlayButton({ type, stationId, stationName, song }) {
         }
     }, [player.isPlaying, player.song.spotifyId, playerStationId])
 
-    function handleClick(ev) {
+    async function handleClick(ev) {
         ev.preventDefault()
         ev.stopPropagation()
         if (!song) return
-        if (playerStationId !== stationId) {
+        if (stationId && playerStationId !== stationId) {
             setPlayerAction(playerActions.PAUSE)
             setPlayerAction(playerActions.LOAD_STATION, { stationId, song })
             setPlayerAction(playerActions.PLAY)
@@ -34,8 +36,9 @@ export function PlayButton({ type, stationId, stationName, song }) {
         }
 
         if (player.song.spotifyId !== song.spotifyId && type === 'songPreview') {
+            const singleSong = await getYtId(song)
             setPlayerAction(playerActions.PAUSE)
-            setPlayerAction(playerActions.LOAD_SONG, { song })
+            setPlayerAction(playerActions.LOAD_SONG, { song: singleSong })
             setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return
@@ -45,6 +48,19 @@ export function PlayButton({ type, stationId, stationName, song }) {
             setPlayerAction(playerActions.PLAY)
         } else {
             setPlayerAction(playerActions.PAUSE)
+        }
+    }
+
+    async function getYtId(song) {
+        if (song.YtId) return
+
+        try {
+            var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+            song.ytId = ytSong.songId
+            return song
+        } catch (err) {
+            console.log('Could not get song from YouTube.', err)
+            showErrorMsg('Defective song')
         }
     }
 

@@ -43,8 +43,6 @@
 
         .sub-menu{
             .drop-down-menu{
-                right: 245px;
-                top: -200px;
                 width: 200px;
 
                 li:first-child {
@@ -80,6 +78,28 @@
             font-size: $textSizeSmaller-1;
         }
 
+    }
+
+    &.mini-table {
+        display:flex;
+        justify-content: space-between;
+       
+        .index,
+        .date-added{
+            display: none;
+        }
+
+        .mini-song-preview{
+            width: 200px;
+        }
+
+        .song-duration {
+            display: grid;
+            grid-template-columns: 25% 45% 30%;
+            place-items: center end;
+            width: 120px;
+            font-size: $textSizeSmaller-1;
+        }
     }
 
     &.type-search,

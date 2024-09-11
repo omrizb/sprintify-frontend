@@ -78,12 +78,6 @@ export function SearchResults() {
         :
         <div className="search-results">
 
-            {/* {(!songs[0].ytId) && <div>
-                <h2>YouTube is blocking us ☹️😟😭</h2>
-                <h2>Cannot play songs</h2>
-            </div>} */}
-
-
             {songs.length > 0 && <TopResult song={songs[0]} />}
 
             {songs.length > 0 && <SongListSearchPage

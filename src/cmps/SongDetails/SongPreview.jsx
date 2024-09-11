@@ -16,6 +16,7 @@ import { MiniSongPreview } from './MiniSongPreview.jsx'
 import { PopUp } from '../PopUp.jsx'
 import { youtubeService } from '../../services/youtube.service.js'
 
+
 export function SongPreview(props) {
 
     const playerSpotifyId = useSelector(store => store.playerModule.player.song.spotifyId)
@@ -34,7 +35,7 @@ export function SongPreview(props) {
             articleClassType = 'table dynamic-grid'
             break
         case 'mini-table':
-            articleClassType = 'table dynamic-grid'
+            articleClassType = 'mini-table dynamic-grid'
     }
 
     const { spotifyId, songName, album, duration } = song
@@ -43,14 +44,12 @@ export function SongPreview(props) {
     const isLikedByUser = likedSongsStation && likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
     const isCurrentlyPlaying = song.spotifyId === playerSpotifyId && isPlaying
 
-
     const songPreviewClass = [
         'song-preview',
         articleClassType,
         isHighlighted ? 'highlight' : '',
         isCurrentlyPlaying ? 'currently-playing' : ''
     ].join(' ')
-
 
     async function addSong() {
         if (!song.ytId) {
@@ -91,7 +90,11 @@ export function SongPreview(props) {
                         ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
                         : index}
             </div>
-            <MiniSongPreview song={song} isCurrentlyPlaying={isCurrentlyPlaying} />
+            <MiniSongPreview
+                song={song}
+                isCurrentlyPlaying={isCurrentlyPlaying}
+                showPlayBtn={type === 'mini-table'}
+            />
             {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
             <div className="date-added"></div>
             <div className="song-duration">

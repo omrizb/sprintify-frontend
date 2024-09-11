@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { PlayButton } from '../Buttons/PlayButton'
 
-export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onClickAdd }) {
+export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onClickAdd, showPlayBtn }) {
 
     let articleClassName
     let imgClassName
@@ -22,7 +23,14 @@ export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onC
 
     return (
         <article className={`${articleClassName} ${isCurrentlyPlaying && 'currently-playing'}`}>
+
             <img className={imgClassName} src={song.imgUrl.big} alt={song.songName} />
+            {showPlayBtn &&
+                <PlayButton
+                    type="songPreview"
+                    song={song}
+                />}
+
             <div className="song-info">
                 <div className="song-name">
                     <Link to={`/track/${song.spotifyId}`}>{song.songName}</Link>
