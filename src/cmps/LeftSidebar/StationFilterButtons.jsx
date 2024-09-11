@@ -5,6 +5,8 @@ import { updateFilterBy } from '../../store/actions/filterBy.actions'
 
 export function StationFilterButtons({ filterBy, userId }) {
 
+    console.log(userId)
+
     const sprintifyId = 'BBBB'
     const [filterBtns, setFilterBtns] = useState([])
 
@@ -123,7 +125,12 @@ export function StationFilterButtons({ filterBy, userId }) {
             }))
         )
 
-        updateFilterBy({ ...filterBy, stationType: '', createdBy: '' });
+        updateFilterBy({
+            ...filterBy,
+            stationType: '',
+            createdBy: '',
+            userId
+        })
     }
 
 
