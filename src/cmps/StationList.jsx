@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { StationPreview } from './StationPreview.jsx'
+import { useSelector } from 'react-redux'
 
-export function StationList({ stations, className, previewStyle, onSetBgColor }) {
+export function StationList({ className, previewStyle, onSetBgColor }) {
 
     const [colorActiveStationId, setColorActiveStationId] = useState(null)
     const listContainer = useRef(null)
+    const stations = useSelector(storeState => storeState.stationModule.stations)
 
     useEffect(() => {
         if (previewStyle !== 'card' || !listContainer.current) return
