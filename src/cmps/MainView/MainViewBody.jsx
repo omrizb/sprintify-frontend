@@ -53,12 +53,6 @@ export function MainViewBody({ onSetBgColor }) {
                 ListClassName="card-stations made-for-you"
                 previewStyle="card"
             />
-            <StationSection
-                titleTxt=""
-                stations={madeForYou.slice(3)}
-                ListClassName="card-stations made-for-you"
-                previewStyle="card"
-            />
 
             {/* <StationSection
                 titleTxt="Recently Played"
