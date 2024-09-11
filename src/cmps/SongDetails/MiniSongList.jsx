@@ -11,9 +11,15 @@ export function MiniSongList({ songs, onClickAdd, type = 'simple' }) {
             {songs.map(song => {
                 const isSongPlaying = song.spotifyId === currPlayingSong.spotifyId && isPlaying
                 return <li key={song.spotifyId}>
-                    <MiniSongPreview type={type} song={song} isSongPlaying={isSongPlaying} onClickAdd={onClickAdd} />
+                    <MiniSongPreview
+                        type={type}
+                        song={song}
+                        isSongPlaying={isSongPlaying}
+                        onClickAdd={onClickAdd}
+                        showPlayBtn={type === 'with-add-btn'}
+                    />
                 </li>
             })}
-        </ul >
+        </ul>
     )
 }
