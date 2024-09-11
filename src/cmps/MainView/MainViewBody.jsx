@@ -7,6 +7,7 @@ import { Footer } from '../Footer'
 import { StationSection } from '../StationSection'
 import { StationListMainView } from './StationListMainView'
 import madeForYouCollections from '../../services/station/station.service.remote'
+import { StationList } from '../StationList'
 
 
 export function MainViewBody({ onSetBgColor }) {
@@ -45,7 +46,7 @@ export function MainViewBody({ onSetBgColor }) {
 
     return (
         <div className="main-view-body">
-            <StationListMainView
+            <StationList
                 stations={stationsMain}
                 className="stations-top"
                 previewStyle="minimal"

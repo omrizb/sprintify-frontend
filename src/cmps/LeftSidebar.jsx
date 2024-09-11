@@ -31,7 +31,10 @@ export function LeftSidebar() {
 
     useEffect(() => {
         if (!user || !stations || !stations.length || isFirstSongLoaded) return
+
         const station = stations.find(station => station.songs.length > 0)
+        if (!station) return
+
         loadFirstStation(station._id, station.songs[0])
     }, [stations])
 
