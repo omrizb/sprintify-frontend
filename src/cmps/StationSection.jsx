@@ -1,4 +1,5 @@
 import { StationListMainView } from './MainView/StationListMainView'
+import { StationList } from './StationList'
 
 export function StationSection({ titleTxt, ListClassName, stations, previewStyle }) {
     return (
@@ -9,7 +10,7 @@ export function StationSection({ titleTxt, ListClassName, stations, previewStyle
                 <div className="show-all">Show all</div>
             </div>
 
-            <StationListMainView className={ListClassName} stations={stations} previewStyle={previewStyle} />
+            <StationList className={ListClassName} stations={stations} previewStyle={previewStyle} />
         </div>
     )
 }

@@ -37,7 +37,7 @@ export function LeftSidebar() {
 
     return (
         <div className="left-sidebar">
-            {user
+            {user && stations
                 ? <div className="my-library" >
                     <LeftSideBarHeader loggedinUser={user} />
                     <LeftSideBarFilter userId={user._id} />
