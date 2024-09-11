@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
-export function PopUp({ children, onClosePopUp, btnRef }) {
+export function PopUp({ children, onClosePopUp, btnRef, isSideMenu }) {
 
     const popUpContainer = useRef(null)
 
@@ -45,13 +45,21 @@ export function PopUp({ children, onClosePopUp, btnRef }) {
         const btnRect = btnRef.current.getBoundingClientRect()
         const popUpEl = popUpContainer.current
 
-        btnRect.left + window.scrollX + popUpEl.getBoundingClientRect().width < window.innerWidth
-            ? popUpEl.style.left = `${btnRect.left + window.scrollX}px`
-            : popUpEl.style.right = `${window.innerWidth - btnRect.right - window.scrollX}px`
+        if (isSideMenu) {
+            popUpEl.style.right = `${window.innerWidth + btnRect.width - btnRect.right - window.scrollX}px`
+            popUpEl.style.top = `${btnRect.top + window.scrollY}px`
+        } else {
 
-        btnRect.bottom + window.scrollY + popUpEl.getBoundingClientRect().height < window.innerHeight
-            ? popUpEl.style.top = `${btnRect.bottom + window.scrollY}px`
-            : popUpEl.style.bottom = `${window.innerHeight - btnRect.top - window.scrollY}px`
+            btnRect.left + window.scrollX + popUpEl.getBoundingClientRect().width < window.innerWidth
+                ? popUpEl.style.left = `${btnRect.left + window.scrollX}px`
+                : popUpEl.style.right = `${window.innerWidth - btnRect.right - window.scrollX}px`
+
+            btnRect.bottom + window.scrollY + popUpEl.getBoundingClientRect().height < window.innerHeight
+                ? popUpEl.style.top = `${btnRect.bottom + window.scrollY}px`
+                : popUpEl.style.bottom = `${window.innerHeight - btnRect.top - window.scrollY}px`
+        }
+
+
     }
 
     const childrenWithProps = React.Children.map(children, child => {

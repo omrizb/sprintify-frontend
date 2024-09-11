@@ -42,7 +42,6 @@ export function DropDownMenu({ listItems }) {
                     </li>)
                 }
             </ul>
-
         </div>
     )
 }

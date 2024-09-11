@@ -7,7 +7,7 @@ export function SignupFooter() {
     return (
         <div className="signup-footer">
             <div>
-                <p>Preview of Spotify</p>
+                <p>Preview of Sprintify</p>
                 <p>Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</p>
             </div>
             <button className="btn-white-big" onClick={() => navigate('/signup')}>Sign up free</button>

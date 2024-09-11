@@ -3,7 +3,7 @@ import { SvgIcon } from "../SvgIcon"
 
 export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
-    const { name, icon, isChosen, topDivision, type } = listItem
+    const { name, ref, icon, isChosen, topDivision, type } = listItem
 
     const [list, setList] = useState([...listItems])
     const [listItemToEdit, setListItemToEdit] = useState(listItem)
@@ -28,7 +28,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
 
     return (
-        <div className={`drop-down-menu-item ${topDivision}`}>
+        <div ref={ref} className={`drop-down-menu-item ${topDivision}`}>
 
             <div className="content">
                 {(listItem.type !== 'button') &&

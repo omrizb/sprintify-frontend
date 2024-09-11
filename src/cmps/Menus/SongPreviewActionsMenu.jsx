@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { addSongToStation, removeSongFromStation, updateStation } from '../../store/actions/station.actions'
 import { DropDownMenu } from './DropDownMenu'
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 import { showErrorMsg } from '../../services/event-bus.service'
+import { PopUp } from '../PopUp'
 
 export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUser, likedSongsStation }) {
 
     const { spotifyId } = song
     const isLikedByUser = likedSongsStation.songs.some(song => song.spotifyId === spotifyId)
     const [showMenu, setShowMenu] = useState(false)
+    const addMoreBtnRef = useRef()
 
     const listItems = getList()
 
@@ -66,6 +68,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             type: 'list-item',
             icon: 'plus',
             secondIcon: 'more-menu',
+            ref: addMoreBtnRef,
             onClick: () => {
                 if (!song.ytId) {
                     setSongYtId()
@@ -109,13 +112,14 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
     return (
         <div className="actions-menu">
             <DropDownMenu listItems={listItems} setShowMenu={setShowMenu} />
-            {showMenu &&
+            {showMenu && <PopUp btnRef={addMoreBtnRef} onClosePopUp={() => setShowMenu(false)} isSideMenu={true}>
                 <AddPlaylistSubMenu
                     song={song}
                     myStations={myStations}
                     likedSongsStation={likedSongsStation}
                     setShowMenu={setShowMenu}
-                    showMenu={showMenu} />}
+                    showMenu={showMenu} />
+            </PopUp>}
 
         </div>
     )
