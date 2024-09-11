@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux'
 
 import { utilService } from '../../services/util.service'
 
-import { StationList } from '../StationList'
-// import { stationService } from '../../services/station/station.service.local'
 import { stationService } from '../../services/station/station.service.remote'
 import { Footer } from '../Footer'
 import { StationSection } from '../StationSection'
+import { StationListMainView } from './StationListMainView'
+import { addSprintifyStation, addStation } from '../../store/actions/station.actions'
 
 
 export function MainViewBody({ onSetBgColor }) {
@@ -16,38 +16,69 @@ export function MainViewBody({ onSetBgColor }) {
     const stations = useSelector(storeState => storeState.stationModule.stations)
 
     const [stationsMain, setStationsMain] = useState([])
-    const [recentlyPlayed, setRecentlyPlayed] = useState([])
-    const [topMixes, setTopMixes] = useState([])
+
     const [madeForYou, setMadeForYou] = useState([])
 
     useEffect(() => {
         if (!stations) return
-        loadMainViewCollections()
+        loadCollections()
+
     }, [stations])
 
-    async function loadMainViewCollections() {
-        try {
-            const numOfMainStations = stations.length >= 7 ? 6 : stations.length
-            setStationsMain(utilService.getRandomItems(
-                stations.filter(station => !station.isPinned),
-                numOfMainStations
-            ))
+    function loadCollections() {
+        const numOfStations = (stations.length < 7) ? stations.length : 6
+        const myLibrary = stations.filter(station =>
+            (station.createdBy.id === loggedinUser._id) ||
+            (station.likedByUsers.includes(loggedinUser._id))
+        )
+        const mainStations = utilService.getRandomItems(myLibrary, numOfStations)
 
-            const recentlyPlayedList = await stationService.getRecentlyPlayed('bob', 4)
-            const topMixesList = await stationService.getTopMixes('bob', 4)
-            const madeForYouList = await stationService.getMadeForYou('bob', 6)
+        setStationsMain(mainStations)
 
-            setRecentlyPlayed(recentlyPlayedList)
-            setTopMixes(topMixesList)
-            setMadeForYou(madeForYouList)
-        } catch (err) {
-            console.log('MainBody loadMainViewCollections error:', err)
+        const stationsForYou = createMadeForYou()
+        // setMadeForYou(stationsForYou)
+    }
+
+
+
+    async function createMadeForYou() {
+        const stationCovers = [
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb7c774b7b4da216c33782c193/1/en/default',
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebee0bf92f5269431b705722b2/2/en/default',
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb7bff9168ecfa90aca537adee/3/en/default',
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebb59c9bdf20c6eb811f9aa894/4/en/default',
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebed7d082db2925fe99a9b9487/5/en/default',
+            'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb92883b0e094a36d2f43ad284/6/en/default',
+        ]
+        const stationsForYou = []
+        const savedStations = []
+
+        for (let i = 0; i < 5; i++) {
+            stationsForYou[i] = stationService.getEmptyStation()
+            stationsForYou[i].name = `Daily Mix ${i + 1}`
+            stationsForYou[i].createdBy = { id: 'BBBB', fullName: 'Sprintify', imgUrl: '' }
+            stationsForYou[i].stationImgUrl = stationCovers[i]
+            stationsForYou[i].isOwnedByUser = false
+
+            const songsArrs = stations.map(station => {
+
+                const numOfSongs = (station.songs.length < 3) ? station.songs.length : 3
+                const songs = utilService.getRandomItems(station.songs, numOfSongs)
+                return songs
+            })
+            stationsForYou[i].songs = songsArrs.flat()
+            savedStations[i] = await stationService.save(stationsForYou[i])
         }
+
+        console.log(savedStations)
+
+        setMadeForYou(savedStations)
+        return savedStations
     }
 
     return (
         <div className="main-view-body">
-            <StationList
+            <StationListMainView
                 stations={stationsMain}
                 className="stations-top"
                 previewStyle="minimal"
@@ -55,6 +86,19 @@ export function MainViewBody({ onSetBgColor }) {
             />
 
             <StationSection
+                titleTxt="Made For You"
+                stations={madeForYou}
+                ListClassName="card-stations made-for-you"
+                previewStyle="card"
+            />
+            <StationSection
+                titleTxt=""
+                stations={madeForYou.slice(3)}
+                ListClassName="card-stations made-for-you"
+                previewStyle="card"
+            />
+
+            {/* <StationSection
                 titleTxt="Recently Played"
                 stations={recentlyPlayed}
                 ListClassName="card-stations recently-played"
@@ -66,14 +110,8 @@ export function MainViewBody({ onSetBgColor }) {
                 stations={topMixes}
                 ListClassName="card-stations top-mixed"
                 previewStyle="card"
-            />
+            /> */}
 
-            <StationSection
-                titleTxt="Made For You"
-                stations={madeForYou}
-                ListClassName="card-stations made-for-you"
-                previewStyle="card"
-            />
 
             <Footer />
         </div>

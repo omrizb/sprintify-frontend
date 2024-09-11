@@ -57,6 +57,15 @@ export async function addStation(newStation) {
         throw err
     }
 }
+export async function addSprintifyStation(station) {
+    try {
+        const savedStation = await stationService.save(station)
+        return savedStation
+    } catch (err) {
+        console.log('Cannot add station', err)
+        throw err
+    }
+}
 
 export async function updateStation(station) {
     try {
@@ -175,6 +184,7 @@ function getCmdAddStation(station) {
         station
     }
 }
+
 
 function getCmdUpdateStation(station) {
     return {

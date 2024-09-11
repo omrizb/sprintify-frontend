@@ -1,4 +1,5 @@
 import { httpService } from '../http.service'
+import { utilService } from '../util.service'
 
 export const stationService = {
     getEmptyStation,
@@ -109,8 +110,9 @@ async function getTopMixes(userId, size = 4) {
     //TODO write algorithm for fetching top mixes per user 
     return httpService.get(`station`, { stationType: 'playlist' })
 }
-async function getMadeForYou(userId, size = 4) {
-    //TODO write algorithm for fetching top mixes per user 
-    return httpService.get(`station`, { stationType: 'playlist' })
+async function getMadeForYou(stations) {
+
+
+
 }
 

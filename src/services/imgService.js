@@ -16,6 +16,16 @@ const imgs = {
     // comedy:
     // charts:
     // danceElectronic:
+    dailyMix1: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb7c774b7b4da216c33782c193/1/en/default',
+    dailyMix2: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebee0bf92f5269431b705722b2/2/en/default',
+    dailyMix3: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb7bff9168ecfa90aca537adee/3/en/default',
+    dailyMix4: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebb59c9bdf20c6eb811f9aa894/4/en/default',
+    dailyMix5: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebed7d082db2925fe99a9b9487/5/en/default',
+    dailyMix6: 'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb92883b0e094a36d2f43ad284/6/en/default',
+
+
+
+
 
 }
 
