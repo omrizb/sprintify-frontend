@@ -35,7 +35,16 @@ export function MoreSongs() {
         try {
             const ytSong = await youtubeService.getTopVideo(`song: ${newSong.songName} by ${newSong.artist.name}`)
             newSong.ytId = ytSong.songId
-            const updatedStation = { ...station, songs: [...station.songs, newSong] }
+
+            if (station.songs.length === 0) {
+                var updatedStation = {
+                    ...station,
+                    stationImgUrl: newSong.imgUrl.big,
+                    songs: [...station.songs, newSong]
+                }
+
+            }
+            else updatedStation = { ...station, songs: [...station.songs, newSong] }
             updateStation(updatedStation)
             showSuccessMsg(`Added to ${updatedStation.name}`)
 
