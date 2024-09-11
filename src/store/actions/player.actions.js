@@ -3,7 +3,7 @@ import { stationService } from '../../services/station/station.service.remote'
 
 import { store } from '../store'
 import {
-    SET_FIRST_SONG_LOADED_TRUE,
+    SET_FIRST_SONG_LOADED,
     SET_PLAYER,
     ADD_TO_ACTION_QUEUE,
     POP_FROM_ACTION_QUEUE,
@@ -43,7 +43,7 @@ export const playerActions = {
 
 export function loadFirstStation(stationId, song) {
     loadStationToPlayer(stationId, song)
-    store.dispatch({ type: SET_FIRST_SONG_LOADED_TRUE })
+    store.dispatch({ type: SET_FIRST_SONG_LOADED, isLoaded: true })
 }
 
 export function setPlayerAction(action, params) {
@@ -80,7 +80,7 @@ function loadSongToPlayer(song) {
     store.dispatch({ type: SET_PLAYER, playerProps: { song } })
 }
 
-async function loadStationToPlayer(stationId, song, isShuffle) {
+async function loadStationToPlayer(stationId, song) {
     try {
         const station = await stationService.getById(stationId)
 

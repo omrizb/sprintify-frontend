@@ -25,7 +25,7 @@ export function LeftSidebar() {
     }, [])
 
     useEffect(() => {
-        if (!user) return
+        if (!user || filterBy.userId !== user._id) return
         loadStations(filterBy)
     }, [filterBy])
 
