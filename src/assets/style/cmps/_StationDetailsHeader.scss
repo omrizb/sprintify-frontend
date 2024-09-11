@@ -4,6 +4,10 @@
     height: 186px;
     padding: 16px;
 
+    .created-by{
+        text-transform: capitalize;
+    }
+
     .station-cover-container{
         align-self: flex-end;
         flex-shrink: 0;
