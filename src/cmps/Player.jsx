@@ -10,10 +10,10 @@ import { PlayerRightPanel } from './Player/PlayerRightPanel'
 
 export function Player() {
 
-    const isFirstSongLoaded = useSelector(state => state.playerModule.isFirstSongLoaded)
     const player = useSelector(state => state.playerModule.player)
     const control = useSelector(state => state.playerModule.control)
     const queue = useSelector(state => state.playerModule.queue)
+    const loggedinUser = useSelector(state => state.userModule.user)
 
     const ytPlayerRef = useRef(null)
     const [isYtPlayerReady, setIsYtPlayerReady] = useState(false)
@@ -55,7 +55,21 @@ export function Player() {
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
+                executePlayerAction.addSongToSongsHistory(player.song)
                 executePlayerAction.loadSongToPlayer(song)
+
+                const songIdx = queue.originalStationSongs.findIndex(s => s.spotifyId === song.spotifyId)
+
+                if (songIdx !== -1) {
+                    const songs = (queue.isShuffle)
+                        ? _.shuffle(queue.originalStationSongs)
+                        : (songIdx + 1 === queue.originalStationSongs.length)
+                            ? []
+                            : queue.originalStationSongs.slice(songIdx + 1)
+
+                    executePlayerAction.setSongsRemainingStationQueue(songs)
+                }
+
                 break
 
             case playerActions.LOAD_STATION:
@@ -224,8 +238,8 @@ export function Player() {
 
     return (
         <div className="player-container">
-            {player.song
-                ? <YouTube key={player.song.ytId} videoId={player.song.ytId} opts={opts} onReady={onReady} />
+            {loggedinUser
+                ? <YouTube videoId={player.song.ytId} opts={opts} onReady={onReady} />
                 : <div></div>
             }
             <PlayerLeftPanel />
