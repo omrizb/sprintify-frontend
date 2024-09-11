@@ -19,10 +19,16 @@ export function MainViewBody({ onSetBgColor }) {
     const [madeForYou, setMadeForYou] = useState([])
 
     useEffect(() => {
+
+        if (!loggedinUser) {
+            setMadeForYou([])
+            setStationsMain([])
+            return
+        }
         if (!stations) return
         loadCollections()
 
-    }, [stations])
+    }, [stations, loggedinUser])
 
     function loadCollections() {
         const numOfStations = (stations.length < 9) ? stations.length : 8
@@ -31,9 +37,6 @@ export function MainViewBody({ onSetBgColor }) {
             (station.likedByUsers.includes(loggedinUser._id))
         )
         const mainStations = utilService.getRandomItems(myLibrary, numOfStations)
-
-
-
         setStationsMain(mainStations)
         setMadeForYou(madeForYouCollections)
     }
@@ -49,26 +52,12 @@ export function MainViewBody({ onSetBgColor }) {
                 onSetBgColor={onSetBgColor}
             />
 
-            <StationSection
+            {(madeForYou.length > 0) && <StationSection
                 titleTxt="Made For You"
                 stations={madeForYou}
                 ListClassName="card-stations made-for-you"
                 previewStyle="card"
-            />
-
-            {/* <StationSection
-                titleTxt="Recently Played"
-                stations={recentlyPlayed}
-                ListClassName="card-stations recently-played"
-                previewStyle="card"
-            />
-
-            <StationSection
-                titleTxt="Your Top Mixes"
-                stations={topMixes}
-                ListClassName="card-stations top-mixed"
-                previewStyle="card"
-            /> */}
+            />}
 
 
             <Footer />
