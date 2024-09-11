@@ -6,6 +6,7 @@ import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { RightSideBar } from '../cmps/RightSideBar.jsx'
 import { Player } from '../cmps/Player.jsx'
+import { SignupFooter } from '../cmps/SignupFooter.jsx'
 
 
 export function StationIndex() {
@@ -35,7 +36,11 @@ export function StationIndex() {
                 <RightSideBar />
             </div>
             <div className="now-playing-bar-container">
-                <Player />
+                {user
+                    ? <Player />
+                    : <SignupFooter />
+                }
+
             </div>
         </div >
     )

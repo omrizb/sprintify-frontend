@@ -1,0 +1,6 @@
+.signup-footer {
+    @include flex($justify: space-between);
+    height: 66px;
+    padding: 11px 24px 7px 15px;
+    background-image: linear-gradient(90deg, #af2896, #509bf5)
+}
