@@ -28,7 +28,7 @@ export function StationHeaderInfo({ station, onEditStation }) {
             <div onClick={onEditStation} className="station-name medium-title">{station.name}</div>
             <div className="station-description">{station.description}</div>
             <div className="bottom-info">
-                <span className="created-by">{station.createdBy.fullName}</span>
+                <span className="created-by">{station.createdBy.fullName} </span>
                 {songCount &&
                     <>
                         <span className="dot"></span>
