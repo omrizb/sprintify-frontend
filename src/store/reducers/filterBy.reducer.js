@@ -1,18 +1,19 @@
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const RESET_FILTER_BY = 'RESET_FILTER_BY'
 
+const defaultFilterBy = {
+    txt: '',
+    stationType: '',
+    createdBy: '',
+    sortField: '',
+    sortDir: '',
+    userId: '',
+    createdAt: '',
+    addedAt: ''
+}
 
 const initialState = {
-    filterBy: {
-        txt: '',
-        stationType: '',
-        createdBy: '',
-        sortField: '',
-        sortDir: '',
-        likedByUser: '',
-        createdAt: '',
-        addedAt: ''
-    }
-
+    filterBy: defaultFilterBy
 }
 
 export function filterByReducer(state = initialState, action) {
@@ -23,6 +24,9 @@ export function filterByReducer(state = initialState, action) {
             newState = { ...state, filterBy: action.filterBy }
             break
 
+        case RESET_FILTER_BY:
+            newState = { ...state, filterBy: defaultFilterBy }
+            break
 
         default:
     }

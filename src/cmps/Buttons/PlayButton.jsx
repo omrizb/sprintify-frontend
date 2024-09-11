@@ -25,11 +25,17 @@ export function PlayButton({ type, stationId, stationName, song }) {
         ev.preventDefault()
         ev.stopPropagation()
         if (!song) return
-        if (playerStationId !== stationId ||
-            player.song.spotifyId !== song.spotifyId
-        ) {
+        if (playerStationId !== stationId) {
             setPlayerAction(playerActions.PAUSE)
             setPlayerAction(playerActions.LOAD_STATION, { stationId, song })
+            setPlayerAction(playerActions.PLAY)
+            setIsPlaying(true)
+            return
+        }
+
+        if (player.song.spotifyId !== song.spotifyId && type === 'songPreview') {
+            setPlayerAction(playerActions.PAUSE)
+            setPlayerAction(playerActions.LOAD_SONG, { song })
             setPlayerAction(playerActions.PLAY)
             setIsPlaying(true)
             return

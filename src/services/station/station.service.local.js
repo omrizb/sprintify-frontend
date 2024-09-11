@@ -2,7 +2,6 @@ import _ from 'lodash'
 
 import { storageService } from '../async-storage.service'
 import { utilService } from '../util.service.js'
-import { userService } from '../user'
 import { stations } from '../../../data-sample/newStations.js'
 
 const STORAGE_KEY = 'stationDB'
@@ -71,7 +70,6 @@ async function query(filterBy = {
         spotifyId, sortField, sortDir, userId } = filterBy
 
 
-
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stations = stations.filter(station => regex.test(station.name) || regex.test(station.createdBy.fullName))
@@ -97,10 +95,8 @@ async function query(filterBy = {
         const combined = [...myStations, ...likedStations]
         stations = _.uniqBy(combined, '_id')
 
-
         if (createdBy === userId) {
             stations = stations.filter(station => station.isPinned === false)
-            console.log(stations)
         }
 
     }

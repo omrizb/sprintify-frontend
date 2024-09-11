@@ -16,7 +16,6 @@ import {
 export async function loadStations(filterBy) {
     try {
         var stations = await stationService.query(filterBy)
-
         const likedStation = stations.filter(station => station.isPinned === true)
         stations = [...likedStation, ...stations.filter(station => station.isPinned === false)]
 
