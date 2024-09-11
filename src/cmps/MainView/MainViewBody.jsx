@@ -25,12 +25,14 @@ export function MainViewBody({ onSetBgColor }) {
     }, [stations])
 
     function loadCollections() {
-        const numOfStations = (stations.length < 7) ? stations.length : 6
+        const numOfStations = (stations.length < 9) ? stations.length : 8
         const myLibrary = stations.filter(station =>
             (station.createdBy.id === loggedinUser._id) ||
             (station.likedByUsers.includes(loggedinUser._id))
         )
         const mainStations = utilService.getRandomItems(myLibrary, numOfStations)
+
+
 
         setStationsMain(mainStations)
         setMadeForYou(madeForYouCollections)
