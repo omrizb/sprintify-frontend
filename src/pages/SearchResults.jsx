@@ -53,12 +53,12 @@ export function SearchResults() {
             setAlbums(res.albums)
             setPlaylists(res.stations)
 
-            const ytSongs = []
+            // const ytSongs = []
 
-            for (let i = 0; i < res.songs.length; i++) {
-                ytSongs[i] = await youtubeService.getTopVideo(`song: ${res.songs[i].songName} by ${res.songs[i].artist.name}`)
-                res.songs[i].ytId = ytSongs[i].songId
-            }
+            // for (let i = 0; i < res.songs.length; i++) {
+            //     ytSongs[i] = await youtubeService.getTopVideo(`song: ${res.songs[i].songName} by ${res.songs[i].artist.name}`)
+            //     res.songs[i].ytId = ytSongs[i].songId
+            // }
 
             setSongs(res.songs)
 
@@ -78,10 +78,10 @@ export function SearchResults() {
         :
         <div className="search-results">
 
-            {(!songs[0].ytId) && <div>
+            {/* {(!songs[0].ytId) && <div>
                 <h2>YouTube is blocking us ☹️😟😭</h2>
                 <h2>Cannot play songs</h2>
-            </div>}
+            </div>} */}
 
 
             {songs.length > 0 && <TopResult song={songs[0]} />}

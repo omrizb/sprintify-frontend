@@ -14,6 +14,7 @@ import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
 import { MiniSongPreview } from './MiniSongPreview.jsx'
 import { PopUp } from '../PopUp.jsx'
+import { youtubeService } from '../../services/youtube.service.js'
 
 export function SongPreview(props) {
 
@@ -51,7 +52,11 @@ export function SongPreview(props) {
     ].join(' ')
 
 
-    function addSong() {
+    async function addSong() {
+        if (!song.ytId) {
+            var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+            song.ytId = ytSong.songId
+        }
 
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {

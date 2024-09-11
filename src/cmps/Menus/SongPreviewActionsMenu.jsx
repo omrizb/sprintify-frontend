@@ -41,8 +41,9 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             name: 'Save to your Liked Songs',
             icon: 'save',
             onClick: () => {
+                const saveToLike = true
                 if (!song.ytId) {
-                    showErrorMsg('Defective song')
+                    setSongYtId(saveToLike)
                     return
                 }
                 const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
@@ -67,12 +68,26 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             secondIcon: 'more-menu',
             onClick: () => {
                 if (!song.ytId) {
-                    showErrorMsg('Defective song')
-                    return
+                    setSongYtId()
                 }
                 setShowMenu(prevShowMenu => !prevShowMenu)
             }
         })
+
+        async function setSongYtId(saveToLike = false) {
+            try {
+                const ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+                song.ytId = ytSong.songId
+                if (saveToLike) {
+                    const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
+                    addSongToStation(updatedStation)
+                }
+
+            } catch (error) {
+                console.log(error)
+                showErrorMsg('Defective song')
+            }
+        }
 
         if (isOwnedByUser) return [addToPlaylist, removeFromPlaylist, removeFromLikedSongs, addToQueue]
         if (!isOwnedByUser && isLikedByUser) return [addToPlaylist, removeFromLikedSongs, addToQueue]

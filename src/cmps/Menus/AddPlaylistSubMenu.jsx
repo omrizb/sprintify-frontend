@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { DropDownMenu } from './DropDownMenu'
 import { addStation, addSongToStation } from '../../store/actions/station.actions'
-import { showSuccessMsg } from '../../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 // import { stationService } from '../../services/station/station.service.local'
 import { stationService } from '../../services/station/station.service.remote'
+import { youtubeService } from '../../services/youtube.service'
 
 
 export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, likedSongsStation }) {
@@ -51,13 +52,25 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
 
     function noop() { }
 
-    function addSong(station) {
+    async function addSong(station) {
         const songExists = station.songs.some(song => song.spotifyId === spotifyId)
         if (songExists) {
             showSuccessMsg(`Already in ${station.name}`)
             console.log('song already there')
             setShowMenu(false)
             return
+        }
+
+        if (!song.YtId) {
+
+            try {
+                var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+                song.ytId = ytSong.songId
+            } catch (error) {
+                console.log(error)
+                showErrorMsg('Defective song')
+            }
+
         }
 
         const updatedStation = { ...station, songs: [...station.songs, song] }
