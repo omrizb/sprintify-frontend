@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { StationPreview } from '../StationPreview'
+import { Loader } from '../Loader'
 
 
 
@@ -42,23 +43,26 @@ export function StationListMainView({ stations, className, previewStyle, onSetBg
         setColorActiveStationId(stationId)
     }
 
-    return (
-        <ul ref={listContainer} className={`station-list ${className}`}>
-            {stations.map(station =>
-                <li
-                    key={station._id}
-                    onMouseEnter={() => handleMouseEnter(station._id)}
-                >
-                    <Link to={`/station/${station._id}`}>
-                        <StationPreview
-                            station={station}
-                            style={previewStyle}
-                            colorActiveStationId={colorActiveStationId}
-                            onSetBgColor={onSetBgColor} />
-                    </Link>
-                </li>)
-            }
-        </ul>
-    )
+    return (!stations)
+        ? <Loader />
+        : (
+
+            <ul ref={listContainer} className={`station-list ${className}`}>
+                {stations.map(station =>
+                    <li
+                        key={station._id}
+                        onMouseEnter={() => handleMouseEnter(station._id)}
+                    >
+                        <Link to={`/station/${station._id}`}>
+                            <StationPreview
+                                station={station}
+                                style={previewStyle}
+                                colorActiveStationId={colorActiveStationId}
+                                onSetBgColor={onSetBgColor} />
+                        </Link>
+                    </li>)
+                }
+            </ul>
+        )
 }
 

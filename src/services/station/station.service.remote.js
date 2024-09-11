@@ -119,8 +119,12 @@ async function getMadeForYou() {
 
     const stations = await query({})
 
+    if (stations.length < 2) return []
+
     const collections = stations.filter(station => station.type === 'daily-mix')
     if (collections.length > 0) return collections
+
+
 
     const stationCovers = [
         'https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb7c774b7b4da216c33782c193/1/en/default',
