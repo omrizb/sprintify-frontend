@@ -31,14 +31,14 @@ export function StationDetails() {
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
 
-        /
-        useEffect(() => {
-            if (!stations) return
-            const likedStation = stations.find(station => station.isPinned)
-            setLikedSongsStation(likedStation)
-            const myStationsArr = stations.filter(station => station.createdBy.id === loggedinUser._id)
-            setMyStations(myStationsArr)
-        }, [stations])
+
+    useEffect(() => {
+        if (!stations) return
+        const likedStation = stations.find(station => station.isPinned)
+        setLikedSongsStation(likedStation)
+        const myStationsArr = stations.filter(station => station.createdBy.id === loggedinUser._id)
+        setMyStations(myStationsArr)
+    }, [stations])
 
     useEffect(() => {
         onLoad(id)
