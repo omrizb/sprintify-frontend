@@ -1,36 +1,38 @@
 .sidebar-filter {
     display: grid;
     row-gap: 0.5em;
-
-    // .category {
-    //     display: flex;
-    //     justify-content: space-between;
-
-    //     .hidden-radio {
-    //         display: none;
-    //     }
-    // }
+    width: 100%;
+    padding-inline: 16px;
 
     .sidebar-search{
-        // position: relative;
         display: grid;
         grid-auto-flow: column;
 
-
         .search-container{
+            display: flex;
+            width: max-content;
+            border-radius: 4px;
 
-            display: grid;
-            grid-auto-flow: column;
-            .search{
+            .search {
                 justify-self: start;
                 width: 32px;
             }
+
+            &.active {
+                background-color: $tintedBgClr;
+            }
     
-            input{
+            input {
                 border: none;
-                width: 140px;
-                background-color: rgb(42, 42, 42);
-                font-size: inherit;
+                width: 0;
+                font-family: SprintifyUI;
+                font-size: $textSizeSmaller-1;
+                background-color: transparent;
+                transition: width 0.2s ease;
+
+                &.active {
+                    width: 180px;
+                }
             }
     
             input:focus {
@@ -47,6 +49,10 @@
             column-gap: 0.2em;
             text-transform: capitalize;
 
+            .text-content.hide {
+                width: 0;
+            }
+
             .recents {
                 display: flex;
                 justify-content: space-between;
@@ -56,7 +62,8 @@
                 font-size: 14px;
 
                 &:hover{
-                    color: white;
+                    fill: $primaryTxtClr;
+                    color: $primaryTxtClr;
                     cursor: pointer;
                 }
             }

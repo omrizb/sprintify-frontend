@@ -16,7 +16,8 @@ export function LeftSideBarHeader({ loggedinUser }) {
     const listItems = [{
         type: 'list-item',
         name: 'Create a new playlist',
-        icon: 'library',
+        icon: 'createNewStation',
+        iconClass: 'svg-small1',
         topDivision: '',
         isChosen: false,
         onClick: handleAddStation
@@ -44,14 +45,14 @@ export function LeftSideBarHeader({ loggedinUser }) {
     return (
         <div className="sidebar-header">
             <div className="library">
-                <div className="icon"> <SvgIcon iconName={"library"} /> </div>
-                Your Library
+                <div className="icon"> <SvgIcon iconName={"library"} svgClass="svg-big1" /> </div>
+                <p>Your Library</p>
             </div>
 
             <div className="add-playlist">
                 <button ref={addBtnRef} className="plus icon btn-medium-with-hover"
                     onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
-                    <SvgIcon iconName={"plus"} />
+                    <SvgIcon iconName={"plus"} svgClass="svg-small1" />
                 </button>
 
                 {showMenu &&

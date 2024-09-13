@@ -3,7 +3,7 @@ import { SvgIcon } from "../SvgIcon"
 
 export function DropDownMenuItem({ listItem, listItems, onSave }) {
 
-    const { name, ref, icon, isChosen, topDivision, type } = listItem
+    const { name, ref, icon, iconClass, isChosen, topDivision, type } = listItem
 
     const [list, setList] = useState([...listItems])
     const [listItemToEdit, setListItemToEdit] = useState(listItem)
@@ -33,7 +33,7 @@ export function DropDownMenuItem({ listItem, listItems, onSave }) {
             <div className="content">
                 {(listItem.type !== 'button') &&
                     <div className={setClass()}>
-                        {(icon && !listItem.imgUrl) && <div className='icon'><SvgIcon iconName={icon} /></div>}
+                        {(icon && !listItem.imgUrl) && <div className='icon'><SvgIcon iconName={icon} svgClass={iconClass} /></div>}
                         {listItem.imgUrl && <img src={listItem.imgUrl} alt="" width="32" height="32" />}
                         <div>{name}</div>
                     </div>}
