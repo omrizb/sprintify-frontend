@@ -41,8 +41,10 @@ export function StationDetails() {
 
         socketService.on(SOCKET_EVENT_STATION_UPDATED, currStation => {
             console.log('GOT from socket', currStation)
-            // dispatch(getCmdUpdateStation(currStation))
-            dispatch(getCmdUpdateAndStay(currStation))
+            if (currStation.createdBy.id !== loggedinUser._id) {
+                dispatch(getCmdUpdateStation(currStation))
+            }
+            // dispatch(getCmdUpdateAndStay(currStation))
         })
 
         return () => {
