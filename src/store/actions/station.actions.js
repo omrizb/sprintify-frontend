@@ -198,7 +198,7 @@ function getCmdUpdateStations(stations) {
     }
 }
 
-function getCmdUpdateAndStay(station) {
+export function getCmdUpdateAndStay(station) {
     return {
         type: UPDATE_STATION_AND_STAY,
         station

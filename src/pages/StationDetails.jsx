@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { updateStation, loadStation, getCmdUpdateStation } from '../store/actions/station.actions.js'
+import { updateStation, loadStation, getCmdUpdateStation, getCmdUpdateAndStay } from '../store/actions/station.actions.js'
 import { colorUtilService } from '../services/color.util.service.js'
 
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -41,7 +41,8 @@ export function StationDetails() {
 
         socketService.on(SOCKET_EVENT_STATION_UPDATED, currStation => {
             console.log('GOT from socket', currStation)
-            dispatch(getCmdUpdateStation(currStation))
+            // dispatch(getCmdUpdateStation(currStation))
+            dispatch(getCmdUpdateAndStay(currStation))
         })
 
         return () => {
