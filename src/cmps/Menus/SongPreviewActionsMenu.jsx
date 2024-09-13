@@ -69,12 +69,6 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             icon: 'plus',
             secondIcon: 'more-menu',
             ref: addMoreBtnRef,
-            onClick: () => {
-                if (!song.ytId) {
-                    setSongYtId()
-                }
-                setShowMenu(prevShowMenu => !prevShowMenu)
-            }
         })
 
         async function setSongYtId(saveToLike = false) {

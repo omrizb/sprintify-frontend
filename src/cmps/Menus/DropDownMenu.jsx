@@ -1,6 +1,6 @@
 import { DropDownMenuItem } from './DropDownMenuItem'
 
-export function DropDownMenu({ listItems }) {
+export function DropDownMenu({ listItems, setShowMenu }) {
 
     function onClick(ev, listItem) {
         ev.stopPropagation()
@@ -27,11 +27,14 @@ export function DropDownMenu({ listItems }) {
                         key={index}
                         className={listItem.type}
                         onClick={(ev) => onClick(ev, listItem)}
-                    // onMouseEnter={() => {
-                    //     if (listItem.name === 'Add to playlist')
-                    //         setShowMenu(true)
-                    //     if (listItem.name !== 'Add to playlist') setShowMenu(false)
-                    // }}
+                        onMouseEnter={() => {
+                            if (setShowMenu) {
+                                if (listItem.name === 'Add to playlist')
+                                    setShowMenu(true)
+                                if (listItem.name !== 'Add to playlist') setShowMenu(false)
+                            }
+
+                        }}
                     >
                         <DropDownMenuItem
                             listItem={listItem}

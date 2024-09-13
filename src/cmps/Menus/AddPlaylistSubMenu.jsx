@@ -61,17 +61,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
             return
         }
 
-        if (!song.YtId) {
-
-            try {
-                var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
-                song.ytId = ytSong.songId
-            } catch (error) {
-                console.log(error)
-                showErrorMsg('Defective song')
-            }
-
-        }
+        if (!song.YtId) await setSongYtId()
 
         const updatedStation = { ...station, songs: [...station.songs, song] }
         addSongToStation(updatedStation)
@@ -83,6 +73,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
         try {
             const newStation = stationService.getEmptyStation()
             const { _id, fullName, imgUrl } = loggedinUser
+            if (!song.YtId) await setSongYtId()
             const station = {
                 ...newStation,
                 name: song.songName,
@@ -100,6 +91,17 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
         } catch (err) {
             console.log('Cannot add a station')
         }
+    }
+
+    async function setSongYtId() {
+        try {
+            var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+            song.ytId = ytSong.songId
+        } catch (error) {
+            console.log(error)
+            showErrorMsg('Defective song')
+        }
+
     }
 
     return (
