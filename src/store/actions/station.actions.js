@@ -126,7 +126,7 @@ export async function removeStationFromLibrary(station, userId, lastIdx) {
             lastIdx
         }
 
-        const savedStation = await stationService.save(updatedStation)
+        const savedStation = await stationService.save(updatedStation, '/toggleLike')
         store.dispatch(getCmdUpdateStation(savedStation))
         store.dispatch(getCmdRemoveStation(savedStation._id))
         showSuccessMsg('Removed from Your Library')
@@ -145,7 +145,7 @@ export async function addStationToLibrary(station, userId) {
             likedByUsers: [...station.likedByUsers, userId],
             addedAt: Date.now(),
         }
-        const savedStation = await stationService.save(updatedStation)
+        const savedStation = await stationService.save(updatedStation, '/toggleLike')
         store.dispatch(getCmdAddStation(savedStation))
         showSuccessMsg('Added to Your Library')
         return savedStation

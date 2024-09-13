@@ -58,7 +58,7 @@ async function remove(stationId) {
     return httpService.delete(`station/${stationId}`)
 }
 
-async function save(station) {
+async function save(station, isToggleLike = '') {
     var savedStation
 
     if (station._id) {
@@ -79,7 +79,7 @@ async function save(station) {
             isPinned: station.isPinned,
             lastIdx: station.lastIdx || ''
         }
-        savedStation = await httpService.put(`station/${station._id}`, stationToSave)
+        savedStation = await httpService.put(`station/${station._id}${isToggleLike}`, stationToSave)
         console.log(savedStation)
     } else {
         const stationToSave = {
