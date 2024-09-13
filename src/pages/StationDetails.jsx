@@ -80,7 +80,7 @@ export function StationDetails() {
     }
 
     function onEdit() {
-        if (!isOwnedByUser) return
+        if (!isOwnedByUser || station.isPinned) return
         setIsModalOpen(true)
     }
 
@@ -124,8 +124,7 @@ export function StationDetails() {
                     onSetBgColor={setBgColor}
                     onEdit={onEdit}
                     pageType={'station'}
-                    onEditStation={() => setIsModalOpen(true)
-                    }
+                    onEditStation={onEdit}
                 />
 
                 {(station.songs.length > 0) &&
