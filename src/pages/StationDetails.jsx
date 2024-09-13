@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { updateStation, loadStation } from '../store/actions/station.actions.js'
+import { updateStation, loadStation, getCmdUpdateStation } from '../store/actions/station.actions.js'
 import { colorUtilService } from '../services/color.util.service.js'
 
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -15,6 +15,7 @@ import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
 import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
 import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
+import { SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_STATION_UPDATED, socketService } from '../services/socket.service.js'
 
 
 export function StationDetails() {
@@ -30,6 +31,24 @@ export function StationDetails() {
 
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
+
+    const dispatch = useDispatch()
+
+
+    useEffect(() => {
+
+        socketService.emit(SOCKET_EMIT_USER_WATCH, loggedinUser._id)
+
+        socketService.on(SOCKET_EVENT_STATION_UPDATED, currStation => {
+            console.log('GOT from socket', currStation)
+            dispatch(getCmdUpdateStation(currStation))
+        })
+
+        return () => {
+            socketService.off(SOCKET_EVENT_STATION_UPDATED)
+
+        }
+    }, [])
 
 
     useEffect(() => {

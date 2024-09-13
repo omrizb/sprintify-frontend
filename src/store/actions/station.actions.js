@@ -185,7 +185,7 @@ function getCmdAddStation(station) {
 }
 
 
-function getCmdUpdateStation(station) {
+export function getCmdUpdateStation(station) {
     return {
         type: UPDATE_STATION,
         station
