@@ -7,7 +7,7 @@ import { StationHeaderInfo } from './StationHeaderInfo'
 import { SongHeaderInfo } from './SongHeaderInfo'
 
 
-export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, pageType }) {
+export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, pageType, isOwnedByUser = false }) {
 
     const [stationNameClass, setStationNameClass] = useState('station-name')
     const [headerBgColor, setHeaderBgColor] = useState()
@@ -68,14 +68,18 @@ export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, 
                         <SvgIcon iconName={"music"} />
                     </div>}
 
-                {(pageType === 'station') && <div className="overlay">
-                    <div className="overlay-content">
-                        <button className="editImage icon btn-medium-with-hover">
-                            <SvgIcon iconName="editImage" />
-                        </button>
-                        <span>Choose photo</span>
-                    </div>
-                </div>}
+                {(pageType === 'station' && !station.isPinned && isOwnedByUser) &&
+                    <div
+                        className="overlay"
+                        onClick={onEditStation}
+                    >
+                        <div className="overlay-content">
+                            <button className="editImage icon btn-medium-with-hover">
+                                <SvgIcon iconName="editImage" />
+                            </button>
+                            <span>Choose photo</span>
+                        </div>
+                    </div>}
             </div>
 
 

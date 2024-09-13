@@ -126,6 +126,7 @@ export function StationDetails() {
                     onEdit={onEdit}
                     pageType={'station'}
                     onEditStation={onEdit}
+                    isOwnedByUser={isOwnedByUser}
                 />
 
                 {(station.songs.length > 0) &&
