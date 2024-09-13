@@ -137,7 +137,7 @@ export function LeftSideBarFilter({ userId }) {
                     </button>
 
                     <input
-                        className={showSearch && 'active'}
+                        className={showSearch ? 'active' : ''}
                         type="text"
                         name="txt"
                         value={filterBy.txt}
