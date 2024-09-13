@@ -1,6 +1,21 @@
 .sidebar-header {
+    @include flex($justify: space-between);
+    padding-inline: 16px;
+
+    .library {
+        color: $secondaryTxtClr;
+        fill: $secondaryTxtClr;
+        font-weight: 700;
+
+        &:hover {
+            color: $primaryTxtClr;
+            fill: $primaryTxtClr;
+        }
+    }
+
     .add-playlist {
         position: relative;
+        margin-inline-end: -8px;
     }
     
     .drop-down-menu {
@@ -16,6 +31,4 @@
             justify-content: space-between;
         }
     }
-
-
 }

@@ -136,7 +136,7 @@ export function StationFilterButtons({ filterBy, userId }) {
 
         <ul className="station-filter-btns">
             {filterBtns.map((filterBtn, index) =>
-                <li key={index}  >
+                <li key={index} className={filterBtn.showBtn ? 'visible' : ''} >
                     {filterBtn.showBtn &&
 
                         <button

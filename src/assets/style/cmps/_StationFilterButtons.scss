@@ -1,10 +1,15 @@
 .station-filter-btns {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: start;
-    justify-items: center;
-    width: max-content;
-    column-gap: 0.2em;
+    @include flex($justify: start);
+    width: 100%;
+
+    li {
+        margin-inline-end: 8px;
+        
+        &:not(.visible) {
+            width: 0;
+            margin: 0
+        }
+    }
 
     .active {
         @include inside-out;

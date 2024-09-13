@@ -130,28 +130,28 @@ export function LeftSideBarFilter({ userId }) {
 
             <section className="sidebar-search">
 
-                <div className="search-container">
+                <div className={`search-container ${showSearch && 'active'}`}>
                     <button onClick={() => setShowSearch(prevShowSearch => !prevShowSearch)}
                         className="search icon btn-medium-with-hover">
                         <SvgIcon iconName={"search"} />
                     </button>
 
-                    {showSearch &&
-                        <input
-                            type="text"
-                            name="txt"
-                            value={filterBy.txt}
-                            placeholder="Search in Playlists"
-                            onChange={handleChange}
-                            required
-                        />}
+                    <input
+                        className={showSearch && 'active'}
+                        type="text"
+                        name="txt"
+                        value={filterBy.txt}
+                        placeholder="Search in Your Library"
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
 
 
                 <div className="sort-by">
                     <div ref={sortByBtnRef} onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)} className="recents" >
-                        <span>{sortType}</span>
-                        <SvgIcon iconName={viewType} svgClass="svg=small" />
+                        <span className={`text-content ${showSearch && 'hide'}`}>{sortType}</span>
+                        <SvgIcon iconName={viewType} svgClass="svg-small1" />
                     </div>
 
                     {showMenu &&
