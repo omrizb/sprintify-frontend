@@ -3,57 +3,6 @@
     width: 100%;
     color: $secondaryTxtClr;
 
-    .drop-down-menu{
-        width: 290px;
-
-        .drop-down-menu-item{
-            .section-title
-             {
-                color: $secondaryTxtClr;
-                padding-inline: 12px;
-                
-            }
-
-            .icon {
-                width:32px;
-                margin: 0;
-            }
-
-            i {
-                svg{
-                    fill: white;
-                }
-            }
-        }
-    
-    }
-
-    .actions-menu {
-        .drop-down-menu{
-            width: 240px;
-
-            i{
-                svg {
-                    fill: #b3b3b3;
-                    height: 16px;
-                }
-                
-            }
-        }
-
-        .sub-menu{
-            .drop-down-menu{
-                width: 200px;
-
-                li:first-child {
-                    box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
-                    border-block-end: 2px solid  rgba(62, 62, 62, 0.3);
-                }
-            }
-            
-        }
-    }
-
     a:hover {
         text-decoration: underline;
         color: $primaryTxtClr;
@@ -102,43 +51,7 @@
         }
     }
 
-    &.type-search,
-    &.recommended {
-        .title-column {
-            display: grid;
-            grid-template-columns: 60px 200px;
-            column-gap: 0.2em;
-
-            img {
-                height: 50px;
-            }
-
-            .text {
-                display: grid;
-                align-items: center;
-                justify-items: start;
-                justify-self: start;
-
-                div:first-child {
-                    font-size: 14px;
-                    color: white;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-
-                div:nth-child(2) {
-                    font-size: 12px;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
-        }
-    }
-
+  
     &.card {
         .title-column {
             display: grid;

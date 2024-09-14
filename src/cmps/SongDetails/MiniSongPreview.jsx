@@ -7,6 +7,9 @@ export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onC
     let imgClassName
     switch (type) {
         case 'with-add-btn':
+            articleClassName = 'mini-song-preview add-songs'
+            imgClassName = 'thumbnail'
+            break
         case 'simple':
             articleClassName = 'mini-song-preview'
             imgClassName = 'thumbnail'
@@ -37,10 +40,10 @@ export function MiniSongPreview({ song, type = "simple", isCurrentlyPlaying, onC
                 </div>
                 <div className="artist">{song.artist.name}</div>
             </div>
-            {(type === 'with-add-btn') && <div className="search-songs">
-                <span className="album">{song.album.name}</span>
-                <button onClick={() => onClickAdd(song)} className="btn-tinted add-btn">Add</button>
-            </div>}
+            {/* {(type === 'with-add-btn') && <div className="search-songs"> */}
+            {(type === 'with-add-btn') && <span className="album">{song.album.name}</span>}
+            {(type === 'with-add-btn') && <button onClick={() => onClickAdd(song)} className="btn-tinted add-btn">Add</button>}
+            {/* </div>} */}
         </article>
     )
 }
