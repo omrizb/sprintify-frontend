@@ -9,55 +9,75 @@
     display: flex;
     align-items:center;
 
-    .content {
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
-    }
-
-    // .icon {
-    //     margin-right: 8px;
-    // }
-
-    .right-align {
-        display: flex;
-        align-items: center;
-        margin-left: auto; /* Pushes this container to the right */
-    }
-    
-    .save-btn {
-        margin-left: auto; 
-    }
 
     &.include-top-division {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 16p;
         border-block-start: 1px solid  rgba(0, 0, 0, 0.3);
     }
 
-    .section-title,
-    .item {
+    .content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+
+
+        .section-title,
+        .item {
         display: flex;
         column-gap: 1em;  
         align-items: center;
-    }
+        }
 
-    .section-title {
+        .section-title {
         font-size: 11px;
         font-weight: 700; 
+
+        }
+
+        .item {
+            font-size: 13px;
+            font-weight: 400; 
+
+            
+
+            .icon {
+                width: max-content;
+            }
+
+            div {
+                width: 100px;
+                @include overflow-ellipsis;
+                margin-inline-end: 1em;
+            }
+        }
+
+        .right-align {
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Pushes this container to the right */
+        }
+
+        
     }
-    
-    .item {
-        font-size: 13px;
-        font-weight: 400; 
-    }
-    
+
     .chosen {
         color: $buttonBgGreen;
 
-        i {
-            fill: "#1ed760";
+        .icon{
+            i {
+                svg{
+                    fill: $buttonBgGreen;
+                }
+                
+            }
         }
     }
+    
+    .save-btn {
+        margin-left: auto; 
+    }
+
+    
 
     .custom-checkbox {
         position: relative;
@@ -93,11 +113,11 @@
         content: '';
         position: absolute;
         left: 5px;
-        top: 5.5px;
-        width: 4px;
-        height: 8px;
-        border: solid rgb(40, 40, 40);;
-        border-width: 0 2px 2px 0;
+        top: 8px;
+        width: 3px;
+        height: 7px;
+        border: solid rgba(40, 40, 40);
+        border-width: 0 1px 1px 0;
         transform: rotate(45deg);
     }
 }
