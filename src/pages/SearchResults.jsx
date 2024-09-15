@@ -8,6 +8,7 @@ import { Loader } from '../cmps/Loader.jsx'
 import { SongListSearchPage } from '../cmps/SearchResultsPageCmps/SongListSearchPage.jsx'
 import { TopResult } from '../cmps/SearchResultsPageCmps/TopResult.jsx'
 import { showErrorMsg } from '../services/event-bus.service.js'
+import { ArtistList } from '../cmps/Artists/ArtistList.jsx'
 
 export function SearchResults() {
 
@@ -86,7 +87,7 @@ export function SearchResults() {
                 likedSongsStation={likedSongsStation}
             />}
 
-            {artists.length > 0 && <h2>Artists</h2>}
+            {artists.length > 0 && <ArtistList artists={artists} />}
             {albums.length > 0 && <h2>Albums</h2>}
 
 

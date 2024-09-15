@@ -1,4 +1,4 @@
-export function ArtistPreview({ artist }) {
+export function ArtistPreview({ artist, type = 'nowPlaying' }) {
 
     function breakArrayToCommas(arr) {
         return arr.reduce((acc, currValue, idx) => {
@@ -13,15 +13,26 @@ export function ArtistPreview({ artist }) {
         }, '')
     }
 
+    function setClass() {
+        if (type === 'nowPlaying') return 'now-playing'
+        if (type === 'search') return 'search'
+    }
+
     return (
-        <div className="artist-preview">
-            <div className="about header-text">About the artist</div>
+        <div className={`artist-preview ${setClass()}`}>
+            {(type === 'now-playing') && <div className="about header-text">About the artist</div>}
             <img src={artist.imgUrl.big} />
-            <div className="artist-info">
+
+            {(type === 'nowPlaying') && <div className="artist-info">
                 <div className="artist-name header-text">{artist.name}</div>
                 <div className="followers">{artist.followers.toLocaleString()} monthly listeners</div>
                 <div className="genres">Most popular for {breakArrayToCommas(artist.genres)}.</div>
-            </div>
+            </div>}
+
+            {(type === 'search') && <div className="artist-info">
+                <div className="artist-name">{artist.name}</div>
+                <div className="artist">Artist</div>
+            </div>}
         </div>
     )
 }

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { spotifyService } from '../../services/spotify.service.js'
 import { MiniSongPreview } from '../SongDetails/MiniSongPreview.jsx'
-import { ArtistPreview } from '../ArtistPreview.jsx'
+import { ArtistPreview } from '../Artists/ArtistPreview.jsx'
+
+
 
 export function NowPlayingDetails({ song }) {
 
