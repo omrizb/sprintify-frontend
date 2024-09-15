@@ -1,23 +1,56 @@
-import { useState } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
+import { useEffect, useRef, useState } from 'react'
+import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
+import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
+import { updateStation } from '../../store/actions/station.actions.js'
 
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
 import { SvgIcon } from '../SvgIcon.jsx'
-import { ItemTypes } from '../ItemTypes.jsx'
 
 export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStation, type, myStations }) {
 
     const [hoveredSpotifyId, setHoveredSpotifyId] = useState(null)
     const [selectedSpotifyId, setSelectedSpotifyId] = useState(null)
+    const droppableRef = useRef(null)
+    const [isDraggedOver, setIsDraggedOver] = useState(false)
 
+    useEffect(() => {
+        const el = droppableRef.current
+
+        return dropTargetForElements({
+            element: el,
+            onDragEnter: () => setIsDraggedOver(true),
+            onDragLeave: () => setIsDraggedOver(false),
+            onDrop: () => setIsDraggedOver(false)
+        })
+    }, [])
+
+    useEffect(() => {
+        return monitorForElements({
+            onDrop: ({ location, source }) => {
+                const target = location.current.dropTargets[0]
+                if (!target || Object.keys(target.data).length === 0) return
+
+                const sourceSongIdx = station.songs.findIndex(song => song.spotifyId === source.data.spotifyId)
+                const targetSongIdx = station.songs.findIndex(song => song.spotifyId === target.data.spotifyId)
+
+                console.log(sourceSongIdx)
+                console.log(targetSongIdx)
+
+                const newStation = structuredClone(station)
+                const sourceSong = newStation.songs.splice(sourceSongIdx, 1)[0]
+                newStation.songs.splice(targetSongIdx, 0, sourceSong)
+                updateStation(newStation)
+            }
+        })
+    }, [station.songs])
 
     function onSetSelectedSpotifyId(spotifyId) {
         setSelectedSpotifyId(spotifyId)
     }
 
-
     return (
-        <div className="song-list inline-container">
+        <div ref={droppableRef} className="song-list inline-container">
 
             {type === 'table' &&
                 <div className={`list-header ${type === 'table' && 'dynamic-grid'}`}>
@@ -31,21 +64,55 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
 
             <ul className="list-body">
                 {station.songs.map((song, index) => {
+
+                    const draggableRef = useRef(null)
+                    const [isDragging, setIsDragging] = useState(false)
+                    const [isSongDraggedOver, setIsSongDraggedOver] = useState(false)
+
+                    useEffect(() => {
+                        const element = draggableRef.current
+
+                        return combine(
+                            draggable({
+                                element,
+                                getInitialData: () => song,
+                                onGenerateDragPreview: ({ nativeSetDragImage }) => {
+                                    const emptyImage = new Image()
+                                    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+                                    emptyImage.style.display = 'none'
+                                    nativeSetDragImage(emptyImage, 0, 0)
+                                },
+                                onDragStart: () => setIsDragging(true),
+                                onDrop: () => setIsDragging(false),
+                            }),
+                            dropTargetForElements({
+                                element,
+                                canDrop: ({ source }) => {
+                                    if (source.element === element) return false
+                                    return ('songName' in source.data)
+                                },
+                                getData: ({ input }) => attachClosestEdge(song, {
+                                    element,
+                                    input,
+                                    allowedEdges: ['top', 'bottom']
+                                }),
+                                onDragEnter: () => setIsSongDraggedOver(true),
+                                onDragLeave: () => setIsSongDraggedOver(false),
+                                onDrop: () => {
+                                    setIsSongDraggedOver(false)
+                                }
+                            })
+                        )
+                    }, [])
+
                     const selectedSongClass = (song.spotifyId === selectedSpotifyId) ? 'selected' : ''
-                    const [collected, drag, dragPreview] = useDrag(() => ({
-                        type: ItemTypes.SONG,
-                        item: song,
-                        collect: (monitor => ({
-                            isDragging: monitor.isDragging(),
-                            handlerId: monitor.getHandlerId()
-                        }))
-                    }))
-                    console.log(collected)
-                    console.log(drag)
-                    console.log(dragPreview)
+                    const draggedOverClass = (isSongDraggedOver) ? 'dragged-over' : ''
+
                     return <li
+                        ref={draggableRef}
                         key={song.spotifyId}
-                        className={`song-list-item ${selectedSongClass}`}
+                        index={index}
+                        className={`song-list-item ${selectedSongClass} ${draggedOverClass}`}
                         onMouseEnter={() => setHoveredSpotifyId(song.spotifyId)}
                         onMouseLeave={() => setHoveredSpotifyId('')}
                         onClick={() => onSetSelectedSpotifyId(song.spotifyId)}
