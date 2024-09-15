@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useParams } from 'react-router-dom'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
@@ -23,25 +25,27 @@ export function StationIndex() {
             <div className="global-nav-container">
                 <GlobalNav />
             </div>
-            <div className="left-sidebar-container scrollable-container">
-                <LeftSidebar />
-            </div>
-            <div className="main-view-container scrollable-container" ref={mainViewContainerRef}>
-                <Outlet key={useParams().id} context={{ containerRef: mainViewContainerRef }} />
-            </div>
-            <div
-                className={`right-sidebar-container scrollable-container ${!isRightSidebarOpen && 'right-sidebar-closed'}`}
-                style={{ width: rightSidebarWidth }}
-            >
-                <RightSideBar />
-            </div>
-            <div className="now-playing-bar-container">
-                {user
-                    ? <Player />
-                    : <SignupFooter />
-                }
+            <DndProvider backend={HTML5Backend}>
 
-            </div>
+                <div className="left-sidebar-container scrollable-container">
+                    <LeftSidebar />
+                </div>
+                <div className="main-view-container scrollable-container" ref={mainViewContainerRef}>
+                    <Outlet key={useParams().id} context={{ containerRef: mainViewContainerRef }} />
+                </div>
+                <div
+                    className={`right-sidebar-container scrollable-container ${!isRightSidebarOpen && 'right-sidebar-closed'}`}
+                    style={{ width: rightSidebarWidth }}
+                >
+                    <RightSideBar />
+                </div>
+                <div className="now-playing-bar-container">
+                    {user
+                        ? <Player />
+                        : <SignupFooter />
+                    }
+                </div>
+            </DndProvider>
         </div >
     )
 }

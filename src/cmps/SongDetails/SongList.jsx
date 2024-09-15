@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
+
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
 import { SvgIcon } from '../SvgIcon.jsx'
+import { ItemTypes } from '../ItemTypes.jsx'
 
 export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStation, type, myStations }) {
 
     const [hoveredSpotifyId, setHoveredSpotifyId] = useState(null)
     const [selectedSpotifyId, setSelectedSpotifyId] = useState(null)
+
 
     function onSetSelectedSpotifyId(spotifyId) {
         setSelectedSpotifyId(spotifyId)
@@ -28,6 +32,17 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
             <ul className="list-body">
                 {station.songs.map((song, index) => {
                     const selectedSongClass = (song.spotifyId === selectedSpotifyId) ? 'selected' : ''
+                    const [collected, drag, dragPreview] = useDrag(() => ({
+                        type: ItemTypes.SONG,
+                        item: song,
+                        collect: (monitor => ({
+                            isDragging: monitor.isDragging(),
+                            handlerId: monitor.getHandlerId()
+                        }))
+                    }))
+                    console.log(collected)
+                    console.log(drag)
+                    console.log(dragPreview)
                     return <li
                         key={song.spotifyId}
                         className={`song-list-item ${selectedSongClass}`}
