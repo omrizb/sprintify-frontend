@@ -64,7 +64,13 @@ export function SongPreview(props) {
                     showErrorMsg('Defective song')
                     return
                 }
-                addSongToStation({ ...likedSongsStation, songs: [...likedSongsStation.songs, song] })
+                addSongToStation({
+                    ...likedSongsStation,
+                    songs: [
+                        ...likedSongsStation.songs,
+                        { ...song, addedAt: Date.now() }
+                    ]
+                })
 
                 break
             case 'addToStation':
@@ -96,7 +102,7 @@ export function SongPreview(props) {
                 showPlayBtn={type === 'mini-table'}
             />
             {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
-            <div className="date-added"></div>
+            {song.addedAt && <div className="date-added">{song.addedAt}</div>}
             <div className="song-duration">
 
                 <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>

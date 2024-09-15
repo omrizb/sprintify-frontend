@@ -35,6 +35,7 @@ export function MoreSongs() {
         try {
             const ytSong = await youtubeService.getTopVideo(`song: ${newSong.songName} by ${newSong.artist.name}`)
             newSong.ytId = ytSong.songId
+            newSong.addedAt = Date.now()
 
             if (station.songs.length === 0) {
                 var updatedStation = {

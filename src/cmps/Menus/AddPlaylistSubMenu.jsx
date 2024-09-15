@@ -63,7 +63,15 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
 
         if (!song.YtId) await setSongYtId()
 
-        const updatedStation = { ...station, songs: [...station.songs, song] }
+        const updatedStation = {
+            ...station,
+            songs: [
+                ...station.songs,
+                {
+                    ...song, addedAt: Date.now()
+                }
+            ]
+        }
         addSongToStation(updatedStation)
         setShowMenu(false)
     }
@@ -74,6 +82,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
             const newStation = stationService.getEmptyStation()
             const { _id, fullName, imgUrl } = loggedinUser
             if (!song.YtId) await setSongYtId()
+            song.addedAt = Date.now()
             const station = {
                 ...newStation,
                 name: song.songName,

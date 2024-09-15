@@ -48,7 +48,12 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
                     setSongYtId(saveToLike)
                     return
                 }
-                const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
+                const updatedStation = {
+                    ...likedSongsStation,
+                    songs: [...likedSongsStation.songs,
+                    { ...song, addedAt: Date.now() }
+                    ]
+                }
                 addSongToStation(updatedStation)
             }
         })
@@ -75,8 +80,15 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             try {
                 const ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
                 song.ytId = ytSong.songId
+
                 if (saveToLike) {
-                    const updatedStation = { ...likedSongsStation, songs: [...likedSongsStation.songs, song] }
+                    const updatedStation = {
+                        ...likedSongsStation,
+                        songs:
+                            [...likedSongsStation.songs,
+                            { ...song, addedAt: Date.now() }
+                            ]
+                    }
                     addSongToStation(updatedStation)
                 }
 
