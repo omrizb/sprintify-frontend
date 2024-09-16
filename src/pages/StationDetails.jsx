@@ -43,6 +43,7 @@ export function StationDetails() {
             // console.log('GOT from socket', currStation)
             if (currStation.createdBy.id !== loggedinUser._id) {
                 dispatch(getCmdUpdateStation(currStation))
+                // dispatch(getCmdUpdateAndStay(currStation))
             }
         })
 
