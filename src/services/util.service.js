@@ -6,6 +6,7 @@ export const utilService = {
     getRandomIntInclusive,
     getRandomItems,
     getTimeStr,
+    getTimeDiffFromPresentStr,
     getDayName,
     getMonthName,
     animateCSS,
@@ -64,6 +65,33 @@ function getTimeStr(timeInSeconds) {
 
     const timeInMinutes = `${minutes.toString().padStart(1, '0')}:${seconds.toString().padStart(2, '0')}`
     return (timeInSeconds < 3600) ? timeInMinutes : `${hours.toString().padStart(2, '0')}:${timeInMinutes}`
+}
+
+function getTimeDiffFromPresentStr(epoch) {
+    if (!epoch) return
+
+    const timeDiffInDays = Math.floor((Date.now() - epoch) / (1000 * 3600 * 24))
+
+    const years = Math.floor(timeDiffInDays / 365)
+    if (years > 0) {
+        return years === 1 ? 'A year ago' : `${years} years ago`
+    }
+
+    const months = Math.floor(timeDiffInDays / 30)
+    if (months > 0) {
+        return months === 1 ? 'A month ago' : `${months} months ago`
+    }
+
+    const weeks = Math.floor(timeDiffInDays / 7)
+    if (weeks > 0) {
+        return weeks === 1 ? 'A week ago' : `${weeks} weeks ago`
+    }
+
+    if (timeDiffInDays > 0) {
+        return timeDiffInDays === 1 ? 'A day ago' : `${timeDiffInDays} days ago`
+    } else {
+        return 'Today'
+    }
 }
 
 function saveToStorage(key, value) {
