@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
-import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
-import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
+import { dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { updateStation } from '../../store/actions/station.actions.js'
 
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
@@ -64,55 +62,12 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
 
             <ul className="list-body">
                 {station.songs.map((song, index) => {
-
-                    const draggableRef = useRef(null)
-                    const [isDragging, setIsDragging] = useState(false)
-                    const [isSongDraggedOver, setIsSongDraggedOver] = useState(false)
-
-                    useEffect(() => {
-                        const element = draggableRef.current
-
-                        return combine(
-                            draggable({
-                                element,
-                                getInitialData: () => song,
-                                onGenerateDragPreview: ({ nativeSetDragImage }) => {
-                                    const emptyImage = new Image()
-                                    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-                                    emptyImage.style.display = 'none'
-                                    nativeSetDragImage(emptyImage, 0, 0)
-                                },
-                                onDragStart: () => setIsDragging(true),
-                                onDrop: () => setIsDragging(false),
-                            }),
-                            dropTargetForElements({
-                                element,
-                                canDrop: ({ source }) => {
-                                    if (source.element === element) return false
-                                    return ('songName' in source.data)
-                                },
-                                getData: ({ input }) => attachClosestEdge(song, {
-                                    element,
-                                    input,
-                                    allowedEdges: ['top', 'bottom']
-                                }),
-                                onDragEnter: () => setIsSongDraggedOver(true),
-                                onDragLeave: () => setIsSongDraggedOver(false),
-                                onDrop: () => {
-                                    setIsSongDraggedOver(false)
-                                }
-                            })
-                        )
-                    }, [])
-
                     const selectedSongClass = (song.spotifyId === selectedSpotifyId) ? 'selected' : ''
-                    const draggedOverClass = (isSongDraggedOver) ? 'dragged-over' : ''
 
                     return <li
-                        ref={draggableRef}
                         key={song.spotifyId}
                         index={index}
-                        className={`song-list-item ${selectedSongClass} ${draggedOverClass}`}
+                        className={`song-list-item ${selectedSongClass}`}
                         onMouseEnter={() => setHoveredSpotifyId(song.spotifyId)}
                         onMouseLeave={() => setHoveredSpotifyId('')}
                         onClick={() => onSetSelectedSpotifyId(song.spotifyId)}

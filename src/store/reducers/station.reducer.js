@@ -1,5 +1,7 @@
 export const SET_STATIONS = 'SET_STATIONS'
 export const SET_STATION = 'SET_STATION'
+export const SET_STATION_BACKUP = 'SET_STATION_BACKUP'
+export const RESTORE_FROM_BACKUP = 'RESTORE_FROM_BACKUP'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const ADD_STATION = 'ADD_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
@@ -10,6 +12,7 @@ export const UPDATE_STATION_AND_STAY = 'UPDATE_STATION_AND_STAY'
 const initialState = {
     stations: [],
     station: null,
+    stationBackup: null,
 }
 
 export function stationReducer(state = initialState, action) {
@@ -23,6 +26,10 @@ export function stationReducer(state = initialState, action) {
 
         case SET_STATION:
             newState = { ...state, station: action.station }
+            break
+
+        case SET_STATION_BACKUP:
+            newState = { ...state, stationBackup: action.station }
             break
 
         case REMOVE_STATION:
@@ -65,6 +72,11 @@ export function stationReducer(state = initialState, action) {
         case UPDATE_STATION:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
             newState = { ...state, stations, station: action.station }
+            break
+
+        case RESTORE_FROM_BACKUP:
+            stations = state.stations.map(station => (station._id === stationBackup._id) ? stationBackup : station)
+            newState = { ...state, stations, station: stationBackup }
             break
 
         case UPDATE_STATIONS:
@@ -112,4 +124,3 @@ function unitTestReducer() {
     state = stationReducer(state, { type: REMOVE_STATION, stationId: station1._id })
     console.log('After REMOVE_STATION:', state)
 }
-

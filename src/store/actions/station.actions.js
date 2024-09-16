@@ -7,6 +7,8 @@ import {
     REMOVE_STATION,
     SET_STATIONS,
     SET_STATION,
+    SET_STATION_BACKUP,
+    RESTORE_FROM_BACKUP,
     UPDATE_STATION,
     UPDATE_STATIONS,
     UPDATE_STATION_AND_STAY as UPDATE_STATION_AND_STAY,
@@ -56,6 +58,7 @@ export async function addStation(newStation) {
         throw err
     }
 }
+
 export async function addSprintifyStation(station) {
     try {
         const savedStation = await stationService.save(station)
@@ -68,11 +71,13 @@ export async function addSprintifyStation(station) {
 
 export async function updateStation(station) {
     try {
+        store.dispatch(getCmdSetStationBackup(station))
+        store.dispatch(getCmdUpdateStation(station))
         const savedStation = await stationService.save(station)
-        store.dispatch(getCmdUpdateStation(savedStation))
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
+        store.dispatch({ type: RESTORE_FROM_BACKUP })
         throw err
     }
 }
@@ -165,18 +170,28 @@ function getCmdSetStations(stations) {
         stations
     }
 }
+
 function getCmdSetStation(station) {
     return {
         type: SET_STATION,
         station
     }
 }
+
+function getCmdSetStationBackup(station) {
+    return {
+        type: SET_STATION_BACKUP,
+        station
+    }
+}
+
 function getCmdRemoveStation(stationId) {
     return {
         type: REMOVE_STATION,
         stationId
     }
 }
+
 function getCmdAddStation(station) {
     return {
         type: ADD_STATION,
@@ -204,8 +219,3 @@ export function getCmdUpdateAndStay(station) {
         station
     }
 }
-
-
-
-
-
