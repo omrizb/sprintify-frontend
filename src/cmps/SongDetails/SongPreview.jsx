@@ -1,6 +1,10 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
+import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
 
 import { utilService } from '../../services/util.service.js'
 import { imgService } from '../../services/imgService.js'
@@ -26,6 +30,46 @@ export function SongPreview(props) {
     const [showMoreMenu, setShowMoreMenu] = useState(false)
     const dotsBtnRef = useRef(null)
 
+    const draggableRef = useRef(null)
+    const [isDragging, setIsDragging] = useState(false)
+    const [songDraggedOver, setSongDraggedOver] = useState({ state: false, edge: '' })
+
+    useEffect(() => {
+        const element = draggableRef.current
+
+        return combine(
+            draggable({
+                element,
+                getInitialData: () => song,
+                onGenerateDragPreview: ({ nativeSetDragImage }) => {
+                    const emptyImage = new Image()
+                    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+                    emptyImage.style.display = 'none'
+                    nativeSetDragImage(emptyImage, 0, 0)
+                },
+                onDragStart: () => setIsDragging(true),
+                onDrop: () => setIsDragging(false),
+            }),
+            dropTargetForElements({
+                element,
+                canDrop: ({ source }) => {
+                    if (source.element === element) return false
+                    return ('songName' in source.data)
+                },
+                getData: ({ input }) => attachClosestEdge(song, {
+                    element,
+                    input,
+                    allowedEdges: ['top', 'bottom']
+                }),
+                onDragEnter: () => setSongDraggedOver(true),
+                onDragLeave: () => setSongDraggedOver(false),
+                onDrop: () => {
+                    setSongDraggedOver(false)
+                }
+            })
+        )
+    }, [])
+
     const { song, stationId, likedSongsStation, myStations, hoveredSpotifyId,
         selectedSpotifyId, index, type, isOwnedByUser, station } = props
 
@@ -48,7 +92,8 @@ export function SongPreview(props) {
         'song-preview',
         articleClassType,
         isHighlighted ? 'highlight' : '',
-        isCurrentlyPlaying ? 'currently-playing' : ''
+        isCurrentlyPlaying ? 'currently-playing' : '',
+        songDraggedOver.state ? `dragged-over-${songDraggedOver.edge}` : ''
     ].join(' ')
 
     async function addSong() {
@@ -84,7 +129,7 @@ export function SongPreview(props) {
     }
 
     return (
-        <article className={songPreviewClass}>
+        <article ref={draggableRef} className={songPreviewClass}>
             <div className="index flex">
                 {isHovered
                     ? <PlayButton
