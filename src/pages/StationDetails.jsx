@@ -40,11 +40,10 @@ export function StationDetails() {
         socketService.emit(SOCKET_EMIT_USER_WATCH, loggedinUser._id)
 
         socketService.on(SOCKET_EVENT_STATION_UPDATED, currStation => {
-            console.log('GOT from socket', currStation)
+            // console.log('GOT from socket', currStation)
             if (currStation.createdBy.id !== loggedinUser._id) {
                 dispatch(getCmdUpdateStation(currStation))
             }
-            // dispatch(getCmdUpdateAndStay(currStation))
         })
 
         return () => {
