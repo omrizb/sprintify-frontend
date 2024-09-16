@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
@@ -32,7 +31,7 @@ export function SongPreview(props) {
 
     const draggableRef = useRef(null)
     const [isDragging, setIsDragging] = useState(false)
-    const [songDraggedOver, setSongDraggedOver] = useState({ state: false, edge: '' })
+    const [songDraggedOver, setSongDraggedOver] = useState({ state: false, closestEdge: '' })
 
     useEffect(() => {
         const element = draggableRef.current
@@ -53,7 +52,6 @@ export function SongPreview(props) {
             dropTargetForElements({
                 element,
                 canDrop: ({ source }) => {
-                    if (source.element === element) return false
                     return ('songName' in source.data)
                 },
                 getData: ({ input }) => attachClosestEdge(song, {
@@ -61,10 +59,22 @@ export function SongPreview(props) {
                     input,
                     allowedEdges: ['top', 'bottom']
                 }),
-                onDragEnter: () => setSongDraggedOver(true),
-                onDragLeave: () => setSongDraggedOver(false),
+                onDragEnter: ({ self }) => {
+                    const closestEdge = extractClosestEdge(self.data)
+                    setSongDraggedOver({ state: true, closestEdge })
+                },
+                onDrag: ({ self }) => {
+                    const closestEdge = extractClosestEdge(self.data)
+                    setSongDraggedOver(prev => {
+                        if (prev.state === true && prev.edge === closestEdge) {
+                            return prev
+                        }
+                        return { state: true, closestEdge }
+                    })
+                },
+                onDragLeave: () => setSongDraggedOver({ state: false, closestEdge: '' }),
                 onDrop: () => {
-                    setSongDraggedOver(false)
+                    setSongDraggedOver({ state: false, closestEdge: '' })
                 }
             })
         )
@@ -93,7 +103,7 @@ export function SongPreview(props) {
         articleClassType,
         isHighlighted ? 'highlight' : '',
         isCurrentlyPlaying ? 'currently-playing' : '',
-        songDraggedOver.state ? `dragged-over-${songDraggedOver.edge}` : ''
+        songDraggedOver.state ? `dragged-over-${songDraggedOver.closestEdge}` : ''
     ].join(' ')
 
     async function addSong() {
@@ -151,7 +161,12 @@ export function SongPreview(props) {
             <div className="song-duration">
 
                 <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>
-                    {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
+                    {<DynamicButton
+                        stationId={stationId}
+                        likedSongsStation={likedSongsStation}
+                        isHighlighted={isHighlighted}
+                        isLikedByUser={isLikedByUser}
+                    />}
                     {showMenu && <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
                         <SongPreviewAddPlaylistMenu
                             song={song}
@@ -182,7 +197,10 @@ export function SongPreview(props) {
 }
 
 function DynamicButton(props) {
-    if (props.isLikedByUser) return <VButton type="addToStation" />
+    if (!props.stationId || !props.likedSongsStation) return
+
+    if (props.stationId === props.likedSongsStation._id) return
+    else if (props.isLikedByUser) return <VButton type="addToStation" />
     else if (props.isHighlighted) return <AddToButton type="addToLikedSongs" />
 }
 

@@ -245,6 +245,22 @@
     height: $svgSizeLarge2;
 }
 
+.dragged-over-top {
+    width: 100%;
+}
+
+.dragged-over-top::before {
+    content: "";
+    @include dnd-h-drop-indicator;
+    top: -1px;
+}
+
+.dragged-over-bottom::before {
+    content: "";
+    @include dnd-h-drop-indicator;
+    bottom: -1px;
+}
+
 .hide {
     display: none;
 }

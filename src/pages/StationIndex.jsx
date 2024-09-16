@@ -17,26 +17,6 @@ export function StationIndex() {
     const isRightSidebarOpen = useSelector(state => state.systemModule.isRightSidebarOpen)
     const mainViewContainerRef = useRef()
 
-    function handleDragEnd(event) {
-        console.log(event)
-        // const { source, destination, draggableId } = result
-
-        // if (!destination) {
-        //     return
-        // }
-
-        // if (destination.droppableId === source.droppableId
-        //     && destination.index === source.index
-        // ) {
-        //     return
-        // }
-
-        // const newStation = structuredClone(station)
-        // const sourceSong = newStation.songs.splice(source.index, 1)[0]
-        // newStation.songs.splice(destination.index, 0, sourceSong)
-        // updateStation(newStation)
-    }
-
     const mainLayout = user ? 'main-layout-loggedin' : 'main-layout'
     return (
         <div className={`station-index ${mainLayout}`}>

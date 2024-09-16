@@ -80,7 +80,6 @@ async function save(station, isToggleLike = '') {
             lastIdx: station.lastIdx || ''
         }
         savedStation = await httpService.put(`station/${station._id}${isToggleLike}`, stationToSave)
-        console.log(savedStation)
     } else {
         const stationToSave = {
             name: station.name,
