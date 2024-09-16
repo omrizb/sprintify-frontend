@@ -1,0 +1,25 @@
+.general-preview {
+    position: relative;
+    border-radius: 8px;
+    width: 240px;
+    padding: 12px;
+    background-color: transparent;
+
+    img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .general-info{
+        .item-name{
+            font-size: 16px; 
+        }
+
+        .item-type{
+            font-size: 14px;
+            color: $secondaryTxtClr;
+            text-transform: capitalize;
+        }
+    }
+    
+}

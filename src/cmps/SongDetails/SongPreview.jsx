@@ -147,7 +147,7 @@ export function SongPreview(props) {
                 showPlayBtn={type === 'mini-table'}
             />
             {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
-            {song.addedAt && <div className="date-added">{song.addedAt}</div>}
+            <div className="date-added">{song.addedAt}</div>
             <div className="song-duration">
 
                 <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>

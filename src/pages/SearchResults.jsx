@@ -9,6 +9,7 @@ import { SongListSearchPage } from '../cmps/SearchResultsPageCmps/SongListSearch
 import { TopResult } from '../cmps/SearchResultsPageCmps/TopResult.jsx'
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { ArtistList } from '../cmps/Artists/ArtistList.jsx'
+import { GeneralList } from '../cmps/General list & preview/GeneralList.jsx'
 
 export function SearchResults() {
 
@@ -54,16 +55,6 @@ export function SearchResults() {
             setAlbums(res.albums)
             setPlaylists(res.stations)
 
-            // const ytSongs = []
-
-            // for (let i = 0; i < res.songs.length; i++) {
-            //     ytSongs[i] = await youtubeService.getTopVideo(`song: ${res.songs[i].songName} by ${res.songs[i].artist.name}`)
-            //     res.songs[i].ytId = ytSongs[i].songId
-            // }
-
-            setSongs(res.songs)
-
-
         } catch (err) {
             console.error(`Couldn't load videos`, err)
             showErrorMsg('YouTube is blocking us')
@@ -88,7 +79,8 @@ export function SearchResults() {
             />}
 
             {artists.length > 0 && <ArtistList artists={artists} />}
-            {albums.length > 0 && <h2>Albums</h2>}
+            {albums.length > 0 && <GeneralList listItems={albums} type="album" />}
+            {playlists.length > 0 && <GeneralList listItems={playlists} type="playlist" />}
 
 
         </div>
