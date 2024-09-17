@@ -1,5 +1,10 @@
 import { store } from '../store.js'
-import { SET_RIGHT_SIDEBAR_CONTENT, SET_RIGHT_SIDEBAR_WIDTH, SET_IS_SIDEBAR_OPEN } from '../reducers/system.reducer.js'
+import {
+    SET_RIGHT_SIDEBAR_CONTENT,
+    SET_RIGHT_SIDEBAR_WIDTH,
+    SET_IS_SIDEBAR_OPEN,
+    SET_IS_SONG_DRAGGED
+} from '../reducers/system.reducer.js'
 
 export const rightSidebarContentKeys = {
     NOW_PLAYING: 'nowPlaying',
@@ -21,4 +26,8 @@ export function setRightSidebarWidth(rightSidebarWidth) {
 
 export function setIsRightSidebarOpen(isOpen) {
     store.dispatch({ type: SET_IS_SIDEBAR_OPEN, isOpen })
+}
+
+export function setIsSongDragged(isDragged) {
+    store.dispatch({ type: SET_IS_SONG_DRAGGED, isDragged })
 }

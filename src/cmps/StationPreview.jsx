@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react'
 export function StationPreview({ station: stationPreview, style, colorActiveStationId, onSetBgColor }) {
 
     const station = useSelector(storeState => storeState.stationModule.station)
+    const isSongDragged = useSelector(store => store.systemModule.isSongDragged)
+
     const [stationPreviewImageColor, setStationPreviewImageColor] = useState(null)
     const fac = new FastAverageColor()
 
@@ -18,13 +20,6 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             onSetBgColor(stationPreviewImageColor)
         }
     }, [colorActiveStationId])
-
-    function isHighlighted() {
-        if (station) {
-            if (stationPreview._id === station._id) return 'highlighted'
-        }
-        return ''
-    }
 
     function handleImageLoad(ev) {
         fac.getColorAsync(ev.target)
@@ -50,8 +45,15 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             break
     }
 
+    const stationPreviewClass = [
+        'station-preview',
+        articleClassName,
+        (stationPreview._id === station._id) ? 'highlighted' : '',
+        (isSongDragged) ? 'disabled' : ''
+    ].join(' ')
+
     return (
-        <article className={`station-preview ${articleClassName} ${isHighlighted()}`}>
+        <article className={stationPreviewClass}>
             <div className="image-container">
                 {(stationPreview.stationImgUrl) && <img
                     crossOrigin="anonymous"
