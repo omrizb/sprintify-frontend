@@ -15,6 +15,8 @@ export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT'
+export const SET_PLAYER_ROLE = 'SET_PLAYER_ROLE'
+export const SET_PLAYER_FROM_SOCKET = 'SET_PLAYER_FROM_SOCKET'
 
 const initialState = {
     isFirstSongLoaded: false,
@@ -39,6 +41,7 @@ const initialState = {
     },
     stationId: '',
     stationName: '',
+    role: ''
 }
 
 export function playerReducer(state = initialState, action = {}) {
@@ -155,8 +158,20 @@ export function playerReducer(state = initialState, action = {}) {
         case TOGGLE_REPEAT:
             newState = { ...state, queue: { ...state.queue, isRepeat: !state.queue.isRepeat } }
             break
+        case SET_PLAYER_ROLE:
+            newState = { ...state, role: action.role }
+            break
+        case SET_PLAYER_FROM_SOCKET:
+            console.log(action)
+            newState = { ...state, ...action.player }
+            break
         default:
             return state
+    }
+    if (state.role === 'owner') {
+        const stateToSend = { ...newState }
+        delete stateToSend.role
+        socketService.emit('player-change', stateToSend)
     }
     return newState
 }

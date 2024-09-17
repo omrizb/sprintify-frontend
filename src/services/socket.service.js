@@ -11,7 +11,7 @@ export const SOCKET_EVENT_REVIEW_REMOVED = 'review-removed'
 export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
 
 export const SOCKET_EVENT_STATION_UPDATED = 'station-updated'
-export const SOCKET_EMIT_SET_PLAYER = 'station-set-player'
+export const SOCKET_EMIT_JOIN_PLAYER = 'station-set-player'
 export const SOCKET_EVENT_MUTUAL_LISTEN = 'mutual-listen'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'

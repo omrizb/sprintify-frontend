@@ -5,7 +5,6 @@ import { youtubeService } from '../../services/youtube.service'
 import { showErrorMsg } from '../../services/event-bus.service'
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
 import { SvgButton } from '../SvgButton'
-import { SOCKET_EMIT_SET_PLAYER } from '../../services/socket.service'
 
 export function PlayButton({ type, stationId, stationName, song }) {
 
@@ -51,7 +50,6 @@ export function PlayButton({ type, stationId, stationName, song }) {
             setPlayerAction(playerActions.PAUSE)
         }
 
-        socketService.emit(SOCKET_EMIT_SET_PLAYER, player)
     }
 
     async function getYtId(song) {

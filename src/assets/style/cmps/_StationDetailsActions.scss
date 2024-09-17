@@ -13,6 +13,16 @@
         padding-inline: $regularGap;
     }
 
+    img.mutual-listen {
+        height: 55px;
+        border-radius: 20px;
+        border: 2px solid $buttonBgGreen;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
     .view-as,
     .show-more {
         position: relative;

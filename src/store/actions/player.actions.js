@@ -19,7 +19,9 @@ import {
     ADD_TO_SONGS_HISTORY,
     POP_FROM_SONGS_HISTORY,
     TOGGLE_SHUFFLE,
-    TOGGLE_REPEAT
+    TOGGLE_REPEAT,
+    SET_PLAYER_ROLE,
+    SET_PLAYER_FROM_SOCKET
 } from '../reducers/player.reducer'
 
 export const playerActions = {
@@ -36,7 +38,7 @@ export const playerActions = {
     ADD_TO_QUEUE: 'addToQueue',
     REMOVE_FROM_QUEUE: 'removeFromQueue',
     CLEAR_QUEUE: 'clearQueue',
-    RESET_ACTION: ''
+    RESET_ACTION: '',
 }
 
 // To be used by app components to set an action
@@ -138,5 +140,13 @@ function toggleShuffle() {
 
 function toggleRepeat() {
     store.dispatch({ type: TOGGLE_REPEAT })
+}
+
+export function setPlayerRole(role) {
+    store.dispatch({ type: SET_PLAYER_ROLE, role })
+}
+
+export function setPlayerFromSocket(player) {
+    store.dispatch({ type: SET_PLAYER_FROM_SOCKET, player })
 }
 

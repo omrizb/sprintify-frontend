@@ -16,6 +16,7 @@ import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
 import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
 import { SOCKET_EVENT_STATION_UPDATED, socketService } from '../services/socket.service.js'
+import { setPlayerRole } from '../store/actions/player.actions.js'
 
 
 export function StationDetails() {
@@ -109,6 +110,8 @@ export function StationDetails() {
             }
         }
     }
+
+    (isOwnedByUser) ? setPlayerRole('owner') : setPlayerRole('follower')
 
     return (isLoading || !loggedinUser)
         ? <Loader />
