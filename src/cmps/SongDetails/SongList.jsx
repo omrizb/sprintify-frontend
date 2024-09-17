@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
+import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge'
 import { updateStation } from '../../store/actions/station.actions.js'
 
 import { SongPreview } from '../SongDetails/SongPreview.jsx'
@@ -32,12 +34,21 @@ export function SongList({ station, isOwnedByUser, onRemoveSong, likedSongsStati
                 const sourceSongIdx = station.songs.findIndex(song => song.spotifyId === source.data.spotifyId)
                 const targetSongIdx = station.songs.findIndex(song => song.spotifyId === target.data.spotifyId)
 
-                console.log(sourceSongIdx)
-                console.log(targetSongIdx)
+                if (sourceSongIdx < 0 || targetSongIdx < 0) {
+                    return
+                }
+
+                const closestEdgeOfTarget = extractClosestEdge(target.data)
 
                 const newStation = structuredClone(station)
-                const sourceSong = newStation.songs.splice(sourceSongIdx, 1)[0]
-                newStation.songs.splice(targetSongIdx, 0, sourceSong)
+                newStation.songs = reorderWithEdge({
+                    list: newStation.songs,
+                    startIndex: sourceSongIdx,
+                    indexOfTarget: targetSongIdx,
+                    closestEdgeOfTarget,
+                    axis: 'vertical',
+                })
+
                 updateStation(newStation)
             }
         })

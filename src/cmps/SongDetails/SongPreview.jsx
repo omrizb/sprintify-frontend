@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview'
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
 import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
 
@@ -32,7 +33,8 @@ export function SongPreview(props) {
 
     const draggableRef = useRef(null)
     const [isDragging, setIsDragging] = useState(false)
-    const [songDraggedOver, setSongDraggedOver] = useState({ state: false, edge: '' })
+    const [songDraggedOver, setSongDraggedOver] = useState({ state: false, closestEdge: '' })
+    const [dragPreview, setDragPreview] = useState(null)
 
     useEffect(() => {
         const element = draggableRef.current
@@ -42,18 +44,23 @@ export function SongPreview(props) {
                 element,
                 getInitialData: () => song,
                 onGenerateDragPreview: ({ nativeSetDragImage }) => {
-                    const emptyImage = new Image()
-                    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-                    emptyImage.style.display = 'none'
-                    nativeSetDragImage(emptyImage, 0, 0)
+                    setCustomNativeDragPreview({
+                        nativeSetDragImage,
+                        render: ({ container }) => {
+                            setDragPreview(container)
+                        }
+                    })
                 },
+                // const emptyImage = new Image()
+                // emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+                // emptyImage.style.display = 'none'
+                // nativeSetDragImage(emptyImage, 0, 0)
                 onDragStart: () => setIsDragging(true),
                 onDrop: () => setIsDragging(false),
             }),
             dropTargetForElements({
                 element,
                 canDrop: ({ source }) => {
-                    if (source.element === element) return false
                     return ('songName' in source.data)
                 },
                 getData: ({ input }) => attachClosestEdge(song, {
@@ -61,10 +68,22 @@ export function SongPreview(props) {
                     input,
                     allowedEdges: ['top', 'bottom']
                 }),
-                onDragEnter: () => setSongDraggedOver(true),
-                onDragLeave: () => setSongDraggedOver(false),
+                onDragEnter: ({ self }) => {
+                    const closestEdge = extractClosestEdge(self.data)
+                    setSongDraggedOver({ state: true, closestEdge })
+                },
+                onDrag: ({ self }) => {
+                    const closestEdge = extractClosestEdge(self.data)
+                    setSongDraggedOver(prev => {
+                        if (prev.state === true && prev.edge === closestEdge) {
+                            return prev
+                        }
+                        return { state: true, closestEdge }
+                    })
+                },
+                onDragLeave: () => setSongDraggedOver({ state: false, closestEdge: '' }),
                 onDrop: () => {
-                    setSongDraggedOver(false)
+                    setSongDraggedOver({ state: false, closestEdge: '' })
                 }
             })
         )
@@ -93,7 +112,7 @@ export function SongPreview(props) {
         articleClassType,
         isHighlighted ? 'highlight' : '',
         isCurrentlyPlaying ? 'currently-playing' : '',
-        songDraggedOver.state ? `dragged-over-${songDraggedOver.edge}` : ''
+        songDraggedOver.state ? `dragged-over-${songDraggedOver.closestEdge}` : ''
     ].join(' ')
 
     async function addSong() {
@@ -129,60 +148,71 @@ export function SongPreview(props) {
     }
 
     return (
-        <article ref={draggableRef} className={songPreviewClass}>
-            <div className="index flex">
-                {isHovered
-                    ? <PlayButton
-                        type="songPreview"
-                        stationId={stationId}
-                        song={song}
-                    />
-                    : isCurrentlyPlaying
-                        ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
-                        : index}
-            </div>
-            <MiniSongPreview
-                song={song}
-                isCurrentlyPlaying={isCurrentlyPlaying}
-                showPlayBtn={type === 'mini-table'}
-            />
-            {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
-            <div className="date-added">{utilService.getTimeDiffFromPresentStr(song.addedAt)}</div>
-            <div className="song-duration">
-
-                <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>
-                    {<DynamicButton isHighlighted={isHighlighted} isLikedByUser={isLikedByUser} />}
-                    {showMenu && <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
-                        <SongPreviewAddPlaylistMenu
+        <>
+            <article ref={draggableRef} className={songPreviewClass}>
+                <div className="index flex">
+                    {isHovered
+                        ? <PlayButton
+                            type="songPreview"
+                            stationId={stationId}
                             song={song}
-                            myStations={myStations}
+                        />
+                        : isCurrentlyPlaying
+                            ? <img src={imgService.getImg('equalizerAnimatedGreen')} />
+                            : index}
+                </div>
+                <MiniSongPreview
+                    song={song}
+                    isCurrentlyPlaying={isCurrentlyPlaying}
+                    showPlayBtn={type === 'mini-table'}
+                />
+                {(!props.isSearchOrigin) && <div className="album">{album.name}</div>}
+                <div className="date-added">{utilService.getTimeDiffFromPresentStr(song.addedAt)}</div>
+                <div className="song-duration">
+
+                    <div ref={addBtnRef} className="add-btn-container" onClick={addSong}>
+                        {<DynamicButton
+                            stationId={stationId}
                             likedSongsStation={likedSongsStation}
-                            setShowMenu={setShowMenu} />
+                            isHighlighted={isHighlighted}
+                            isLikedByUser={isLikedByUser}
+                        />}
+                        {showMenu && <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
+                            <SongPreviewAddPlaylistMenu
+                                song={song}
+                                myStations={myStations}
+                                likedSongsStation={likedSongsStation}
+                                setShowMenu={setShowMenu} />
+                        </PopUp>}
+                    </div>
+                    <span>{utilService.getTimeStr(duration)}</span>
+                    <div ref={dotsBtnRef} onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}
+                        className="dots-container">
+                        {isHighlighted && <DotsButton type="songPreview" elementName={songName} />}
+                    </div>
+
+                    {showMoreMenu && <PopUp btnRef={dotsBtnRef} onClosePopUp={() => setShowMoreMenu(false)} >
+                        <SongPreviewActionsMenu
+                            song={song}
+                            station={station}
+                            isOwnedByUser={isOwnedByUser}
+                            likedSongsStation={likedSongsStation}
+                            myStations={myStations}
+
+                        />
                     </PopUp>}
                 </div>
-                <span>{utilService.getTimeStr(duration)}</span>
-                <div ref={dotsBtnRef} onClick={() => setShowMoreMenu(prevShowMoreMenu => !prevShowMoreMenu)}
-                    className="dots-container">
-                    {isHighlighted && <DotsButton type="songPreview" elementName={songName} />}
-                </div>
-
-                {showMoreMenu && <PopUp btnRef={dotsBtnRef} onClosePopUp={() => setShowMoreMenu(false)} >
-                    <SongPreviewActionsMenu
-                        song={song}
-                        station={station}
-                        isOwnedByUser={isOwnedByUser}
-                        likedSongsStation={likedSongsStation}
-                        myStations={myStations}
-
-                    />
-                </PopUp>}
-            </div>
-        </article>
+            </article>
+            {dragPreview && createPortal(<div style={{ height: '1px' }}>.</div>, dragPreview)}
+        </>
     )
 }
 
 function DynamicButton(props) {
-    if (props.isLikedByUser) return <VButton type="addToStation" />
+    if (!props.stationId || !props.likedSongsStation) return
+
+    if (props.stationId === props.likedSongsStation._id) return
+    else if (props.isLikedByUser) return <VButton type="addToStation" />
     else if (props.isHighlighted) return <AddToButton type="addToLikedSongs" />
 }
 
