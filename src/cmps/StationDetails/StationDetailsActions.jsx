@@ -16,7 +16,7 @@ import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PopUp } from '../PopUp.jsx'
 import { Tooltip } from '../Tooltip.jsx'
-import { SOCKET_EMIT_JOIN_PLAYER } from '../../services/socket.service.js'
+import { SOCKET_EMIT_JOIN_MUTUAL_STATION } from '../../services/socket.service.js'
 
 
 export function StationDetailsActions({ station, stationMeta }) {
@@ -124,9 +124,9 @@ export function StationDetailsActions({ station, stationMeta }) {
 
     function onClickMutualListen() {
         console.log('Mutual listening')
-        socketService.emit(SOCKET_EMIT_JOIN_PLAYER, station._id)
-        socketService.on('on-player-change', player => {
-            setPlayerFromSocket(player)
+        socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, station._id)
+        socketService.on('on-player-change', state => {
+            setPlayerFromSocket(state)
         })
     }
 

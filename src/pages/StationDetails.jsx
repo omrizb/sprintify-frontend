@@ -47,7 +47,7 @@ export function StationDetails() {
 
         return () => {
             socketService.off(SOCKET_EVENT_STATION_UPDATED)
-
+            socketService.off('on-player-change')
         }
     }, [])
 
