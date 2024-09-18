@@ -16,7 +16,7 @@ import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
 import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
 import { SOCKET_EMIT_JOIN_MUTUAL_STATION, SOCKET_EVENT_STATION_UPDATED, socketService } from '../services/socket.service.js'
-import { setPlayerRole } from '../store/actions/player.actions.js'
+import { setPlayerMutualListen, setPlayerRole } from '../store/actions/player.actions.js'
 
 
 export function StationDetails() {
@@ -47,6 +47,7 @@ export function StationDetails() {
 
         return () => {
             socketService.off(SOCKET_EVENT_STATION_UPDATED)
+            setPlayerMutualListen(false)
             socketService.off('on-player-change')
             socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, '')
         }

@@ -18,6 +18,7 @@ export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT'
 export const SET_PLAYER_ROLE = 'SET_PLAYER_ROLE'
+export const SET_PLAYER_MUTUAL_LISTEN = 'SET_PLAYER_MUTUAL_LISTEN'
 export const SET_PLAYER_FROM_SOCKET = 'SET_PLAYER_FROM_SOCKET'
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
         elapsedDuration: 0,
         isPlaying: false,
         volume: 100,
+        mutualListen: false,
     },
     queue: {
         originalStationSongs: [],
@@ -44,6 +46,7 @@ const initialState = {
     stationId: '',
     stationName: '',
     role: '',
+
     isSync: false
 }
 
@@ -172,16 +175,34 @@ export function playerReducer(state = initialState, action = {}) {
         case SET_PLAYER_ROLE:
             newState = { ...state, role: action.role }
             break
+        case SET_PLAYER_MUTUAL_LISTEN:
+            newState = {
+                ...state,
+                player: {
+                    ...state.player,
+                    mutualListen: action.mutualListen
+                }
+            }
+            break
         case SET_PLAYER_FROM_SOCKET:
             if (!state.isSync) {
-                console.log(action)
-                console.log(state.isSync)
-                newState = { ...state, ...action.player, isSync: true }
+
+                console.log(action.player)
+                newState = {
+                    ...state,
+                    ...action.player,
+                    isSync: true
+                }
                 break
             }
             if (state.isSync) {
-                console.log(state.isSync)
-                newState = { ...state, ...action.player, ...action.control, isSync: true }
+                console.log(action.player)
+                newState = {
+                    ...state,
+                    ...action.player,
+                    ...action.control,
+                    isSync: true
+                }
                 break
             }
 
@@ -191,9 +212,10 @@ export function playerReducer(state = initialState, action = {}) {
     if (state.role === 'owner') {
         const stateToSend = { ...newState }
         delete stateToSend.role
+        stateToSend.player.mutualListen = true
 
         // if (control) stateToSend.control = control
-        console.log(stateToSend.control)
+        console.log(stateToSend.player)
         socketService.emit('player-change', stateToSend)
     }
     return newState

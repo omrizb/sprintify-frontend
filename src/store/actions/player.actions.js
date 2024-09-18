@@ -21,9 +21,10 @@ import {
     TOGGLE_SHUFFLE,
     TOGGLE_REPEAT,
     SET_PLAYER_ROLE,
+    SET_PLAYER_MUTUAL_LISTEN,
     SET_PLAYER_FROM_SOCKET
 } from '../reducers/player.reducer'
-import { socketService } from '../../services/socket.service'
+import { SOCKET_EMIT_JOIN_MUTUAL_STATION, socketService } from '../../services/socket.service'
 
 export const playerActions = {
     LOAD_SONG: 'loadSong',
@@ -50,7 +51,9 @@ export function loadFirstStation(stationId, song) {
 }
 
 export function setPlayerAction(action, params) {
+    setPlayerMutualListen(false)
     socketService.off('on-player-change')
+    socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, '')
 
     store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params }, isSync: false })
 }
@@ -147,6 +150,10 @@ function toggleRepeat() {
 
 export function setPlayerRole(role) {
     store.dispatch({ type: SET_PLAYER_ROLE, role })
+}
+
+export function setPlayerMutualListen(mutualListen) {
+    store.dispatch({ type: SET_PLAYER_MUTUAL_LISTEN, mutualListen })
 }
 
 export function setPlayerFromSocket(player) {
