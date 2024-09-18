@@ -1,5 +1,6 @@
 const imgs = {
     liked: 'https://misc.scdn.co/liked-songs/liked-songs-64.png',
+    together: `https://www.viwizard.com/images/resource/listen-to-spotify-together.jpg`,
     equalizerAnimatedGreen: 'https://open.spotifycdn.com/cdn/images/equaliser-animated-green.f5eb96f2.gif',
     music: 'https://i.scdn.co/image/ab67fb8200005caf474a477debc822a3a45c5acb',
     podcasts: 'https://i.scdn.co/image/ab6765630000ba8a81f07e1ead0317ee3c285bfa',

@@ -4,6 +4,7 @@ import { SvgIcon } from '../SvgIcon'
 
 import { utilService } from '../../services/util.service'
 import { spotifyService } from '../../services/spotify.service'
+import { SvgButton } from '../SvgButton'
 
 
 
@@ -34,10 +35,14 @@ export function SearchAndAdd({ setShowSearchBox, setSongs }) {
     return (
         <div className="search-and-add">
             <h1>Let's find something for your playlist
-                <span
-                    className="btn-medium"
+
+                <SvgButton
+                    btnClass="btn-medium-with-hover"
+                    svgIcon="close"
+                    svgClass="svg-small1"
+                    tooltipTxt="close"
                     onClick={() => setShowSearchBox(false)}
-                >X</span>
+                />
             </h1>
 
             <div className="search-box">
@@ -50,15 +55,18 @@ export function SearchAndAdd({ setShowSearchBox, setSongs }) {
                     onChange={handleChange}
                     required
                 />
-                <div className="clear-search"
+
+                <SvgButton
+                    btnClass="btn-medium-with-hover"
+                    svgIcon="close"
+                    svgClass="svg-small1"
+                    tooltipTxt="close"
                     onClick={() => {
                         setSearchText('')
                         setSongs([])
-                    }}>X</div>
+                    }}
+                />
             </div>
-
-
-
         </div>
     )
 }

@@ -98,9 +98,10 @@
         .bottom-info {
             margin-block-start: $regularGap;
             
-            .station-created-by {
+            .created-by {
                 font-size: $textSizeSmaller-1;
                 font-weight: 700;
+                text-transform: capitalize;
             }
     
             .total-duration {

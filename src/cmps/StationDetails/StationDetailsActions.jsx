@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { playerActions, setPlayerAction } from '../../store/actions/player.actions.js'
+import { playerActions, setPlayerAction, setPlayerFromSocket, setPlayerMutualListen } from '../../store/actions/player.actions.js'
 import { addStationToLibrary, removeStation, removeStationFromLibrary } from '../../store/actions/station.actions.js'
 
 import { EditStation } from '../EditStation.jsx'
@@ -15,12 +15,16 @@ import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PopUp } from '../PopUp.jsx'
+import { Tooltip } from '../Tooltip.jsx'
+import { SOCKET_EMIT_JOIN_MUTUAL_STATION } from '../../services/socket.service.js'
 
 
 export function StationDetailsActions({ station, stationMeta }) {
 
     const navigate = useNavigate()
     const stations = useSelector(storeState => storeState.stationModule.stations)
+    const player = useSelector(storeState => storeState.playerModule.player)
+
     const pinnedStation = (station.isPinned === true)
 
     const [viewType, setViewType] = useState('list')
@@ -120,6 +124,25 @@ export function StationDetailsActions({ station, stationMeta }) {
 
     function noop() { }
 
+    function onClickMutualListen() {
+
+        if (!player.mutualListen) {
+            console.log('Listening together')
+            setPlayerMutualListen(true)
+            socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, station._id)
+            socketService.on('on-player-change', state => {
+                setPlayerFromSocket(state)
+            })
+        }
+        else {
+            console.log('Listening alone')
+            setPlayerMutualListen(false)
+            socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, '')
+            socketService.off('on-player-change')
+        }
+
+    }
+
 
     return (
         <div className="station-action-bar" >
@@ -156,6 +179,16 @@ export function StationDetailsActions({ station, stationMeta }) {
                     </PopUp>}
 
                 </div>}
+
+            {!isOwnedByUser && <Tooltip txt="Better together 🎧">
+                <img
+                    className={`mutual-listen ${(player.mutualListen) ? 'selected' : ''}`}
+                    onClick={onClickMutualListen}
+                    src="https://us.123rf.com/450wm/yusufdemirci/yusufdemirci1807/yusufdemirci180700225/105063894-vector-illustration-of-a-kids-dancing.jpg?ver=6"
+                    alt="" />
+            </Tooltip>}
+
+
 
             <div className="view-as">
                 <button

@@ -13,6 +13,22 @@
         padding-inline: $regularGap;
     }
 
+    img.mutual-listen {
+        height: 50px;
+        border-radius: 20px;
+        opacity: 0.8;
+        outline: 1px solid $buttonBgGreen;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        &.selected {
+            opacity: 1;
+            outline: 2px solid $buttonBgGreen;
+        }
+    }
+
     .view-as,
     .show-more {
         position: relative;

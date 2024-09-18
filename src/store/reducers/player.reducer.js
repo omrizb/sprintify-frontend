@@ -1,3 +1,5 @@
+import { socketService } from "../../services/socket.service"
+
 export const SET_FIRST_SONG_LOADED = 'SET_FIRST_SONG_LOADED'
 export const SET_PLAYER = 'SET_PLAYER'
 export const ADD_TO_ACTION_QUEUE = 'ADD_TO_ACTION_QUEUE'
@@ -15,6 +17,9 @@ export const ADD_TO_SONGS_HISTORY = 'ADD_TO_SONGS_HISTORY'
 export const POP_FROM_SONGS_HISTORY = 'POP_FROM_SONGS_HISTORY'
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT'
+export const SET_PLAYER_ROLE = 'SET_PLAYER_ROLE'
+export const SET_PLAYER_MUTUAL_LISTEN = 'SET_PLAYER_MUTUAL_LISTEN'
+export const SET_PLAYER_FROM_SOCKET = 'SET_PLAYER_FROM_SOCKET'
 
 const initialState = {
     isFirstSongLoaded: false,
@@ -24,6 +29,7 @@ const initialState = {
         elapsedDuration: 0,
         isPlaying: false,
         volume: 100,
+        mutualListen: false,
     },
     queue: {
         originalStationSongs: [],
@@ -39,6 +45,9 @@ const initialState = {
     },
     stationId: '',
     stationName: '',
+    role: '',
+
+    isSync: false
 }
 
 export function playerReducer(state = initialState, action = {}) {
@@ -60,11 +69,18 @@ export function playerReducer(state = initialState, action = {}) {
                 control: {
                     ...state.control,
                     actionsQueue: [...state.control.actionsQueue, action.action],
-                    actionParams: [...state.control.actionParams, { ...action.actionParams }]
-                }
+                    actionParams: [...state.control.actionParams, { ...action.actionParams }],
+                },
+                isSync: action.isSync
             }
+            console.log(state.isSync)
             break
         case POP_FROM_ACTION_QUEUE:
+            if (state.role === 'owner') {
+
+                console.log(state.control)
+                var control = { ...state.control }
+            }
             newState = {
                 ...state,
                 control: {
@@ -92,6 +108,7 @@ export function playerReducer(state = initialState, action = {}) {
                 queue: { ...state.queue, remainingStationSongs: action.songs }
             }
             break
+
         case POP_FROM_REMAINING_STATION_SONGS:
             newState = {
                 ...state,
@@ -155,8 +172,52 @@ export function playerReducer(state = initialState, action = {}) {
         case TOGGLE_REPEAT:
             newState = { ...state, queue: { ...state.queue, isRepeat: !state.queue.isRepeat } }
             break
+        case SET_PLAYER_ROLE:
+            newState = { ...state, role: action.role }
+            break
+        case SET_PLAYER_MUTUAL_LISTEN:
+            newState = {
+                ...state,
+                player: {
+                    ...state.player,
+                    mutualListen: action.mutualListen
+                }
+            }
+            break
+        case SET_PLAYER_FROM_SOCKET:
+            if (!state.isSync) {
+
+                console.log(action.player)
+                newState = {
+                    ...state,
+                    ...action.player,
+                    isSync: true
+                }
+                break
+            }
+            if (state.isSync) {
+                console.log(action.player)
+                newState = {
+                    ...state,
+                    ...action.player,
+                    ...action.control,
+                    isSync: true
+                }
+                break
+            }
+
         default:
             return state
+    }
+    if (state.role === 'owner') {
+
+        const stateToSend = structuredClone(newState)
+        delete stateToSend.role
+        stateToSend.player.mutualListen = true
+
+        // if (control) stateToSend.control = control
+        console.log(stateToSend.player)
+        socketService.emit('player-change', stateToSend)
     }
     return newState
 }
