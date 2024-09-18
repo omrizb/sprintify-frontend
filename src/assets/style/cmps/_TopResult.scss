@@ -11,11 +11,12 @@
     }
 
     .top-result-card{
+        position: relative;
 
         display: grid;
         height: 200px;
-        background-color: rgb(41,41,41);
-        border-radius: 8px;
+        background-color: $darkBgClr;
+        border-radius: 4px;
         padding: 20px;
     
         img {
@@ -24,6 +25,15 @@
             margin-block-end: 25px;
         }
 
+        .play-button {
+            opacity: 0;
+            position: absolute;
+            bottom: 2%;
+            right: 0;
+            transform: translate(-50%, -50%);
+        }
+
+      
         .name {
             @include overflow-ellipsis;
             margin-block-start: 5px;
@@ -43,6 +53,15 @@
                 color: $secondaryTxtClr; 
             }
         }
+
+        &:hover {
+            background-color: $listHoverClr;
+            .play-button {
+                    opacity: 1;
+            }     
+        }
     }
+
+    
 
 }

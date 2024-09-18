@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom"
+import { PlayButton } from "../Buttons/PlayButton"
+import { StationTopResult } from "./StationTopResult"
+import { SongTopResult } from "./SongTopResult"
 
 export function TopResult({ item, type }) {
 
@@ -19,20 +22,11 @@ export function TopResult({ item, type }) {
             <h2>Top Result</h2>
 
             <div className="top-result-card">
-                {(type === 'song') && <img src={item.imgUrl.big} alt="" />}
-                {(type === 'station') && <img src={item.stationImgUrl} alt="" />}
 
-                <div className="card-info">
-                    {(type === 'song') && <span className="name">{item.songName}</span>}
-                    {(type === 'station') && <span className="name">{item.name}</span>}
+                {(type === 'station') && <StationTopResult station={item} />}
 
-                    <div className="bottom-line">
-                        <span className="type">{item.type}</span>
-                        <span className="dot"> • </span>
-                        {(type === 'song') && <span className="artist">{item.artist.name}</span>}
-                        {(type === 'station') && <span className="artist">{item.createdBy.fullName}</span>}
-                    </div>
-                </div>
+                {(type === 'song') && <SongTopResult song={item} />}
+
             </div>
         </div>
 
