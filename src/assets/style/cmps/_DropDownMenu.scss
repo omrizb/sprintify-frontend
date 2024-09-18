@@ -8,6 +8,8 @@
     ul {
         display: grid;
         align-items: center;
+        max-height: 300px;
+        overflow-y: scroll;
     }
 
     .list-item,

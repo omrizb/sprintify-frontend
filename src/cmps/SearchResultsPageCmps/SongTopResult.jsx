@@ -5,8 +5,8 @@ export function SongTopResult({ song }) {
         <div>
             <div className="img-container">
                 <PlayButton
-                    type="stationPreview"
-                    stationName={song.songName}
+                    type="songPreview"
+                    // stationName={song.songName}
                     song={song}
                 />
                 <img src={song.imgUrl.big} alt="" />

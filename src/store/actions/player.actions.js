@@ -85,7 +85,7 @@ function setPlayer(playerProps) {
 }
 
 function loadSongToPlayer(song) {
-    store.dispatch({ type: SET_PLAYER, playerProps: { song } })
+    store.dispatch({ type: SET_PLAYER, playerProps: { song: structuredClone(song) } })
 }
 
 async function loadStationToPlayer(stationId, song) {
@@ -101,7 +101,7 @@ async function loadStationToPlayer(stationId, song) {
             ? []
             : station.songs.slice(firstSongIdx + 1)
 
-        store.dispatch({ type: SET_PLAYER, playerProps: { song } })
+        store.dispatch({ type: SET_PLAYER, playerProps: { song: structuredClone(song) } })
         store.dispatch({ type: SET_STATION_ID, stationId: station._id })
         store.dispatch({ type: SET_STATION_NAME, stationName: station.name })
         store.dispatch({ type: SET_ORIGINAL_STATION_SONGS, songs: station.songs })

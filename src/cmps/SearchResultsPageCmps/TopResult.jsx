@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import { PlayButton } from "../Buttons/PlayButton"
 import { StationTopResult } from "./StationTopResult"
 import { SongTopResult } from "./SongTopResult"
 
@@ -12,9 +11,6 @@ export function TopResult({ item, type }) {
         console.log('plantedStation')
         navigate(`/station/${item._id}`)
     }
-
-
-
 
     return (
         <div className="top-result" onClick={onClick}>

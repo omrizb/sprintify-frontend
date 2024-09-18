@@ -49,5 +49,13 @@
                 color: $secondaryTxtClr;
             }
         }
+
+        &:hover {
+            background-color: $listHoverClr;
+            cursor: pointer;
+            .play-button {
+                    opacity: 1;
+            }     
+        }
     }
 }
