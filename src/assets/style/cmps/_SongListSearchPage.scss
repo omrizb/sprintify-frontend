@@ -1,5 +1,8 @@
 .song-list-search-page {
-   
+
+    position: relative;
+    padding-inline: 16px;
+
     h2{
         font-size: 24px;
         margin-block-start: 20px;
@@ -8,12 +11,26 @@
 
     ul{
         height: 240px;
-    }
 
-    li.song-list-item{
-        padding: 0 8px;
-        height: 50px;
-    }
+        .song-list-item{
+            position: relative;
+            @include flex; 
 
+            padding: 0 8px;
+            height: 50px;
+            border-radius: 4px;
+
+            cursor: default;
     
+            &.selected {
+                background-color: $listSelectedClr;
+            }
+    
+            &:not(.selected):hover {
+                background-color: $listHoverClr;
+            }
+        }
+     
+    }
+ 
 }

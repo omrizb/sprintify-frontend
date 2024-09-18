@@ -46,14 +46,11 @@ export function SearchResults() {
 
         getPlantedStation()
 
-
     }, [stations])
 
     async function getPlantedStation() {
-        const allStations = await stationService.query({})
-        const plantedStation = allStations.filter(station => station._id === '66e6425a91bf0b67a1c08139')
-        console.log(...plantedStation)
-        setPlantedPlaylist(...plantedStation)
+        const plantedStation = await stationService.getById('66e6425a91bf0b67a1c08139')
+        setPlantedPlaylist(plantedStation)
     }
 
 

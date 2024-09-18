@@ -15,7 +15,7 @@ export function SongListSearchPage({ songs, myStations, likedSongsStation }) {
 
     return (
 
-        <div className="song-list-search-page song-list">
+        <div className="song-list-search-page">
             <h2 className="title">Songs</h2>
             <ul className="list-body">
                 {songs.map(song => {
