@@ -39,7 +39,6 @@ export function StationDetails() {
     useEffect(() => {
 
         socketService.on(SOCKET_EVENT_STATION_UPDATED, currStation => {
-            // console.log('GOT from socket', currStation)
             if (currStation.createdBy.id !== loggedinUser._id) {
                 dispatch(getCmdUpdateStation(currStation))
             }
@@ -47,6 +46,7 @@ export function StationDetails() {
 
         return () => {
             socketService.off(SOCKET_EVENT_STATION_UPDATED)
+
             setPlayerMutualListen(false)
             socketService.off('on-player-change')
             socketService.emit(SOCKET_EMIT_JOIN_MUTUAL_STATION, '')

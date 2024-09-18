@@ -210,7 +210,8 @@ export function playerReducer(state = initialState, action = {}) {
             return state
     }
     if (state.role === 'owner') {
-        const stateToSend = { ...newState }
+
+        const stateToSend = structuredClone(newState)
         delete stateToSend.role
         stateToSend.player.mutualListen = true
 
