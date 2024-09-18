@@ -197,7 +197,8 @@
 }
 
 .disabled {
-    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    opacity: 0.4;
 }
 
 .icon {
@@ -243,6 +244,14 @@
 .svg-big2 {
     width: $svgSizeLarge2;
     height: $svgSizeLarge2;
+}
+
+.drag-preview {
+    max-width: 250px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: $primaryTxtClr;
+    background-color: #232323;
 }
 
 .dragged-over-top {

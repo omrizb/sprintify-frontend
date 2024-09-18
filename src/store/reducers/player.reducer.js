@@ -216,7 +216,7 @@ export function playerReducer(state = initialState, action = {}) {
         stateToSend.player.mutualListen = true
 
         // if (control) stateToSend.control = control
-        console.log(stateToSend.player)
+        // console.log(stateToSend.player)
         socketService.emit('player-change', stateToSend)
     }
     return newState

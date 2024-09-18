@@ -4,17 +4,19 @@ import { useSelector } from 'react-redux'
 
 import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview'
+import { pointerOutsideOfPreview } from '@atlaskit/pragmatic-drag-and-drop/element/pointer-outside-of-preview';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
 import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
 
 import { utilService } from '../../services/util.service.js'
 import { imgService } from '../../services/imgService.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
+import { addSongToStation } from '../../store/actions/station.actions.js'
+import { setIsSongDragged } from '../../store/actions/system.actions.js'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { VButton } from '../Buttons/VButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PlayButton } from '../Buttons/PlayButton.jsx'
-import { addSongToStation } from '../../store/actions/station.actions.js'
 import { SongPreviewActionsMenu } from '../Menus/SongPreviewActionsMenu.jsx'
 import { SongPreviewAddPlaylistMenu } from '../Menus/SongPreviewAddPlaylistMenu.jsx'
 import { MiniSongPreview } from './MiniSongPreview.jsx'
@@ -26,13 +28,15 @@ export function SongPreview(props) {
 
     const playerSpotifyId = useSelector(store => store.playerModule.player.song.spotifyId)
     const isPlaying = useSelector(store => store.playerModule.player.isPlaying)
+    const isSongDragged = useSelector(state => state.systemModule.isSongDragged)
+
+
     const [showMenu, setShowMenu] = useState(false)
     const addBtnRef = useRef(null)
     const [showMoreMenu, setShowMoreMenu] = useState(false)
     const dotsBtnRef = useRef(null)
 
     const draggableRef = useRef(null)
-    const [isDragging, setIsDragging] = useState(false)
     const [songDraggedOver, setSongDraggedOver] = useState({ state: false, closestEdge: '' })
     const [dragPreview, setDragPreview] = useState(null)
 
@@ -46,17 +50,20 @@ export function SongPreview(props) {
                 onGenerateDragPreview: ({ nativeSetDragImage }) => {
                     setCustomNativeDragPreview({
                         nativeSetDragImage,
+                        getOffset: pointerOutsideOfPreview({
+                            x: '8px',
+                        }),
                         render: ({ container }) => {
                             setDragPreview(container)
                         }
                     })
                 },
-                // const emptyImage = new Image()
-                // emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-                // emptyImage.style.display = 'none'
-                // nativeSetDragImage(emptyImage, 0, 0)
-                onDragStart: () => setIsDragging(true),
-                onDrop: () => setIsDragging(false),
+                onDragStart: () => {
+                    setIsSongDragged(true)
+                },
+                onDrop: () => {
+                    setIsSongDragged(false)
+                },
             }),
             dropTargetForElements({
                 element,
@@ -112,7 +119,8 @@ export function SongPreview(props) {
         articleClassType,
         isHighlighted ? 'highlight' : '',
         isCurrentlyPlaying ? 'currently-playing' : '',
-        songDraggedOver.state ? `dragged-over-${songDraggedOver.closestEdge}` : ''
+        songDraggedOver.state ? `dragged-over-${songDraggedOver.closestEdge}` : '',
+        isSongDragged ? 'dragged' : ''
     ].join(' ')
 
     async function addSong() {
@@ -203,7 +211,7 @@ export function SongPreview(props) {
                     </PopUp>}
                 </div>
             </article>
-            {dragPreview && createPortal(<div style={{ height: '1px' }}>.</div>, dragPreview)}
+            {dragPreview && createPortal(<div className="drag-preview">{song.artist.name} • {song.songName}</div>, dragPreview)}
         </>
     )
 }

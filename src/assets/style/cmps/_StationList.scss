@@ -8,6 +8,10 @@
             &:hover{
                 background-color: rgba(179, 179, 179, 0.05);
             }
+
+            &:has(.dragged-over) {
+                outline: 2px solid $highlightedTxtClr;
+            }
         }
     }
 

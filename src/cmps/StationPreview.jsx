@@ -1,30 +1,57 @@
+import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { FastAverageColor } from 'fast-average-color'
 
+import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { addSongToStation } from '../store/actions/station.actions'
+
 import { PlayButton } from './Buttons/PlayButton'
 import { SvgIcon } from './SvgIcon'
-import { useEffect, useState } from 'react'
 
 export function StationPreview({ station: stationPreview, style, colorActiveStationId, onSetBgColor }) {
 
-    const station = useSelector(storeState => storeState.stationModule.station)
+    const station = useSelector(store => store.stationModule.station)
+    const user = useSelector(store => store.userModule.user)
+    const isSongDragged = useSelector(store => store.systemModule.isSongDragged)
+    const [isStationDraggedOver, setIsStationDraggedOver] = useState(false)
+    const stationDndRef = useRef(null)
+
     const [stationPreviewImageColor, setStationPreviewImageColor] = useState(null)
     const fac = new FastAverageColor()
 
     const pinnedStation = (stationPreview.isPinned === true)
+    const cannotDropSong = isSongDragged && (stationPreview.createdBy.id !== user._id)
+
+    useEffect(() => {
+        const element = stationDndRef.current
+
+        return dropTargetForElements({
+            element,
+            canDrop: ({ source }) => {
+                if (cannotDropSong) return
+                return ('songName' in source.data)
+            },
+            getData: () => stationPreview,
+            onDragEnter: () => {
+                if (cannotDropSong) return
+                setIsStationDraggedOver(true)
+            },
+            onDragLeave: () => setIsStationDraggedOver(false),
+            onDrop: ({ self, source }) => {
+                const songToAdd = { ...source.data, addedAt: Date.now() }
+                const targetStation = self.data
+                const updatedStation = { ...targetStation, songs: [...targetStation.songs, songToAdd] }
+                addSongToStation(updatedStation)
+                setIsStationDraggedOver(false)
+            }
+        })
+    }, [isSongDragged])
 
     useEffect(() => {
         if (stationPreview._id === colorActiveStationId && stationPreviewImageColor) {
             onSetBgColor(stationPreviewImageColor)
         }
     }, [colorActiveStationId])
-
-    function isHighlighted() {
-        if (station) {
-            if (stationPreview._id === station._id) return 'highlighted'
-        }
-        return ''
-    }
 
     function handleImageLoad(ev) {
         fac.getColorAsync(ev.target)
@@ -50,8 +77,16 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             break
     }
 
+    const stationPreviewClass = [
+        'station-preview',
+        articleClassName,
+        (station && stationPreview._id === station._id) ? 'highlighted' : '',
+        (cannotDropSong) ? 'disabled' : '',
+        (isStationDraggedOver) ? 'dragged-over' : ''
+    ].join(' ')
+
     return (
-        <article className={`station-preview ${articleClassName} ${isHighlighted()}`}>
+        <article ref={stationDndRef} className={stationPreviewClass}>
             <div className="image-container">
                 {(stationPreview.stationImgUrl) && <img
                     crossOrigin="anonymous"
