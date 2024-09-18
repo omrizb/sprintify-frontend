@@ -1,3 +1,5 @@
+import { socketService } from "../../services/socket.service"
+
 export const SET_FIRST_SONG_LOADED = 'SET_FIRST_SONG_LOADED'
 export const SET_PLAYER = 'SET_PLAYER'
 export const ADD_TO_ACTION_QUEUE = 'ADD_TO_ACTION_QUEUE'
@@ -67,11 +69,15 @@ export function playerReducer(state = initialState, action = {}) {
                     actionParams: [...state.control.actionParams, { ...action.actionParams }],
                 },
                 isSync: action.isSync
-
             }
             console.log(state.isSync)
             break
         case POP_FROM_ACTION_QUEUE:
+            if (state.role === 'owner') {
+
+                console.log(state.control)
+                var control = { ...state.control }
+            }
             newState = {
                 ...state,
                 control: {
@@ -99,6 +105,7 @@ export function playerReducer(state = initialState, action = {}) {
                 queue: { ...state.queue, remainingStationSongs: action.songs }
             }
             break
+
         case POP_FROM_REMAINING_STATION_SONGS:
             newState = {
                 ...state,
@@ -174,16 +181,7 @@ export function playerReducer(state = initialState, action = {}) {
             }
             if (state.isSync) {
                 console.log(state.isSync)
-                // newState = {
-                //     ...state,
-                //     control: {
-                //         ...action.control,
-                //         actionsQueue: action.control.actionsQueue[0],
-                //         actionsParams: action.control.actionsParams[0]
-                //     },
-                //     isSync: true
-                // }
-                newState = { ...state, ...action.player, isSync: true }
+                newState = { ...state, ...action.player, ...action.control, isSync: true }
                 break
             }
 
@@ -193,6 +191,9 @@ export function playerReducer(state = initialState, action = {}) {
     if (state.role === 'owner') {
         const stateToSend = { ...newState }
         delete stateToSend.role
+
+        // if (control) stateToSend.control = control
+        console.log(stateToSend.control)
         socketService.emit('player-change', stateToSend)
     }
     return newState

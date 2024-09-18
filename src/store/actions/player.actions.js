@@ -23,6 +23,7 @@ import {
     SET_PLAYER_ROLE,
     SET_PLAYER_FROM_SOCKET
 } from '../reducers/player.reducer'
+import { socketService } from '../../services/socket.service'
 
 export const playerActions = {
     LOAD_SONG: 'loadSong',
@@ -49,6 +50,8 @@ export function loadFirstStation(stationId, song) {
 }
 
 export function setPlayerAction(action, params) {
+    socketService.off('on-player-change')
+
     store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params }, isSync: false })
 }
 
