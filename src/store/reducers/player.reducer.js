@@ -41,7 +41,8 @@ const initialState = {
     },
     stationId: '',
     stationName: '',
-    role: ''
+    role: '',
+    isSync: false
 }
 
 export function playerReducer(state = initialState, action = {}) {
@@ -63,9 +64,12 @@ export function playerReducer(state = initialState, action = {}) {
                 control: {
                     ...state.control,
                     actionsQueue: [...state.control.actionsQueue, action.action],
-                    actionParams: [...state.control.actionParams, { ...action.actionParams }]
-                }
+                    actionParams: [...state.control.actionParams, { ...action.actionParams }],
+                },
+                isSync: action.isSync
+
             }
+            console.log(state.isSync)
             break
         case POP_FROM_ACTION_QUEUE:
             newState = {
@@ -162,9 +166,27 @@ export function playerReducer(state = initialState, action = {}) {
             newState = { ...state, role: action.role }
             break
         case SET_PLAYER_FROM_SOCKET:
-            console.log(action)
-            newState = { ...state, ...action.player }
-            break
+            if (!state.isSync) {
+                console.log(action)
+                console.log(state.isSync)
+                newState = { ...state, ...action.player, isSync: true }
+                break
+            }
+            if (state.isSync) {
+                console.log(state.isSync)
+                // newState = {
+                //     ...state,
+                //     control: {
+                //         ...action.control,
+                //         actionsQueue: action.control.actionsQueue[0],
+                //         actionsParams: action.control.actionsParams[0]
+                //     },
+                //     isSync: true
+                // }
+                newState = { ...state, ...action.player, isSync: true }
+                break
+            }
+
         default:
             return state
     }

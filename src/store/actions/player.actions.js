@@ -49,7 +49,7 @@ export function loadFirstStation(stationId, song) {
 }
 
 export function setPlayerAction(action, params) {
-    store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params } })
+    store.dispatch({ type: ADD_TO_ACTION_QUEUE, action, actionParams: { ...params }, isSync: false })
 }
 
 // To be used ONLY by the player component component to execute action
