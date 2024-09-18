@@ -29,7 +29,7 @@ export function stationReducer(state = initialState, action) {
             break
 
         case SET_STATION_BACKUP:
-            newState = { ...state, stationBackup: action.station }
+            newState = { ...state, stationBackup: state.station }
             break
 
         case REMOVE_STATION:
@@ -75,8 +75,8 @@ export function stationReducer(state = initialState, action) {
             break
 
         case RESTORE_FROM_BACKUP:
-            stations = state.stations.map(station => (station._id === stationBackup._id) ? stationBackup : station)
-            newState = { ...state, stations, station: stationBackup }
+            stations = state.stations.map(station => (station._id === state.stationBackup._id) ? state.stationBackup : station)
+            newState = { ...state, stations, station: state.stationBackup }
             break
 
         case UPDATE_STATIONS:
@@ -90,7 +90,7 @@ export function stationReducer(state = initialState, action) {
 
         case UPDATE_STATION_AND_STAY:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
-            newState = { ...state, stations, station: action.station }
+            newState = { ...state, stations }
             break
 
         default:
