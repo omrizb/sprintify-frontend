@@ -64,17 +64,7 @@ export function AddPlaylistSubMenu({ showMenu, setShowMenu, song, myStations, li
         if (!song.YtId) await setSongYtId()
 
         const clonedSong = structuredClone(song)
-
-        const updatedStation = {
-            ...station,
-            songs: [
-                ...station.songs,
-                {
-                    ...clonedSong, addedAt: Date.now()
-                }
-            ]
-        }
-        addSongToStation(updatedStation)
+        addSongToStation(station, clonedSong)
         setShowMenu(false)
     }
 

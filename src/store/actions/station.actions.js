@@ -97,9 +97,33 @@ export async function updateStations(stations) {
     }
 }
 
-export async function addSongToStation(station) {
+export async function updateStationAndStay(station) {
     try {
         const savedStation = await stationService.save(station)
+        store.dispatch(getCmdUpdateAndStay(savedStation))
+        showSuccessMsg(`${savedStation.name} was updated`)
+        return savedStation
+    } catch (err) {
+        console.log('Cannot save station', err)
+        showErrorMsg(`Could not update ${station.name}`)
+        throw err
+    }
+}
+
+
+export async function addSongToStation(station, songToAdd) {
+    try {
+        if (station.songs.some(song => song.spotifyId === songToAdd.spotifyId)) {
+            showSuccessMsg(`Already in ${station.name}`)
+            return
+        }
+
+        (!song.ytId) ? updatedSong = stationService.setSongYtId(songToAdd) : songToAdd
+
+        updatedSong.addAt = Date.now()
+
+        const updatedStation = { ...station, songs: [...station.songs, updatedSong] }
+        const savedStation = await stationService.save(updatedStation)
         store.dispatch(getCmdUpdateAndStay(savedStation))
         showSuccessMsg(`Added to ${savedStation.name}`)
         return savedStation
@@ -110,18 +134,6 @@ export async function addSongToStation(station) {
     }
 }
 
-export async function removeSongFromStation(station) {
-    try {
-        const savedStation = await stationService.save(station)
-        store.dispatch(getCmdUpdateAndStay(savedStation))
-        showSuccessMsg(`Removed from ${savedStation.name}`)
-        return savedStation
-    } catch (err) {
-        console.log('Cannot save station', err)
-        showErrorMsg(`Could not add to ${station.name}`)
-        throw err
-    }
-}
 
 export async function removeStationFromLibrary(station, userId, lastIdx) {
     try {
@@ -160,6 +172,8 @@ export async function addStationToLibrary(station, userId) {
         throw err
     }
 }
+
+
 
 
 

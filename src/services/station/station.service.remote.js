@@ -13,7 +13,8 @@ export const stationService = {
     getRecentlyPlayed,
     getTopMixes,
     // getMadeForYou,
-    getLikedSongsStation
+    getLikedSongsStation,
+    setSongYtId
 }
 
 function getEmptyStation() {
@@ -156,6 +157,18 @@ async function getMadeForYou() {
     }
 
     return savedStations
+}
+
+
+async function setSongYtId(song) {
+    try {
+        var ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
+        song.ytId = ytSong.songId
+        return song
+    } catch (error) {
+        console.log(error)
+        showErrorMsg('Defective song')
+    }
 }
 
 

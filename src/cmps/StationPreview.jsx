@@ -41,15 +41,7 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             onDrop: ({ self, source }) => {
                 const songToAdd = { ...source.data, addedAt: Date.now() }
                 const targetStation = self.data
-                if (targetStation.songs.some(song => song.spotifyId === songToAdd.spotifyId)) {
-                    showSuccessMsg(`Already in ${targetStation.name}`)
-                    console.log('Song already in station')
-                    setIsStationDraggedOver(false)
-                    return
-                }
-
-                const updatedStation = { ...targetStation, songs: [...targetStation.songs, songToAdd] }
-                addSongToStation(updatedStation)
+                addSongToStation(targetStation, songToAdd)
                 setIsStationDraggedOver(false)
             }
         })

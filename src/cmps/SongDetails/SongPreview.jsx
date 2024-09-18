@@ -132,17 +132,8 @@ export function SongPreview(props) {
         var status = isLikedByUser ? 'addToStation' : 'addToLikedSongs'
         switch (status) {
             case 'addToLikedSongs':
-                if (!song.ytId) {
-                    showErrorMsg('Defective song')
-                    return
-                }
-                addSongToStation({
-                    ...likedSongsStation,
-                    songs: [
-                        ...likedSongsStation.songs,
-                        { ...song, addedAt: Date.now() }
-                    ]
-                })
+                const clonedSong = structuredClone(song)
+                addSongToStation(likedSongsStation, clonedSong)
 
                 break
             case 'addToStation':

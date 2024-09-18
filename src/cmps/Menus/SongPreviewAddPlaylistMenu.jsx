@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
-import { addStation, updateStation, addSongToStation, removeSongFromStation } from '../../store/actions/station.actions'
+import { addStation, updateStationAndStay } from '../../store/actions/station.actions'
 // import { stationService } from '../../services/station/station.service.local'
 import { stationService } from '../../services/station/station.service.remote'
 
@@ -129,8 +129,8 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
         })
 
 
-        updatedAdd.forEach(station => addSongToStation(station))
-        updatedRemoved.forEach(station => removeSongFromStation(station))
+        updatedAdd.forEach(station => updateStationAndStay(station))
+        updatedRemoved.forEach(station => updateStationAndStay(station))
     }
 
     return (

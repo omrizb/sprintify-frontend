@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 
 import { playerActions, setPlayerAction } from '../../store/actions/player.actions'
-import { addSongToStation, removeSongFromStation, updateStation } from '../../store/actions/station.actions'
+import { addSongToStation, updateStation, updateStationAndStay } from '../../store/actions/station.actions'
 import { DropDownMenu } from './DropDownMenu'
 import { AddPlaylistSubMenu } from './AddPlaylistSubMenu'
 import { showErrorMsg } from '../../services/event-bus.service'
@@ -43,18 +43,8 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             name: 'Save to your Liked Songs',
             icon: 'save',
             onClick: () => {
-                const saveToLike = true
-                if (!song.ytId) {
-                    setSongYtId(saveToLike)
-                    return
-                }
-                const updatedStation = {
-                    ...likedSongsStation,
-                    songs: [...likedSongsStation.songs,
-                    { ...song, addedAt: Date.now() }
-                    ]
-                }
-                addSongToStation(updatedStation)
+                const clonedSong = structuredClone(song)
+                addSongToStation(likedSongsStation, clonedSong)
             }
         })
 
@@ -64,7 +54,7 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             onClick: () => {
                 const updatedSongs = likedSongsStation.songs.filter(song => song.spotifyId !== spotifyId)
                 const updatedStation = { ...likedSongsStation, songs: updatedSongs }
-                removeSongFromStation(updatedStation)
+                updateStationAndStay(updatedStation)
             }
         })
 
@@ -76,27 +66,6 @@ export function SongPreviewActionsMenu({ myStations, song, station, isOwnedByUse
             ref: addMoreBtnRef,
         })
 
-        async function setSongYtId(saveToLike = false) {
-            try {
-                const ytSong = await youtubeService.getTopVideo(`song: ${song.songName} by ${song.artist.name}`)
-                song.ytId = ytSong.songId
-
-                if (saveToLike) {
-                    const updatedStation = {
-                        ...likedSongsStation,
-                        songs:
-                            [...likedSongsStation.songs,
-                            { ...song, addedAt: Date.now() }
-                            ]
-                    }
-                    addSongToStation(updatedStation)
-                }
-
-            } catch (error) {
-                console.log(error)
-                showErrorMsg('Defective song')
-            }
-        }
 
         if (isOwnedByUser) return [addToPlaylist, removeFromPlaylist, removeFromLikedSongs, addToQueue]
         if (!isOwnedByUser && isLikedByUser) return [addToPlaylist, removeFromLikedSongs, addToQueue]
