@@ -32,6 +32,7 @@ export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
         store.dispatch(getCmdSetStation(station))
+        store.dispatch(getCmdSetStationBackup(station))
     } catch (err) {
         console.log('Cannot load station', err)
         throw err
@@ -88,7 +89,6 @@ export async function updateStations(stations) {
         for (var i = 0; i < stations.length; i++) {
             savedStations[i] = await stationService.save(stations[i])
         }
-        console.log(savedStations)
         store.dispatch(getCmdUpdateStations(savedStations))
         return savedStations
     } catch (err) {

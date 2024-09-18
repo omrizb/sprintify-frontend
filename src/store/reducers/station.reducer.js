@@ -90,7 +90,7 @@ export function stationReducer(state = initialState, action) {
 
         case UPDATE_STATION_AND_STAY:
             stations = state.stations.map(station => (station._id === action.station._id) ? action.station : station)
-            newState = { ...state, stations }
+            newState = { ...state, stations, station: action.station }
             break
 
         default:
