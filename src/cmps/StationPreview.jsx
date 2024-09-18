@@ -42,7 +42,7 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                 const targetStation = self.data
                 const updatedStation = { ...targetStation, songs: [...targetStation.songs, songToAdd] }
                 addSongToStation(updatedStation)
-                setIsStationDraggedOver(stationPreview)
+                setIsStationDraggedOver(false)
             }
         })
     }, [isSongDragged])
