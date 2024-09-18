@@ -32,7 +32,6 @@ export async function loadStation(stationId) {
     try {
         const station = await stationService.getById(stationId)
         store.dispatch(getCmdSetStation(station))
-        store.dispatch(getCmdSetStationBackup(station))
     } catch (err) {
         console.log('Cannot load station', err)
         throw err
@@ -72,12 +71,13 @@ export async function addSprintifyStation(station) {
 
 export async function updateStation(station) {
     try {
-        store.dispatch(getCmdSetStationBackup(station))
+        store.dispatch({ type: SET_STATION_BACKUP })
         store.dispatch(getCmdUpdateStation(station))
         const savedStation = await stationService.save(station)
         return savedStation
     } catch (err) {
         console.log('Cannot save station', err)
+        showErrorMsg('Could not update station')
         store.dispatch({ type: RESTORE_FROM_BACKUP })
         throw err
     }
@@ -174,13 +174,6 @@ function getCmdSetStations(stations) {
 function getCmdSetStation(station) {
     return {
         type: SET_STATION,
-        station
-    }
-}
-
-function getCmdSetStationBackup(station) {
-    return {
-        type: SET_STATION_BACKUP,
         station
     }
 }
