@@ -10,6 +10,8 @@ import { TopResult } from '../cmps/SearchResultsPageCmps/TopResult.jsx'
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { ArtistList } from '../cmps/Artists/ArtistList.jsx'
 import { GeneralList } from '../cmps/General list & preview/GeneralList.jsx'
+import { loadStation } from '../store/actions/station.actions.js'
+import { stationService } from '../services/station/station.service.remote.js'
 
 export function SearchResults() {
 
@@ -25,9 +27,12 @@ export function SearchResults() {
     const [albums, setAlbums] = useState([])
     const [playlists, setPlaylists] = useState([])
 
+    const [searchWord, setSearchWord] = useState('')
+    const [plantedPlaylist, setPlantedPlaylist] = useState({})
+
+
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
-
 
 
     useEffect(() => {
@@ -39,7 +44,17 @@ export function SearchResults() {
         const myStationsArr = stations.filter(station => station.createdBy.id === loggedinUser._id)
         setMyStations(myStationsArr)
 
+        getPlantedStation()
+
+
     }, [stations])
+
+    async function getPlantedStation() {
+        const allStations = await stationService.query({})
+        const plantedStation = allStations.filter(station => station._id === '66e6425a91bf0b67a1c08139')
+        console.log(...plantedStation)
+        setPlantedPlaylist(...plantedStation)
+    }
 
 
     useEffect(() => {
@@ -50,6 +65,7 @@ export function SearchResults() {
         setIsLoading(true)
         try {
             const res = await spotifyService.search(value)
+            setSearchWord(value)
             setSongs(res.songs)
             setArtists(res.artists)
             setAlbums(res.albums)
@@ -70,13 +86,16 @@ export function SearchResults() {
         :
         <div className="search-results">
 
-            {songs.length > 0 && <TopResult song={songs[0]} />}
+            <div className="song-section">
+                {(searchWord !== 'chill') && songs.length > 0 && <TopResult item={songs[0]} type="song" />}
+                {(searchWord === 'chill') && <TopResult item={plantedPlaylist} type="station" />}
 
-            {songs.length > 0 && <SongListSearchPage
-                songs={songs}
-                myStations={myStations}
-                likedSongsStation={likedSongsStation}
-            />}
+                {songs.length > 0 && <SongListSearchPage
+                    songs={songs}
+                    myStations={myStations}
+                    likedSongsStation={likedSongsStation}
+                />}
+            </div>
 
             {artists.length > 0 && <ArtistList artists={artists} />}
             {albums.length > 0 && <GeneralList listItems={albums} type="album" />}

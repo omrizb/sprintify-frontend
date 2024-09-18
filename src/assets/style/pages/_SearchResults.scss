@@ -1,21 +1,11 @@
 .search-results {
     
     @include section;
-    h2{
-        font-size: 24px;
-        margin-block-start: 20px;;
+
+    .song-section {
+        display: grid;
+        grid-auto-flow: column;
+        margin-block-end: 20px;
     }
-
-    .song-list{
-        padding:0;
-
-        ul {
-
-            margin-block-start: 1em;
-        }
-    }
-
-    li.song-list-item{
-        padding: 0 8px;
-    }
+    
 }

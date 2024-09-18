@@ -1,15 +1,19 @@
 .top-result{
+
+    min-width: 250px;
+
+    
     
     h2{
         font-size: 24px;
         margin-block-start: 20px;
+        margin-block-end: 10px;
     }
 
     .top-result-card{
 
         display: grid;
         height: 200px;
-        // width: 420px;
         background-color: rgb(41,41,41);
         border-radius: 8px;
         padding: 20px;
@@ -17,7 +21,7 @@
         img {
             height: 90px;
             border-radius: 8px;
-            margin-block-end: 4px;
+            margin-block-end: 25px;
         }
 
         .name {
