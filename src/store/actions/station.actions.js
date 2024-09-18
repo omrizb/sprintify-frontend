@@ -83,20 +83,6 @@ export async function updateStation(station) {
     }
 }
 
-export async function updateStations(stations) {
-    try {
-        const savedStations = []
-        for (var i = 0; i < stations.length; i++) {
-            savedStations[i] = await stationService.save(stations[i])
-        }
-        store.dispatch(getCmdUpdateStations(savedStations))
-        return savedStations
-    } catch (err) {
-        console.log('Cannot save station', err)
-        throw err
-    }
-}
-
 export async function updateStationAndStay(station) {
     try {
         const savedStation = await stationService.save(station)
@@ -118,9 +104,12 @@ export async function addSongToStation(station, songToAdd) {
             return
         }
 
-        (!song.ytId) ? updatedSong = stationService.setSongYtId(songToAdd) : songToAdd
+        songToAdd.addAt = Date.now()
 
-        updatedSong.addAt = Date.now()
+        if (!songToAdd.ytId) {
+            var updatedSong = stationService.setSongYtId(songToAdd)
+        }
+        else updatedSong = songToAdd
 
         const updatedStation = { ...station, songs: [...station.songs, updatedSong] }
         const savedStation = await stationService.save(updatedStation)
