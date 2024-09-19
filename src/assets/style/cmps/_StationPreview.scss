@@ -69,10 +69,27 @@
             .station-info {
                 font-size: $textSizeSmaller-1;
             }
+
+            &.floating-text{
+                position: fixed;
+                left: 80px;
+                background-color:rgba(0,0,0,.8);
+                width: max-content;
+                border-radius: 4px;
+                z-index: 100;
+                padding: 0.2em;
+                opacity: 0;
+ 
+            }
         }
 
-        &:hover .play-button {
+       &:hover {
+        .play-button {
             opacity: 1;
+        }
+        .floating-text{
+            opacity: 1,
+        }
        }
     }
 
@@ -102,7 +119,8 @@
             background-color: $tintedBgClrHighlight;
             .play-button {
                  opacity: 1;
-            }    
+            }
+             
         }
     }
 

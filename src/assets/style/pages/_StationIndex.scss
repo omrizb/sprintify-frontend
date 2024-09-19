@@ -11,7 +11,7 @@
         grid-area: left-sidebar;
         overflow-y: auto;
         overflow-x: hidden;
-        width: 360px;
+        width: max-content;
     }
 
     .main-view-container {

@@ -1,8 +1,7 @@
 .artist-list{
 
     ul{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        @include generalList;
     }
-    
+   
 }

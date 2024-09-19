@@ -258,5 +258,15 @@
     }
 }
 
+// Mixin for general list
+
+@mixin generalList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+    grid-template-rows: 1fr;
+    grid-auto-rows: 0;
+    margin: -8px;
+}
+
 
 

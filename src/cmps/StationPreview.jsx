@@ -67,6 +67,10 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             articleClassName = 'list'
             stationPreviewType = 'stationPreviewLight'
             break
+        case 'leftSideMinimal':
+            articleClassName = 'list'
+            stationPreviewType = 'stationPreviewLight'
+            break
         case 'minimal':
             articleClassName = 'list-minimal'
             stationPreviewType = 'stationPreview'
@@ -97,14 +101,16 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                 {(!stationPreview.stationImgUrl) && <div className="icon">
                     <SvgIcon iconName={"music"} />
                 </div>}
-                <PlayButton
-                    type={stationPreviewType}
-                    stationId={stationPreview._id}
-                    stationName={stationPreview.name}
-                    song={stationPreview.songs[0]}
-                />
+                {(style !== 'leftSideMinimal') &&
+                    <PlayButton
+                        type={stationPreviewType}
+                        stationId={stationPreview._id}
+                        stationName={stationPreview.name}
+                        song={stationPreview.songs[0]}
+                    />}
             </div>
-            <div className="text">
+
+            {(style !== 'leftSideMinimal') && <div className="text">
                 <div className="station-name">{stationPreview.name}</div>
 
                 {(style === 'leftSide' && (!pinnedStation)) &&
@@ -117,7 +123,25 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                         <SvgIcon iconName={"pin"} />
                         <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
                     </div>}
-            </div>
+            </div>}
+
+            {(style === 'leftSideMinimal') && <div className="text floating-text">
+                <div className="station-name">{stationPreview.name}</div>
+
+                {!pinnedStation &&
+                    <div className="station-info">
+                        {stationPreview.type} • {stationPreview.createdBy.fullName}
+                    </div>}
+
+                {pinnedStation &&
+                    <div className="station-info liked">
+                        <SvgIcon iconName={"pin"} />
+                        <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
+                    </div>}
+            </div>}
+
+
+
         </article>
     )
 }
