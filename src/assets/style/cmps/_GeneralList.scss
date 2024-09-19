@@ -1,7 +1,33 @@
-.general-list{
-    
-    ul{
-        @include generalList;
+.general-list {
+
+    .list-header {
+        @include flex($justify:space-between);
+        height: 100px;
+        font-weight: 700;
+        
+        .list-title {
+            @include margin-top-box(60px);
+            font-size: $textSizeLarger1;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
+
+    ul {
+        @include generalList;
+        max-width: 100%;
+
+        li {
+            padding: 8px;
+            border-radius: 8px;
     
+            &:hover{
+                background-color: rgba(179, 179, 179, 0.05);
+            }
+        }
+    }
+
 }

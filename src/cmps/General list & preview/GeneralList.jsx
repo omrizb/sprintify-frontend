@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { GeneralPreview } from "./GeneralPreview"
 
-export function GeneralList({ listItems, type }) {
+export function GeneralList({ title, listItems, type }) {
 
     const listContainer = useRef(null)
 
@@ -14,11 +14,6 @@ export function GeneralList({ listItems, type }) {
 
         return () => resizeObserver.disconnect()
     }, [listItems])
-
-    function setTitle() {
-        if (type === 'album') return 'Albums'
-        if (type === 'playlist') return 'Playlists'
-    }
 
     function hideOverflowCards() {
         const listContainerWidth = listContainer.current.getBoundingClientRect().width
@@ -37,17 +32,18 @@ export function GeneralList({ listItems, type }) {
         })
     }
 
-
-
-
     return (
 
         <div className="general-list">
-            <h2>{setTitle()}</h2>
+            <div className="list-header">
+                <div className="list-title">
+                    {title}
+                </div>
+            </div>
+
             <ul ref={listContainer} className="">
 
                 {listItems.map(item => {
-
                     return <li key={item.spotifyId}>
                         <GeneralPreview item={item} type={type} />
                     </li>

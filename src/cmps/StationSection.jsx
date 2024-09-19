@@ -1,7 +1,9 @@
-import { StationListMainView } from './MainView/StationListMainView'
 import { StationList } from './StationList'
 
 export function StationSection({ titleTxt, ListClassName, stations, previewStyle }) {
+
+    console.log(stations)
+
     return (
         <div className="station-section">
 

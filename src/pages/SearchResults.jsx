@@ -2,16 +2,16 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-
 import { spotifyService } from '../services/spotify.service.js'
 import { Loader } from '../cmps/Loader.jsx'
 import { SongListSearchPage } from '../cmps/SearchResultsPageCmps/SongListSearchPage.jsx'
 import { TopResult } from '../cmps/SearchResultsPageCmps/TopResult.jsx'
 import { showErrorMsg } from '../services/event-bus.service.js'
-import { ArtistList } from '../cmps/Artists/ArtistList.jsx'
 import { GeneralList } from '../cmps/General list & preview/GeneralList.jsx'
-import { loadStation } from '../store/actions/station.actions.js'
 import { stationService } from '../services/station/station.service.remote.js'
+import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
+import { MainViewHeader } from '../cmps/MainView/MainViewHeader.jsx'
+import { Footer } from '../cmps/Footer.jsx'
 
 export function SearchResults() {
 
@@ -53,7 +53,6 @@ export function SearchResults() {
         setPlantedPlaylist(plantedStation)
     }
 
-
     useEffect(() => {
         loadResults(txt)
     }, [])
@@ -77,28 +76,38 @@ export function SearchResults() {
         }
     }
 
-
     return (isLoading)
         ? <Loader />
         :
         <div className="search-results">
 
-            <div className="song-section">
-                {(searchWord !== 'chill') && songs.length > 0 && <TopResult item={songs[0]} type="song" />}
-                {(searchWord === 'chill') && <TopResult item={plantedPlaylist} type="station" />}
+            <HeaderFixer
+                header={<MainViewHeader />}
+                className="top-rounded-box"
+                bgColor="#626262"
+            >
+                <div className="empty-header" style={{ height: '64px' }} />
+                <div className="song-section">
+                    {(searchWord !== 'chill') && songs.length > 0 && <TopResult item={songs[0]} type="song" />}
+                    {(searchWord === 'chill') && <TopResult item={plantedPlaylist} type="station" />}
 
-                {songs.length > 0 && <SongListSearchPage
-                    songs={songs}
-                    myStations={myStations}
-                    likedSongsStation={likedSongsStation}
-                />}
-            </div>
+                    {songs.length > 0 && <SongListSearchPage
+                        songs={songs}
+                        myStations={myStations}
+                        likedSongsStation={likedSongsStation}
+                    />}
+                </div>
 
-            {artists.length > 0 && <ArtistList artists={artists} />}
-            {albums.length > 0 && <GeneralList listItems={albums} type="album" />}
-            {playlists.length > 0 && <GeneralList listItems={playlists} type="playlist" />}
+                <GeneralList title="Artists" listItems={artists} type="artist" />
+                <GeneralList title="Albums" listItems={albums} type="album" />
+                <GeneralList title="Playlists" listItems={playlists.slice(0, 6)} type="playlist" />
+                <GeneralList title="Most popular" listItems={playlists.slice(6, 12)} type="playlist" />
+                <GeneralList title="Made for you" listItems={playlists.slice(12, 18)} type="playlist" />
+                <GeneralList title="Discover new" listItems={playlists.slice(18, 24)} type="playlist" />
 
+                <Footer />
 
+            </HeaderFixer>
         </div>
 
 }

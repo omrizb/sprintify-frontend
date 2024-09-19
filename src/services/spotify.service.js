@@ -17,11 +17,11 @@ export const spotifyService = {
 // For debug
 window.spotifyService = spotifyService
 
-async function search(query, limit = 4) {
+async function search(query, limit = 6) {
     const songs = await _search(query, 'track', limit)
     const artists = await _search(query, 'artist', limit)
     const albums = await _search(query, 'album', limit)
-    const stations = await _search(query, 'playlist', limit)
+    const stations = await _search(query, 'playlist', limit * 4)
 
     return {
         songs: songs.tracks.items.map(track => ({
