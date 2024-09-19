@@ -1,4 +1,3 @@
-import { showErrorMsg } from '../event-bus.service'
 import { httpService } from '../http.service'
 import { utilService } from '../util.service'
 import { youtubeService } from '../youtube.service'
@@ -169,8 +168,7 @@ async function setSongYtId(song) {
         return song
     } catch (error) {
         console.log(error)
-        showErrorMsg('Defective song')
-        throw error
+        throw 'YouTube is blocking'
     }
 }
 

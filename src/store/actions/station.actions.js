@@ -52,6 +52,7 @@ export async function addStation(newStation) {
     try {
         const savedStation = await stationService.save(newStation)
         store.dispatch(getCmdAddStation(savedStation))
+        showSuccessMsg(`${savedStation.name} was successfully added!`)
         return savedStation
     } catch (err) {
         console.log('Cannot add station', err)
@@ -119,8 +120,7 @@ export async function addSongToStation(station, songToAdd, updateCurrStation = f
 
     } catch (err) {
         console.log('Cannot save station', err)
-        showErrorMsg(`Could not add to ${station.name}`)
-        throw err
+        showErrorMsg(`Could not add to ${station.name}, ${err}`)
     }
 }
 
