@@ -61,23 +61,33 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
 
     let articleClassName
     let stationPreviewType
+    let textSectionClass
+    let stationInfoClass
 
     switch (style) {
         case 'leftSide':
             articleClassName = 'list'
             stationPreviewType = 'stationPreviewLight'
+            textSectionClass = 'text'
+            stationInfoClass = 'station-info'
             break
         case 'leftSideMinimal':
             articleClassName = 'list'
             stationPreviewType = 'stationPreviewLight'
+            textSectionClass = 'text floating-text'
+            stationInfoClass = 'station-info'
             break
         case 'minimal':
             articleClassName = 'list-minimal'
             stationPreviewType = 'stationPreview'
+            textSectionClass = 'text'
+            stationInfoClass = 'hidden'
             break
         case 'card':
             articleClassName = 'card'
             stationPreviewType = 'stationPreview'
+            textSectionClass = 'text'
+            stationInfoClass = 'hidden'
             break
     }
 
@@ -110,37 +120,22 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                     />}
             </div>
 
-            {(style !== 'leftSideMinimal') && <div className="text">
+            <div className={textSectionClass}>
                 <div className="station-name">{stationPreview.name}</div>
 
-                {(style === 'leftSide' && (!pinnedStation)) &&
-                    <div className="station-info">
-                        {stationPreview.type} • {stationPreview.createdBy.fullName}
-                    </div>}
-
-                {(style === 'leftSide' && (pinnedStation)) &&
-                    <div className="station-info liked">
-                        <SvgIcon iconName={"pin"} />
-                        <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
-                    </div>}
-            </div>}
-
-            {(style === 'leftSideMinimal') && <div className="text floating-text">
-                <div className="station-name">{stationPreview.name}</div>
-
-                {!pinnedStation &&
-                    <div className="station-info">
+                {(!pinnedStation) &&
+                    <div
+                        className={stationInfoClass}>
                         {stationPreview.type} • {stationPreview.createdBy.fullName}
                     </div>}
 
                 {pinnedStation &&
-                    <div className="station-info liked">
+                    <div
+                        className={stationInfoClass}>
                         <SvgIcon iconName={"pin"} />
                         <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
                     </div>}
-            </div>}
-
-
+            </div>
 
         </article>
     )
