@@ -19,9 +19,9 @@ export function DropDownMenu({ listItems, setShowMenu }) {
 
     return (
 
-        <div className="drop-down-menu scrollable-container">
+        <div className="drop-down-menu ">
 
-            <ul className="list">
+            <ul className="list scrollable-container">
                 {listItems.map((listItem, index) =>
                     <li
                         key={index}

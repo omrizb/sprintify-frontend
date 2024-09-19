@@ -24,3 +24,4 @@ export function GeneralList({ listItems, type }) {
 
     )
 }
+
