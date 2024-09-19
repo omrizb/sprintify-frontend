@@ -101,12 +101,13 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                 {(!stationPreview.stationImgUrl) && <div className="icon">
                     <SvgIcon iconName={"music"} />
                 </div>}
-                <PlayButton
-                    type={stationPreviewType}
-                    stationId={stationPreview._id}
-                    stationName={stationPreview.name}
-                    song={stationPreview.songs[0]}
-                />
+                {(style !== 'leftSideMinimal') &&
+                    <PlayButton
+                        type={stationPreviewType}
+                        stationId={stationPreview._id}
+                        stationName={stationPreview.name}
+                        song={stationPreview.songs[0]}
+                    />}
             </div>
 
             {(style !== 'leftSideMinimal') && <div className="text">
@@ -123,6 +124,24 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                         <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
                     </div>}
             </div>}
+
+            {(style === 'leftSideMinimal') && <div className="text floating-text">
+                <div className="station-name">{stationPreview.name}</div>
+
+                {!pinnedStation &&
+                    <div className="station-info">
+                        {stationPreview.type} • {stationPreview.createdBy.fullName}
+                    </div>}
+
+                {pinnedStation &&
+                    <div className="station-info liked">
+                        <SvgIcon iconName={"pin"} />
+                        <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
+                    </div>}
+            </div>}
+
+
+
         </article>
     )
 }
