@@ -6,6 +6,10 @@
     align-items: center;
     border-radius: 8px;
 
+    .hidden {
+        display: none;
+    }
+
     &.highlighted {
         background-color: rgba(255, 255, 255, 0.1);
     }
@@ -59,6 +63,7 @@
 
         .text {
             width: 80%;
+
             
             .station-name {
                 @include overflow-ellipsis;
@@ -68,6 +73,12 @@
 
             .station-info {
                 font-size: $textSizeSmaller-1;
+            }
+
+            &.card{
+                .station-info{
+                    display: none;
+                }
             }
 
             &.floating-text{
@@ -81,6 +92,8 @@
                 opacity: 0;
  
             }
+
+            
         }
 
        &:hover {
