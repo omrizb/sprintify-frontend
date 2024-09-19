@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { loadStations } from '../store/actions/station.actions.js'
@@ -18,6 +18,8 @@ export function LeftSidebar() {
     const isFirstSongLoaded = useSelector(storeState => storeState.playerModule.isFirstSongLoaded)
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
+
+    const [libraryDisp, setLibraryDisp] = useState('open')
 
     useEffect(() => {
         if (!user) return
@@ -42,9 +44,10 @@ export function LeftSidebar() {
         <div className="left-sidebar">
             {user && stations
                 ? <div className="my-library" >
-                    <LeftSideBarHeader loggedinUser={user} />
-                    <LeftSideBarFilter userId={user._id} />
-                    <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />
+                    <LeftSideBarHeader loggedinUser={user} setLibraryDisp={setLibraryDisp} />
+                    {(libraryDisp === 'open') && <LeftSideBarFilter userId={user._id} />}
+                    {(libraryDisp === 'open') && <StationList stations={stations} className="left-side-stations" previewStyle="leftSide" />}
+                    {(libraryDisp === 'close') && <StationList stations={stations} className="left-side-stations" previewStyle="leftSideMinimal" />}
                 </div>
                 : <SidebarNav />
             }

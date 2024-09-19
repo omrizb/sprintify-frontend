@@ -67,6 +67,10 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
             articleClassName = 'list'
             stationPreviewType = 'stationPreviewLight'
             break
+        case 'leftSideMinimal':
+            articleClassName = 'list'
+            stationPreviewType = 'stationPreviewLight'
+            break
         case 'minimal':
             articleClassName = 'list-minimal'
             stationPreviewType = 'stationPreview'
@@ -104,7 +108,8 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                     song={stationPreview.songs[0]}
                 />
             </div>
-            <div className="text">
+
+            {(style !== 'leftSideMinimal') && <div className="text">
                 <div className="station-name">{stationPreview.name}</div>
 
                 {(style === 'leftSide' && (!pinnedStation)) &&
@@ -117,7 +122,7 @@ export function StationPreview({ station: stationPreview, style, colorActiveStat
                         <SvgIcon iconName={"pin"} />
                         <span>{stationPreview.type} • {stationPreview.songs.length} songs</span>
                     </div>}
-            </div>
+            </div>}
         </article>
     )
 }

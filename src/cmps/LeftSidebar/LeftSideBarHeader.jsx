@@ -8,9 +8,10 @@ import { DropDownMenu } from '../Menus/DropDownMenu'
 import { stationService } from '../../services/station/station.service.remote'
 import { PopUp } from '../PopUp'
 
-export function LeftSideBarHeader({ loggedinUser }) {
+export function LeftSideBarHeader({ loggedinUser, setLibraryDisp }) {
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
+    const [display, setDisplay] = useState('open')
     const addBtnRef = useRef(null)
 
     const listItems = [{
@@ -42,25 +43,44 @@ export function LeftSideBarHeader({ loggedinUser }) {
         }
     }
 
+    function onClickLibraryIcon(status) {
+        setDisplay(status)
+        setLibraryDisp(status)
+
+    }
+
     return (
         <div className="sidebar-header">
-            <div className="library">
-                <div className="icon"> <SvgIcon iconName={"library"} svgClass="svg-big1" /> </div>
+            {(display == 'open') && <div className="library">
+                <div
+                    onClick={() => onClickLibraryIcon('close')}
+                    className="icon">
+                    <SvgIcon iconName={"library"} svgClass="svg-big1" />
+                </div>
                 <p>Your Library</p>
-            </div>
+            </div>}
 
-            <div className="add-playlist">
-                <button ref={addBtnRef} className="plus icon btn-medium-with-hover"
-                    onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
-                    <SvgIcon iconName={"plus"} svgClass="svg-small1" />
-                </button>
+            {(display == 'close') && <div className="library">
+                <div
+                    onClick={() => onClickLibraryIcon('open')}
+                    className="icon">
+                    <SvgIcon iconName={"libraryClose"} svgClass="svg-big1" />
+                </div>
+            </div>}
 
-                {showMenu &&
-                    <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
-                        <DropDownMenu listItems={listItems} />
-                    </PopUp>
-                }
-            </div>
+            {(display === 'open') &&
+                <div className="add-playlist">
+                    <button ref={addBtnRef} className="plus icon btn-medium-with-hover"
+                        onClick={() => setShowMenu(prevShowMenu => !prevShowMenu)}>
+                        <SvgIcon iconName={"plus"} svgClass="svg-small1" />
+                    </button>
+
+                    {showMenu &&
+                        <PopUp btnRef={addBtnRef} onClosePopUp={() => setShowMenu(false)} >
+                            <DropDownMenu listItems={listItems} />
+                        </PopUp>
+                    }
+                </div>}
         </div>
     )
 }
