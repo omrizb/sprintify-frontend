@@ -69,8 +69,6 @@
 
     .song-info {
         @include flex($direction: column, $align: start);
-        width: 220px;
-        
         
         .song-name {
             @include overflow-ellipsis;
