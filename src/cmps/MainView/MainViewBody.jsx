@@ -42,8 +42,6 @@ export function MainViewBody({ onSetBgColor }) {
         setMadeForYou(madeForYouCollections)
     }
 
-
-
     return (
         <div className="main-view-body">
             <StationList

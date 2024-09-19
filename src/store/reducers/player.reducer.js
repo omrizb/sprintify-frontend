@@ -73,7 +73,6 @@ export function playerReducer(state = initialState, action = {}) {
                 },
                 isSync: action.isSync
             }
-            console.log(state.isSync)
             break
         case POP_FROM_ACTION_QUEUE:
             if (state.role === 'owner') {
