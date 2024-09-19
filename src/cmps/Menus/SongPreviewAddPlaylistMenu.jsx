@@ -94,7 +94,6 @@ export function SongPreviewAddPlaylistMenu({ setShowMenu, song, myStations, like
                 songs: [song]
             }
             const savedStation = await addStation(station)
-            // const savedStation = await updateStation(updatedStation)
             navigate(`/station/${savedStation._id}`)
         } catch (err) {
             console.log('Cannot add a station')

@@ -1,5 +1,7 @@
+import { showErrorMsg } from '../event-bus.service'
 import { httpService } from '../http.service'
 import { utilService } from '../util.service'
+import { youtubeService } from '../youtube.service'
 
 const madeForYouCollections = await getMadeForYou()
 export default madeForYouCollections
@@ -168,6 +170,7 @@ async function setSongYtId(song) {
     } catch (error) {
         console.log(error)
         showErrorMsg('Defective song')
+        throw error
     }
 }
 

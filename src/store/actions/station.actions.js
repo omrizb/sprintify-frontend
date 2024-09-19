@@ -97,25 +97,26 @@ export async function updateStationAndStay(station) {
 }
 
 
-export async function addSongToStation(station, songToAdd) {
+export async function addSongToStation(station, songToAdd, updateCurrStation = false) {
     try {
         if (station.songs.some(song => song.spotifyId === songToAdd.spotifyId)) {
             showSuccessMsg(`Already in ${station.name}`)
             return
         }
 
-        songToAdd.addAt = Date.now()
+        songToAdd.addedAt = Date.now()
 
-        if (!songToAdd.ytId) {
-            var updatedSong = stationService.setSongYtId(songToAdd)
-        }
-        else updatedSong = songToAdd
+        const updatedSong = (!songToAdd.ytId) ? await stationService.setSongYtId(songToAdd) : songToAdd
 
         const updatedStation = { ...station, songs: [...station.songs, updatedSong] }
         const savedStation = await stationService.save(updatedStation)
-        store.dispatch(getCmdUpdateAndStay(savedStation))
+
+        if (!updateCurrStation) store.dispatch(getCmdUpdateAndStay(savedStation))
+        else if (updateCurrStation) store.dispatch(getCmdUpdateStation(savedStation))
+
         showSuccessMsg(`Added to ${savedStation.name}`)
         return savedStation
+
     } catch (err) {
         console.log('Cannot save station', err)
         showErrorMsg(`Could not add to ${station.name}`)
