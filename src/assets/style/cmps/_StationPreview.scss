@@ -83,6 +83,7 @@
 
             &.floating-text{
                 position: fixed;
+                pointer-events: none;
                 left: 80px;
                 background-color:rgba(0,0,0,.8);
                 width: max-content;
