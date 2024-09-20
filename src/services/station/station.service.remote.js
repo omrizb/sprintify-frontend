@@ -104,7 +104,7 @@ async function save(station, isToggleLike = '') {
 async function getRecentlyPlayed() {
     const stations = await query({ createdBy: 'BBBB' })
     const dailyMixStations = stations.filter(station => !station.name.includes("Daily Mix"))
-    return dailyMixStations.slice(5, 10)
+    return dailyMixStations.slice(6, 12)
 }
 
 async function getTopMixes() {
@@ -116,7 +116,7 @@ async function getTopMixes() {
 async function getMadeForYou() {
     const stations = await query({ createdBy: 'BBBB' })
     const dailyMixStations = stations.filter(station => !station.name.includes("Daily Mix"))
-    return dailyMixStations.slice(0, 5)
+    return dailyMixStations.slice(0, 6)
 }
 
 async function setSongYtId(song) {
