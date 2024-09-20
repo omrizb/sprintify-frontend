@@ -33,7 +33,7 @@ export function MainViewBody({ onSetBgColor }) {
     }, [stations, loggedinUser])
 
     async function loadCollections() {
-        const numOfStations = (stations.length < 9) ? stations.length : 8
+        const numOfStations = (stations.length < 9) ? stations.length : 9
         const myLibrary = stations.filter(station =>
             (station.createdBy.id === loggedinUser._id) ||
             (station.likedByUsers.includes(loggedinUser._id))
