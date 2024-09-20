@@ -30,10 +30,8 @@ export function SearchResults() {
     const [searchWord, setSearchWord] = useState('')
     const [plantedPlaylist, setPlantedPlaylist] = useState({})
 
-
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
-
 
     useEffect(() => {
         if (!stations) return
@@ -55,7 +53,7 @@ export function SearchResults() {
 
     useEffect(() => {
         loadResults(txt)
-    }, [])
+    }, [txt])
 
     async function loadResults(value) {
         setIsLoading(true)
