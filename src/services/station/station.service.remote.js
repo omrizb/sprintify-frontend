@@ -101,20 +101,22 @@ async function save(station, isToggleLike = '') {
     return savedStation
 }
 
-async function getRecentlyPlayed(userId, size = 4) {
-    //TODO write algorithm for fetching recentlyplayed playlists per user 
-
-    return httpService.get(`station`, { stationType: 'album' })
-
+async function getRecentlyPlayed() {
+    const stations = await query({ createdBy: 'BBBB' })
+    const dailyMixStations = stations.filter(station => !station.name.includes("Daily Mix"))
+    return dailyMixStations.slice(5, 10)
 }
-async function getTopMixes(userId, size = 4) {
-    //TODO write algorithm for fetching top mixes per user 
-    return httpService.get(`station`, { stationType: 'playlist' })
+
+async function getTopMixes() {
+    const stations = await query({ createdBy: 'BBBB' })
+    const dailyMixStations = stations.filter(station => station.name.includes("Daily Mix"))
+    return dailyMixStations
 }
 
 async function getMadeForYou() {
-    const stations = await query({ txt: 'Daily Mix' })
-    return stations
+    const stations = await query({ createdBy: 'BBBB' })
+    const dailyMixStations = stations.filter(station => !station.name.includes("Daily Mix"))
+    return dailyMixStations.slice(0, 5)
 }
 
 async function setSongYtId(song) {
