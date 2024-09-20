@@ -21,10 +21,8 @@ export function SearchAndAdd({ setShowSearchBox, setSongs }) {
     async function loadSongs(value) {
         if (!value) return
         try {
-            const results = await spotifyService.search(value, 10)
-            const loadedSongs = results.songs
-
-            setSongs(loadedSongs)
+            const searchSongs = await spotifyService.searchSong(value, 10)
+            setSongs(searchSongs)
 
         } catch (err) {
             console.log(`Couldn't load songs`, err)

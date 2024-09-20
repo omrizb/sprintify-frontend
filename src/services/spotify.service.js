@@ -6,6 +6,7 @@ const CLIENT_SECRET = '4cb7b55ab1fa409185026d058403fe2f'
 
 export const spotifyService = {
     search,
+    searchSong,
     getSong,
     getArtist,
     getAlbum,
@@ -27,7 +28,7 @@ async function search(query, limit = 6) {
         songs: songs.tracks.items.map(track => ({
             spotifyId: track.id,
             songName: track.name,
-            artist: track.artists[0],
+            artist: { name: track.artists[0].name, spotifyId: track.artists[0].id },
             album: { name: track.album.name, spotifyId: track.album.id },
             imgUrl: _getImageUrls(track.album),
             duration: Math.floor(track.duration_ms / 1000),
@@ -51,6 +52,19 @@ async function search(query, limit = 6) {
             imgUrl: _getImageUrls(playlist),
         }))
     }
+}
+
+async function searchSong(query, limit = 6) {
+    const songs = await _search(query, 'track', limit)
+
+    return songs.tracks.items.map(track => ({
+        spotifyId: track.id,
+        songName: track.name,
+        artist: { name: track.artists[0].name, spotifyId: track.artists[0].id },
+        album: { name: track.album.name, spotifyId: track.album.id },
+        imgUrl: _getImageUrls(track.album),
+        duration: Math.floor(track.duration_ms / 1000),
+    }))
 }
 
 async function getSong(spotifyId) {
