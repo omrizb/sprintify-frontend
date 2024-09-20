@@ -16,7 +16,6 @@ export function NowPlayingDetails({ song }) {
 
     async function loadArtist() {
         try {
-            console.log(song)
             setArtist(await spotifyService.getArtist(song.artist.spotifyId))
         } catch (err) {
             console.log('NowPlayingDetails error: Could not load artist.', err)

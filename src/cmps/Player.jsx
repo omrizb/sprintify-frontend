@@ -21,15 +21,6 @@ export function Player() {
     const [intervalId, setIntervalId] = useState(null)
     const playerElapsedDurationRef = useRef(player.elapsedDuration)
 
-    // console.log('control', control)
-    // console.log('player', player)
-    // console.log('stationId', stationId)
-    // console.log('stationName', stationName)
-    // console.log('originalStationSongs', originalStationSongs)
-    // console.log('remainingStationSongs', remainingStationSongs)
-    // console.log('queue', queue)
-    // console.log('playedSongsHistory', playedSongsHistory)
-
     useEffect(() => {
         if (!ytPlayerRef.current) return
         ytPlayerRef.current.addEventListener('onStateChange', onUpdatePlayerState)
@@ -51,7 +42,7 @@ export function Player() {
         const { song, songs, stationId, seconds, volume } = control.actionParams[0]
 
         // Check the next action to execute
-        console.log('Executing action:', actionToExecute, control.actionParams[0])
+        // console.log('Executing action:', actionToExecute, control.actionParams[0])
 
         switch (actionToExecute) {
             case playerActions.LOAD_SONG:
