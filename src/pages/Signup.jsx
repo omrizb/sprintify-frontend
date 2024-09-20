@@ -23,7 +23,7 @@ export function Signup() {
             await login(credentials)
 
             navigate('/')
-            showSuccessMsg(`Welcome ${user.fullname}`)
+            showSuccessMsg(`Welcome ${user.fullName}`)
 
         } catch (err) {
             console.log('Error in signup:', err)
