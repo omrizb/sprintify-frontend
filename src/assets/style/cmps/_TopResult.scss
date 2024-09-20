@@ -10,7 +10,6 @@
         position: relative;
 
         display: grid;
-        height: 200px;
         background-color: hsla(0,0%,100%,0.05);
         border-radius: 4px;
         padding: 20px;
@@ -37,6 +36,7 @@
             padding: 0 0 4px 0;
             font-family: inherit;
             line-height: 0.8;
+            white-space: normal;
         }
 
         .bottom-line {
