@@ -1,13 +1,12 @@
 .top-result{
-    min-width: 250px;
 
-    h2{
+    h2 {
         font-size: 24px;
         margin-block-start: 20px;
         margin-block-end: 10px;
     }
 
-    .top-result-card{
+    .top-result-card {
         position: relative;
 
         display: grid;
@@ -30,7 +29,6 @@
             transform: translate(-50%, -50%);
         }
 
-      
         .name {
             @include overflow-ellipsis;
             margin-block-start: 5px;
