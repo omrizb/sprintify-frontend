@@ -75,11 +75,6 @@ export function playerReducer(state = initialState, action = {}) {
             }
             break
         case POP_FROM_ACTION_QUEUE:
-            if (state.role === 'owner') {
-
-                console.log(state.control)
-                var control = { ...state.control }
-            }
             newState = {
                 ...state,
                 control: {
