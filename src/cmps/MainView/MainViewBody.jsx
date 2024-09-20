@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { utilService } from '../../services/util.service'
+import { stationService } from '../../services/station/station.service.remote'
 
 import { Footer } from '../Footer'
 import { StationSection } from '../StationSection'
-import { StationListMainView } from './StationListMainView'
-import madeForYouCollections from '../../services/station/station.service.remote'
 import { StationList } from '../StationList'
 
 
@@ -31,7 +30,7 @@ export function MainViewBody({ onSetBgColor }) {
 
     }, [stations, loggedinUser])
 
-    function loadCollections() {
+    async function loadCollections() {
         const numOfStations = (stations.length < 9) ? stations.length : 8
         const myLibrary = stations.filter(station =>
             (station.createdBy.id === loggedinUser._id) ||
@@ -39,6 +38,8 @@ export function MainViewBody({ onSetBgColor }) {
         )
         const mainStations = utilService.getRandomItems(myLibrary, numOfStations)
         setStationsMain(mainStations)
+
+        const madeForYouCollections = await stationService.getMadeForYou()
         setMadeForYou(madeForYouCollections)
     }
 
@@ -57,7 +58,6 @@ export function MainViewBody({ onSetBgColor }) {
                 ListClassName="card-stations made-for-you"
                 previewStyle="card"
             />}
-
 
             <Footer />
         </div>
