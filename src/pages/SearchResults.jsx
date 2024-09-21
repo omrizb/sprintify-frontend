@@ -21,14 +21,12 @@ export function SearchResults() {
     const [isLoading, setIsLoading] = useState(true)
     const { txt } = useParams()
 
-    const [results, setResults] = useState([])
     const [songs, setSongs] = useState([])
     const [artists, setArtists] = useState([])
     const [albums, setAlbums] = useState([])
     const [playlists, setPlaylists] = useState([])
 
-    const [searchWord, setSearchWord] = useState('')
-    const [plantedPlaylist, setPlantedPlaylist] = useState({})
+    const [topResult, setTopResult] = useState({})
 
     const [likedSongsStation, setLikedSongsStation] = useState([])
     const [myStations, setMyStations] = useState([])
@@ -41,17 +39,10 @@ export function SearchResults() {
 
         const myStationsArr = stations.filter(station => station.createdBy.id === loggedinUser._id)
         setMyStations(myStationsArr)
-
-        getPlantedStation()
-
     }, [stations])
 
-    async function getPlantedStation() {
-        const plantedStation = await stationService.getById('66e6425a91bf0b67a1c08139')
-        setPlantedPlaylist(plantedStation)
-    }
-
     useEffect(() => {
+        if (!txt) return
         loadResults(txt)
     }, [txt])
 
@@ -59,18 +50,26 @@ export function SearchResults() {
         setIsLoading(true)
         try {
             const res = await spotifyService.search(value)
-            setSearchWord(value)
             setSongs(res.songs)
             setArtists(res.artists)
             setAlbums(res.albums)
             setPlaylists(res.stations)
+
+            let topResultToSet = {}
+            if (value === 'chill') {
+                topResultToSet.item = await stationService.getById('66e6425a91bf0b67a1c08139')
+                topResultToSet.type = 'station'
+            } else {
+                topResultToSet.item = res.songs[0]
+                topResultToSet.type = 'song'
+            }
+            setTopResult(topResultToSet)
 
         } catch (err) {
             console.error(`Couldn't load videos`, err)
             showErrorMsg('YouTube is blocking us')
         } finally {
             setIsLoading(false)
-
         }
     }
 
@@ -86,14 +85,15 @@ export function SearchResults() {
             >
                 <div className="empty-header" style={{ height: '64px' }} />
                 <div className="song-section">
-                    {(searchWord !== 'chill') && songs.length > 0 && <TopResult item={songs[0]} type="song" />}
-                    {(searchWord === 'chill') && <TopResult item={plantedPlaylist} type="station" />}
 
-                    {songs.length > 0 && <SongListSearchPage
-                        songs={songs}
-                        myStations={myStations}
-                        likedSongsStation={likedSongsStation}
-                    />}
+                    {songs.length > 0 && <>
+                        <TopResult item={topResult.item} type={topResult.type} />
+                        <SongListSearchPage
+                            songs={songs}
+                            myStations={myStations}
+                            likedSongsStation={likedSongsStation} />
+                    </>}
+
                 </div>
 
                 <GeneralList title="Artists" listItems={artists} type="artist" />
@@ -107,5 +107,4 @@ export function SearchResults() {
 
             </HeaderFixer>
         </div>
-
 }
