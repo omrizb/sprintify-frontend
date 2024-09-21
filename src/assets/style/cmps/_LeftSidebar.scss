@@ -14,9 +14,9 @@
         display: grid;
         row-gap: 1em;
 
-        & > * {
-            overflow-x: hidden;
-        }
+        // & > * {
+        //     overflow-x: hidden;
+        // }
 
         .sidebar-header {
             display: grid;
