@@ -11,7 +11,9 @@ export function Tooltip() {
 
     return (
         <>
-            {props.isVisible && <div className="tooltip" style={props.style}>{props.txt}</div>}
+            {props && props.isVisible &&
+                <div className="tooltip" style={props.style}>{props.txt}</div>
+            }
         </>
     )
 }
