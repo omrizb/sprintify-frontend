@@ -143,6 +143,7 @@ export function LeftSideBarFilter({ userId }) {
                         value={filterBy.txt}
                         placeholder="Search in Your Library"
                         onChange={handleChange}
+                        onBlur={() => updateFilterBy({ ...filterBy, txt: '' })}
                         required
                     />
                 </div>
