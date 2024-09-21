@@ -11,7 +11,7 @@ import { PopUp } from '../PopUp'
 export function LeftSideBarHeader({ loggedinUser, setLibraryDisp }) {
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
-    const [display, setDisplay] = useState('open')
+    const [display, setDisplay] = useState('close')
     const addBtnRef = useRef(null)
 
     const listItems = [{

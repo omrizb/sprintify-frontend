@@ -19,7 +19,7 @@ export function LeftSidebar() {
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
-    const [libraryDisp, setLibraryDisp] = useState('open')
+    const [libraryDisp, setLibraryDisp] = useState('close')
 
     useEffect(() => {
         if (!user) return
