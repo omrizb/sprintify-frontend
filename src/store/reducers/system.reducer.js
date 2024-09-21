@@ -6,7 +6,7 @@ export const SET_IS_SONG_DRAGGED = 'SET_IS_SONG_DRAGGED'
 const initialState = {
     rightSidebarContent: 'nowPlaying',
     rightSidebarWidth: 280,
-    isRightSidebarOpen: true,
+    isRightSidebarOpen: false,
     isSongDragged: false,
 }
 
