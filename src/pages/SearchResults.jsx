@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -15,11 +15,13 @@ import { Footer } from '../cmps/Footer.jsx'
 
 export function SearchResults() {
 
+    const navigate = useNavigate()
+    const { txt } = useParams()
+
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
     const [isLoading, setIsLoading] = useState(true)
-    const { txt } = useParams()
 
     const [songs, setSongs] = useState([])
     const [artists, setArtists] = useState([])
@@ -65,11 +67,12 @@ export function SearchResults() {
             }
             setTopResult(topResultToSet)
 
+            setIsLoading(false)
+
         } catch (err) {
             console.error(`Couldn't load videos`, err)
-            showErrorMsg('YouTube is blocking us')
-        } finally {
-            setIsLoading(false)
+            showErrorMsg('Search failed')
+            navigate('/')
         }
     }
 
