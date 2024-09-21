@@ -11,6 +11,7 @@ import { SongDetails } from './pages/SongDetails.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
+import { Tooltip } from './cmps/Tooltip.jsx'
 
 import './assets/style/main.scss'
 
@@ -19,6 +20,7 @@ export function App() {
         <Provider store={store}>
             <Router>
                 <UserMsg />
+                <Tooltip />
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />

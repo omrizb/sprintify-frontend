@@ -1,4 +1,5 @@
 export const SHOW_MSG = 'show-user-msg'
+export const SHOW_TOOLTIP = 'show-tooltip'
 
 function createEventEmitter() {
     const listenersMap = {}
@@ -31,6 +32,10 @@ export function showErrorMsg(txt) {
 
 function showUserMsg(msg) {
     eventBusService.emit(SHOW_MSG, msg)
+}
+
+export function showTooltip(props) {
+    eventBusService.emit(SHOW_TOOLTIP, props)
 }
 
 window.showUserMsg = showUserMsg

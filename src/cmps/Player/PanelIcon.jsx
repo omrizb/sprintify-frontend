@@ -12,6 +12,7 @@ export function PanelIcon({ svgIcon, tooltipTxt, isActive, onClick }) {
                 svgClass="svg-small1"
                 tooltipTxt={tooltipTxt}
                 onClick={onClick}
+                style={{ position: 'relative' }}
             />
         </div>
     )

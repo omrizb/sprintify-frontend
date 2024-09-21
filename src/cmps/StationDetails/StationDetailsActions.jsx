@@ -15,7 +15,7 @@ import { VButton } from '../Buttons/VButton.jsx'
 import { AddToButton } from '../Buttons/AddToButton.jsx'
 import { DotsButton } from '../Buttons/DotsButton.jsx'
 import { PopUp } from '../PopUp.jsx'
-import { Tooltip } from '../Tooltip.jsx'
+import { TooltipContainer } from '../TooltipContainer.jsx'
 import { SOCKET_EMIT_JOIN_MUTUAL_STATION } from '../../services/socket.service.js'
 
 
@@ -180,13 +180,13 @@ export function StationDetailsActions({ station, stationMeta }) {
 
                 </div>}
 
-            {!isOwnedByUser && <Tooltip txt="Better together 🎧">
+            {!isOwnedByUser && <TooltipContainer txt="Better together 🎧">
                 <img
                     className={`mutual-listen ${(player.mutualListen) ? 'selected' : ''}`}
                     onClick={onClickMutualListen}
                     src="https://us.123rf.com/450wm/yusufdemirci/yusufdemirci1807/yusufdemirci180700225/105063894-vector-illustration-of-a-kids-dancing.jpg?ver=6"
                     alt="" />
-            </Tooltip>}
+            </TooltipContainer>}
 
 
 

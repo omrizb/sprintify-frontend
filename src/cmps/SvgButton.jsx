@@ -1,18 +1,18 @@
 import { SvgIcon } from './SvgIcon'
-import { Tooltip } from './Tooltip'
+import { TooltipContainer } from './TooltipContainer'
 
-export function SvgButton({ btnClass, svgIcon, svgClass, tooltipTxt, onClick }) {
+export function SvgButton({ btnClass, svgIcon, svgClass, tooltipTxt, onClick, style }) {
 
     const buttonElement = (
-        <button className={btnClass} onClick={onClick}>
+        <button className={btnClass} onClick={onClick} style={style}>
             <SvgIcon iconName={svgIcon} svgClass={svgClass || undefined} />
         </button>
     )
 
     return (tooltipTxt) ? (
-        <Tooltip txt={tooltipTxt}>
+        <TooltipContainer txt={tooltipTxt}>
             {buttonElement}
-        </Tooltip>
+        </TooltipContainer>
     ) : (
         buttonElement
     )

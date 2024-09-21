@@ -1,27 +1,34 @@
 :root {
     --tooltip-txt-color: #ffffff;
-    --tooltip-bgcolor: rgb(12,12,12,0.9);
+    --tooltip-bgcolor: rgb(12,12,12,0.95);
 }
 
 .tooltip-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     
-    .tooltip {
-        position: absolute;
-        border-radius: 4px;
+    .tooltip-ref {
+        position: fixed;
+        max-width: 250px;
         padding: $smallPadding;
-        text-wrap: nowrap;
         font-size: $textSizeSmaller-1;
         font-weight: 300;
-        color: var(--tooltip-txt-color);
-        background-color: var(--tooltip-bgcolor);
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 4px 0px;
-        z-index: 5000;
-
-        opacity: 0;
-        transition: opacity 0.5s ease;
     }
+}
+
+.tooltip {
+    position: fixed;
+    max-width: 250px;
+    border-radius: 4px;
+    padding: $smallPadding;
+    font-size: $textSizeSmaller-1;
+    font-weight: 300;
+    color: var(--tooltip-txt-color);
+    background-color: var(--tooltip-bgcolor);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 4px 0px;
+    z-index: 5000;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
