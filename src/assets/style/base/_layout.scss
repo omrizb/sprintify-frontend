@@ -6,6 +6,20 @@
     "global-nav         global-nav      global-nav"
     "left-sidebar       main-view       right-sidebar"
     "now-playing-bar    now-playing-bar now-playing-bar";
+
+    @media (max-width: 720px) {
+
+        & {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+            "global-nav"
+            "main-view"
+            "now-playing-bar";
+        }
+        
+    }
+    
 }
 
 .main-layout-loggedin {
@@ -16,6 +30,19 @@
     "global-nav         global-nav      global-nav"
     "left-sidebar       main-view       right-sidebar"
     "now-playing-bar    now-playing-bar now-playing-bar";
+
+    @media (max-width: 720px) {
+
+        & {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+            "global-nav"
+            "main-view"
+            "now-playing-bar";
+        }
+
+    }
 }
 
 .main-text {

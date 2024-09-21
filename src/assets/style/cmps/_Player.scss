@@ -1,7 +1,6 @@
 .player-container {
     display: grid;
     grid-template-columns: 0 30% 40% 30%;
-    min-width: 720px;
     height: $playerHeight;
 
     .player-left-panel {
@@ -20,7 +19,7 @@
 
         .duration-bar {
             display: grid;
-            grid-template-columns: 1fr minmax(200px, 5fr) 1fr;
+            grid-template-columns: 1fr minmax(200px, 400px) 1fr;
             gap: 8px;
             width: 100%;
 
@@ -29,6 +28,7 @@
 
             .elapsed-time {
                 place-self: center end;
+                padding-inline-start: 16px;
             }
 
             .slider {
@@ -37,6 +37,7 @@
 
             .total-time {
                 place-self: center start;
+                padding-inline-end: 16px;
             }
         }
     }
@@ -44,15 +45,6 @@
     .player-right-panel {
         @include flex($justify: flex-end);
         width: 100%;
-
-        .volume-controller {
-            flex-shrink: 1;
-            display: flex;
-            
-            .slider {
-                flex-shrink: 1;
-            }
-        }
     }
 
     .active-icon {
@@ -83,5 +75,17 @@
         &:active {
             background-color: $lightBgClrPress;
         }
-    }    
+    }
+
+    @media (max-width: 720px) {
+        grid-template-columns: 0 0 1fr 0;
+
+        .player-left-panel > * {
+            display: none;
+        }
+
+        .player-right-panel > * {
+            display: none;
+        }
+    }
 }

@@ -35,4 +35,22 @@
     .now-playing-bar-container {
         grid-area: now-playing-bar;
     }
+
+    @media (max-width: 720px) {
+
+        padding: 0;
+
+        .main-view-container {
+            border-radius: 0;
+        }
+
+        .left-sidebar-container {
+            display: none;
+        }
+
+        .right-sidebar-container {
+            display: none;
+        }
+    }
+
 }

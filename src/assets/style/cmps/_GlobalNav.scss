@@ -1,69 +1,83 @@
 .global-nav {
-        height: 48px;
-        position: relative;
+    height: 48px;
+    position: relative;
 
-        .global-nav-left{
-                height: 72px;
-                width: 72px;
+    .global-nav-left {
+        height: 72px;
+        width: 72px;
+    }
+
+    .global-nav-mid{
+        display: flex;
+        align-items: center;
+        max-width: 546px;
+        min-width: 350px;
+        width: 50%;
+
+        .homeIcon{
+            margin-inline-start: 8px;
+        }
+
+        .search-container{
+            flex-grow: 1;
+
+        }
+    }
+
+    .global-nav-right {
+        display: flex;
+        
+        .installApp{
+            display: flex; 
+            align-items: center;
+            padding:4px 16px 4px 33px ;
+
+
+            .btn-installApp-nav{
+                @include transparent;
+                @include btn($type: animated, $size: small);
+                
             }
 
-        .global-nav-mid{
-                display: flex;
-                align-items: center;
-                max-width: 546px;
-                min-width: 350px;
-                width: 50%;
-
-                .homeIcon{
-                    margin-inline-start: 8px;
-                }
-
-                .search-container{
-                    flex-grow: 1;
-
-                }
+            .smaller-margin{
+                margin-right: -9px;
             }
 
-        .global-nav-right{
+            &:hover {
+                transform: scale(1.05);
+                text-decoration: underline;
+            }
+
+        }
+
+        .profile-btn{
+            @include green;
+            @include btn($type: animated, $size: small);
+        }
+
+        .login-signup {
             display: flex;
             
-                .installApp{
-                    display: flex; 
-                    align-items: center;
-                    padding:4px 16px 4px 33px ;
-
-
-                    .btn-installApp-nav{
-                        @include transparent;
-                        @include btn($type: animated, $size: small);
-                        
-                    }
-
-                    .smaller-margin{
-                        margin-right: -9px;
-                    }
-
-                    &:hover {
-                        transform: scale(1.05);
-                        text-decoration: underline;
-                    }
-        
-                }
-
-                .profile-btn{
-                    @include green;
-                    @include btn($type: animated, $size: small);
-                }
-
-                .login-signup {
-                    display: flex;
-                    
-                    & > *:last-child {
-                        margin-inline-end: 30px;
-                    }
-                }
+            & > *:last-child {
+                margin-inline-end: 30px;
             }
+        }
     }
+
+    @media (max-width: 720px) {
+
+        padding-top: 8px;
+        
+        .global-nav-mid {
+            display: none;
+        }
+
+        .global-nav-mid > * {
+            display: none;
+        }
+
+    }
+}
 
 .flex-center-center{
     display: flex;

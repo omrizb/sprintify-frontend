@@ -1,8 +1,13 @@
-
 .footer {
     background-color: $sectionBgClr;
     color:$secondaryTxtClr;
     padding: 8px 16px 40px;
+
+    @media (max-width: 720px) {
+        & {
+            display: none;
+        }
+    }
 }
 
 .footer-top {

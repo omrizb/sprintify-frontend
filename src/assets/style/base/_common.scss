@@ -31,6 +31,17 @@
             display: none;
         }
     }
+
+    @container (max-width: 600px) {
+        grid-template-columns:
+            [index] 16px
+            [first] minmax(120px, 2fr)
+            [last] minmax(120px, 1fr);
+        
+        .album {
+            display: none;
+        }
+    }
 }
 
 .btn {
