@@ -44,6 +44,15 @@
     .player-right-panel {
         @include flex($justify: flex-end);
         width: 100%;
+
+        .volume-controller {
+            flex-shrink: 1;
+            display: flex;
+            
+            .slider {
+                flex-shrink: 1;
+            }
+        }
     }
 
     .active-icon {

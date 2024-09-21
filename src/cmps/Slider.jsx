@@ -10,11 +10,13 @@ export function Slider({ value = 50, min = 0, max = 100, setOnMouseup = false, o
     const [isDragging, setIsDragging] = useState(false)
 
     useEffect(() => {
-        if (nonActiveBarRef.current && pointerRef.current) {
-            const nonActiveBarWidth = nonActiveBarRef.current.offsetWidth
-            const pointerWidth = pointerRef.current.offsetWidth
-            setSliderWidth(nonActiveBarWidth - pointerWidth)
-        }
+        if (!nonActiveBarRef.current || !pointerRef.current) return
+
+        updateWidth()
+        const resizeObserver = new ResizeObserver(updateWidth)
+        resizeObserver.observe(nonActiveBarRef.current)
+
+        return () => resizeObserver.disconnect()
     }, [])
 
     useEffect(() => {
@@ -44,6 +46,12 @@ export function Slider({ value = 50, min = 0, max = 100, setOnMouseup = false, o
             onChange(sliderValue)
         }
     }, [sliderValue])
+
+    function updateWidth() {
+        const nonActiveBarWidth = nonActiveBarRef.current.offsetWidth
+        const pointerWidth = pointerRef.current.offsetWidth
+        setSliderWidth(nonActiveBarWidth - pointerWidth)
+    }
 
     function onSetPointerOffset(value) {
         const newOffset = sliderWidth * (value - min) / (max - min)
