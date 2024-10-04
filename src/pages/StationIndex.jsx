@@ -1,7 +1,8 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useParams } from 'react-router-dom'
 
+import { login, logout } from '../store/actions/user.actions.js'
 import { GlobalNav } from '../cmps/GlobalNav.jsx'
 import { LeftSidebar } from '../cmps/LeftSidebar.jsx'
 import { RightSideBar } from '../cmps/RightSideBar.jsx'
@@ -16,6 +17,24 @@ export function StationIndex() {
     const rightSidebarWidth = useSelector(state => state.systemModule.rightSidebarWidth)
     const isRightSidebarOpen = useSelector(state => state.systemModule.isRightSidebarOpen)
     const mainViewContainerRef = useRef()
+
+    // Unmark to set a default logged in user
+    useEffect(() => {
+        if (!user) {
+            const credentials = {
+                username: 'darr',
+                password: 'darr'
+            }
+
+            onLogin(credentials)
+        }
+    }, [])
+
+    async function onLogin(credentials) {
+        await logout()
+        await login(credentials)
+        window.location.reload()
+    }
 
     const mainLayout = user ? 'main-layout-loggedin' : 'main-layout'
     return (
