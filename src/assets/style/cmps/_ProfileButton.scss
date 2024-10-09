@@ -1,0 +1,6 @@
+.profile-button {
+    .profile-btn{
+        @include green;
+        @include btn($type: animated, $size: small);
+    }
+}
