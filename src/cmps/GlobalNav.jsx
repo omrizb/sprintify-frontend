@@ -15,6 +15,7 @@ export function GlobalNav() {
 
     const isHome = location.pathname === '/'
     const isBrowse = location.pathname === '/search'
+    const isLibrary = location.pathname === '/library'
 
 
     function handleChange(ev) {
@@ -65,10 +66,10 @@ export function GlobalNav() {
                 </div>
 
                 <div className="library-icon">
-                    <Link to={`/`}>
+                    <Link to={`/library`}>
                         <SvgButton
-                            btnClass={isHome ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
-                            svgIcon={isHome ? 'library' : 'libraryClose'}
+                            btnClass={isLibrary ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
+                            svgIcon={isLibrary ? 'library' : 'libraryClose'}
                             svgClass="svg-big1"
                             tooltipTxt="My Library"
                         />

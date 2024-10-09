@@ -3,6 +3,11 @@
     padding-inline: 16px;
 
     .library {
+        justify-self: start;
+        display: grid;
+        align-content: center;
+        grid-auto-flow: column;
+        column-gap: 0.5em;
         color: $secondaryTxtClr;
         fill: $secondaryTxtClr;
         font-weight: 700;
@@ -10,25 +15,18 @@
         &:hover {
             color: $primaryTxtClr;
             fill: $primaryTxtClr;
+            cursor: pointer;
         }
     }
 
     .add-playlist {
         position: relative;
         margin-inline-end: -8px;
+
+        .plus {
+            justify-self: end;
+            width: 32px;
+            }
     }
     
-    .drop-down-menu {
-        height: max-content;
-        width: max-content;
-        position: absolute;
-        left: -110px;
-        top: 40px;
-        li {
-            width: 190px;
-            height: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
-    }
 }

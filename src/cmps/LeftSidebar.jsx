@@ -11,7 +11,7 @@ import { StationList } from './StationList.jsx'
 import { updateFilterBy } from '../store/actions/filterBy.actions.js'
 
 
-export function LeftSidebar() {
+export function LeftSidebar({ display = 'close' }) {
 
     const user = useSelector(storeState => storeState.userModule.user)
 
@@ -19,7 +19,7 @@ export function LeftSidebar() {
     const stations = useSelector(storeState => storeState.stationModule.stations)
     const filterBy = useSelector(storeState => storeState.filterByModule.filterBy)
 
-    const [libraryDisp, setLibraryDisp] = useState('close')
+    const [libraryDisp, setLibraryDisp] = useState(display)
 
     useEffect(() => {
         if (!user) return

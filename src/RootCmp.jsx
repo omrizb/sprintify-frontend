@@ -7,6 +7,7 @@ import { MainView } from './pages/MainView.jsx'
 import { Search } from './pages/Search.jsx'
 import { SearchResults } from './pages/SearchResults.jsx'
 import { StationDetails } from './pages/StationDetails.jsx'
+import { YourLibrary } from './pages/YourLibrary.jsx'
 import { SongDetails } from './pages/SongDetails.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
@@ -14,6 +15,8 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { Tooltip } from './cmps/Tooltip.jsx'
 
 import './assets/style/main.scss'
+
+
 
 export function App() {
     return (
@@ -30,6 +33,8 @@ export function App() {
                         <Route path="/track/:id" element={<SongDetails />} />
                         <Route path="/search" element={<Search />} />
                         <Route path="/search/:txt" element={<SearchResults />} />
+                        <Route path="/library" element={<YourLibrary />} />
+
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
