@@ -33,7 +33,7 @@ export function GlobalNav() {
                 <SvgIcon iconName={"spotify"} />
             </div>
             <div className="global-nav-mid">
-                <div className="homeIcon">
+                <div className="home-icon">
                     <Link to={`/`}>
                         <SvgButton
                             btnClass={isHome ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
@@ -43,10 +43,15 @@ export function GlobalNav() {
                         />
                     </Link>
                 </div>
+
                 <div className="search-container">
                     <Link to={`/search`}>
                         <SearchBox handleChange={handleChange} isBrowse={isBrowse} />
                     </Link>
+
+                </div>
+
+                <div className="search-icon">
                     <Link to={`/search`}>
                         <div className="mobile-search">
                             <SvgButton
@@ -58,7 +63,21 @@ export function GlobalNav() {
                         </div>
                     </Link>
                 </div>
+
+                <div className="library-icon">
+                    <Link to={`/`}>
+                        <SvgButton
+                            btnClass={isHome ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
+                            svgIcon={isHome ? 'library' : 'libraryClose'}
+                            svgClass="svg-big1"
+                            tooltipTxt="My Library"
+                        />
+                    </Link>
+                </div>
             </div>
+
+
+
             <div className="global-nav-right">
                 <div className="installApp">
                     <SvgButton

@@ -2,4 +2,16 @@
     position: relative;
     @include flex($justify: start, $gap: 8px);
     padding: 16px;
+
+    .profile-btn{
+        display: none;
+    }
+
+    @media (max-width: 720px) {
+        padding-block: 8px;
+        .profile-btn{
+            display: block;
+        }
+
+    }
 }

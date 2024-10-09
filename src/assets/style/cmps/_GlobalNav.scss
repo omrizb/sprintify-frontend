@@ -14,10 +14,7 @@
         min-width: 350px;
         width: 50%;
 
-        .homeIcon{
-            margin-inline-start: 8px;
-        }
-
+        
         .search-container{
             flex-grow: 1;
 
@@ -26,6 +23,10 @@
         .mobile-search {
             display: none;
         }
+    }
+
+    .library-icon {
+        display:none;
     }
 
     .global-nav-right {
@@ -70,41 +71,41 @@
 
     @media (max-width: 720px) {
 
-        .global-nav {
-            width: 150px;
-        }
+        padding-block-end: 8px;
         
         .global-nav-left,
         .global-nav-right {
             display: none;
         }
-
+    
         .global-nav-mid {
+            display: grid;
+            grid-auto-flow: column;
+            place-content: center;
+            width: 100%;
             
-            position: fixed;
-            width: 150px;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-
             button {
                 background-color: transparent;
             }
 
-            .search-box {
+            .search-container {
                 display: none;
             }
-
+    
             .mobile-search {
-                display: flex;
-                width: 50px;
-                flex-grow: 1;
+                display: block;
+                
             }
-
+    
+            .library-icon {
+                display:block;
+            }
            
         }
-
+    
     }
+    
+
 }
 
 .flex-center-center{
@@ -142,3 +143,4 @@
     fill: $lightBgClr; 
     transition: fill 0.3s; 
 }
+
