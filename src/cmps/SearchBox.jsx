@@ -1,11 +1,11 @@
 import { SvgButton } from "./SvgButton";
 
 
-export function SearchBox({ handleChange, isBrowse }) {
+export function SearchBox({ handleChange, isBrowse, className = '' }) {
 
 
     return (
-        <div className="search-box">
+        <div className={`search-box ${className}`}>
             <div>
                 <SvgButton
                     btnClass="btn-search-nav"
@@ -17,7 +17,7 @@ export function SearchBox({ handleChange, isBrowse }) {
             <input
                 type="text"
                 name="txt"
-                placeholder="What do you want to play?"
+                placeholder={className === 'mobile' ? 'What do you want to listen to?' : 'What do you want to play?'}
                 onChange={handleChange}
                 required
             />
@@ -25,7 +25,7 @@ export function SearchBox({ handleChange, isBrowse }) {
                 <div className="border-element">
                 </div>
             </div>
-            <div>
+            <div className="browse-icon">
                 <SvgButton
                     btnClass="btn-search-nav"
                     svgIcon={isBrowse ? 'browseFull' : 'browse'}

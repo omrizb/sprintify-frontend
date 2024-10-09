@@ -1,8 +1,33 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "../cmps/Footer";
+import { SearchBox } from "../cmps/SearchBox";
 import { SearchTopic } from "../cmps/SearchTopic";
-import { imgService } from "../services/imgService";
+import { utilService } from "../services/util.service";
+import { DropDownMenu } from "../cmps/Menus/DropDownMenu";
+import { PopUp } from "../cmps/PopUp";
+import { logout } from "../store/actions/user.actions";
+import { ProfileButton } from "../cmps/ProfileButton";
+
 
 export function Search() {
+
+
+    const navigate = useNavigate()
+    const debouncedNavigate = utilService.debounce(navToResults, 500)
+    const location = useLocation()
+    const isBrowse = location.pathname === '/search'
+
+
+    function handleChange(ev) {
+        var value = ev.target.value
+        debouncedNavigate(value)
+    }
+
+    function navToResults(value) {
+        navigate(`/search/${value}`)
+    }
+
+
 
     const topics = ['Music', 'Podcasts', 'Live Events', 'Made For You', 'New Releases',
         'Pop', 'Hip-Hop', 'Rock', 'Latin', 'Podcast Charts', 'Educational',
@@ -51,7 +76,17 @@ export function Search() {
 
     return (
         <div className="search-page">
-            <h1>Browse all</h1>
+
+            <div className='mobile-header'>
+                <ProfileButton />
+                <h1>Search</h1>
+            </div>
+
+            <Link to={`/search`}>
+                <SearchBox handleChange={handleChange} isBrowse={isBrowse} className="mobile" />
+            </Link>
+
+            <h1 className="desktop-title">Browse all</h1>
 
             <ul className="browse-topics">
                 {topics.map((topic, index) => {

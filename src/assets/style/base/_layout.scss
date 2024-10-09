@@ -1,4 +1,4 @@
-.main-layout {
+.station-index.main-layout {
     @include main-grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
@@ -13,16 +13,16 @@
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr auto;
             grid-template-areas:
-            "global-nav"
             "main-view"
-            "now-playing-bar";
+            "now-playing-bar"
+            "global-nav";
         }
         
     }
     
 }
 
-.main-layout-loggedin {
+.station-index.main-layout-loggedin {
     @include main-grid;
     grid-template-columns: auto minmax(600px, 1fr);
     grid-template-rows: auto 1fr auto;
@@ -33,13 +33,15 @@
 
     @media (max-width: 720px) {
 
+        padding: 0;
+
         & {
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr auto;
             grid-template-areas:
-            "global-nav"
             "main-view"
-            "now-playing-bar";
+            "now-playing-bar"
+            "global-nav";
         }
 
     }
