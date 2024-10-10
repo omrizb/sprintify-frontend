@@ -1,6 +1,9 @@
 .global-nav {
     height: 48px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .global-nav-left {
         height: 72px;
@@ -71,8 +74,12 @@
 
     @media (max-width: 720px) {
 
+        display: grid;
+        place-content: center;
+
         padding-block-end: 8px;
-        
+        width: 100%;
+          
         .global-nav-left,
         .global-nav-right {
             display: none;

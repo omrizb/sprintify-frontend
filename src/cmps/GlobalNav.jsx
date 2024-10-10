@@ -28,7 +28,7 @@ export function GlobalNav() {
     }
 
     return (
-        <div className="global-nav flex-center-space-between">
+        <div className="global-nav ">
 
             <div className="global-nav-left flex-center-center">
                 <SvgIcon iconName={"spotify"} />
