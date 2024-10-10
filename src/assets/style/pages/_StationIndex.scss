@@ -34,6 +34,7 @@
 
     .now-playing-bar-container {
         grid-area: now-playing-bar;
+        margin-top: auto;
     }
 
     @media (max-width: 720px) {

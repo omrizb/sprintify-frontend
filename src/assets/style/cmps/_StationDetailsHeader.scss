@@ -64,6 +64,14 @@
         &:hover .overlay {
             opacity: 1;
         }
+
+        @media (max-width: 720px) {
+
+            .station-name {
+                font-size: $textSizeLarger2;
+            }
+
+        }
     }
 
     .station-info {

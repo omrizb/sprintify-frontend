@@ -1,44 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FastAverageColor } from 'fast-average-color'
 
 import { colorUtilService } from '../../services/color.util.service'
 import { SvgIcon } from '../SvgIcon'
 import { StationHeaderInfo } from './StationHeaderInfo'
 import { SongHeaderInfo } from './SongHeaderInfo'
+import { Link } from 'react-router-dom'
+import { SvgButton } from '../SvgButton'
 
 
 export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, pageType, isOwnedByUser = false }) {
 
-    const [stationNameClass, setStationNameClass] = useState('station-name')
+
     const [headerBgColor, setHeaderBgColor] = useState()
     const [headerDarkerBgColor, setHeaderDarkerBgColor] = useState()
-    const stationNameRef = useRef(null)
     const fac = new FastAverageColor()
 
     const headerImg = pageType === 'station' ? station.stationImgUrl : song.imgUrl.big
-
-    useEffect(() => {
-        adjustStationNameSize()
-        window.addEventListener('resize', adjustStationNameSize)
-        return () => window.removeEventListener('resize', adjustStationNameSize)
-    }, [])
-
-    function adjustStationNameSize() {
-        // const containerWidth = stationNameRef.current.parentElement.offsetWidth
-        // const containerHeight = stationNameRef.current.parentElement.offsetHeight
-
-        // if (stationNameRef.current.scrollHeight > 120) {
-        //     if (stationNameClass === 'station-name') setStationNameClass('station-name medium-title')
-        //     if (stationNameClass === 'station-name medium-title') setStationNameClass('station-name small-title')
-        // } else {
-        //     if (stationNameClass === 'station-name medium-title') setStationNameClass('station-name')
-        //     if (stationNameClass === 'station-name small-title') setStationNameClass('station-name medium-title')
-        // }
-        // console.log('containerWidth', containerWidth)
-        // console.log('containerHeight', containerHeight)
-        // console.log(stationNameRef.current.scrollWidth)
-        // console.log(stationNameRef.current.scrollHeight)
-    }
 
     function handleImageLoad(ev) {
         fac.getColorAsync(ev.target)
@@ -55,7 +33,9 @@ export function DetailsPageHeader({ station, song, onSetBgColor, onEditStation, 
             className="station-details-header"
             style={{ backgroundImage: `linear-gradient(to bottom, ${headerBgColor}cc, ${headerDarkerBgColor})` }}
         >
+
             <div className="station-cover-container">
+
                 {(headerImg)
                     ? <img
                         crossOrigin="anonymous"

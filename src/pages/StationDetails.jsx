@@ -1,8 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
+import { setPlayerMutualListen, setPlayerRole } from '../store/actions/player.actions.js'
 import { updateStation, loadStation, getCmdUpdateStation } from '../store/actions/station.actions.js'
+
+import { SOCKET_EMIT_JOIN_MUTUAL_STATION, SOCKET_EVENT_STATION_UPDATED, socketService } from '../services/socket.service.js'
 import { colorUtilService } from '../services/color.util.service.js'
 
 import { StationDetailsActions } from '../cmps/StationDetails/StationDetailsActions.jsx'
@@ -15,8 +18,6 @@ import { HeaderFixer } from '../cmps/HeaderFixer.jsx'
 import { PlayButton } from '../cmps/Buttons/PlayButton.jsx'
 import { EditStation } from '../cmps/EditStation.jsx'
 import { DetailsPageHeader } from '../cmps/Headers/DetailsPageHeader.jsx'
-import { SOCKET_EMIT_JOIN_MUTUAL_STATION, SOCKET_EVENT_STATION_UPDATED, socketService } from '../services/socket.service.js'
-import { setPlayerMutualListen, setPlayerRole } from '../store/actions/player.actions.js'
 
 
 export function StationDetails() {
