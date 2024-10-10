@@ -35,25 +35,26 @@ export function GlobalNav() {
             </div>
             <div className="global-nav-mid">
                 <div className="home-icon">
-                    <Link to={`/`}>
+                    <Link className="nav-icon" to={`/`}>
                         <SvgButton
                             btnClass={isHome ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
                             svgIcon={isHome ? 'homeFull' : 'home'}
                             svgClass="svg-big1"
                             tooltipTxt="Home"
                         />
+                        <p className="icon-title">Home</p>
                     </Link>
                 </div>
 
                 <div className="search-container">
-                    <Link to={`/search`}>
+                    <Link className="nav-icon" to={`/search`}>
                         <SearchBox handleChange={handleChange} isBrowse={isBrowse} />
                     </Link>
 
                 </div>
 
                 <div className="search-icon">
-                    <Link to={`/search`}>
+                    <Link className="nav-icon" to={`/search`}>
                         <div className="mobile-search">
                             <SvgButton
                                 btnClass={isBrowse ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
@@ -62,17 +63,19 @@ export function GlobalNav() {
                                 tooltipTxt="Search"
                             />
                         </div>
+                        <p className="icon-title">Search</p>
                     </Link>
                 </div>
 
                 <div className="library-icon">
-                    <Link to={`/library`}>
+                    <Link className="nav-icon" to={`/library`}>
                         <SvgButton
                             btnClass={isLibrary ? 'btn-global-nav-white' : 'btn-global-nav-gray'}
                             svgIcon={isLibrary ? 'library' : 'libraryClose'}
                             svgClass="svg-big1"
                             tooltipTxt="My Library"
                         />
+                        <p className="icon-title">Your Library</p>
                     </Link>
                 </div>
             </div>

@@ -17,6 +17,10 @@
         min-width: 350px;
         width: 50%;
 
+        .icon-title {
+            display: none;
+        }
+
         
         .search-container{
             flex-grow: 1;
@@ -58,11 +62,6 @@
 
         }
 
-        .profile-btn{
-            @include green;
-            @include btn($type: animated, $size: small);
-        }
-
         .login-signup {
             display: flex;
             
@@ -73,11 +72,10 @@
     }
 
     @media (max-width: 720px) {
-
         display: grid;
         place-content: center;
 
-        padding-block-end: 8px;
+        padding-block-end: 24px;
         width: 100%;
           
         .global-nav-left,
@@ -87,13 +85,34 @@
     
         .global-nav-mid {
             display: grid;
-            grid-auto-flow: column;
-            place-content: center;
             width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+            place-content: center;
+            
+
+            a.nav-icon {
+                display: grid;
+                position: relative;
+
+                p.icon-title {
+                    position: absolute;
+                    bottom: -5px;
+                    display: grid;
+                    place-self: center;
+                    font-size: 12px;
+                    font-weight:400;
+                    color: $secondaryTxtClr;
+
+                }
+            }
             
             button {
                 background-color: transparent;
             }
+
+            
+
+           
 
             .search-container {
                 display: none;
