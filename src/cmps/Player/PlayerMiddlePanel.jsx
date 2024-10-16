@@ -6,11 +6,17 @@ import { playerActions, setPlayerAction } from '../../store/actions/player.actio
 import { SvgButton } from '../SvgButton'
 import { Slider } from '../Slider'
 import { PanelIcon } from './PanelIcon'
+import { MiniSongPreview } from '../SongDetails/MiniSongPreview'
+import { AddToButton } from '../Buttons/AddToButton'
+import { addSongToStation } from '../../store/actions/station.actions'
 
 export function PlayerMiddlePanel({ getPlayerState }) {
 
     const player = useSelector(state => state.playerModule.player)
     const queue = useSelector(state => state.playerModule.queue)
+    const stations = useSelector(storeState => storeState.stationModule.stations)
+
+    const likedSongsStation = stations.find(station => station.isPinned)
 
     function handlePlayPause() {
         const playerState = getPlayerState()
@@ -23,6 +29,11 @@ export function PlayerMiddlePanel({ getPlayerState }) {
 
     function handleDurationChange(duration) {
         setPlayerAction(playerActions.GOTO, { seconds: Math.floor(duration) })
+    }
+
+    function addSong() {
+        const clonedSong = structuredClone(player.song)
+        addSongToStation(likedSongsStation, clonedSong)
     }
 
     return (
@@ -40,6 +51,18 @@ export function PlayerMiddlePanel({ getPlayerState }) {
                     tooltipTxt="Previous song"
                     onClick={() => setPlayerAction(playerActions.PLAY_PREV)}
                 />
+
+                {player.song && <>
+                    <MiniSongPreview
+                        song={player.song}
+                        isCurrentlyPlaying={player.isCurrentlyPlaying}
+                    />
+                    <div onClick={addSong}>
+                        <AddToButton type="addToLikedSongs" />
+                    </div>
+
+                </>}
+
                 <SvgButton
                     btnClass="btn-player-play"
                     svgIcon={player.isPlaying ? 'playerPause' : 'playerPlay'}

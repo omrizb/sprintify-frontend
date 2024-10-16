@@ -13,6 +13,10 @@
         @include flex($direction: column, $gap: 8px);
         width: 100%;
 
+        article.mini-song-preview {
+            display: none;
+        }
+
         .actions {
             @include flex($gap: 16px);
         }
@@ -78,7 +82,9 @@
     }
 
     @media (max-width: 720px) {
+        height: 55px;
         grid-template-columns: 0 0 1fr 0;
+        justify-items: center;
 
         .player-left-panel > * {
             display: none;
@@ -86,6 +92,69 @@
 
         .player-right-panel > * {
             display: none;
+        }
+
+        .player-middle-panel {
+            position: relative;
+            max-width: 400px;
+            border-radius: 4px;
+            background-image: linear-gradient(to right, rgb(115, 168, 241), rgb(19, 46, 245));
+            .panel-icon {
+                display:none;
+            }
+
+            .mini-song-preview {
+                margin-inline-start: 0.5em;
+            }
+
+            .actions {
+                column-gap: 8px;
+                width: 100%;
+            }
+
+            .svg-small1 {
+        
+                width: 16px;
+                height: 16px;
+                fill: white;
+            }
+
+    
+            .btn-player-play {
+                background-color: transparent;
+                .svg-small1 {
+                    width: 15px;
+                    height: 15px;
+                }
+               
+            }
+
+            article.mini-song-preview {
+                display: flex;
+            }
+
+           
+
+            .duration-bar{
+                display: block;
+                position: absolute;
+                bottom: 1px;
+                width: 98%;
+            
+                .elapsed-time,
+                .total-time {
+                    display: none;
+                }
+
+                .slider {
+                    .pointer {
+                        opacity: 0;
+                    }
+                }
+
+               
+            }
+
         }
     }
 }

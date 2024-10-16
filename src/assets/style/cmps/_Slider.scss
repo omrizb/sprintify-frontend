@@ -47,4 +47,8 @@
             background-color: var(--slider-active-bgcolor-highlighted);
         }
     }
+
+    @media (max-width: 720px) {
+        height: 1px;
+    }
 }
